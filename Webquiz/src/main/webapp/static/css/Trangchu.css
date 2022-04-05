@@ -1,0 +1,144 @@
+.header ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+
+}
+body>{
+    width: 100%;
+    box-sizing: border-box;
+
+}
+*{
+    box-sizing: inherit;
+
+}
+
+.header ul li{
+    display: inline-table;
+}
+.header ul li a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
+.header{
+    margin: 0 auto;
+    border: solid 1px;
+
+}
+.container_f{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.left_main{
+    width: 25%;
+    height: auto;
+    float: left;
+    border:solid 1px;
+    /*background-color: #e7f66e;*/
+}
+.middle_main{
+    width:50% ;
+    height: auto;
+    justify-content: space-around;
+    border:solid 1px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.right_main{
+    width: 25%;
+    height: auto;
+    float: left;
+    border:solid 1px;
+    padding-top: 20px;
+}
+
+.gold_pound{
+    padding-left:20px ;
+    padding-top:20px ;
+    padding-right:20px ;
+    background-color: #84f4f4;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.div_cus{
+    /*border: solid 1px;*/
+    padding-top: 20px;
+    padding-bottom: 25px;
+    margin-right: 20px ;
+    margin-left: 20px;
+    /*background-color: #84f4f4;*/
+
+}
+.call_sp{
+    padding-left:20px ;
+    padding-top:20px ;
+    padding-right:20px ;
+    background-color: #f4c678;
+    padding-bottom: 20px;
+}
+.btn_logout{
+    list-style: none;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+.customer{
+    padding-top: 20px;
+    background-color: #84f4f4;
+
+}
+.div_thongke{
+    padding-top: 30px;
+    background-color: #f4c678;
+    padding-bottom: 40px;
+}
+
+.div_timkiem{
+    padding-top: 30px;
+
+    padding-bottom: 40px;
+    margin: 0 auto;
+
+}
+
+
+.search_b {
+    display: flex;
+    justify-content: center;
+}
+
+.b_block {
+    display: block;
+}
+/*.middle_main{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+
+/*}*/
+.middle_main> .card{
+    background-color: #f1f1f1;
+
+    margin: 10px;
+    text-align: center;
+    width: 17rem;
+    height: 15rem;
+
+
+}
+.card:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.card{
+    transition: transform .2s;
+}
+
+/*  css ft*/
+
+
