@@ -1,6 +1,7 @@
 package repository;
 
 import model.Customer;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ CustomerRepository {
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("SELECT * FROM khach_hang");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                customerList.add(new Customer(  rs.getInt(1),
+                customerList.add(new Customer(rs.getInt(1),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(6),
@@ -41,13 +42,13 @@ CustomerRepository {
                     "select  * from x where  r between  ((? * ? ) - ? + 1) and ? * ?";
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(queryListPage);
             preparedStatement.setInt(1, pageIndex);
-            preparedStatement.setInt(2 ,pageSize);
+            preparedStatement.setInt(2, pageSize);
             preparedStatement.setInt(3, pageSize);
             preparedStatement.setInt(4, pageIndex);
             preparedStatement.setInt(5, pageSize);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                customerList.add(new Customer(  rs.getInt(1),
+                customerList.add(new Customer(rs.getInt(1),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(6),
@@ -69,7 +70,7 @@ CustomerRepository {
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("SELECT Max(ma_khach_hang) FROM khach_hang");
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-               id = rs.getInt(1);
+                id = rs.getInt(1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -84,7 +85,7 @@ CustomerRepository {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                customer = (new Customer(  rs.getInt(1),
+                customer = (new Customer(rs.getInt(1),
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(6),
@@ -106,15 +107,15 @@ CustomerRepository {
             PreparedStatement preparedStatement = this.baseRepository
                     .getConnection()
                     .prepareStatement("insert into khach_hang(ma_khach_hang, ma_loai_khach ,ho_ten, ngay_sinh, gioi_tinh,so_cmnd,so_dien_thoai,email,dia_chi) value(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1,customer.getId());
-            preparedStatement.setInt(2,Integer.parseInt(customer.getCustomerType()));
-            preparedStatement.setString(3,customer.getName());
+            preparedStatement.setInt(1, customer.getId());
+            preparedStatement.setInt(2, Integer.parseInt(customer.getCustomerType()));
+            preparedStatement.setString(3, customer.getName());
             preparedStatement.setDate(4, Date.valueOf(customer.getDateOfBirth()));
-            preparedStatement.setInt(5,Integer.parseInt(customer.getSex()));
-            preparedStatement.setString(6,customer.getIdCard());
-            preparedStatement.setString(7,customer.getSdt());
-            preparedStatement.setString(8,customer.getEmail());
-            preparedStatement.setString(9,customer.getAddress());
+            preparedStatement.setInt(5, Integer.parseInt(customer.getSex()));
+            preparedStatement.setString(6, customer.getIdCard());
+            preparedStatement.setString(7, customer.getSdt());
+            preparedStatement.setString(8, customer.getEmail());
+            preparedStatement.setString(9, customer.getAddress());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -124,17 +125,17 @@ CustomerRepository {
 
     public void updateCustomerId(Customer customer, int id) {
         try {
-            String queryUpdate ="UPDATE khach_hang SET ma_loai_khach = ? , ho_ten = ?  , ngay_sinh = ? , gioi_tinh = ? , so_cmnd = ? , so_dien_thoai = ? , email = ? , dia_chi = ? WHERE ma_khach_hang = ?" ;
+            String queryUpdate = "UPDATE khach_hang SET ma_loai_khach = ? , ho_ten = ?  , ngay_sinh = ? , gioi_tinh = ? , so_cmnd = ? , so_dien_thoai = ? , email = ? , dia_chi = ? WHERE ma_khach_hang = ?";
             PreparedStatement preparedStatement = this.baseRepository
                     .getConnection().prepareStatement(queryUpdate);
-            preparedStatement.setInt(1,Integer.parseInt(customer.getCustomerType()));
-            preparedStatement.setString(2,customer.getName());
+            preparedStatement.setInt(1, Integer.parseInt(customer.getCustomerType()));
+            preparedStatement.setString(2, customer.getName());
             preparedStatement.setDate(3, Date.valueOf(customer.getDateOfBirth()));
-            preparedStatement.setInt(4,Integer.parseInt(customer.getSex()));
-            preparedStatement.setString(5,customer.getIdCard());
-            preparedStatement.setString(6,customer.getSdt());
-            preparedStatement.setString(7,customer.getEmail());
-            preparedStatement.setString(8,customer.getAddress());
+            preparedStatement.setInt(4, Integer.parseInt(customer.getSex()));
+            preparedStatement.setString(5, customer.getIdCard());
+            preparedStatement.setString(6, customer.getSdt());
+            preparedStatement.setString(7, customer.getEmail());
+            preparedStatement.setString(8, customer.getAddress());
             preparedStatement.setInt(9, id);
             int row = preparedStatement.executeUpdate();
             System.out.println("thành công rồi nè mấy cậu" + row);
@@ -146,7 +147,7 @@ CustomerRepository {
         }
     }
 
-    public void deleteCustomer (int id) {
+    public void deleteCustomer(int id) {
         try {
             PreparedStatement preparedStatement = this.baseRepository
                     .getConnection().prepareStatement("Delete FROM khach_hang where ma_khach_hang = ? ");
@@ -159,11 +160,11 @@ CustomerRepository {
         }
     }
 
-//    phân trang
+    //    phân trang
     public int countSearch() {
         try {
-        PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("SELECT count(*) FROM khach_hang");
-        ResultSet rs = preparedStatement.executeQuery();
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("SELECT count(*) FROM khach_hang");
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
             }

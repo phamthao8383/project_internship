@@ -1,4 +1,5 @@
 package controller;
+
 import model.Customer;
 import service.CustomerService;
 import service.CustomerServiceImpl;
@@ -34,22 +35,21 @@ public class CustomerServlet extends HttpServlet {
                 updateCustomer(request, response);
                 break;
             case "search":
-                getCustomerListPage(request,response);
+                getCustomerListPage(request, response);
                 break;
             default:
-                getCustomerList(request,response);
+                getCustomerList(request, response);
                 break;
         }
     }
 
 
-
     @Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        if (action ==null) {
+        if (action == null) {
             action = "";
         }
         switch (action) {
@@ -57,12 +57,12 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 response.sendRedirect("customerhdl.jsp");
                 break;
             case "update":
-                goUpdate(request,response);
+                goUpdate(request, response);
                 break;
             case "search":
-                getCustomerListPage(request,response);
+                getCustomerListPage(request, response);
             default:
-                getCustomerListPage(request,response);
+                getCustomerListPage(request, response);
                 break;
         }
     }
@@ -82,47 +82,47 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         int id = customerService.getIdMax() + 1;
         System.out.println(id);
         String name = request.getParameter("name");
-        String sex =request.getParameter("sex");
-        String idCard =request.getParameter("idCard");
-        String email =request.getParameter("email");
-        String dateOfBirth =request.getParameter("dateOfBirth");
-        String sdt =request.getParameter("sdt");
-        String typeCustomer =request.getParameter("typeCustomer");
-        String address =request.getParameter("address");
+        String sex = request.getParameter("sex");
+        String idCard = request.getParameter("idCard");
+        String email = request.getParameter("email");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        String sdt = request.getParameter("sdt");
+        String typeCustomer = request.getParameter("typeCustomer");
+        String address = request.getParameter("address");
 
-        Customer customer = new Customer(id,name, dateOfBirth,idCard,sex,sdt,email,typeCustomer,address);
+        Customer customer = new Customer(id, name, dateOfBirth, idCard, sex, sdt, email, typeCustomer, address);
         customerService.addCustomerList(customer);
-        request.setAttribute("message" , "Thêm thành công!");
+        request.setAttribute("message", "Thêm thành công!");
 //        tới trang list customer
-        getCustomerListPage(request,response);
+        getCustomerListPage(request, response);
 
     }
 
     private void goUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         int index = Integer.parseInt(request.getParameter("index"));
-        request.setAttribute("indexPage" , index);
+        request.setAttribute("indexPage", index);
         request.setAttribute("customer", customerService.getIdCustomer(id));
         request.getRequestDispatcher("/customerEdit.jsp").forward(request, response);
     }
 
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String name =request.getParameter("name");
-        String sex =request.getParameter("sex");
-        String idCard =request.getParameter("idCard");
-        String email =request.getParameter("email");
-        String dateOfBirth =request.getParameter("dateOfBirth");
-        String sdt =request.getParameter("sdt");
-        String typeCustomer =request.getParameter("typeCustomer");
-        String address =request.getParameter("address");
+        String name = request.getParameter("name");
+        String sex = request.getParameter("sex");
+        String idCard = request.getParameter("idCard");
+        String email = request.getParameter("email");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        String sdt = request.getParameter("sdt");
+        String typeCustomer = request.getParameter("typeCustomer");
+        String address = request.getParameter("address");
 
-        Customer customer = new Customer(id,name, dateOfBirth,idCard,sex,sdt,email,typeCustomer,address);
+        Customer customer = new Customer(id, name, dateOfBirth, idCard, sex, sdt, email, typeCustomer, address);
         customerService.updateCustomerId(customer, id);
-        request.setAttribute("message" , "Sửa thành công!");
+        request.setAttribute("message", "Sửa thành công!");
 
 //        tới trang list customer
-        getCustomerListPage(request,response);
+        getCustomerListPage(request, response);
 
     }
 
@@ -134,7 +134,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
         }
         int count = customerService.countSearch();
         int engPage = count / pageSize;
-        if(count % pageSize != 0) {
+        if (count % pageSize != 0) {
             engPage++;
         }
         request.setAttribute("countPage", engPage);
