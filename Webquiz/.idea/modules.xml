@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Webquiz.iml" filepath="$PROJECT_DIR$/.idea/Webquiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Webquiz.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Webquiz.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Webquiz.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Webquiz.test.iml" />
+    </modules>
+  </component>
+</project>
