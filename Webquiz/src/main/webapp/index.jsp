@@ -194,8 +194,13 @@
       <div class="div_cus">
 
 
+<<<<<<< HEAD
         <img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
         <a href="/login.jsp">Login</a>
+=======
+        <a href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black" ><img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
+          Login</a>
+>>>>>>> 16d4ecbe2f7810daa9e97859ef09185e7e7ad78b
         <ul class="list-group">
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <%
@@ -424,8 +429,8 @@
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">Nhóm 2</a>
     </div>
     <!-- Copyright -->
   </footer>
