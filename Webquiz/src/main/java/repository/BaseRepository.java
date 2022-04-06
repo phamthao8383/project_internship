@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BaseRepository {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/furama_manager?autoReconnect=true&useSSL=false";
+    private String jdbcUrl = "jdbc:mysql://localhost:3306/quiz_web?autoReconnect=true&useSSL=false";
     private String username = "root";
     private String password = "12345";
     private Connection connection;

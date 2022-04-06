@@ -239,13 +239,13 @@
         </div>
         <div class="search_b">
           <input class="b_block" type="text" placeholder="Search">
-          <button class="b_block" type="submit" class="btn-success"> Search</button>
+          <button class="b_block" onclick="show()" type="submit" class="btn-success"> Search</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="footer">
+<div class="footer" id="footer" style="display: none">
   <!-- Footer -->
   <footer class="bg-dark text-center text-white">
     <!-- Grid container -->
@@ -424,5 +424,10 @@
   </footer>
   <!-- Footer -->
 </div>
+<script>
+  function show() {
+      document.getElementById("footer").style.display = "block";
+  }
+</script>
 </body>
 </html>
