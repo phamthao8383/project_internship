@@ -11,6 +11,9 @@ public class Account {
         this.idRole = idRole;
     }
 
+    public Account() {
+    }
+
     @Override
     public String toString() {
         return "Account{" +

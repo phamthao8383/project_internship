@@ -195,10 +195,17 @@
 
 
         <img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
-        Login
+        <a href="/login.jsp">Login</a>
         <ul class="list-group">
           <li class="list-group-item d-flex justify-content-between align-items-center">
-            User Name:
+            <%
+            String username = (String) session.getAttribute("tendangnhap");
+            if(session != null) {
+              out.println("chào bạn: " + username);
+            } else {
+              out.println("Chào khách!");
+            }
+            %>
             <span class="badge badge-primary badge-pill"></span>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -207,7 +214,7 @@
 
           </li>
           <li class="btn_logout">
-            <button type="submit" class="btn-warning">Logout</button>
+            <button type="submit" class="btn-warning"><a href="/userServlet?action=logout">Logout</a></button>
 
           </li>
 
