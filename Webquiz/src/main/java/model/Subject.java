@@ -4,7 +4,7 @@ public class Subject {
     private int subject_id;
     private String subject_name;
 
-    public Subject() {
+    public Subject(int subject_id) {
     }
 
     public Subject(int subject_id, String subject_name) {

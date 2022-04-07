@@ -20,17 +20,17 @@
 <header id="header">
     <div class="header__logo">
         <img src="/static/img/codegym-logo.png" class="header__imglogo" alt="logo">
-        <p class="header__logoname">Smart Quiz Dashboard</p>
+        <p class="header__logoname">BẢNG ĐIỀU KHIÊN CÂU ĐỐ THÔNG MINH</p>
     </div>
     <div class="header__admin">
         <a href="#" class="header__adminlink dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <p class="header__nameadmin">Nguyen Van Admin</p>
+            <p class="header__nameadmin">QUẢN TRỊ VIÊN</p>
             <img src="/static/img/admin_profile.svg" alt="admin-profile" class="header__imgadmin" data-bs-toggle="dropdown" aria-expanded="false">
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Log out</a></li>
+            <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+            <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
         </ul>
     </div>
 </header>
@@ -83,8 +83,8 @@
                             <td>0243523482</td>
                             <td class="text-center">89</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Sửa</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>
                         </tr>
                         <tr>
@@ -95,8 +95,8 @@
                             <td>0923809122</td>
                             <td class="text-center">78</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Sửa</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>
                         </tr>
                         <tr>
@@ -107,14 +107,14 @@
                             <td>0924231344</td>
                             <td class="text-center">64</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Sửa</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination-sm justify-content-end">
+                        <ul class="pagination pagination-sm justify-content-center">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true"><< Trang trước</span>
@@ -130,58 +130,6 @@
                             </li>
                         </ul>
                     </nav>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Point</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>longvan19</td>
-                            <td>Van Thanh Long</td>
-                            <td>Da Nang</td>
-                            <td>0243523482</td>
-                            <td>89</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>mark99</td>
-                            <td>Thornton Mark</td>
-                            <td>Ha Noi</td>
-                            <td>0923809122</td>
-                            <td>78</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>jacobj123</td>
-                            <td>Jacob Jones</td>
-                            <td>Hai Duong</td>
-                            <td>0924231344</td>
-                            <td>64</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i></button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
                 </div>
             </div>
         </div>
@@ -193,15 +141,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete User Confirmation</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Xóa xác nhận người dùng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                This user will be deleted. Click <b>OK</b> to proceed. Or <b>Close</b> to cancel.
+                Người dùng này sẽ bị xóa. Nhấp chuột <b>Đồng ý</b> to proceed. Or <b>Đóng</b> to cancel.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">OK</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Đồng ý</button>
             </div>
         </div>
     </div>
@@ -211,7 +159,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit User Information</h5>
+                <h5 class="modal-title" id="editModalLabel">Sửa thông tin người dùng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -227,13 +175,12 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
