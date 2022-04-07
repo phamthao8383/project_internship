@@ -1,5 +1,6 @@
 package controller;
 
+import model.Account;
 import service.AccountService;
 import service.AccountServiceImpl;
 import service.CustomerService;
@@ -65,10 +66,16 @@ public class UserServlet extends HttpServlet {
 //                break;
 //            case "search":
 //                getCustomerListPage(request,response);
-//            default:
-//                getCustomerListPage(request,response);
-//                break;
+            default:
+                goHomePage(request,response);
+                break;
         }
+    }
+//    Về trang chủ
+    private void goHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request,response);
+
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -79,7 +86,7 @@ public class UserServlet extends HttpServlet {
 //            Hủy session
             session.invalidate();
 //            quay về trang đăng nhập
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DangNhapDangKi.jsp");
             dispatcher.forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
@@ -99,20 +106,21 @@ public class UserServlet extends HttpServlet {
             String userAccount = request.getParameter("account");
             String passWord = request.getParameter("password");
 
-            boolean iValid = accountService.CheckLogIn(userAccount,passWord);
+           Account account = accountService.CheckLogIn(userAccount,passWord);
 
-            if(iValid) {
+            if(account.getUsername() != null ) {
 //                Khởi tạo session
                 HttpSession session = request.getSession();
 //                  Thiết lập giá trị trong session
-                session.setAttribute("tendangnhap", userAccount);
-
+                session.setAttribute("account", account);
+                System.out.println(account);
+//                response.sendRedirect("/index.jsp");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request,response);
             }
 //            Thất bại thì quay về lại trang login
             else  {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DangNhapDangKi.jsp");
                 dispatcher.forward(request,response);
             }
 

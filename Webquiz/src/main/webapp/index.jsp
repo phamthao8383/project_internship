@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -63,7 +64,12 @@
         <img src="../static/img/Network-Globe-Disconnected-icon.png" height="25px" width="25px"/>
         About Us
       </a>
-
+      <c:if test="${sessionScope.account.idRole == 1}">
+        <a href="/admin/index.jsp">
+          <img src="../static/img/Network-Globe-Disconnected-icon.png" height="25px" width="25px"/>
+          Manage
+        </a>
+      </c:if>
     </li>
   </ul>
 </div>
@@ -187,30 +193,35 @@
 
   <div class="right_main">
     <div class="customer">
-
       <img src="../static/img/like-2-icon.png" height="20px" width="20px"/>
-      Customers
+      <c:set var = "role" scope = "session" value = "${sessionScope.account.idRole}"/>
+      <c:choose>
+        <c:when test="${role == 1}">
+          <b>ADMIN</b>
+        </c:when>
+        <c:when test="${role == 2}">
+          <b>Customers</b>
+        </c:when>
+        <c:otherwise>
+          <b>Khách </b>
+        </c:otherwise>
+      </c:choose>
 
       <div class="div_cus">
-
-
-<<<<<<< HEAD
-        <img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
-        <a href="/login.jsp">Login</a>
-=======
-        <a href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black" ><img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
-          Login</a>
->>>>>>> 16d4ecbe2f7810daa9e97859ef09185e7e7ad78b
+        <c:if test="${sessionScope.account == null}">
+          <a href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black" >
+            <img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
+            Login
+          </a>
+        </c:if>
         <ul class="list-group">
           <li class="list-group-item d-flex justify-content-between align-items-center">
-            <%
-            String username = (String) session.getAttribute("tendangnhap");
-            if(session != null) {
-              out.println("chào bạn: " + username);
-            } else {
-              out.println("Chào khách!");
-            }
-            %>
+            <c:if test="${sessionScope.account != null}">
+              <span> Chào bạn ${sessionScope.account.username}</span>
+            </c:if>
+            <c:if test="${sessionScope.account == null}">
+              <span>Chào khách</span>
+            </c:if>
             <span class="badge badge-primary badge-pill"></span>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -219,7 +230,11 @@
 
           </li>
           <li class="btn_logout">
-            <button type="submit" class="btn-warning"><a href="/userServlet?action=logout">Logout</a></button>
+            <c:if test="${sessionScope.account != null}">
+              <button type="submit" class="btn-warning">
+                <a href="/userServlet?action=logout">Logout</a>
+              </button>
+            </c:if>
 
           </li>
 

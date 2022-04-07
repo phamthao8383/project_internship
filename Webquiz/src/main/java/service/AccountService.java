@@ -1,5 +1,7 @@
 package service;
 
+import model.Account;
+
 public interface AccountService {
-    public boolean CheckLogIn(String userAccount, String password);
+    public Account CheckLogIn(String userAccount, String password);
 }
