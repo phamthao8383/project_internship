@@ -58,59 +58,8 @@
                     <p>Manage Users</p>
                 </div>
                 <div class="user-list">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Point/Times</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>longvan19</td>
-                            <td>Van Thanh Long</td>
-                            <td>Da Nang</td>
-                            <td>0243523482</td>
-                            <td>89/2</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>mark99</td>
-                            <td>Thornton Mark</td>
-                            <td>Ha Noi</td>
-                            <td>0923809122</td>
-                            <td>78/5</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>jacobj123</td>
-                            <td>Jacob Jones</td>
-                            <td>Hai Duong</td>
-                            <td>0924231344</td>
-                            <td>64/2</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination-sm justify-content-center">
+                        <ul class="pagination pagination-sm justify-content-end">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
@@ -126,6 +75,58 @@
                             </li>
                         </ul>
                     </nav>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Point</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>longvan19</td>
+                            <td>Van Thanh Long</td>
+                            <td>Da Nang</td>
+                            <td>0243523482</td>
+                            <td>89</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>mark99</td>
+                            <td>Thornton Mark</td>
+                            <td>Ha Noi</td>
+                            <td>0923809122</td>
+                            <td>78</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>jacobj123</td>
+                            <td>Jacob Jones</td>
+                            <td>Hai Duong</td>
+                            <td>0924231344</td>
+                            <td>64</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>

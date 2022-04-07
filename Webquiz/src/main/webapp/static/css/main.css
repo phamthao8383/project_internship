@@ -31,7 +31,7 @@ h1 {
 #header .header__imglogo{
     display: inline-block;
     width: 5rem;
-    border-radius: 5%;
+    border-radius: 50%;
 }
 
 #header .header__logoname{
@@ -39,7 +39,7 @@ h1 {
     margin-left: 1rem;
     font-size: 1.5rem;
     font-weight: 500;
-    color: #5a5c69;
+    color: #fff;
 }
 
 #header .header__admin{
@@ -63,6 +63,7 @@ h1 {
 
 #header .header__nameadmin{
     display: inline-block;
+    color:#fff ;
 }
 
 .header__admin .dropdown-menu{
@@ -70,7 +71,9 @@ h1 {
     box-shadow: 3px 3px 3px #ccc;
 }
 
-.main{}
+.main{
+    background-color: #eeeeee;
+}
 
 .main .container-fluid{
     padding: 0 2rem 0 0;
@@ -106,4 +109,10 @@ h1 {
 
 .main .col-2{
     
+}
+#header {
+    background-color: #77787d;
+}
+.main .sidebar {
+    background-color: #77787d;
 }
