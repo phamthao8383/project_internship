@@ -58,7 +58,7 @@
             <div class="col-10 content">
                 <div class="content__title">
                     <div class="content_titlepath">
-                        <a href="/exam-list.html" class="content__pathback">Exam List</a>
+                        <a href="/admin/exam-list.jsp" class="content__pathback">Exam List</a>
                         <p class="content__examname">
                             <i class="fa-solid fa-angle-right"></i>
                             Đề thi số 1 - Toán

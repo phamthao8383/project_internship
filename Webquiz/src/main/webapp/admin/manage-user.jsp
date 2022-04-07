@@ -41,33 +41,37 @@
                 <div class="list-group">
                     <a href="/admin/manage-user.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-people-group"></i>
-                        Manage Users</a>
+                        Quản lý thành viên</a>
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
-                        Manage Exams</a>
+                        Quản lý đề</a>
                     <a href="question-bank.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-circle-question"></i>
-                        Questions Bank</a>
+                        Ngân hàng câu hỏi</a>
                     <a href="exam-list.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-house"></i>
-                        Exam List</a>
+                        Danh sách đề</a>
                 </div>
             </div>
             <div class="col-10 content">
                 <div class="content__title">
-                    <p>Manage Users</p>
+                    <p>Quản lý thành viên</p>
                 </div>
                 <div class="user-list">
-                    <table class="table table-hover">
+                    <table id="user_table" class="table table-hover">
+                        <colgroup>
+                            <col width="130" span="1">
+                            <col width=auto span="6">
+                        </colgroup>
                         <thead>
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Point/Times</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Mã thành viên</th>
+                            <th scope="col">Tài khoản</th>
+                            <th scope="col">Họ và Tên</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Số điện thoại</th>
+                            <th scope="col" class="text-center">Điểm tích luỹ</th>
+                            <th scope="col">Hành động</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -77,10 +81,10 @@
                             <td>Van Thanh Long</td>
                             <td>Da Nang</td>
                             <td>0243523482</td>
-                            <td>89/2</td>
+                            <td class="text-center">89</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                             </td>
                         </tr>
                         <tr>
@@ -89,10 +93,10 @@
                             <td>Thornton Mark</td>
                             <td>Ha Noi</td>
                             <td>0923809122</td>
-                            <td>78/5</td>
+                            <td class="text-center">78</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                             </td>
                         </tr>
                         <tr>
@@ -101,10 +105,10 @@
                             <td>Jacob Jones</td>
                             <td>Hai Duong</td>
                             <td>0924231344</td>
-                            <td>64/2</td>
+                            <td class="text-center">64</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm">Edit</button>
-                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                             </td>
                         </tr>
                         </tbody>
@@ -113,7 +117,7 @@
                         <ul class="pagination pagination-sm justify-content-center">
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
+                                    <span aria-hidden="true"><< Trang trước</span>
                                 </a>
                             </li>
                             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -121,7 +125,7 @@
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item">
                                 <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
+                                    <span aria-hidden="true">Trang sau >></span>
                                 </a>
                             </li>
                         </ul>
@@ -133,11 +137,11 @@
 </div>
 </body>
 <!-- Delete Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete User Confirmation</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Delete User Confirmation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -150,7 +154,45 @@
         </div>
     </div>
 </div>
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit User Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control edit-input" placeholder="Họ và tên">
+                        <input type="text" class="form-control edit-input" placeholder="Email">
+                        <input type="text" class="form-control edit-input" placeholder="Số điện thoại">
+                        <input type="text" class="form-control edit-input" placeholder="Địa chỉ">
+                        <input type="text" class="form-control edit-input" placeholder="Tài khoản">
+                        <input type="text" class="form-control edit-input" placeholder="Điểm tích luỹ">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $('#example').dataTable({}); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
+
+    } );
+</script>
 </html>

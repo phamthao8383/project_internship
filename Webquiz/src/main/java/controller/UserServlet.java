@@ -124,8 +124,9 @@ public class UserServlet extends HttpServlet {
                 dispatcher.forward(request,response);
             }
 
+    }
 
-
+    public void getMemberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
     }
 }
