@@ -33,33 +33,33 @@
     <div class="forms">
         <div class="form-content">
             <div class="login-form">
-                <div class="title">Login</div>
+                <div class="title">Đăng nhập</div>
                 <form action="/userServlet" method="post">
                     <input type="hidden" name="action" value="login">
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" name="account" placeholder="Enter your account" required>
+                            <input type="text" name="account" placeholder="Nhập tên đăng nhập..." required>
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="password" placeholder="Enter your password" required>
+                            <input type="password" name="password" placeholder="Nhập mật khẩu..." required>
                         </div>
-                        <div class="text"><a href="#">Forgot password?</a></div>
+                        <div class="text"><a href="#">Quên mật khẩu ?</a></div>
                         <div class="button input-box">
-                            <input type="submit" value="submit">
+                            <input type="submit" value="Đăng nhập">
                         </div>
-                        <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
+                        <div class="text sign-up-text">Bạn chưa có tài khoản? <label for="flip">Đăng kí nhanh</label></div>
                     </div>
                 </form>
             </div>
             <div class="signup-form">
-                <div class="title">Signup</div>
+                <div class="title">Đăng ký</div>
                 <form action="#">
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Enter your name" required>
+                            <input type="text" placeholder="" required>
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
