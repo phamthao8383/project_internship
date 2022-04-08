@@ -12,10 +12,11 @@ import java.util.List;
 
 public class SubjectRepository {
     private BaseRepository baseRepository = new BaseRepository();
+    private static final String DELETE_SUBJECT_SQL = "delete from `subject` where `subject_id` = ?;";
     private static final String SELECT_SUBJECT_BY_ID = "select * from subject where subject_id =?";
     private static final String SELECT_ALL_SUBJECT = "select * from subject";
     private static final String INSERT_SUBJECT = "INSERT INTO subject" + " (subject_id,subject_name) VALUES" + "(?,?);";
-    private static final String UPDATE_SUBJECT = "update `subject` set subject_name ? where subject_id = ?;";
+    private static final String UPDATE_SUBJECT = "update `subject` set subject_name = ? where subject_id = ?;";
 
 
     public List<Subject> selectAllSubject() {
@@ -75,6 +76,19 @@ public class SubjectRepository {
             e.printStackTrace();
         }
         return rowUpdated;
+    }
+    public boolean deleteSubject(int subject_id) {
+        boolean rowDeleted = false;
+        try {
+            Connection connection = baseRepository.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SUBJECT_SQL);
+//            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(DELETE_QUESTION_SQL);
+            preparedStatement.setInt(1, subject_id);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rowDeleted;
     }
 }
 

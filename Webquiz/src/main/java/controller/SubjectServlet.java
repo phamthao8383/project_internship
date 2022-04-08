@@ -30,7 +30,7 @@ public class SubjectServlet extends HttpServlet {
                 break;
             }
             case "delete": {
-                //  deleteSubject(request,response);
+                  deleteSubject(request,response);
                 break;
             }
             case "search": {
@@ -41,6 +41,12 @@ public class SubjectServlet extends HttpServlet {
                 break;
         }
 
+    }
+
+    private void deleteSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int subject_id = Integer.parseInt(request.getParameter("id"));
+        subjectService.deleteSubject(subject_id);
+        subjectList(request,response);
     }
 
     private void editSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

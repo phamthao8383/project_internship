@@ -26,7 +26,7 @@
                 <td><c:out value="${subject.subject_name}"/></td>
                 <td>
                     <a href="/subjects?action=edit&id=${subject.subject_id}">Edit</a>
-                    <a href="/subjects?action=delete&id=${subject.subject_name}">Delete</a>
+                    <a href="/subjects?action=delete&id=${subject.subject_id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
