@@ -90,7 +90,7 @@
                         <tr>
                             <th scope="row">2</th>
                             <td>mark99</td>
-                            <td>Thornton Mark</td>
+                            <td>Đặng Hồng Sơn</td>
                             <td>Ha Noi</td>
                             <td>0923809122</td>
                             <td class="text-center">78</td>
