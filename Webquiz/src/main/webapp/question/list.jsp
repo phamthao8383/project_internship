@@ -12,6 +12,7 @@
 <%--        <button type="submit">Search</button>--%>
 <%--    </form>--%>
 </center>
+<a href="/questions?action=create">Add New Question</a>
 <div align="center">
     <table border="1" cellpadding="5">
         <caption><h2>List Question</h2></caption>
@@ -35,7 +36,10 @@
                 <td><c:out value="${question.answer4}"/></td>
                 <td><c:out value="${question.correct_answer}"/></td>
                 <td><c:out value="${question.getSubject().getSubject_name()}"/></td>
-
+                <td>
+                    <a href="/questions?action=edit&id=${question.question_id}">Edit</a>
+                    <a href="/questions?action=delete&id=${question.question_id}">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

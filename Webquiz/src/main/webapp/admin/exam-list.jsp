@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +47,7 @@
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
                         Quản lý đề thi</a>
-                    <a href="question-bank.jsp" class="list-group-item list-group-item-action">
+                    <a href="/questions" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-circle-question"></i>
                         Ngân hàng câu hỏi</a>
                     <a href="exam-list.jsp" class="list-group-item list-group-item-action">
