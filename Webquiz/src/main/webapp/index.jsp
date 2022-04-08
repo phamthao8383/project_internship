@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
@@ -9,7 +8,8 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/bootstrap.js"></script>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
@@ -20,248 +20,247 @@
 
 </head>
 <body>
-<div class="banner">
-    <img src="../static/img/3f93ae2b0df0b7a875bdca9b6bbcef20.png" height="120" width="120"/></div>
 <div class="header">
-    <ul>
-        <li>
+    <div class="banner">
+        <div class="sologan">
+            <h1>TRẮC NGHIỆM ONLINE</h1>
+            <h4>ĐA DẠNG - THÔNG MINH - CHÍNH XÁC</h4>
+        </div>
+    </div>
+    <ul class="navbar__item-list">
+        <li class="navbar__item-sectors">
             <a href="#">
-
-                <img src="../static/img/home-icon.png" height="25px" width="25px"/>
+                <i class="fa-solid fa-house"></i>
                 Home
             </a>
         </li>
-        <li>
+        <li class="navbar__item-sectors">
             <a href="#">
-
-                <img src="../static/img/Books-2-icon.png" height="25px" width="25px"/>
-                Khối A</a>
+                <i class="fa-solid fa-book"></i>
+                Khối A
+            </a>
         </li>
-        <li>
+        <li class="navbar__item-sectors">
             <a href="#">
-                <img src="../static/img/Books-2-icon.png" height="25px" width="25px"/>
+                <i class="fa-solid fa-book"></i>
                 Khối B
             </a>
-
         </li>
-        <li>
+        <li class="navbar__item-sectors">
             <a href="#">
-                <img src="../static/img/Books-2-icon.png" height="25px" width="25px"/>
-                Khối D
+                <i class="fa-solid fa-book"></i>
+                Khối C
             </a>
         </li>
-        <li>
+        <li class="navbar__item-sectors">
             <a href="#">
-                <img src="../static/img/Books-2-icon.png" height="25px" width="25px"/>
-                IQ Test
+                <i class="fa-solid fa-book-open"></i>
+                Bài TEST
             </a>
-
-    </li>
-        <li>
-      <a href="#">
-        <img src="../static/img/Network-Globe-Disconnected-icon.png" height="25px" width="25px"/>
-        About Us
-      </a>
-      <c:if test="${sessionScope.account.idRole == 1}">
-        <a href="/admin/index.jsp">
-          <img src="../static/img/Network-Globe-Disconnected-icon.png" height="25px" width="25px"/>
-          Manage
-        </a>
-      </c:if>
-    </li>
-  </ul>
-        <li>
-            <a href="#">
-                <img src="../static/img/Network-Globe-Disconnected-icon.png" height="25px" width="25px"/>
-                About Us
-            </a>
+        </li>
+        <li class="navbar__item-sectors">
+            <c:if test="${sessionScope.account.idRole == 1}">
+                <a href="/admin/index.jsp">
+                    <i class="fa-solid fa-link"></i>
+                    Tới trang quản lý
+                </a>
+            </c:if>
         </li>
     </ul>
 </div>
-<div class="container_f">
-    <div class="left_main">
-        <div class="gold_pound">
-
-            <img src="../static/img/like-2-icon.png" height="20px" width="20px"/>
-            Vinh danh bảng vàng
-      <div class="div_group">
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Cras justo odio
-            <span class="badge badge-primary badge-pill">14</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Dapibus ac facilisis in
-            <span class="badge badge-primary badge-pill">2</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Morbi leo risus
-            <span class="badge badge-primary badge-pill">1</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Morbi leo risus
-            <span class="badge badge-primary badge-pill">1</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Morbi leo risus
-            <span class="badge badge-primary badge-pill">1</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="call_sp">
-
-      Hỗ trợ trực tuyến
-
-      <div class="div_group_call">
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            ONLINE
-            <span class="badge badge-primary badge-pill">Slack</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            HOTLINE
-            <span class="badge badge-primary badge-pill">112221122</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            MESSENGER
-            <span class="badge badge-primary badge-pill"></span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-  <div class="middle_main">
-    <div class="card" >
-      <img class="card-img-top" src="../static/img/Thiết-kế-không-tên-1-1.png" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Toán Học</h5>
-        <p class="card-text"></p>
-
-      </div>
-    </div>
-
-    <div class="card">
-      <img class="card-img-top" src="../static/img/vai-tro-cua-hoa-hoc-lop-8_3.png"style="height: 180px" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Hóa Học</h5>
-        <p class="card-text"></p>
-
-      </div>
-    </div>
-
-    <div class="card" >
-      <img class="card-img-top" src="../static/img/sach-hay-ve-vat-ly-cover-780x470.png" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Vật Lý</h5>
-        <p class="card-text"></p>
-
-      </div>
-    </div>
-
-    <div class="card" >
-      <img class="card-img-top" src="../static/img/500-mau-cau-tieng-anh-giao-tiep-hay-dung-nhat-phan-1.png"style="height: 160px" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Tiếng Anh</h5>
-        <p class="card-text"></p>
-
-      </div>
-    </div>
-    <div class="card" >
-      <img class="card-img-top" src="../static/img/quy-dinh-thi-bang-lai-xe-may.png" style="height: 165px" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Thi Bằng Lái Xe</h5>
-        <p class="card-text"></p>
-
-      </div>
-    </div>
-    <div class="card" >
-      <img class="card-img-top" src="../static/img/post-thumb-ngon-ngu-lap-trinh.png"style="height: 165px" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Ngôn Ngữ Lập Trình</h5>
-        <p class="card-text"></p>
-      </div>
-    </div>
-  </div>
-  <div class="right_main">
-    <div class="customer">
-      <img src="../static/img/like-2-icon.png" height="20px" width="20px"/>
-      <c:set var = "role" scope = "session" value = "${sessionScope.account.idRole}"/>
-      <c:choose>
-        <c:when test="${role == 1}">
-          <b>ADMIN</b>
-        </c:when>
-        <c:when test="${role == 2}">
-          <b>Customers</b>
-        </c:when>
-        <c:otherwise>
-          <b>Khách </b>
-        </c:otherwise>
-      </c:choose>
-      <div class="div_cus">
-        <c:if test="${sessionScope.account == null}">
-          <a href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black" >
-            <img src="../static/img/User-Interface-Login-icon.png" height="20px" width="20px"/>
-            Login
-          </a>
-        </c:if>
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <c:if test="${sessionScope.account != null}">
-              <span> Chào bạn ${sessionScope.account.username}</span>
-            </c:if>
-            <c:if test="${sessionScope.account == null}">
-              <span>Chào khách</span>
-            </c:if>
-            <span class="badge badge-primary badge-pill"></span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Dapibus ac facilisis in
-            <span class="badge badge-primary badge-pill"></span>
-
-          </li>
-          <li class="btn_logout">
-            <c:if test="${sessionScope.account != null}">
-              <button type="submit" class="btn-warning">
-                <a href="/userServlet?action=logout">Logout</a>
-              </button>
-            </c:if>
-
-          </li>
-        </ul>
-      </div>
-      <div class="div_thongke">
-
-
-        <img src="../static/img/user-icon.png" height="20px" width="20px"/>
-
-        THỐNG KÊ THÀNH VIÊN
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Tổng Thành Viên
-            <span class="badge badge-primary badge-pill"> 5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            Mới Nhất
-            <span class="badge badge-primary badge-pill">Cypher</span>
-          </li>
-        </ul>
-      </div>
-        <div class="div_timkiem">
-        <div class="icon_search">
-          <img src="../static/img/zoom-search-2-icon.png" height="20px" width="20px"/>
-          <label class="s"> Search</label>
-        </div>
-        <div class="search_b">
-          <input class="b_block" type="text" placeholder="Search">
-          <button class="b_block" onclick="show()" type="submit" class="btn-success"> Search</button>
+<div class="row">
+    <div class="left_main col-3 col-md-3">
+        <div class="honour">
+            <div class="gold_pound">
+                <i class="fa-solid fa-award"></i>
+                <p>Vinh danh bảng vàng</p>
+            </div>
             <div class="div_group">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Nhạc Phạm</span>
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Hồng Sơn</span>
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Hiếu Cao</span>
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Mỹ Vân</span>
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>Thu Thảo</span>
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="honour">
+            <div class="gold_pound">
+                <i class="fa-regular fa-comment-arrow-down"></i>
+                <p>Hỗ trợ trực tuyến</p>
+            </div>
+            <div class="div_group_call">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ONLINE
+                        <span class="badge badge-primary badge-pill">Slack</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        HOTLINE
+                        <span class="badge badge-primary badge-pill">112221122</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        MESSENGER
+                        <span class="badge badge-primary badge-pill"></span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
-  </div>
+    <div class="row col-6 col-md-6">
+        <div class="col-6">
+            <div class="card card_mg">
+                <img class="card-img-top" src="../static/img/Thiết-kế-không-tên-1-1.png" style="height: 180px" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Toán Học</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card card_mg">
+                <img class="card-img-top" src="../static/img/vai-tro-cua-hoa-hoc-lop-8_3.png" style="height: 180px"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Hóa Học</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class=" col-6">
+            <div class="card card_mg">
+                <img class="card-img-top" src="../static/img/sach-hay-ve-vat-ly-cover-780x470.png" style="height: 180px" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Vật Lý</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class=" col-6">
+            <div class="card card_mg">
+                <img class="card-img-top" src="../static/img/500-mau-cau-tieng-anh-giao-tiep-hay-dung-nhat-phan-1.png"
+                     style="height: 180px" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Tiếng Anh</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card card_mg">
+                <img class="card-img-top" src="../static/img/quy-dinh-thi-bang-lai-xe-may.png" style="height: 180px"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Thi Bằng Lái Xe</h5>
+
+                </div>
+            </div>
+        </div>
+        <div class=" col-6">
+            <div class="card card_mg">
+                <img class="card-img-top" src="../static/img/post-thumb-ngon-ngu-lap-trinh.png" style="height: 180px"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Ngôn Ngữ Lập Trình</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right_main col-3 col-md-3">
+        <div class="honour">
+            <div class="gold_pound">
+                <c:set var="role" scope="session" value="${sessionScope.account.idRole}"/>
+                <i class="fa-solid fa-user"></i>
+                <c:choose>
+                    <c:when test="${role == 1}">
+                        <p>Quản lý</p>
+                    </c:when>
+                    <c:when test="${role == 2}">
+                        <p>Thành viên</p>
+                    </c:when>
+                    <c:otherwise>
+                        <p>Khách</p>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <div class="user_log">
+                <div class="div_cus">
+                    <c:if test="${sessionScope.account == null}">
+                        <a class="div_cus-link" href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <p>Đăng nhập</p>
+                        </a>
+                    </c:if>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <c:if test="${sessionScope.account != null}">
+                                <span> Chào bạn ${sessionScope.account.username}</span>
+                            </c:if>
+                            <c:if test="${sessionScope.account == null}">
+                                <span>Chào khách</span>
+                            </c:if>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a><span>Xem thông tin cá nhân</span></a>
+                        </li>
+                        <li class="btn_logout">
+                            <c:if test="${sessionScope.account != null}">
+                                <button type="submit" class="btn-warning">
+                                    <a href="/userServlet?action=logout">Logout</a>
+                                </button>
+                            </c:if>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="user_log">
+                <div class="div_thongke">
+                    <a class="div_cus-link" href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black">
+                        <i class="fa-solid fa-user-group"></i>
+                        <p>Thống kê thành viên</p>
+                    </a>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tổng Thành Viên
+                            <span class="badge badge-primary badge-pill"> 5</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Mới Nhất
+                            <span class="badge badge-primary badge-pill">Long</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="user_log">
+                <div class="div_timkiem">
+                    <div class="search_lable">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <p>Tìm kiếm</p>
+                    </div>
+                    <div class="search_b">
+                        <input class="search_input" type="text" placeholder="Nhập...">
+                        <button class="btn_search" onclick="show()" type="submit" class="btn-success">Tìm</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 <div class="footer">
     <!-- Footer -->
@@ -432,18 +431,18 @@
             <!-- Section: Links -->
         </div>
         <!-- Grid container -->
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2022 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">Nhóm 2</a>
-    </div>
-  </footer>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">Nhóm 2</a>
+        </div>
+    </footer>
 </div>
 
 <script>
-  function show() {
-      document.getElementById("footer").style.display = "block";
-  }
+    function show() {
+        document.getElementById("footer").style.display = "block";
+    }
 </script>
 </body>
 </html>
