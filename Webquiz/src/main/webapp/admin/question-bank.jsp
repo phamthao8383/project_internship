@@ -56,25 +56,28 @@
                 </div>
             </div>
             <div class="col-10 content">
-                <div class="content__title">
-                    <p>Danh sách câu hỏi</p>
+                <div class="content__title d-flex justify-content-between align-items-center">
+                    <p class="content__title-label">Danh sách câu hỏi</p>
                     <div class="title-actions">
                         <button type="button" class="btn btn-outline-success btn-sm">Nhập câu hỏi</button>
                         <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createQuestionModal">Tạo mới</button>
-                        <!-- <button type="button" class="btn btn-outline-danger btn-sm">Delete Item</button> -->
-                        <button type="button" class="btn btn-outline-secondary btn-sm">Thoát</button>
                     </div>
                 </div>
                 <div class="user-list">
                     <table class="table table-hover">
+                        <colgroup>
+                            <col width=auto span="1">
+                            <col width="100px" span="1">
+                            <col width=auto span="4">
+                        </colgroup>
                         <thead>
                         <tr>
                             <th scope="col">STT</th>
                             <th scope="col">Mã câu hỏi</th>
-                            <th scope="col">câu hỏi</th>
-                            <th scope="col">Choices</th>
-                            <th scope="col">Câu trả lời</th>
-                            <th scope="col">Chọn</th>
+                            <th scope="col">Câu hỏi</th>
+                            <th scope="col">Phương án</th>
+                            <th scope="col">Đáp án</th>
+                            <th scope="col">Hành động</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -92,7 +95,7 @@
                             </td>
                             <td>Vận tốc tăng dần với gia tốc không đổi</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm mt-3">Sửa</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#editQuestionModal">Sửa</button>
                                 <button type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Xóa</button>
                             </td>
                         </tr>
@@ -110,7 +113,7 @@
                             </td>
                             <td>Vận tốc tăng dần với gia tốc không đổi</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm mt-3">Sửa</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#editQuestionModal">Sửa</button>
                                 <button type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Xóa</button>
                             </td>
                         </tr>
@@ -128,7 +131,7 @@
                             </td>
                             <td>Vận tốc tăng dần với gia tốc không đổi</td>
                             <td>
-                                <button type="button" class="btn btn-outline-warning btn-sm mt-3">Sửa</button>
+                                <button type="button" class="btn btn-outline-warning btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#editQuestionModal">Sửa</button>
                                 <button type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Xóa</button>
                             </td>
                         </tr>
@@ -168,15 +171,19 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3 row">
-                        <label for="inputQuestionID" class="col-sm-3 col-form-label">Mã câu hỏi</label>
+                        <label for="inputQuestion" class="col-sm-3 col-form-label">Nhập câu hỏi</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputQuestionID">
+                            <textarea type="text" class="form-control" id="inputQuestion" rows="3"></textarea>
                         </div>
                     </div>
+
                     <div class="mb-3 row">
-                        <label for="inputChoices" class="col-sm-3 col-form-label">Lựa chọn</label>
+                        <label for="inputChoices1" class="col-sm-3 col-form-label">Lựa chọn</label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="inputChoices" rows="4"></textarea>
+                            <textarea type="text" class="form-control" id="inputChoices1" rows="1" placeholder="A"></textarea>
+                            <textarea type="text" class="form-control" id="inputChoices2" rows="1" placeholder="B"></textarea>
+                            <textarea type="text" class="form-control" id="inputChoices3" rows="1" placeholder="C"></textarea>
+                            <textarea type="text" class="form-control" id="inputChoices4" rows="1" placeholder="D"></textarea>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -200,20 +207,62 @@
         </div>
     </div>
 </div>
+
+<%-- Edit question --%>
+<div class="modal fade" id="editQuestionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Cập nhật câu hỏi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3 row">
+                        <label for="editChoice1" class="col-sm-3 col-form-label">Lựa chọn</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" class="form-control" id="editChoice1" rows="1">A. </textarea>
+                            <textarea type="text" class="form-control" id="editChoice2" rows="1">B. </textarea>
+                            <textarea type="text" class="form-control" id="editChoice3" rows="1">C. </textarea>
+                            <textarea type="text" class="form-control" id="editChoice4" rows="1">D. </textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputAnswer" class="col-sm-3 col-form-label">Câu trả lời</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editAnswer">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputExamID" class="col-sm-3 col-form-label">Mã đề thi</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editExamID">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Gửi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Delete Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Xóa thông tin người dùng</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Xóa câu hỏi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Người dùng này sẽ bị xóa. Nhấp chuột <b>Đồng ý</b> to proceed. Or <b>Đóng</b> to cancel.
+                Xác nhận xoá câu hỏi này khỏi ngân hàng câu hỏi?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">OK</button>
+                <button type="button" class="btn btn-primary">Xác nhận</button>
             </div>
         </div>
     </div>
