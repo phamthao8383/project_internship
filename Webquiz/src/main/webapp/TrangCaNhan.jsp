@@ -2,21 +2,18 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <script src="/static/js/bootstrap.bundle.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-grid.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-reboot.css">
-    <link rel="stylesheet" href="/static/css/Trangchu.css">
-    <link rel="stylesheet" href="static/css/TrangCaNhan.css">
-
-
+    <script src="../static/js/bootstrap.bundle.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="../static/css/Trangchu.css">
+    <link rel="stylesheet" href="../static/css/TrangCaNhan.css">
 
 </head>
 <body>
@@ -28,7 +25,7 @@
     <ul>
 
         <li>
-            <a href="#">
+            <a href="/index.jsp">
 
                 <img src="../static/img/home-icon.png" height="25px" width="25px"/>
                 Home
@@ -69,7 +66,54 @@
         </li>
     </ul>
 </div>
-<div class="div_user" >
+<div class="div_user">
+    <h3>Thông tin cá nhân</h3>
+
+    <div class="div_info">
+        <div class="div_img">
+            <img src="../static/img/denn-mark-cypher-full.jpg" alt="..." class="img-thumbnail"
+                 style="height: 200px ; width: 150px">
+
+        </div>
+
+
+
+        <div class="div_group" >
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    User :
+                    <span class="badge badge-primary badge-pill"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Name :
+                    <span class="badge badge-primary badge-pill"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Email :
+                    <span class="badge badge-primary badge-pill"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Address :
+                    <span class="badge badge-primary badge-pill"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Phone :
+                    <span class="badge badge-primary badge-pill"></span>
+                </li>
+            </ul>
+        </div>
+
+        <input class="choose_file" type="file" style="font-size: 12px ; padding-right: 325px ;padding-bottom: 15px" >
+        <div class="btn_edit_histoty">
+            <button>Edit</button>
+
+            <button>History</button>
+        </div>
+
+
+
+    </div>
 
 
 </div>
@@ -254,4 +298,3 @@
 </div>
 </body>
 </html>
-

@@ -26,7 +26,7 @@
   <ul>
 
     <li>
-      <a href="#">
+      <a href="/index.jsp">
 
         <img src="../static/img/home-icon.png" height="25px" width="25px"/>
         Home
@@ -189,7 +189,9 @@
     <div class="customer">
 
       <img src="../static/img/like-2-icon.png" height="20px" width="20px"/>
+
       Customers
+     <a href="/TrangCaNhan.jsp"><img src="static/img/settings-3-icon.png" height="20px" width="20px" style=""></a>
 
       <div class="div_cus">
 
