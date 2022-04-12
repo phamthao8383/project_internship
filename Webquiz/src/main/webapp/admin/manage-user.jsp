@@ -45,7 +45,7 @@
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
                         Quản lý đề</a>
-                    <a href="question-bank.jsp" class="list-group-item list-group-item-action">
+                    <a href="/questions" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-circle-question"></i>
                         Ngân hàng câu hỏi</a>
                     <a href="exam-list.jsp" class="list-group-item list-group-item-action">

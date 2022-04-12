@@ -2,6 +2,8 @@ package service;
 
 import model.Question;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface QuestionService {
@@ -15,4 +17,5 @@ public interface QuestionService {
     boolean updateQuestion(Question question);
 
     List<Question> findAllByName(String name);
+
 }

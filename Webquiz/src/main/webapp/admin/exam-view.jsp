@@ -47,7 +47,7 @@
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
                         Quản lý đề thi</a>
-                    <a href="question-bank.jsp" class="list-group-item list-group-item-action">
+                    <a href="/questions" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-circle-question"></i>
                         Ngân hàng câu hỏi</a>
                     <a href="exam-list.jsp" class="list-group-item list-group-item-action">
@@ -71,58 +71,58 @@
                     </div>
                 </div>
                 <div class="user-list">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã câu hỏi</th>
-                            <th scope="col">Câu hỏi</th>
-                            <th scope="col">Câu trả lời</th>
-                            <th scope="col">Chọn</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>001</td>
-                            <td>Chuyển động tăng dần đều là gì?</td>
-                            <td>Vận tốc tăng dần với gia tốc không đổi.</td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>002</td>
-                            <td>Tính chất chung của kim loại?</td>
-                            <td>Dẻo, dẫn nhiệt, dẫn điện, ánh kim.</td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                                    <label class="form-check-label" for="flexCheckDefault2">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>003</td>
-                            <td>I am interested in (listen)_____ to music.</td>
-                            <td>listening</td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                                    <label class="form-check-label" for="flexCheckDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+<%--                    <table class="table table-hover">--%>
+<%--                        <thead>--%>
+<%--                        <tr>--%>
+<%--                            <th scope="col">STT</th>--%>
+<%--                            <th scope="col">Mã câu hỏi</th>--%>
+<%--                            <th scope="col">Câu hỏi</th>--%>
+<%--                            <th scope="col">Câu trả lời</th>--%>
+<%--                            <th scope="col">Chọn</th>--%>
+<%--                        </tr>--%>
+<%--                        </thead>--%>
+<%--                        <tbody>--%>
+<%--                        <tr>--%>
+<%--                            <th scope="row">1</th>--%>
+<%--                            <td>001</td>--%>
+<%--                            <td>Chuyển động tăng dần đều là gì?</td>--%>
+<%--                            <td>Vận tốc tăng dần với gia tốc không đổi.</td>--%>
+<%--                            <td>--%>
+<%--                                <div class="form-check">--%>
+<%--                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">--%>
+<%--                                    <label class="form-check-label" for="flexCheckDefault">--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <th scope="row">2</th>--%>
+<%--                            <td>002</td>--%>
+<%--                            <td>Tính chất chung của kim loại?</td>--%>
+<%--                            <td>Dẻo, dẫn nhiệt, dẫn điện, ánh kim.</td>--%>
+<%--                            <td>--%>
+<%--                                <div class="form-check">--%>
+<%--                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">--%>
+<%--                                    <label class="form-check-label" for="flexCheckDefault2">--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
+<%--                        <tr>--%>
+<%--                            <th scope="row">3</th>--%>
+<%--                            <td>003</td>--%>
+<%--                            <td>I am interested in (listen)_____ to music.</td>--%>
+<%--                            <td>listening</td>--%>
+<%--                            <td>--%>
+<%--                                <div class="form-check">--%>
+<%--                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">--%>
+<%--                                    <label class="form-check-label" for="flexCheckDefault1">--%>
+<%--                                    </label>--%>
+<%--                                </div>--%>
+<%--                            </td>--%>
+<%--                        </tr>--%>
+<%--                        </tbody>--%>
+<%--                    </table>--%>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-sm justify-content-center">
                             <li class="page-item">
