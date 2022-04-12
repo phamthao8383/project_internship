@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 
@@ -15,13 +13,11 @@
     <link rel="stylesheet" href="/static/css/bootstrap-grid.css">
     <link rel="stylesheet" href="/static/css/bootstrap-reboot.css">
     <link rel="stylesheet" href="/static/css/Trangchu.css">
-
-
 </head>
 <body>
 <div class="header">
     <div class="banner">
-        <img src="static/img/logoQuizgym.PNG" height="200px">
+        <img src="icon/logo-QUIZGYM.png" height="200px">
     </div>
     <ul class="navbar__item-list">
         <li class="navbar__item-sectors">
