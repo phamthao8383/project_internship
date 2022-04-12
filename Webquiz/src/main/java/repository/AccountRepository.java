@@ -6,9 +6,6 @@ import model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class AccountRepository {
 
     private BaseRepository baseRepository = new BaseRepository();
@@ -33,4 +30,31 @@ public class AccountRepository {
         }
         return account;
     }
+
+    public int CheckAccount(String userAccount) {
+        int i = 0;
+        try {
+            String myQuery = "SELECT * FROM `account` where username = ? ";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setString(1, userAccount);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                i=1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+//    public void AddAccount(Account account) {
+//        try {
+//            String myQuery = "SELECT * FROM `account` where username = ? ";
+//            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+//            preparedStatement.setString(1, );
+//            ResultSet rs = preparedStatement.executeQuery();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
