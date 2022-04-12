@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nhacp
@@ -6,14 +5,16 @@
   Time: 8:46 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Quiz</title>
+    <title>Câu đố thông minh</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/static/css/main.css">
@@ -27,17 +28,17 @@
 <header id="header">
     <div class="header__logo">
         <img src="/static/img/codegym-logo.png" class="header__imglogo" alt="logo">
-        <p class="header__logoname">Smart Quiz Dashboard</p>
+        <p class="header__logoname">BẢNG ĐIỀU KHIỂN CÂU ĐỐ THÔNG MINH</p>
     </div>
     <div class="header__admin">
         <a href="#" class="header__adminlink dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <p class="header__nameadmin">Nguyen Van Admin</p>
+            <p class="header__nameadmin">QUẢN TRỊ VIÊN</p>
             <img src="/static/img/admin_profile.svg" alt="admin-profile" class="header__imgadmin" data-bs-toggle="dropdown" aria-expanded="false">
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Log out</a></li>
+            <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
+            <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
         </ul>
     </div>
 </header>
@@ -48,16 +49,16 @@
                 <div class="list-group">
                     <a href="/admin/manage-user.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-people-group"></i>
-                        Manage Users</a>
+                        Quản lý người dùng</a>
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
-                        Manage Exams</a>
-                    <a href="question-bank.jsp" class="list-group-item list-group-item-action">
+                        Quản lý đề  thi</a>
+                    <a href="/questions" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-circle-question"></i>
-                        Questions Bank</a>
+                        Ngân hàng câu hỏi</a>
                     <a href="exam-list.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-house"></i>
-                        Exam List</a>
+                        Danh sách câu hỏi</a>
                 </div>
             </div>
         </div>
@@ -70,15 +71,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete User Confirmation</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Xóa xác nhận người dùng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                This user will be deleted. Click <b>OK</b> to proceed. Or <b>Close</b> to cancel.
+                This user will be deleted. Click <b>Đồng ý</b> to proceed. Or <b>Đóng</b> to cancel.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">OK</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Đồng ý</button>
             </div>
         </div>
     </div>

@@ -10,12 +10,12 @@ public class QuestionServiceImpl implements QuestionService {
     QuestionRepository questionRepository=new QuestionRepository();
     @Override
     public void insertQuestion(Question question) {
-
+        questionRepository.insertQuestion(question);
     }
 
     @Override
     public Question selectQuestion(int question_id) {
-        return null;
+        return questionRepository.selectByIdQuestion(question_id);
     }
 
     @Override
@@ -25,12 +25,12 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public boolean deleteQuestion(int question_id) {
-        return false;
+        return questionRepository.deleteQuestion(question_id);
     }
 
     @Override
     public boolean updateQuestion(Question question) {
-        return false;
+        return questionRepository.updateQuestion(question);
     }
 
     @Override

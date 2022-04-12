@@ -1,0 +1,60 @@
+h4{
+    margin: 0;
+    line-height: 36px;
+}
+
+.exam-cart{
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+.exam__description{
+    position: relative;
+}
+
+.exam__time, .exam__question-number{
+    margin: 15px;
+}
+
+.exam__start-btn{
+    position: absolute;
+    right: 0;
+    top: 12px;
+}
+
+.btn-outline-primary{
+    padding: 0 12px;
+    max-height: 36px;
+}
+
+.common-exam__list{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.common-exam{
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.common-exam__header{
+    background-color: #3A4BCD;
+
+}
+.common-exam__header-label{
+    color: #fff;
+    text-align: center;
+}
+
+
+.common-exam__cart{
+    padding: 5px 5px;
+    border-bottom: 1px solid #ccc;
+}
+.ce__description{
+    margin: 0;
+    justify-content: space-between;
+}

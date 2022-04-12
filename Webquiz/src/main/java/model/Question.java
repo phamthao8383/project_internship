@@ -10,7 +10,7 @@ public class Question {
     private String correct_answer;
     private Subject subject;
 
-    public Question() {
+    public Question(String description) {
     }
 
     public Question(int question_id, String description, String answer1, String answer2, String answer3, String answer4, String correct_answer, Subject subject) {
@@ -23,7 +23,6 @@ public class Question {
         this.correct_answer = correct_answer;
         this.subject = subject;
     }
-
     public Question( String description, String answer1, String answer2, String answer3, String answer4, String correct_answer, Subject subject) {
         this.description = description;
         this.answer1 = answer1;
@@ -33,8 +32,6 @@ public class Question {
         this.correct_answer = correct_answer;
         this.subject = subject;
     }
-
-
     public int getQuestion_id() {
         return question_id;
     }
