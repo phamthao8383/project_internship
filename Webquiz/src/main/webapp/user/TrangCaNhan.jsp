@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPhone" class="col-sm-2 col-form-label">Email</label>
+                    <label for="inputPhone" class="col-sm-2 col-form-label">SĐT</label>
                     <div class="col-sm-10">
                         <input type="phone" class="form-control" id="inputPhone"
                                placeholder="Số điện thoại của bạn">
