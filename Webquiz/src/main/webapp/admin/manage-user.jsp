@@ -41,7 +41,7 @@
                 <div class="list-group">
                     <a href="/admin/manage-user.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-people-group"></i>
-                        Quản lý thành viên</a>
+                        Quản lý người dùng</a>
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
                         Quản lý đề</a>
@@ -165,12 +165,25 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control edit-input" placeholder="Họ và tên">
-                        <input type="text" class="form-control edit-input" placeholder="Email">
-                        <input type="text" class="form-control edit-input" placeholder="Số điện thoại">
-                        <input type="text" class="form-control edit-input" placeholder="Địa chỉ">
-                        <input type="text" class="form-control edit-input" placeholder="Tài khoản">
-                        <input type="text" class="form-control edit-input" placeholder="Điểm tích luỹ">
+                        <input type="text" class="form-control edit-input mt-2" placeholder="Họ và tên">
+                        <input type="text" class="form-control edit-input mt-3" placeholder="Email">
+                        <input type="text" class="form-control edit-input mt-3" placeholder="Số điện thoại">
+                        <input type="text" class="form-control edit-input mt-3" placeholder="Địa chỉ">
+                        <input type="text" class="form-control edit-input mt-3" placeholder="Tài khoản">
+                        <input type="text" class="form-control edit-input mt-3" placeholder="Điểm tích luỹ">
+                        <div class="d-flex justify-content-between mt-3">
+                            <p class="mb-0">Phân quyền người dùng</p>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Quản trị viên</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">Thành viên</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

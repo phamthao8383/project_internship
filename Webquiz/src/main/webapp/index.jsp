@@ -104,20 +104,20 @@
                     <p>Hỗ trợ trực tuyến</p>
                 </div>
                 <div class="div_group_call">
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            ONLINE
-                            <span class="badge badge-primary badge-pill">Slack</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            HOTLINE
-                            <span class="badge badge-primary badge-pill">112221122</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            MESSENGER
-                            <span class="badge badge-primary badge-pill"></span>
-                        </li>
-                    </ul>
+                    <div class="list-group">
+                        <a href="skype:danghongson0807@gmail.com?chat" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Start chat
+                            <span class="badge bg-primary rounded-pill" style="color: white">Skype</span>
+                        </a>
+                        <a href="tel:+84982321503" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                            Hotline
+                            <span class="badge bg-primary rounded-pill" style="color: white">0982321503</span>
+                        </a>
+                        <a href="https://www.fb.com/messages" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" target="_blank">
+                            Messenger
+                            <img src="../static/img/fb-messenger.png" alt="Messenger" width="24">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

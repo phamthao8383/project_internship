@@ -22,7 +22,9 @@
 <body>
 <c:if test="${sessionScope.account.idRole != 1}">
     <%--    ${pageContext.request.contextPath} --%>
-    <h1>Lỗi! Bạn Không thể truy cập trang này. <a href="/userServlet">Về trang chủ</a></h1>
+    <div class="d-flex" style="height: 100vh; background-color: #002060">
+        <h1 style="margin: auto; color: white">Lỗi! Bạn Không thể truy cập trang này. <a href="/userServlet" style="color: #ff6900">Về trang chủ</a></h1>
+    </div>
 </c:if>
 <c:if test="${sessionScope.account.idRole == 1}">
 <header id="header">
