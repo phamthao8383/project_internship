@@ -12,137 +12,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <jsp:include page="/admin/view/head.jsp"/>
     <title>Câu đố thông minh</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="/static/css/main.css">
     <link rel="stylesheet" href="/static/css/question-bank.css">
 </head>
 <body>
-<header id="header">
-    <div class="header__logo">
-        <img src="/static/img/codegym-logo.png" class="header__imglogo" alt="logo">
-        <p class="header__logoname">BẢNG ĐIỀU KHIỂN CÂU ĐỐ THÔNG MINH</p>
-    </div>
-    <div class="header__admin">
-        <a href="#" class="header__adminlink dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-           data-bs-toggle="dropdown" aria-expanded="false">
-            <p class="header__nameadmin">QUẢN TRỊ VIÊN</p>
-            <img src="/static/img/admin_profile.svg" alt="admin-profile" class="header__imgadmin"
-                 data-bs-toggle="dropdown" aria-expanded="false">
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
-            <li><a class="dropdown-item" href="#">Cài đặt</a></li>
-            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-        </ul>
-    </div>
-</header>
+<jsp:include page="/admin/view/header.jsp"/>
 <div class="main">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 sidebar">
-                <div class="list-group">
-                    <a href="/admin/manage-user.jsp" class="list-group-item list-group-item-action">
-                        <i class="fa-solid fa-people-group"></i>
-                        Quản lý người dùng</a>
-                    <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
-                        <i class="fa-solid fa-file-lines"></i>
-                        Quản lý đề thi</a>
-                    <a href="/questions" class="list-group-item list-group-item-action">
-                        <i class="fa-solid fa-file-circle-question"></i>
-                        Ngân hàng câu hỏi</a>
-                    <a href="exam-list.jsp" class="list-group-item list-group-item-action">
-                        <i class="fa-solid fa-house"></i>
-                        Danh sách đề thi</a>
-                </div>
-            </div>
+            <jsp:include page="/admin/view/left_navbar.jsp"/>
             <div class="col-10 content">
                 <div class="content__title">
                     <p>Danh sách câu hỏi</p>
                     <div class="title-actions">
-                        <button type="button" class="btn btn-outline-success btn-sm">Nhập câu hỏi</button>
                         <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#createQuestionModal">Tạo mới
                         </button>
-                        <!-- <button type="button" class="btn btn-outline-danger btn-sm">Delete Item</button> -->
-                        <button type="button" class="btn btn-outline-secondary btn-sm">Thoát</button>
                     </div>
                 </div>
                 <div class="user-list">
-                    <%--                    <table class="table table-hover">--%>
-                    <%--                        <thead>--%>
-                    <%--                        <tr>--%>
-                    <%--                            <th scope="col">STT</th>--%>
-                    <%--                            <th scope="col">Mã câu hỏi</th>--%>
-                    <%--                            <th scope="col">câu hỏi</th>--%>
-                    <%--                            <th scope="col">Choices</th>--%>
-                    <%--                            <th scope="col">Câu trả lời</th>--%>
-                    <%--                            <th scope="col">Chọn</th>--%>
-                    <%--                        </tr>--%>
-                    <%--                        </thead>--%>
-                    <%--                        <tbody>--%>
-                    <%--                        <tr>--%>
-                    <%--                            <th scope="row">1</th>--%>
-                    <%--                            <td>001</td>--%>
-                    <%--                            <td>Chuyển động tăng dần đều là gì?</td>--%>
-                    <%--                            <td>--%>
-                    <%--                                <ul class="list-group">--%>
-                    <%--                                    <li class="list-group-item list-group-item-primary">Gia tốc không thay đổi.</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-success">Vận tốc không thay đổi.</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-danger">Quảng đường đi lớn nhất</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-warning">Vận tốc tăng dần với gia tốc không đổi</li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </td>--%>
-                    <%--                            <td>Vận tốc tăng dần với gia tốc không đổi</td>--%>
-                    <%--                            <td>--%>
-                    <%--                                <button type="button" class="btn btn-outline-warning btn-sm mt-3">Sửa</button>--%>
-                    <%--                                <button type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Xóa</button>--%>
-                    <%--                            </td>--%>
-                    <%--                        </tr>--%>
-                    <%--                        <tr>--%>
-                    <%--                            <th scope="row">2</th>--%>
-                    <%--                            <td>002</td>--%>
-                    <%--                            <td>Chuyển động tăng dần đều là gì?</td>--%>
-                    <%--                            <td>--%>
-                    <%--                                <ul class="list-group">--%>
-                    <%--                                    <li class="list-group-item list-group-item-primary">Gia tốc không thay đổi.</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-success">Vận tốc không thay đổi.</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-danger">Quảng đường đi lớn nhất</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-warning">Vận tốc tăng dần với gia tốc không đổi</li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </td>--%>
-                    <%--                            <td>Vận tốc tăng dần với gia tốc không đổi</td>--%>
-                    <%--                            <td>--%>
-                    <%--                                <button type="button" class="btn btn-outline-warning btn-sm mt-3">Sửa</button>--%>
-                    <%--                                <button type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Xóa</button>--%>
-                    <%--                            </td>--%>
-                    <%--                        </tr>--%>
-                    <%--                        <tr>--%>
-                    <%--                            <th scope="row">3</th>--%>
-                    <%--                            <td>003</td>--%>
-                    <%--                            <td>Chuyển động tăng dần đều là gì?</td>--%>
-                    <%--                            <td>--%>
-                    <%--                                <ul class="list-group">--%>
-                    <%--                                    <li class="list-group-item list-group-item-primary">Gia tốc không thay đổi.</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-success">Vận tốc không thay đổi.</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-danger">Quảng đường đi lớn nhất</li>--%>
-                    <%--                                    <li class="list-group-item list-group-item-warning">Vận tốc tăng dần với gia tốc không đổi</li>--%>
-                    <%--                                </ul>--%>
-                    <%--                            </td>--%>
-                    <%--                            <td>Vận tốc tăng dần với gia tốc không đổi</td>--%>
-                    <%--                            <td>--%>
-                    <%--                                <button type="button" class="btn btn-outline-warning btn-sm mt-3">Sửa</button>--%>
-                    <%--                                <button type="button" class="btn btn-outline-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Xóa</button>--%>
-                    <%--                            </td>--%>
-                    <%--                        </tr>--%>
-                    <%--                        </tbody>--%>
-                    <%--                    </table>--%>
                     <table border="1" cellpadding="5" class="table table-hover">
                         <tr>
                             <th>STT</th>
@@ -153,25 +42,48 @@
                             <th>D</th>
                             <th>Đáp án</th>
                             <th>Môn Học</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         <c:forEach var="question" items="${listQuestion}">
                             <tr>
-                                <td><c:out value="${question.question_id}"/></td>
-                                <td><c:out value="${question.description}"/></td>
-                                <td><c:out value="${question.answer1}"/></td>
-                                <td><c:out value="${question.answer2}"/></td>
-                                <td><c:out value="${question.answer3}"/></td>
-                                <td><c:out value="${question.answer4}"/></td>
-                                <td><c:out value="${question.correct_answer}"/></td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.question_id}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.description}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer1}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer2}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer3}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer4}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text">
+                                    <c:out value="${question.correct_answer}"/>
+                                    </span>
+                                </td>
                                 <td><c:out value="${question.getSubject().getSubject_name()}"/></td>
-                                    <%--                <td>--%>
-                                    <%--                    <a href="/questions?action=edit&id=${question.question_id}">Edit</a>--%>
-                                    <%--                    <a href="/questions?action=delete&id=${question.question_id}">Delete</a>--%>
-                                    <%--                </td>--%>
+                                <td>
+                                    <button class="btn btn-outline-warning btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editQuestionModal">
+                                        Edit
+<%--                                        href="/questions?action=edit&id=${question.question_id}"--%>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button  class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                                       Delete
+<%--                                        href="/questions?action=delete&id=${question.question_id}"--%>
+                                    </button>
+                                </td>
 
-<%--                                    <button  class="btn btn-outline-warning btn-sm" ><a href="/questions?action=edit&id=${question.question_id}"></a> Sửa</button>--%>
-                                <td><a class="btn btn-outline-warning btn-sm" role="button" href="/questions?action=edit&id=${question.question_id}">Edit</a></td>
-                                <td><a class="btn btn-outline-danger btn-sm" role="button" href="/questions?action=delete&id=${question.question_id}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -208,16 +120,35 @@
             </div>
             <div class="modal-body">
                 <form>
+
                     <div class="mb-3 row">
-                        <label for="inputQuestionID" class="col-sm-3 col-form-label">Mã câu hỏi</label>
+                        <label for="inputQuestion" class="col-sm-3 col-form-label">Câu hỏi</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputQuestionID">
+                            <textarea type="text" class="form-control" id="inputQuestion" rows="4"></textarea>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputChoices" class="col-sm-3 col-form-label">Lựa chọn</label>
+                        <label for="inputAnswer1" class="col-sm-3 col-form-label">Đáp án 1</label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="inputChoices" rows="4"></textarea>
+                            <input type="text" class="form-control" id="inputAnswer1">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputAnswer2" class="col-sm-3 col-form-label">Đáp án 2</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputAnswer2">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputAnswer3" class="col-sm-3 col-form-label">Đáp án 3</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputAnswer3">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="inputAnswer4" class="col-sm-3 col-form-label">Đáp án 4</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="inputAnswer4">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -227,34 +158,98 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputExamID" class="col-sm-3 col-form-label">Mã đề thi</label>
+                        <label for="inputSubject" class="col-sm-3 col-form-label">Chọn môn</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputExamID">
+                            <input type="text" class="form-control" id="inputSubject">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary">Gửi</button>
+                <button type="submit" class="btn btn-primary">Thêm</button>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Edit New Question Modal -->
+<div class="modal fade" id="editQuestionModal" tabindex="-1" aria-labelledby="editQuestionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editQuestionLabel">Tạo mới câu hỏi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="mb-3 row">
+                        <label for="editQuestion" class="col-sm-3 col-form-label">Câu hỏi</label>
+                        <div class="col-sm-9">
+                            <textarea type="text" class="form-control" id="editQuestion" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAnswer1" class="col-sm-3 col-form-label">Đáp án 1</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editAnswer1">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAnswer2" class="col-sm-3 col-form-label">Đáp án 2</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editAnswer2">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAnswer3" class="col-sm-3 col-form-label">Đáp án 3</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editAnswer3">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAnswer4" class="col-sm-3 col-form-label">Đáp án 4</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editAnswer4">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editAnswer" class="col-sm-3 col-form-label">Câu trả lời</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editAnswer">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="editSubject" class="col-sm-3 col-form-label">Chọn môn</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="editSubject">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Sửa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Delete Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Xóa thông tin người dùng</h5>
+                <h5 class="modal-title" id="exampleModalLabel1">Xóa câu hỏi</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Người dùng này sẽ bị xóa. Nhấp chuột <b>Đồng ý</b> to proceed. Or <b>Đóng</b> to cancel.
+                Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">OK</button>
+                <button type="button" class="btn btn-danger">Xóa</button>
             </div>
         </div>
     </div>
