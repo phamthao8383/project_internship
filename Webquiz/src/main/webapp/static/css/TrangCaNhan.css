@@ -1,32 +1,146 @@
-.div_user{
-    margin: 0px;
-    width: 100%;
-    height: 100vh;
-}
-.div_info{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 600px;
+.form__info {
+    max-width: 900px;
     margin: auto;
-    margin-top: 60px;
-    margin-bottom: 100px;
+    border: 1px solid #0d6efd;
+    border-radius: 15px;
+    overflow: hidden;
 }
-.div_img{
-    margin-right: 100px;
+
+.form__info-head {
+    background-color: #0d6efd;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
 }
-.list-group{
-    width: 300px;
+
+.form__info-title {
+    padding: 12px 0;
+    margin: 0
 }
-.btn_edit_histoty{
+
+
+.form__info-body {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+
 }
-.btn_edit_histoty button{
-    width: 100px;
-    background-color: #ade684;
+
+.form__info-image {
+    padding: 24px 0;
+    margin: auto;
+    width: 300px;
+    border-radius: 50%;
 }
-.btn_edit_histoty button:hover{
+
+.form__info-img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+
+}
+
+.input_file {
+    padding: 16px 0;
+}
+
+.form__info-list {
+    flex: 1;
+    height: 100%;
+}
+
+.form__info-item {
+    display: flex;
+    align-items: center;
+    background-color: rgba(13, 109, 253, 0.342);
+    border: 1px solid #eee;
+    padding: 0 16px;
+}
+
+.form__info-name {
+    display:block;
+    width: 150px;
+}
+
+.form__info-value {
+    flex: 1;
+    margin: 8px 0;
+}
+
+.form__info-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__info-btn {
+    background-color:#0d6efd;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 10px 20px 20px;
     cursor: pointer;
-    background-color: #14d1ff;
+    border: 1px solid #0d6efd;
+    overflow:hidden;
 }
+
+.form__info-btn:hover {
+    background-color: white;
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+}
+
+/* form chỉnh sửa */
+
+.form__edit {
+    max-width: 900px;
+    margin: 20px auto;
+    border: 1px solid #0d6efd;
+    border-radius: 15px;
+    overflow: hidden;
+    display: none;
+}
+
+.form__edit-body {
+    padding:40px 20px;
+}
+
+
+/* Lịch sử thi */
+
+.history {
+    padding-top: 36px;
+    max-width: 900px;
+    margin: 36px auto;
+    display: none;
+}
+
+.history__title {
+    color: #0d6efd;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.show{
+    display: block;
+}
+
+.btn_show {
+    background-color:#0d31fd
+}
+
+/* modal */
+.modal-content  {
+    border: 1px solid #0d6efd;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.modal-dialog {
+    max-width: 700px;
+}
+
 

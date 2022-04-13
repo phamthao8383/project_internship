@@ -1,0 +1,113 @@
+html {
+    font-size: 100%;
+    line-height: 1.6;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+#header {
+    height: 7rem;
+    background-color: #F8F8F8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    box-shadow: 3px 3px #ccc;
+}
+
+#header .header__logo{
+}
+
+#header .header__imglogo{
+    display: inline-block;
+    width: 5rem;
+    border-radius: 5%;
+}
+
+#header .header__logoname{
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #5a5c69;
+}
+
+#header .header__admin{
+
+}
+
+#header .header__adminlink{
+    color: #858796;
+    text-decoration: none;
+}
+
+#header .dropdown-toggle::after{
+    display: none;
+}
+
+#header .header__imgadmin{
+    display: inline-block;
+    width: 2rem;
+
+}
+
+#header .header__nameadmin{
+    display: inline-block;
+}
+
+.header__admin .dropdown-menu{
+    top: 1rem !important;
+    box-shadow: 3px 3px 3px #ccc;
+}
+
+.main{}
+
+.main .container-fluid{
+    padding: 0 2rem 0 0;
+}
+
+.container-fluid > .row{
+    height: 100vh;
+}
+
+.container-fluid .sidebar{
+    padding-right: 0;
+    border-right: 1px solid #ccc;
+}
+
+.container-fluid .sidebar a{
+    padding: 0.75rem 1rem;
+}
+
+.container-fluid .sidebar a > i{
+    width: 1.25rem;
+}
+
+/* Below is User List CSS */
+
+.main .content__title{
+    margin: 1rem 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.main .content__title > p{
+    font-size: 1.5rem;
+}
+
+.main .col-2{
+    
+}
+
+.edit-input{
+    margin-bottom: 10px;
+}
