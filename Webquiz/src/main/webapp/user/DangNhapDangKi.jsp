@@ -97,9 +97,11 @@
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-
-
                             <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required >
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text"  name="name" id="account" placeholder="Nhập vào tên đăng nhập" required >
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
