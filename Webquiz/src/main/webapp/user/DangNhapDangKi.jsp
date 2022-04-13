@@ -97,21 +97,33 @@
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-
-
-                            <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required >
+                            <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required=""
+                                   oninvalid="this.setCustomValidity('Họ tên không được để trống!')"
+                                   oninput="setCustomValidity('')">
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text"  name="username" id="username" placeholder="Nhập tài khoản của bạn" required
+                                   oninvalid="this.setCustomValidity('Tài khoản không được để trống!')"
+                                   oninput="setCustomValidity('')">
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="passw" id="pass" placeholder="Nhập mật khẩu" required>
+                            <input type="password" name="passw" id="pass" placeholder="Nhập mật khẩu" required
+                                   oninvalid="this.setCustomValidity('Mật khẩu không được để trống!')"
+                                   oninput="setCustomValidity('')">
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="con_passw" id="passw" placeholder="Nhập lại mật khẩu" required>
+                            <input type="password" name="con_passw" id="passw" placeholder="Nhập lại mật khẩu" required
+                                   oninvalid="this.setCustomValidity('Xác nhận mật khẩu không được để trống!')"
+                                   oninput="setCustomValidity('')">
                         </div>
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" name="email"id="email" placeholder="Nhập email của bạn" required>
+                            <input type="text" name="email"id="email" placeholder="Nhập email của bạn" required
+                                   oninvalid="this.setCustomValidity('Email không được để trống!')"
+                                   oninput="setCustomValidity('')">
                         </div>
                         <div class="input-box">
                             <i class="fa-solid fa-location-dot"></i>
@@ -119,19 +131,20 @@
                         </div>
                         <div class="input-box">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="text" name="phone"id="phone" placeholder="Nhập vào số điện thoại" required>
+                            <input type="text" name="phone"id="phone" placeholder="Nhập vào số điện thoại" required
+                                   oninvalid="this.setCustomValidity('Số điện thoại không được để trống!')"
+                                   oninput="setCustomValidity('')">
                         </div>
                         <div>
                             <span style="color: red" id="errorName"></span>
-                            <span style="color: red"  id="errorPhone"></span>
-                            <span  style="color: red"  id="errorEmail"></span>
+                            <span style="color: red" id="errorUsername"></span>
                             <span style="color: red"   id="errorPass"></span>
                             <span  style="color: red"  id="errorConPass"></span>
-
-
+                            <span style="color: red"  id="errorPhone"></span>
+                            <span  style="color: red"  id="errorEmail"></span>
                         </div>
                         <div class="button input-box">
-                            <input type="submit" value="Sumbit">
+                            <input type="submit" value="Đăng ký">
                         </div>
                         <div class="text sign-up-text">Bạn đã có tài khoản? <label for="flip">Đăng nhập nhanh</label></div>
                     </div>
@@ -193,11 +206,30 @@
 
 <script>
     function Validate() {
-
-
         var name = document.getElementById('name').value;
         var errorName = document.getElementById('errorName');
-        var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
+        function removeAscent (str) {
+            if (str === null || str === undefined) return str;
+            str = str.toLowerCase();
+            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            str = str.replace(/đ/g, "d");
+            return str;
+        }
+        var regexName = /^[a-zA-Z!@#\$%\^\&*\)\(+=._-]{2,}$/g;
+        // var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
+
+        var username = document.getElementById('username').value;
+        var errorUsername = document.getElementById('errorUsername');
+        //username 6-20 kí tự, không có dấu _ hoặc dấu . ở đầu
+        //không có __ hoặc _. hoặc ._ hoặc ..
+        //cho phép kí tự a-z, A-Z, 0-9
+        //không có dấu _ hoặc dấu . ở cuối
+        var regexUsername = /^(?=.{6,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
 
         var phone = document.getElementById('phone').value;
         var errorPhone = document.getElementById('errorPhone');
@@ -209,20 +241,40 @@
 
         if (name == '' || name == null) {
             errorName.innerHTML = "Họ tên không được để trống!";
-        } else if (!regexName.test(name)) {
+        } else if (!regexName.test(removeAscent(name))) {
             errorName.innerHTML = "Họ tên không hợp lệ!";
             return false;
         } else {
             errorName.innerHTML = '';
         }
 
-        if (phone == '' || phone == null) {
-            errorPhone.innerHTML = "Số điện thoại không được để trống!";
-        } else if (!regexPhone.test(phone)) {
-            errorPhone.innerHTML = "SĐT không hợp lệ!";
+        if (username == '' || username == null) {
+            errorUsername.innerHTML = "Tài khoản không được để trống!";
+        } else if (!regexUsername.test(username)) {
+            errorUsername.innerHTML = "Tài khoản không hợp lệ! (Tài khoản có độ dài 8-20 kí tự, sử dụng kí tự chữ cái hoặc số.)";
             return false;
         } else {
-            errorPhone.innerHTML = '';
+            errorUsername.innerHTML = '';
+        }
+
+        var passW = document.getElementById('pass').value;
+        var errorPass = document.getElementById('errorPass');
+
+        if (passW == '' || passW == null) {
+            errorPass.innerHTML = "Mật khẩu không được để trống!";
+        } else {
+            errorPass.innerHTML = "";
+        }
+
+        var ConPass = document.getElementById('passw').value;
+        var errorConPass = document.getElementById('errorConPass');
+
+        if (ConPass == '' || ConPass == null) {
+            errorConPass.innerHTML = "Xác nhận mật khẩu không được để trống!";
+        } else if (ConPass != passW) {
+            errorConPass.innerHTML = "Xác nhận mật khẩu không trùng khớp!";
+        } else {
+            errorConPass.innerHTML = "";
         }
 
         if (email == '' || email == null) {
@@ -234,34 +286,18 @@
             errorEmail.innerHTML = '';
         }
 
-        var passW = document.getElementById('pass').value;
-        var errorPass = document.getElementById('errorPass');
-
-        if (passW == '' || passW == null) {
-            errorPass.innerHTML = "Mật khẩu vui lòng không để trống!";
+        if (phone == '' || phone == null) {
+            errorPhone.innerHTML = "Số điện thoại không được để trống!";
+        } else if (!regexPhone.test(phone)) {
+            errorPhone.innerHTML = "SĐT không hợp lệ!";
+            return false;
         } else {
-            errorPass.innerHTML = "";
-        }
-
-        var ConPass = document.getElementById('passw').value;
-        var errorConPass = document.getElementById('errorConPass');
-
-        if (ConPass == '' || ConPass == null) {
-            errorConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
-        } else if (ConPass != passW) {
-            alert("Xác nhận mật khẩu không trùng khớp!");
-        } else {
-            errorConPass.innerHTML = "";
+            errorPhone.innerHTML = '';
         }
 
         if (name && phone && email && ConPass && passW && passW == ConPass) {
-
             alert("Đăng ký thành công!");
-
-        } else {
-
         }
-
         return false;
     }
 </script>
