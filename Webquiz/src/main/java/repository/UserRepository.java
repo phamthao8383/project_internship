@@ -1,5 +1,7 @@
 package repository;
 
+import model.Exam;
+import model.ExamHistory;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -31,47 +33,27 @@ public class UserRepository {
         return users;
     }
 
-   /* public List<Customer> getCustomerListPage(int pageIndex, int pageSize) {
-        List<Customer> customerList = new ArrayList<>();
+    public List<ExamHistory> getListExamHistory(int id) {
+        List<ExamHistory> examHistoryList = new ArrayList<>();
+        ExamHistory examHistory = new ExamHistory();
         try {
-            String queryListPage = "with x as(SELECT *, row_number() over (order by ma_khach_hang asc) as r  from khach_hang )\n" +
-                    "select  * from x where  r between  ((? * ? ) - ? + 1) and ? * ?";
-            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(queryListPage);
-            preparedStatement.setInt(1, pageIndex);
-            preparedStatement.setInt(2 ,pageSize);
-            preparedStatement.setInt(3, pageSize);
-            preparedStatement.setInt(4, pageIndex);
-            preparedStatement.setInt(5, pageSize);
+            String myQuery = "SELECT * FROM quiz_web.assignment where  user_id = ?";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                customerList.add(new Customer(  rs.getInt(1),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(6),
-                        rs.getString(5),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getString(2),
-                        rs.getString(9)));
+                examHistory = new ExamHistory(rs.getInt("exam_id"),
+                                                rs.getInt("user_id"),
+                                                rs.getInt("exam_id"),
+                                                rs.getTime("starting_time"),
+                                                rs.getTime("completion_time"),
+                                                rs.getDouble("point"));
+                examHistoryList.add(examHistory);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return customerList;
-    }*/
-
-    public Integer getIdMax() {
-        int id = 0;
-        try {
-            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("SELECT Max(user_id) FROM quiz_web.user ");
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                id = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return id;
+        return examHistoryList;
     }
 
     public User getUserId(int id) {
@@ -95,19 +77,38 @@ public class UserRepository {
         return user;
     }
 
+    public User getUserAccount(String accountName) {
+        User user = new User();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement("SELECT * FROM `user` WHERE username = ?");
+            preparedStatement.setString(1, accountName);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                user = (new User(rs.getInt("user_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("image"),
+                        rs.getString("username")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     public void addUserList(User user) {
         try {
-            String queryInsert = "insert into `user` value(?,?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = this.baseRepository
-                    .getConnection()
+            String queryInsert = "insert into `user` (name, email, phone, address, image, username) value(?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection()
                     .prepareStatement(queryInsert);
-            preparedStatement.setInt(1,user.getUserId());
-            preparedStatement.setString(2,user.getName());
-            preparedStatement.setString(3,user.getEmail());
-            preparedStatement.setString(4,user.getPhone());
-            preparedStatement.setString(5,user.getAddress());
-            preparedStatement.setString(6,user.getImage());
-            preparedStatement.setString(7,user.getAccount());
+            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(2,user.getEmail());
+            preparedStatement.setString(3,user.getPhone());
+            preparedStatement.setString(4,user.getAddress());
+            preparedStatement.setString(5,user.getImage());
+            preparedStatement.setString(6,user.getAccount());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

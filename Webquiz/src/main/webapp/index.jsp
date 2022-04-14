@@ -186,15 +186,28 @@
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <c:if test="${sessionScope.account != null}">
-                                    <span> Chào bạn ${sessionScope.account.username}</span>
+                                    <span> Chào bạn ${sessionScope.user.name}</span>
                                 </c:if>
                                 <c:if test="${sessionScope.account == null}">
                                     <span>Chào khách</span>
                                 </c:if>
                             </li>
+                            <c:if test="${sessionScope.account != null}">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="/user/TrangCaNhan.jsp"><span>Xem thông tin cá nhân</span></a>
+                                <form action="/userServlet" method="post">
+                                    <input type="hidden" name="action" value="infoUser">
+                                    <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
+
+                                        <button class="btn_info" type="submit">
+                                            <i class="fa-solid fa-gear"></i>
+                                            <span>Cài đặt thông tin</span>
+                                        </button>
+
+
+                                </form>
+
                             </li>
+                            </c:if>
                             <li class="btn_logout">
                                 <c:if test="${sessionScope.account != null}">
                                     <button type="submit" class="btn-warning">
