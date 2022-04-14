@@ -50,7 +50,7 @@ public class UserServlet extends HttpServlet {
                 break;
         }
     }
-//    Về trang chủ
+//  Về trang chủ
     private void goHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HomeServlet homeServlet = new HomeServlet();
         homeServlet.getMaxPoint(request, response);

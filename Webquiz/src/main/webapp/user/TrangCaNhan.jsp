@@ -5,66 +5,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="/static/js/bootstrap.bundle.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="/static/css/Trangchu.css">
+    <jsp:include page="/view/head.jsp"/>
+    <title>Thông tin $user</title>
     <link rel="stylesheet" href="/static/css/TrangCaNhan.css">
 </head>
 
 <body>
-<div class="header">
-    <div class="banner">
-        <div class="sologan">
-            <h1>TRẮC NGHIỆM ONLINE</h1>
-            <h4>ĐA DẠNG - THÔNG MINH - CHÍNH XÁC</h4>
-        </div>
-    </div>
-    <ul class="navbar__item-list">
-        <li class="navbar__item-sectors">
-            <a href="/index.jsp">
-                <i class="fa-solid fa-house"></i>
-               Trang chủ
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                Khối A
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                Khối B
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                Khối C
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book-open"></i>
-                Bài TEST
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <c:if test="${sessionScope.account.idRole == 1}">
-                <a href="/admin/index.jsp">
-                    <i class="fa-solid fa-link"></i>
-                    Tới trang quản lý
-                </a>
-            </c:if>
-        </li>
-    </ul>
-</div>
+<jsp:include page="/view/header.jsp"/>
 <div class="container-fluid">
     <div class="form__info">
         <div class="form__info-head">
@@ -126,24 +73,24 @@
             <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <td>Toán</td>
+                <td>Toán nâng cao</td>
+                <td>100</td>
+                <td>45 phút</td>
             </tr>
             <tr>
                 <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>@fat</td>
+                <td>Hóa</td>
+                <td>Hóa Đại Cương</td>
+                <td>90</td>
+                <td>45 phút</td>
             </tr>
             <tr>
                 <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>@twitter</td>
+                <td>Vật Lý</td>
+                <td>Lý 12</td>
+                <td>99</td>
+                <td>45 phút</td>
             </tr>
             </tbody>
         </table>
@@ -176,6 +123,9 @@
             <div class="form__info-head" id="modalEditInfor">
                 <h3 class="form__info-title">Cập nhật thông tin</h3>
             </div>
+            <form  action="/userServlet" method="post" name="register" onsubmit="return ValidateEdit()">
+
+
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Họ tên</label>
@@ -186,11 +136,15 @@
                 <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail" placeholder="Email của bạn">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Email của bạn">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPhone" class="col-sm-2 col-form-label">Email</label>
+<<<<<<< HEAD
+                    <label for="inputPhone" class="col-sm-2 col-form-label">std</label>
+=======
+                    <label for="inputPhone" class="col-sm-2 col-form-label">SĐT</label>
+>>>>>>> a99ca79a6c5c54dd8c8d9836a27f0d65620cf49d
                     <div class="col-sm-10">
                         <input type="phone" class="form-control" id="inputPhone"
                                placeholder="Số điện thoại của bạn">
@@ -203,10 +157,16 @@
                     </div>
                 </div>
             </div>
+                <div>
+                    <span style="color: red" id="errorName"></span>
+                    <span style="color: red"  id="erorPhone"></span>
+                    <span  style="color: red"  id="erorEmail"></span>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                <button type="button" class="btn btn-primary">Cập nhật</button>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -218,6 +178,10 @@
             <div class="form__info-head" id="modalEditPassword">
                 <h3 class="form__info-title">Đổi mật khẩu</h3>
             </div>
+
+            <form action="/userServlet" method="post" name="register" onsubmit="return ValidateChangePass()">
+
+
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 control-labelform-label">Mật khẩu hiện tại: </label>
@@ -238,195 +202,125 @@
                     </div>
                 </div>
             </div>
+                <div>
+                    <span style="color: red"   id="errPass"></span>
+                    <span  style="color: red"  id="errConPass"></span>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                <button type="button" class="btn btn-primary">Cập nhật</button>
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
-<div class="footer">
-    <!-- Footer -->
-    <footer class="bg-dark text-center text-white">
-        <!-- Grid container -->
-        <div class="container p-4">
-            <!-- Section: Social media -->
-            <section class="mb-4">
-                <!-- Facebook -->
-                <a class="btn btn-outline-light btn-floating m-1" href="" role="button"
-                ><i class="fab fa-facebook-f"></i
-                ></a>
-
-                <!-- Twitter -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-twitter"></i
-                ></a>
-
-                <!-- Google -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-google"></i
-                ></a>
-
-                <!-- Instagram -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-instagram"></i
-                ></a>
-
-                <!-- Linkedin -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-linkedin-in"></i
-                ></a>
-
-                <!-- Github -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                ><i class="fab fa-github"></i
-                ></a>
-            </section>
-            <!-- Section: Social media -->
-
-            <!-- Section: Form -->
-            <section class="">
-                <form action="">
-                    <!--Grid row-->
-                    <div class="row d-flex justify-content-center">
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong>Đăng ký nhận thông báo</strong>
-                            </p>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-                        <div class="col-md-5 col-12">
-                            <!-- Email input -->
-                            <div class="form-outline form-white mb-4">
-                                <input type="email" id="form5Example21" class="form-control"/>
-                                <label class="form-label" for="form5Example21">Địa chỉ Email</label>
-                            </div>
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-outline-light mb-4">
-                                Theo dõi
-                            </button>
-                        </div>
-                        <!--Grid column-->
-                    </div>
-                    <!--Grid row-->
-                </form>
-            </section>
-            <!-- Section: Form -->
-
-            <!-- Section: Text -->
-            <section class="mb-4">
-                <p>
-                    TRẮC NGHIỆM THÔNG MINH
-                </p>
-            </section>
-            <!-- Section: Text -->
-
-            <!-- Section: Links -->
-            <section class="">
-                <!--Grid row-->
-                <div class="row">
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">THI THPT QG</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">TOÁN-VĂN-ANH</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">LÝ-HÓA-SINH</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">SỬ-ĐỊA-CÔNG DÂN</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">ĐỀ KIỂM TRA</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">ĐỀ THI HK1,HK2</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">KIỂM TRA 1 TIẾT</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">KIỂM TRA 15 PHÚT</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">IT TEST</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">JAVA</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">C++</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">CƠ SỞ DỮ LIỆU</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">HƯỚNG NGHIỆP</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">BẰNG LÁI XE MÁY</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">BÀI LÁI Ô TÔ</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">THI CÔNG VIÊN CHỨC</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-                </div>
-                <!--Grid row-->
-            </section>
-            <!-- Section: Links -->
-        </div>
-        <!-- Grid container -->
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2022 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">Nhóm 2</a>
-        </div>
-    </footer>
-</div>
+<jsp:include page="/view/footer.jsp"/>
 <script>
     function showhistory() {
         document.getElementById("history").classList.toggle("show");
 
     }
 </script>
+
+<%--Validate ChangePassword--%>
+<script>
+    function ValidateChangePass() {
+
+
+        const inputNewPassword = document.getElementById('inputNewPassword').value;
+        const errPass = document.getElementById('errPass');
+
+        if ( inputNewPassword == '' || inputNewPassword== null) {
+        errPass.innerHTML = "Mật khẩu vui lòng không để trống!";
+    } else {
+        errPass.innerHTML = "";
+    }
+
+        const inputConfirmPassword = document.getElementById('inputConfirmPassword').value;
+        const errConPass = document.getElementById('errConPass');
+
+        if (inputConfirmPassword == '' || inputConfirmPassword == null) {
+        errConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
+    } else if (inputConfirmPassword != inputNewPassword) {
+        alert("Xác nhận mật khẩu không trùng khớp!");
+    } else {
+        errConPass.innerHTML = "";
+    }
+
+
+    if (inputConfirmPassword && inputNewPassword && inputConfirmPassword==inputNewPassword ) {
+
+        alert("gửi mã thành công!");
+
+    } else {
+
+    }
+
+    return false;
+
+    }
+
+</script>
+
+<%--Validate Edit--%>
+<script>
+    function ValidateEdit(){
+        var name = document.getElementById('inputName').value;
+        var errName = document.getElementById('errorName');
+        var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
+
+
+
+        var email = document.getElementById('inputEmail').value;
+        var errEmail = document.getElementById('erorEmail');
+        var reGexEmail = /[a-z]{2}.+.[A-Za-z0-9._%+-]{4}.+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
+
+        var phone = document.getElementById('inputPhone').value;
+        var erorPhone = document.getElementById('erorPhone');
+        var regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+
+        if(name==''||name==null){
+            errName.innerHTML="̣Tên đăng nhập không được để trống";
+        }
+        else if(!regexName.test(name)){
+            errName.innerHTML="Tên đăng nhập không hợp lệ";
+            return false;
+        }else{
+            errName.innerHTML="";
+        }
+
+        if(email==''||email==null){
+            errEmail.innerHTML="Email không được để trống";
+        }else if(!reGexEmail.test(email)){
+            errEmail.innerHTML="Email không hợp lệ";
+            return  false;
+        }else {
+            errEmail.innerHTML='';
+        }
+        if (phone == '' || phone == null) {
+            erorPhone.innerHTML = "Số điện thoại không được để trống!";
+        } else if (!regexPhone.test(phone)) {
+            erorPhone.innerHTML = "SĐT không hợp lệ!";
+            return false;
+        } else {
+            erorPhone.innerHTML = '';
+        }
+        if (name && phone && email ) {
+
+            alert("Đăng ký thành công!");
+
+        } else {
+
+        }
+
+        return false;
+
+
+
+    }
+</script>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

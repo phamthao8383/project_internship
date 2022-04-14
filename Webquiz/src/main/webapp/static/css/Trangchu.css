@@ -1,19 +1,38 @@
-.header ul{
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-
+:root {
+    --text-color: rgb(180, 180, 180);
 }
+
+*{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    line-height: 16px;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
 body>{
     width: 100%;
     box-sizing: border-box;
 
 }
-*{
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-
+ul ,li {
+    list-style: none;
+    -webkit-list-style:none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    text-decoration: none;
+    color: black;
 }
 
 .banner {
@@ -32,15 +51,6 @@ body>{
     margin: auto;
 }
 
-.header ul li{
-    display: inline-table;
-}
-.header ul li a{
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    color: black;
-}
 .header{
     margin: 0 auto;
 
@@ -151,7 +161,16 @@ body>{
     border: 1px solid #3a4bcd ;
     border-radius: 4px;
     color: #3a4bcd;
+    padding: 4px 8px;
     background-color: white;
+}
+
+.btn_search:hover {
+    border: 1px solid #3a4bcd ;
+    border-radius: 4px;
+    color: white;
+    background-color: #3a4bcd;
+
 }
 /*.middle_main{*/
 /*    display: flex;*/
@@ -183,13 +202,14 @@ body>{
 .navbar__item-list{
     display: flex;
     height: 65px;
+    justify-content: space-around;
     align-items:center;
     box-shadow: 3px 1px 6px 1px #888888;
 }
 
 .navbar__item-sectors{
     line-height: 65px;
-    font-size:1.6rem;
+    font-size:1rem;
     margin: 0 8px;
     padding: 0 8px;
     position: relative;
@@ -198,12 +218,13 @@ body>{
 
 /* sectors */
 .navbar__item-sectors:hover {
-    height: 100%;
     border-bottom: 3px solid #000;
     cursor: pointer;
 }
+
 .navbar__item-sectors:hover .sector-detail {
     display: flex;
+    z-index: 1;
 }
 
 .sector-detail {
@@ -243,7 +264,7 @@ body>{
     padding: 0 16px;
     color: #000;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1rem;
     text-shadow: 1px 1px #ccc;
     text-decoration: none;
     text-transform: uppercase;
@@ -254,11 +275,14 @@ body>{
 .sector-detail__item-link{
     display: block;
     padding: 0 16px;
-    font-size: 1.4rem;
+    font-size: 1rem;
     text-decoration: none;
     text-transform: capitalize;
     line-height:32px;
     color:rgb(110, 110, 110);
 }
 
+.sector-detail__item-link:hover {
+    background-color: #afafaf;
+}
 
