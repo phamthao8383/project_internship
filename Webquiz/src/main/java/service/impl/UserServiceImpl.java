@@ -1,7 +1,8 @@
-package service;
+package service.impl;
 
 import model.User;
 import repository.UserRepository;
+import service.UserService;
 
 import java.util.List;
 

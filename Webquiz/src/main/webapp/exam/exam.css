@@ -1,0 +1,266 @@
+.breadcrumb{
+    background: #3a4bcd;
+    border-radius: 0;
+}
+.skill-test-lists .part-item {
+    padding: 35px 20px 35px 32px;
+    width: 100%;
+    margin-bottom: 20px;
+    background: #fff;
+}
+.d9Box > a {
+    text-decoration: none;
+}
+
+.exam-content ul li a:hover {
+    text-decoration: none;
+}
+.boldIntro p{
+    font-weight: 700!important;
+}
+.d9Box {
+    border: solid 1px #d9d9d9;
+    border-radius: 8px;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+div {
+    display: block;
+}
+body {
+    font: normal 14px/1.2 "Nunito", sans-serif;
+    color: #3a3a3a;
+    background: #fff;
+    text-align: left;
+}
+html, body {
+    min-width: 1024px
+}
+
+body {
+    font: normal 14px/1.2 "Nunito", sans-serif;
+    color: #3a3a3a;
+    background: #fff
+}
+
+
+.main-content {
+    margin-top: -1px
+}
+
+
+.detail-question {
+    min-height: 69px;
+    border-radius: 8px;
+    background-color: #ececec;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 22px
+}
+
+.detail-question .col {
+    width: 33.3%
+}
+
+.detail-question .col .fa {
+    margin-right: 5px
+}
+
+.detail-question .col span {
+    font-size: 15px
+}
+
+.detail-question .col.num-question {
+    padding-left: 28px
+}
+
+.detail-question .col.num-minutes {
+    text-align: center
+}
+
+.detail-question .col.num-attempt {
+    text-align: right;
+    padding-right: 21px
+}
+
+.detail-question .col:last-child {
+    text-align: right;
+    padding-right: 25px
+}
+.detail-question .col .fa {
+    margin-right: 5px;
+}
+
+.skill-test-lists .part-item h1 {
+    padding-bottom: 4px;
+}
+.exam-content ul li h2 {
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.cot-trai {
+    width: calc(100% - 350px) !important;
+    margin-right: 30px;
+    margin-left: 9px;
+}
+.cot-phai {
+    width: 300px;
+}
+
+
+
+
+.test-lists .test-item h3 {
+    color: #0c0c0c;
+    font-family: "Nunito", sans-serif;
+    font-size: 20px;
+    line-height: 1.35;
+    font-weight: 700;
+    padding: 26px 0 7px;
+}
+
+.btn-group-do-exam-share{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btn-group-do-exam-share .btn{
+    display: flex;
+    justify-content: center
+}
+.btn.h51 {
+    height: 51px !important;
+    line-height: 51px !important;
+    padding: 0 100px !important;
+    min-width: 328px !important;
+    text-transform: uppercase;
+}
+.btn.orange {
+    background: #ffb83c;
+}
+.title22Bold {
+    font-family: "Nunito", sans-serif;
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+ol, ul {
+    list-style: none;
+}
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.skill-test-lists .part-item .btn.f16b {
+    font-size: 16px;
+}
+
+.skill-test-lists .part-item .btn {
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    float: left;
+    width: 20%;
+}
+
+.question-answer-detail {
+    margin-top: 0px;
+}
+form, input, textarea {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: "NiveaOTFBook", Arial, Helvetica, sans-serif;
+    color: #575859;
+}
+.question-item {
+    border-radius: 5px;
+    border: solid 1px #d9d9d9;
+    margin-top: 20px;
+}
+form, input, textarea {
+
+     font-family: "NiveaOTFBook", Arial, Helvetica, sans-serif;
+     color: #575859;
+ }
+.radio-control {
+    padding-left: 15px;
+    padding-right: 0;
+}
+.checkbox-control, .radio-control {
+    width: 100%;
+    position: relative;
+    display: block;
+    min-height: 23px;
+}
+.radio-control [type=radio]:checked {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+}
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+.custom-control-input {
+    z-index: -1;
+}
+input {
+    outline: none;
+    box-shadow: none !important;
+    font-family: "Nunito", sans-serif;
+    font-size: 14px;
+    line-height: 1.1;
+    font-weight: 400;
+}
+input{
+    margin: 0;
+    border: 0;
+    color: #575859;
+}
+input {
+    overflow: visible;
+}
+.do-exercise .question-answer-detail .radio-control .custom-control-label {
+    padding: 15px 14px 15px 35px;
+    width: 100%;
+}
+.question-answer-detail .radio-control .custom-control-label {
+    font-size: 15px;
+    color: #000;
+}
+.radio-control .custom-control-label {
+    z-index: 2;
+    font-family: "Nunito", sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    position: relative;
+    margin-left: 0;
+}
+.no-max-height {
+    max-height: unset!important;
+}
+.custom-control-label {
+    margin-bottom: 0;
+}

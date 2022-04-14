@@ -2,9 +2,7 @@ package controller;
 
 import model.Account;
 import service.AccountService;
-import service.AccountServiceImpl;
-import service.CustomerService;
-import service.CustomerServiceImpl;
+import service.impl.AccountServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "UserServlet", urlPatterns = "/userServlet")
+@WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
 public class UserServlet extends HttpServlet {
     private AccountService accountService = new AccountServiceImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,23 +27,12 @@ public class UserServlet extends HttpServlet {
             case "login":
                 logInUser(request, response);
                 break;
-//            case "delete":
-//                deleteCustomer(request, response);
-//                break;
-//            case "update":
-//                updateCustomer(request, response);
-//                break;
-//            case "search":
-//                getCustomerListPage(request,response);
-////                break;
-//            default:
-//                getCustomerList(request,response);
-//                break;
+            case "createAccount":
+                createNewAccount(request, response);
+                break;
         }
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String action = request.getParameter("action");
         if (action ==null) {
             action = "";
@@ -58,14 +45,6 @@ public class UserServlet extends HttpServlet {
             case "logout":
                 logout(request, response);
                 break;
-//            case "create":
-//                response.sendRedirect("customerhdl.jsp");
-//                break;
-//            case "update":
-//                goUpdate(request,response);
-//                break;
-//            case "search":
-//                getCustomerListPage(request,response);
             default:
                 goHomePage(request,response);
                 break;
@@ -73,9 +52,12 @@ public class UserServlet extends HttpServlet {
     }
 //    Về trang chủ
     private void goHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HomeServlet homeServlet = new HomeServlet();
+        homeServlet.getMaxPoint(request, response);
+        homeServlet.getMemberNumber(request, response);
+        homeServlet.getNewMember(request, response);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(request,response);
-
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -86,8 +68,7 @@ public class UserServlet extends HttpServlet {
 //            Hủy session
             session.invalidate();
 //            quay về trang đăng nhập
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DangNhapDangKi.jsp");
-            dispatcher.forward(request,response);
+            goLogin(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         } finally {
@@ -95,9 +76,10 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void goLogin(HttpServletRequest request, HttpServletResponse response) {
+    private void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/DangNhapDangKi.jsp");
+        dispatcher.forward(request,response);
 
     }
 
@@ -115,18 +97,34 @@ public class UserServlet extends HttpServlet {
                 session.setAttribute("account", account);
                 System.out.println(account);
 //                response.sendRedirect("/index.jsp");
+                HomeServlet homeServlet = new HomeServlet();
+                homeServlet.getMaxPoint(request, response);
+                homeServlet.getMemberNumber(request, response);
+                homeServlet.getNewMember(request, response);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request,response);
             }
 //            Thất bại thì quay về lại trang login
             else  {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DangNhapDangKi.jsp");
-                dispatcher.forward(request,response);
+                goLogin(request,response);
             }
 
     }
 
-    public void getMemberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
+    private void createNewAccount(HttpServletRequest request, HttpServletResponse response) {
+            String nameAccount = request.getParameter("nameAccount");
+            String name = request.getParameter("name");
+            String ps1 = request.getParameter("password1");
+            String ps2 = request.getParameter("password2");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            String phone = request.getParameter("phone");
+            int i = accountService.CheckAccount(nameAccount);
+            if(i == 1 ) {
+                System.out.println("Trùng tên account!!");
+            } else if(i == 0) {
+                System.out.println(1);
+            }
     }
+
 }

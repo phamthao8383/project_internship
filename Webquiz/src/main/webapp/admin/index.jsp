@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nhacp
@@ -6,7 +5,9 @@
   Time: 8:46 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,7 @@
 <c:if test="${sessionScope.account.idRole != 1}">
     <%--    ${pageContext.request.contextPath} --%>
     <h1>Lỗi! Bạn Không thể truy cập trang này. <a href="/userServlet">Về trang chủ</a></h1>
-</c:if>>
+</c:if>
 <c:if test="${sessionScope.account.idRole == 1}">
 <header id="header">
     <div class="header__logo">
@@ -52,7 +53,7 @@
                     <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-lines"></i>
                         Quản lý đề  thi</a>
-                    <a href="question-bank.jsp" class="list-group-item list-group-item-action">
+                    <a href="/questions" class="list-group-item list-group-item-action">
                         <i class="fa-solid fa-file-circle-question"></i>
                         Ngân hàng câu hỏi</a>
                     <a href="exam-list.jsp" class="list-group-item list-group-item-action">

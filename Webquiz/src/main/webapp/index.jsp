@@ -1,9 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,12 +13,11 @@
     <link rel="stylesheet" href="/static/css/bootstrap-grid.css">
     <link rel="stylesheet" href="/static/css/bootstrap-reboot.css">
     <link rel="stylesheet" href="/static/css/Trangchu.css">
-
-
 </head>
 <body>
 <div class="header">
     <div class="banner">
+        <img src="icon/logo-QUIZGYM.png" height="200px">
         <div class="sologan">
             <h1>TRẮC NGHIỆM ONLINE</h1>
             <h4>ĐA DẠNG - THÔNG MINH - CHÍNH XÁC</h4>
@@ -29,9 +25,9 @@
     </div>
     <ul class="navbar__item-list">
         <li class="navbar__item-sectors">
-            <a href="#">
+            <a href="/index.jsp">
                 <i class="fa-solid fa-house"></i>
-                Home
+                Trang chủ
             </a>
         </li>
         <li class="navbar__item-sectors">
@@ -78,26 +74,12 @@
                 </div>
                 <div class="div_group">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Nhạc Phạm</span>
-                            <span class="badge badge-primary badge-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Hồng Sơn</span>
-                            <span class="badge badge-primary badge-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Hiếu Cao</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Mỹ Vân</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Thu Thảo</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
+                        <c:forEach var="member" items="${memberList}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span><c:out value="${member.name}"></c:out></span>
+                                <span class="badge badge-primary badge-pill">${member.point}</span>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -204,7 +186,7 @@
                 <div class="user_log">
                     <div class="div_cus">
                         <c:if test="${sessionScope.account == null}">
-                            <a class="div_cus-link" href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black">
+                            <a class="div_cus-link" href="/user/DangNhapDangKi.jsp" style="text-decoration: none; color: black">
                                 <i class="fa-solid fa-arrow-right-to-bracket"></i>
                                 <p>Đăng nhập</p>
                             </a>
@@ -219,12 +201,12 @@
                                 </c:if>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a><span>Xem thông tin cá nhân</span></a>
+                                <a href="/user/TrangCaNhan.jsp"><span>Xem thông tin cá nhân</span></a>
                             </li>
                             <li class="btn_logout">
                                 <c:if test="${sessionScope.account != null}">
                                     <button type="submit" class="btn-warning">
-                                        <a href="/userServlet?action=logout">Logout</a>
+                                        <a href="/userServlet?action=logout">Đăng xuất</a>
                                     </button>
                                 </c:if>
                             </li>
@@ -233,18 +215,18 @@
                 </div>
                 <div class="user_log">
                     <div class="div_thongke">
-                        <a class="div_cus-link" href="/DangNhapDangKi.jsp" style="text-decoration: none; color: black">
+                        <div class="div_cus-link"  style="text-decoration: none; color: black">
                             <i class="fa-solid fa-user-group"></i>
                             <p>Thống kê thành viên</p>
-                        </a>
+                        </div>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Tổng Thành Viên
-                                <span class="badge badge-primary badge-pill"> 5</span>
+                                <span class="badge badge-primary badge-pill">${memberList2.size()}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Mới Nhất
-                                <span class="badge badge-primary badge-pill">Long</span>
+                                <span class="badge badge-primary badge-pill">${newMember.name}</span>
                             </li>
                         </ul>
                     </div>
@@ -257,7 +239,7 @@
                         </div>
                         <div class="search_b">
                             <input class="search_input" type="text" placeholder="Nhập...">
-                            <button class="btn_search" onclick="show()" type="submit" class="btn-success">Tìm</button>
+                            <button class="btn_search"type="submit" class="btn-success">Tìm</button>
                         </div>
                     </div>
                 </div>
@@ -267,7 +249,6 @@
         </div>
     </div>
 </div>
-
 <div class="footer">
     <!-- Footer -->
     <footer class="bg-dark text-center text-white">
@@ -315,7 +296,7 @@
                         <!--Grid column-->
                         <div class="col-auto">
                             <p class="pt-2">
-                                <strong>Sign up for our newsletter</strong>
+                                <strong>Đăng ký nhận thông báo</strong>
                             </p>
                         </div>
                         <!--Grid column-->
@@ -325,7 +306,7 @@
                             <!-- Email input -->
                             <div class="form-outline form-white mb-4">
                                 <input type="email" id="form5Example21" class="form-control"/>
-                                <label class="form-label" for="form5Example21">Email address</label>
+                                <label class="form-label" for="form5Example21">Địa chỉ Email</label>
                             </div>
                         </div>
                         <!--Grid column-->
@@ -334,7 +315,7 @@
                         <div class="col-auto">
                             <!-- Submit button -->
                             <button type="submit" class="btn btn-outline-light mb-4">
-                                Subscribe
+                                Theo dõi
                             </button>
                         </div>
                         <!--Grid column-->
@@ -444,11 +425,5 @@
         </div>
     </footer>
 </div>
-
-<script>
-    function show() {
-        document.getElementById("footer").style.display = "block";
-    }
-</script>
 </body>
 </html>
