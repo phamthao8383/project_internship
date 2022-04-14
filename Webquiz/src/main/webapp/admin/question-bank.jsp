@@ -156,13 +156,29 @@
                         </tr>
                         <c:forEach var="question" items="${listQuestion}">
                             <tr>
-                                <td><c:out value="${question.question_id}"/></td>
-                                <td><c:out value="${question.description}"/></td>
-                                <td><c:out value="${question.answer1}"/></td>
-                                <td><c:out value="${question.answer2}"/></td>
-                                <td><c:out value="${question.answer3}"/></td>
-                                <td><c:out value="${question.answer4}"/></td>
-                                <td><c:out value="${question.correct_answer}"/></td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.question_id}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.description}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer1}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer2}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer3}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text"><c:out value="${question.answer4}"/></span>
+                                </td>
+                                <td>
+                                    <span class="limit-text">
+                                    <c:out value="${question.correct_answer}"/>
+                                    </span>
+                                </td>
                                 <td><c:out value="${question.getSubject().getSubject_name()}"/></td>
                                     <%--                <td>--%>
                                     <%--                    <a href="/questions?action=edit&id=${question.question_id}">Edit</a>--%>
