@@ -8,6 +8,12 @@ import java.util.List;
 
 public class MemberServiceImpl implements MemberService {
     MemberRepository memberRepository = new MemberRepository();
+
+    @Override
+    public List<Member> getMemberList() {
+        return memberRepository.getMemberList();
+    }
+
     @Override
     public List<Member> getMaxPoint() {
         return memberRepository.getMaxPoint();
