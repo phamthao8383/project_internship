@@ -7,7 +7,55 @@
     <title>QuizGym</title>
 </head>
 <body>
-<jsp:include page="/view/header.jsp"/>
+<div class="header">
+    <div class="banner">
+        <img src="icon/logo-QUIZGYM.png" height="200px">
+        <div class="sologan">
+            <h1>TRẮC NGHIỆM ONLINE</h1>
+            <h4>ĐA DẠNG - THÔNG MINH - CHÍNH XÁC</h4>
+        </div>
+    </div>
+    <ul class="navbar__item-list">
+        <li class="navbar__item-sectors">
+            <a href="/index.jsp">
+                <i class="fa-solid fa-house"></i>
+                Trang chủ
+            </a>
+        </li>
+        <li class="navbar__item-sectors">
+            <a href="#">
+                <i class="fa-solid fa-book"></i>
+                Khối A
+            </a>
+        </li>
+        <li class="navbar__item-sectors">
+            <a href="#">
+                <i class="fa-solid fa-book"></i>
+                Khối B
+            </a>
+        </li>
+        <li class="navbar__item-sectors">
+            <a href="#">
+                <i class="fa-solid fa-book"></i>
+                Khối C
+            </a>
+        </li>
+        <li class="navbar__item-sectors">
+            <a href="#">
+                <i class="fa-solid fa-book-open"></i>
+                Bài TEST
+            </a>
+        </li>
+        <li class="navbar__item-sectors">
+            <c:if test="${sessionScope.account.idRole == 1}">
+                <a href="/admin/index.jsp">
+                    <i class="fa-solid fa-link"></i>
+                    Tới trang quản lý
+                </a>
+            </c:if>
+        </li>
+    </ul>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-3 col-md-3">
@@ -18,26 +66,12 @@
                 </div>
                 <div class="div_group">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Nhạc Phạm</span>
-                            <span class="badge badge-primary badge-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Hồng Sơn</span>
-                            <span class="badge badge-primary badge-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Hiếu Cao</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Mỹ Vân</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Thu Thảo</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
+                        <c:forEach var="member" items="${memberList}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span><c:out value="${member.name}"></c:out></span>
+                                <span class="badge badge-primary badge-pill">${member.point}</span>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -186,18 +220,18 @@
                 </div>
                 <div class="user_log">
                     <div class="div_thongke">
-                        <a class="div_cus-link" href="" style="text-decoration: none; color: black">
+                        <div class="div_cus-link"  style="text-decoration: none; color: black">
                             <i class="fa-solid fa-user-group"></i>
                             <p>Thống kê thành viên</p>
-                        </a>
+                        </div>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Tổng Thành Viên
-                                <span class="badge badge-primary badge-pill"> 5</span>
+                                <span class="badge badge-primary badge-pill">${memberList2.size()}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Mới Nhất
-                                <span class="badge badge-primary badge-pill">Long</span>
+                                <span class="badge badge-primary badge-pill">${newMember.name}</span>
                             </li>
                         </ul>
                     </div>

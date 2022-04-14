@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "UserServlet", urlPatterns = {"/userServlet", "/user", ""})
+@WebServlet(name = "UserServlet", urlPatterns = {"/userServlet", "/user"})
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
     private AccountService accountService = new AccountServiceImpl();
@@ -41,7 +41,6 @@ public class UserServlet extends HttpServlet {
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String action = request.getParameter("action");
         if (action ==null) {
             action = "";
@@ -65,13 +64,16 @@ public class UserServlet extends HttpServlet {
     }
 
 
-
-    //    Về trang chủ
+//  Về trang chủ
     private void goHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Hiển thị danh sách vinh danh / thống kê thành viên
         response.setContentType("text/html;charset=UTF8");
+        HomeServlet homeServlet = new HomeServlet();
+        homeServlet.getMaxPoint(request, response);
+        homeServlet.getMemberNumber(request, response);
+        homeServlet.getNewMember(request, response);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(request,response);
-
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -111,9 +113,12 @@ public class UserServlet extends HttpServlet {
 //                  Thiết lập giá trị trong session
                 session.setAttribute("account", account);
                 session.setAttribute("user", user);
-
                 System.out.println(account);
 //                response.sendRedirect("/index.jsp");
+                HomeServlet homeServlet = new HomeServlet();
+                homeServlet.getMaxPoint(request, response);
+                homeServlet.getMemberNumber(request, response);
+                homeServlet.getNewMember(request, response);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request,response);
             }
@@ -128,10 +133,6 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
         request.setAttribute("history", userService.getListExamHistory(idUser));
-        for (ExamHistory e: userService.getListExamHistory(idUser)
-             ) {
-            System.out.println(e);
-        }
         request.getRequestDispatcher("/user/TrangCaNhan.jsp").forward(request, response);
     }
 

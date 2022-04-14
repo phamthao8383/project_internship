@@ -34,7 +34,7 @@
         <div class="form-content">
             <div class="login-form">
                 <div class="title">Đăng nhập</div>
-                <form action="/" method="post">
+                <form action="/userServlet" method="post">
                     <input type="hidden" name="action" value="login">
                     <div class="input-boxes">
                         <div class="input-box">
