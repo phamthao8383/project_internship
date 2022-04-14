@@ -34,7 +34,7 @@
         <div class="form-content">
             <div class="login-form">
                 <div class="title">Đăng nhập</div>
-                <form action="/userServlet" method="post">
+                <form action="/" method="post">
                     <input type="hidden" name="action" value="login">
                     <div class="input-boxes">
                         <div class="input-box">
@@ -56,14 +56,16 @@
 <%--            Đăng ký   --%>
             <div class="signup-form">
                 <div class="title">Đăng ký</div>
-
-                <form action="/userServlet" method="post" name="register" onsubmit="return Validate()">
+                <form id="form-dangky" action="/userServlet" method="post" name="register" onsubmit="return Validate()">
+                    <input type="hidden" name="action" value="createAccount">
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-
-
                             <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required >
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text"  name="nameAccount" id="nameAccount" placeholder="Nhập vào tên đăng nhập.." required >
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
@@ -79,11 +81,11 @@
                         </div>
                         <div class="input-box">
                             <i class="fa-solid fa-location-dot"></i>
-                            <input type="text" placeholder="Nhập địa chỉ" required>
+                            <input type="text" name="address" placeholder="Nhập địa chỉ" required>
                         </div>
                         <div class="input-box">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="text" name="phone"id="phone" placeholder="Nhập vào số điện thoại" required>
+                            <input type="text" name="phone" id="phone" placeholder="Nhập vào số điện thoại" required>
                         </div>
                         <div>
                             <span style="color: red" id="errorName"></span>
@@ -91,11 +93,9 @@
                             <span  style="color: red"  id="erorEmail"></span>
                             <span style="color: red"   id="errorPass"></span>
                             <span  style="color: red"  id="errorConPass"></span>
-
-
                         </div>
                         <div class="button input-box">
-                            <input type="submit" value="Sumbit">
+                            <input type="submit" value="Đăng Ký">
                         </div>
                         <div class="text sign-up-text">Bạn đã có tài khoản? <label for="flip">Đăng nhập nhanh</label></div>
                     </div>
@@ -109,7 +109,6 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content ">
             <div class="modal-header">
-
                 <h5 class="modal-title" id="modalEditPassword">Quên mật khẩu</h5>
             </div>
             <form action="/userServlet" method="post" name="register" onsubmit="return ValidateForgot()">
@@ -117,7 +116,6 @@
                 <div class="form-group row">
                     <label  class="col-sm-3 control-labelform-label">Tên đăng nhập: </label>
                     <div class="col-sm-9">
-
                         <input type="text" class="form-control" id="inputNameAccount" name="inputNameAccount" placeholder="Nhập tên đăng nhập">
                     </div>
                 </div>
@@ -302,9 +300,8 @@
 
 
         if (name && phone && email && ConPass && passW && passW == ConPass) {
-
             alert("Đăng ký thành công!");
-
+            document.getElementById("form-dangky").submit();
         } else {
 
         }

@@ -30,7 +30,6 @@ public class AccountRepository {
         }
         return account;
     }
-
     public int CheckAccount(String userAccount) {
         int i = 0;
         try {
@@ -39,22 +38,26 @@ public class AccountRepository {
             preparedStatement.setString(1, userAccount);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                i=1;
+                i=+1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return i;
     }
-
-//    public void AddAccount(Account account) {
-//        try {
-//            String myQuery = "SELECT * FROM `account` where username = ? ";
-//            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
-//            preparedStatement.setString(1, );
-//            ResultSet rs = preparedStatement.executeQuery();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void AddAccount(Account account) {
+        try {
+            String myQuery = "insert into `account` value (?,?)";
+            String queryRole = "insert into user_role value (?, 2)" ;
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setString(1, account.getUsername() );
+            preparedStatement.setString(2, account.getPassword() );
+            preparedStatement.executeUpdate();
+            PreparedStatement preparedStatementRole = this.baseRepository.getConnection().prepareStatement(queryRole);
+            preparedStatementRole.setString(1, account.getUsername() );
+            preparedStatementRole.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

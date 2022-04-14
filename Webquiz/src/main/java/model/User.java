@@ -22,7 +22,14 @@ public class User {
     public User() {
     }
 
-
+    public User(String name, String email, String phone, String address, String image, String account) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.image = image;
+        this.account = account;
+    }
 
     @Override
     public String toString() {
