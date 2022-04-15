@@ -140,11 +140,11 @@
                     </div>
                 </div>
                 <div class="form-group row">
-<<<<<<< HEAD
+
                     <label for="inputPhone" class="col-sm-2 col-form-label">std</label>
-=======
+
                     <label for="inputPhone" class="col-sm-2 col-form-label">SĐT</label>
->>>>>>> a99ca79a6c5c54dd8c8d9836a27f0d65620cf49d
+
                     <div class="col-sm-10">
                         <input type="phone" class="form-control" id="inputPhone"
                                placeholder="Số điện thoại của bạn">
