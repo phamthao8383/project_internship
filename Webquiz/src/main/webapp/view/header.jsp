@@ -28,7 +28,9 @@
             </a>
             <div class="sector-detail">
                 <ul class="sector-detail__list">
-                    <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Toán</a></li>
+                    <li class="sector-detail__item">
+                            <a  href="/exam_list?action=list_exam&sj_id=1"  class="sector-detail__item-link">Toán</a>
+                    </li>
                     <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Vật Lý</a></li>
                     <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Hóa Học</a></li>
                 </ul>
@@ -41,7 +43,7 @@
             </a>
             <div class="sector-detail">
                 <ul class="sector-detail__list">
-                    <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Toán</a></li>
+                    <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=1" class="sector-detail__item-link">Toán</a></li>
                     <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Sinh Học</a></li>
                     <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Hóa Học</a></li>
                 </ul>
