@@ -13,6 +13,34 @@ public class MemberRepository {
     BaseRepository baseRepository = new BaseRepository();
     Connection connection = this.baseRepository.getConnection();
 
+    public List<Member> getMemberList(){
+        List<Member> members = new ArrayList<>();
+
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(
+                    "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
+                            "from accumulated_point ap\n" +
+                            "right join `user` u on u.user_id = ap.user_id\n" +
+                            "inner join user_role ur on ur.username = u.username;\n"
+            );
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                members.add(new Member(resultSet.getInt("user_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("address"),
+                        resultSet.getString("image"),
+                        resultSet.getString("username"),
+                        resultSet.getDouble("accumulated_point")));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return members;
+    }
+
     public List<Member> getMaxPoint(){
         List<Member> memberList = new ArrayList<>();
         String sql = "Select distinct us.*, ap.accumulated_point from user us inner join " +
