@@ -7,6 +7,10 @@ public class Member extends User {
     public Member() {
     }
 
+    public Member(int userId) {
+        super(userId);
+    }
+
     public Member(int userId,
                   String name,
                   String email,

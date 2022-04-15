@@ -9,7 +9,7 @@
 
         <div class="col-2 sidebar">
             <div class="list-group">
-                <a href="/admin/manage-user?action=view" class="list-group-item list-group-item-action">
+                <a href="/admin/manage-user" class="list-group-item list-group-item-action">
                     <i class="fa-solid fa-user-group"></i>
                     Quản lý người dùng</a>
                 <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">

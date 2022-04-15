@@ -152,8 +152,10 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
         String name = request.getParameter("name");
+        name = handleString.handleFont(name);
         String email = request.getParameter("email");
         String address = request.getParameter("address");
+        address = handleString.handleFont(address);
         String phone = request.getParameter("phone");
         User user = new User(idUser,name,email,phone,address);
         userService.updateUserId(user);

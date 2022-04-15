@@ -17,7 +17,7 @@ public class MemberRepository {
         List<Member> members = new ArrayList<>();
 
         try {
-            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(
+            PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
                             "from accumulated_point ap\n" +
                             "right join `user` u on u.user_id = ap.user_id\n" +
@@ -94,5 +94,18 @@ public class MemberRepository {
             throwables.printStackTrace();
         }
         return memberList;
+    }
+
+    public boolean deleteMember(Member member){
+        String sql = "call delete_user(?)";
+        boolean checkDeleted = false;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, member.getUserId());
+            checkDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return  checkDeleted;
     }
 }

@@ -55,7 +55,7 @@
                                 <td class="text-center">${member.point}</td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal">Sửa</button>
-                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                                    <button onclick="onDeleteMember(${member.userId})" type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
                             </tr>
                             </c:forEach>
@@ -93,13 +93,16 @@
                 <h5 class="modal-title" id="deleteModalLabel">Xóa xác nhận người dùng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                Xác nhận xoá thành viên?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Xác nhận</button>
-            </div>
+            <form action="/admin/manage-user?action=delete" method="post">
+                <input type="hidden" name="id" id="MemberIDDelete">
+                <div class="modal-body">
+                    Xác nhận xoá thành viên?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -150,10 +153,8 @@
 <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
 
 <script>
-    $(document).ready(function() {
-
-        $('#example').dataTable({}); // dòng này để nhúng bảng biểu thành dạng bảng được phân trang
-
-    } );
+    function onDeleteMember(MemberIDDelete) {
+        document.getElementById("MemberIDDelete").value = MemberIDDelete;
+    }
 </script>
 </html>

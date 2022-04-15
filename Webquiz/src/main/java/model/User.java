@@ -29,6 +29,9 @@ public class User {
 
     public User() {
     }
+    public User(int userId){
+        this.userId = userId;
+    }
 
     public User(String name, String email, String phone, String address, String image, String account) {
         this.name = name;

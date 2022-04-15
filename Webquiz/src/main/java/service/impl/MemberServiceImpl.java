@@ -24,4 +24,9 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.getMemberNumber();
     }
 
+    @Override
+    public boolean deleteMember(Member member) {
+        return memberRepository.deleteMember(member);
+    }
+
 }

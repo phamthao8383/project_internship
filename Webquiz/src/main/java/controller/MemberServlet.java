@@ -22,7 +22,8 @@ public class MemberServlet extends HttpServlet {
             action = "";
         }
         switch (action){
-            case "":
+            case "delete":
+                deleteMember(request, response);
                 break;
             default:
                 getMemberList(request, response);
@@ -35,10 +36,11 @@ public class MemberServlet extends HttpServlet {
             action = "";
         }
         switch (action){
-            case "view":
-                getMemberList(request, response);
-                break;
+            //case "view":
+                //getMemberList(request, response);
+//                break;
             default:
+                getMemberList(request, response);
         }
     }
 
@@ -58,5 +60,13 @@ public class MemberServlet extends HttpServlet {
 //        request.setAttribute("memberList", memberList);
 //        request.getRequestDispatcher("/admin/manage-user.jsp").forward(request, response);
 //    }
+
+    private void deleteMember(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        int memberIDDelete = Integer.parseInt(request.getParameter("id"));
+        Member member = new Member(memberIDDelete);
+        boolean checkDeleted = memberService.deleteMember(member);
+        response.sendRedirect("/admin/manage-user");
+    }
 
 }
