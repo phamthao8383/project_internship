@@ -8,6 +8,7 @@ import service.UserService;
 import service.impl.AccountServiceImpl;
 import service.impl.UserServiceImpl;
 import util.HandleString;
+import util.PasswordEncryption;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +25,8 @@ import java.nio.charset.StandardCharsets;
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
     private AccountService accountService = new AccountServiceImpl();
-    HandleString handleString = new HandleString();
+    private HandleString handleString = new HandleString();
+    private PasswordEncryption passwordEncryption = new PasswordEncryption();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -167,8 +169,11 @@ public class UserServlet extends HttpServlet {
         int idUser = Integer.parseInt(request.getParameter("idUser"));
         String account = request.getParameter("nameAccount");
         String password = request.getParameter("password");
+        password = passwordEncryption.encrypt(password);
         String ps1 = request.getParameter("newPassword");
+        ps1 = passwordEncryption.encrypt(ps1);
         String ps2 = request.getParameter("confirmPassword");
+        ps2 = passwordEncryption.encrypt(ps2);
 
         if(ps1.equals(ps2)) {
             accountService.editPassword(account, ps1);
@@ -192,6 +197,7 @@ public class UserServlet extends HttpServlet {
             name = handleString.handleName(name);
             String ps1 = request.getParameter("passw");
             String ps2 = request.getParameter("con_passw");
+            ps1 = passwordEncryption.encrypt(ps1);
             String email = request.getParameter("email");
             String address = request.getParameter("address");
             address = handleString.handleFont(address);

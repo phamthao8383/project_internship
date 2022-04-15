@@ -2,6 +2,7 @@ package repository;
 
 import model.Account;
 import model.User;
+import util.PasswordEncryption;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,11 +10,13 @@ import java.sql.SQLException;
 public class AccountRepository {
 
     private BaseRepository baseRepository = new BaseRepository();
+    private PasswordEncryption passwordEncryption = new PasswordEncryption();
 
 
     public Account CheckLogIn(String userAccount, String password) {
         Account account = new Account();
         try {
+            password = passwordEncryption.encrypt(password);
             String myQuery = "SELECT `account`.username, password, role_id  FROM `account` inner join user_role on `account`.username = user_role.username where `account`.username = ? and password = ?";
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
             preparedStatement.setString(1, userAccount);
