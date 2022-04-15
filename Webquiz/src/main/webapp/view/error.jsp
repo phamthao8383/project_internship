@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <script src="jquery-3.6.0.min.js"></script>
     <title>Error Page</title>
 </head>
 <style>
@@ -173,6 +174,7 @@
     <h1 class="second-four">4</h1>
     <p class="wrong-para">Uh Oh! Page not found! <a href="/userServlet">GO HOME</a></p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.3/gsap.min.js"></script>
 <script>
     let t1 = gsap.timeline();
     let t2 = gsap.timeline();

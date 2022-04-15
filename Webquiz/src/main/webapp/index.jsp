@@ -7,55 +7,7 @@
     <title>QuizGym</title>
 </head>
 <body>
-<div class="header">
-    <div class="banner">
-        <img src="icon/logo-QUIZGYM.png" height="200px">
-        <div class="sologan">
-            <h1>TRẮC NGHIỆM ONLINE</h1>
-            <h4>ĐA DẠNG - THÔNG MINH - CHÍNH XÁC</h4>
-        </div>
-    </div>
-    <ul class="navbar__item-list">
-        <li class="navbar__item-sectors">
-            <a href="/index.jsp">
-                <i class="fa-solid fa-house"></i>
-                Trang chủ
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                Khối A
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                Khối B
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book"></i>
-                Khối C
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <a href="#">
-                <i class="fa-solid fa-book-open"></i>
-                Bài TEST
-            </a>
-        </li>
-        <li class="navbar__item-sectors">
-            <c:if test="${sessionScope.account.idRole == 1}">
-                <a href="/admin/index.jsp">
-                    <i class="fa-solid fa-link"></i>
-                    Tới trang quản lý
-                </a>
-            </c:if>
-        </li>
-    </ul>
-</div>
+<jsp:include page="/view/header.jsp"/>
 <div class="container-fluid">
     <div class="row">
         <div class="col-3 col-md-3">
@@ -210,7 +162,7 @@
                             </c:if>
                             <li class="btn_logout">
                                 <c:if test="${sessionScope.account != null}">
-                                    <button type="submit" class="btn-warning">
+                                    <button type="submit" class="btn-logout">
                                         <a href="/userServlet?action=logout">Đăng xuất</a>
                                     </button>
                                 </c:if>

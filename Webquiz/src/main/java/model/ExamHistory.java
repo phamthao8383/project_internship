@@ -5,24 +5,22 @@ import java.sql.Time;
 public class ExamHistory {
     int examHistoryId;
     int userId;
-    int examId;
+    Exam exam;
     Time startTime;
     Time endTime;
     Double point;
 
-    public ExamHistory(int examHistoryId, int userId, int examId, Time startTime, Time endTime, Double point) {
+    public ExamHistory(int examHistoryId, int userId, Exam exam, Time startTime, Time endTime, Double point) {
         this.examHistoryId = examHistoryId;
         this.userId = userId;
-        this.examId = examId;
+        this.exam = exam;
         this.startTime = startTime;
         this.endTime = endTime;
         this.point = point;
     }
 
-    public ExamHistory(int examHistoryId, int userId, int examId) {
+    public ExamHistory(int examHistoryId) {
         this.examHistoryId = examHistoryId;
-        this.userId = userId;
-        this.examId = examId;
     }
 
     public ExamHistory() {
@@ -33,15 +31,11 @@ public class ExamHistory {
         return "ExamHistory{" +
                 "examHistoryId=" + examHistoryId +
                 ", userId=" + userId +
-                ", examId=" + examId +
+                ", exam=" + exam +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", point=" + point +
                 '}';
-    }
-
-    public ExamHistory(int examHistoryId) {
-        this.examHistoryId = examHistoryId;
     }
 
     public int getExamHistoryId() {
@@ -60,12 +54,12 @@ public class ExamHistory {
         this.userId = userId;
     }
 
-    public int getExamId() {
-        return examId;
+    public Exam getExam() {
+        return exam;
     }
 
-    public void setExam(int examId) {
-        this.examId = examId;
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 
     public Time getStartTime() {

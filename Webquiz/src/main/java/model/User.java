@@ -19,6 +19,14 @@ public class User {
         this.account = account;
     }
 
+    public User(int userId, String name, String email, String phone, String address) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public User() {
     }
 

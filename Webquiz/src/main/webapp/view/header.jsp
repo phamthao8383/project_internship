@@ -73,13 +73,13 @@
                 </ul>
             </div>
         </li>
-        <li class="navbar__item-sectors">
-            <c:if test="${sessionScope.account.idRole == 1}">
-                <a href="/admin/index.jsp">
-                    <i class="fa-solid fa-link"></i>
-                    Tới trang quản lý
-                </a>
-            </c:if>
-        </li>
+        <c:if test="${sessionScope.account.idRole == 1}">
+            <li class="navbar__item-sectors">
+                    <a href="/admin/index.jsp">
+                        <i class="fa-solid fa-link"></i>
+                        Tới trang quản lý
+                    </a>
+            </li>
+        </c:if>
     </ul>
 </div>
