@@ -19,6 +19,5 @@ dependencies {
 
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 
-
-
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.10'
 }

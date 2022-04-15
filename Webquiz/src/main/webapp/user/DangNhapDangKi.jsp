@@ -1,10 +1,11 @@
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -179,6 +180,7 @@
         var email = document.getElementById('inputEmail').value;
         var errEmail = document.getElementById('errEmail');
         var reGexEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
+
         if(name==''||name==null){
             errName.innerHTML="̣Tên đăng nhập không được để trống";
         }
@@ -217,19 +219,11 @@
         } else {
             errConPass.innerHTML = "";
         }
-
-
         if (name &&  email && inputNewPassword  &&inputNewPass && inputNewPassword==inputNewPass ) {
-
             alert("gửi mã thành công!");
-
         } else {
-
         }
-
         return false;
-
-
     }
 </script>
 

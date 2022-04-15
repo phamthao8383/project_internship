@@ -9,8 +9,8 @@
 
         <div class="col-2 sidebar">
             <div class="list-group">
-                <a href="/admin/manage-user.jsp" class="list-group-item list-group-item-action">
-                    <i class="fa-solid fa-people-group"></i>
+                <a href="/admin/manage-user" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-user-group"></i>
                     Quản lý người dùng</a>
                 <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                     <i class="fa-solid fa-file-lines"></i>
@@ -19,7 +19,7 @@
                     <i class="fa-solid fa-file-circle-question"></i>
                     Ngân hàng câu hỏi</a>
                 <a href="/admin/exam-list.jsp" class="list-group-item list-group-item-action">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-layer-group"></i>
                     Danh sách đề thi</a>
             </div>
         </div>

@@ -8,4 +8,5 @@ public interface MemberService {
     public List<Member> getMemberList();
     public List<Member> getMaxPoint();
     public List<Member> getMemberNumber();
+    public boolean deleteMember(Member member);
 }
