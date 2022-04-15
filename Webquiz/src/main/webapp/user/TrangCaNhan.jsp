@@ -19,33 +19,33 @@
 <div class="container-fluid">
     <div class="form__info">
         <div class="form__info-head">
-            <h3 class="form__info-title">Thông tin của ${sessionScope.user.name} </h3>
+            <h3 class="form__info-title">Thông tin của ${user.name} </h3>
         </div>
         <div class="form__info-body">
             <div class="form__info-image">
-                <img src="${sessionScope.user.image}" class="form__info-img">
+                <img src="${user.image}" class="form__info-img">
                 <input class="input_file" type="file">
             </div>
             <ul class="form__info-list">
                 <li class="form__info-item">
                     <span class="form__info-name">Tên đăng nhập:</span>
-                    <p class="form__info-value">${sessionScope.user.account}</p>
+                    <p class="form__info-value">${user.account}</p>
                 </li>
                 <li class="form__info-item">
                     <span class="form__info-name">Họ tên:</span>
-                    <p class="form__info-value">${sessionScope.user.name}</p>
+                    <p class="form__info-value">${user.name}</p>
                 </li>
                 <li class="form__info-item">
                     <span class="form__info-name">Email: </span>
-                    <p class="form__info-value">${sessionScope.user.email}</p>
+                    <p class="form__info-value">${user.email}</p>
                 </li>
                 <li class="form__info-item">
                     <span class="form__info-name">Địa chỉ: </span>
-                    <p class="form__info-value">${sessionScope.user.address}</p>
+                    <p class="form__info-value">${user.address}</p>
                 </li>
                 <li class="form__info-item">
                     <span class="form__info-name">Số điện thoại:</span>
-                    <p class="form__info-value">${sessionScope.user.phone} </p>
+                    <p class="form__info-value">${user.phone} </p>
                 </li>
             </ul>
 
@@ -74,36 +74,15 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${history}" var="examHis">
+            <c:forEach items="${history}" var="exam">
                 <tr>
                     <th scope="row">1</th>
-                    <td>abc</td>
-                    <td>Toán nâng cao</td>
-                    <td>${examHis.point}</td>
-                    <td>45 phút v</td>
+                    <td>${exam.getExam().getSubject().subject_name}</td>
+                    <td>${exam.getExam().examName}</td>
+                    <td>${exam.point}</td>
+                    <td>${exam.getExam().allowedTime}</td>
                 </tr>
             </c:forEach>
-            <tr>
-                <th scope="row">1</th>
-                <td>Toán</td>
-                <td>Toán nâng cao</td>
-                <td>100</td>
-                <td>45 phút</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Hóa</td>
-                <td>Hóa Đại Cương</td>
-                <td>90</td>
-                <td>45 phút</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Vật Lý</td>
-                <td>Lý 12</td>
-                <td>99</td>
-                <td>45 phút</td>
-            </tr>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
@@ -135,31 +114,33 @@
             <div class="form__info-head" id="modalEditInfor">
                 <h3 class="form__info-title">Cập nhật thông tin</h3>
             </div>
-            <form  action="/userServlet" method="post" name="register" onsubmit="return ValidateEdit()">
+            <form id="form-chinhsua"  action="/userServlet" method="post" name="register" onsubmit="return ValidateEdit()">
+                <input type="hidden" name="action" value="updateMyInfo">
+                <input type="hidden" name="idUser" value="${user.userId}">
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Họ tên</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputName" value="${sessionScope.user.name}"  placeholder="Nhập họ tên">
+                        <input type="text" name="name" class="form-control" id="inputName" value="${user.name}"  placeholder="Nhập họ tên">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" value="${sessionScope.user.email}" id="inputEmail" placeholder="Email của bạn">
+                        <input type="text" name="email" class="form-control" value="${user.email}" id="inputEmail" placeholder="Email của bạn">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputPhone" class="col-sm-2 col-form-label">SĐT</label>
                     <div class="col-sm-10">
-                        <input type="phone" value="${sessionScope.user.phone}" class="form-control" id="inputPhone"
+                        <input type="phone" name="phone" value="${user.phone}" class="form-control" id="inputPhone"
                                placeholder="Số điện thoại của bạn">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputAddress" class="col-sm-2 col-form-label">Địa chỉ</label>
                     <div class="col-sm-10">
-                        <input type="text" value="${sessionScope.user.address}" class="form-control" id="inputAddress" placeholder="Địa chỉ..">
+                        <input type="text" name="address" value="${user.address}" class="form-control" id="inputAddress" placeholder="Địa chỉ..">
                     </div>
                 </div>
             </div>
@@ -184,27 +165,27 @@
             <div class="form__info-head" id="modalEditPassword">
                 <h3 class="form__info-title">Đổi mật khẩu</h3>
             </div>
-
-            <form action="/userServlet" method="post" name="register" onsubmit="return ValidateChangePass()">
-
-
+            <form id="form-editpass" action="/userServlet" method="post" name="register" onsubmit="return ValidateChangePass()">
+                <input type="hidden" name="action" value="updatePassword">
+                <input type="hidden" name="idUser" value="${user.userId}">
+                <input type="hidden" name="nameAccount" value="${user.account}">
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 control-labelform-label">Mật khẩu hiện tại: </label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Nhập mật khẩu hiện tại">
+                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Nhập mật khẩu hiện tại">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputNewPassword" class="col-sm-3 control-labelform-label">Mật khẩu mới: </label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputNewPassword" placeholder="Nhập mật khẩu mới">
+                        <input type="password" name="newPassword" class="form-control" id="inputNewPassword" placeholder="Nhập mật khẩu mới">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputConfirmPassword" class="col-sm-3 control-labelform-label">Xác nhận mật khẩu: </label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Nhập lại mật khẩu">
+                        <input type="password"  name="confirmPassword" class="form-control" id="inputConfirmPassword" placeholder="Nhập lại mật khẩu">
                     </div>
                 </div>
             </div>
@@ -256,7 +237,8 @@
 
     if (inputConfirmPassword && inputNewPassword && inputConfirmPassword==inputNewPassword ) {
 
-        alert("gửi mã thành công!");
+        alert("Đổi mật khẩu thành công!");
+        document.getElementById("form-editpass").submit();
 
     } else {
 
@@ -313,9 +295,7 @@
             erorPhone.innerHTML = '';
         }
         if (name && phone && email ) {
-
-            alert("Đăng ký thành công!");
-
+            document.getElementById("form-chinhsua").submit();
         } else {
 
         }

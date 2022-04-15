@@ -164,6 +164,22 @@ a:hover {
     padding: 4px 0;
     margin: auto;
 }
+button:focus {outline: 0}
+button:active {
+    outline: none;
+    border: none;
+}
+.btn-logout {
+    border: 1px solid #ffd12a;
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    background-color: #ffd12a;
+}
+
+.btn-logout:hover {
+    background-color: #f3b600;
+}
 .btn_info:focus {outline:0;}
 
 .btn_info:active {

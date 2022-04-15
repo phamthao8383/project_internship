@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "UserServlet", urlPatterns = {"/userServlet", "/user"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
     private AccountService accountService = new AccountServiceImpl();
@@ -38,8 +38,15 @@ public class UserServlet extends HttpServlet {
             case "createAccount":
                 createNewAccount(request, response);
                 break;
+            case "updateMyInfo":
+                updateMyInfo(request,response);
+                break;
+            case "updatePassword":
+                updatePassword(request, response);
+                break;
         }
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action ==null) {
@@ -132,9 +139,41 @@ public class UserServlet extends HttpServlet {
     private void goGetInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
+        request.setAttribute("user", userService.getUserId(idUser));
         request.setAttribute("history", userService.getListExamHistory(idUser));
         request.getRequestDispatcher("/user/TrangCaNhan.jsp").forward(request, response);
     }
+
+    private void updateMyInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF8");
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        User user = new User(idUser,name,email,phone,address);
+        userService.updateUserId(user);
+        goGetInfo(request,response);
+    }
+
+    private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF8");
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+        String account = request.getParameter("nameAccount");
+        String password = request.getParameter("password");
+        String ps1 = request.getParameter("newPassword");
+        String ps2 = request.getParameter("confirmPassword");
+
+        if(ps1.equals(ps2)) {
+            accountService.editPassword(account, ps1);
+            System.out.println("dung rồi");
+            goGetInfo(request,response);
+        } else {
+            System.out.println("sai roi cau a");
+        }
+
+    }
+
 
     private void createNewAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             response.setContentType("text/html;charset=UTF8");

@@ -60,4 +60,16 @@ public class AccountRepository {
             e.printStackTrace();
         }
     }
+
+    public void editPassword(String ac, String ps) {
+        try {
+            String myQuery = "update account set password = ? where username = ?";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setString(1, ps);
+            preparedStatement.setString(2, ac);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

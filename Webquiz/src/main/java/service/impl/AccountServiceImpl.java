@@ -20,4 +20,9 @@ public class AccountServiceImpl implements AccountService {
     public void AddAccount(Account account) {
         accountRepository.AddAccount(account);
     }
+
+    @Override
+    public void editPassword(String ac, String ps) {
+        accountRepository.editPassword(ac,ps);
+    }
 }

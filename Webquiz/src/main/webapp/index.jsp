@@ -210,7 +210,7 @@
                             </c:if>
                             <li class="btn_logout">
                                 <c:if test="${sessionScope.account != null}">
-                                    <button type="submit" class="btn-warning">
+                                    <button type="submit" class="btn-logout">
                                         <a href="/userServlet?action=logout">Đăng xuất</a>
                                     </button>
                                 </c:if>

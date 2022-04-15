@@ -2,6 +2,7 @@ package repository;
 
 import model.Exam;
 import model.ExamHistory;
+import model.Subject;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -37,14 +38,23 @@ public class UserRepository {
         List<ExamHistory> examHistoryList = new ArrayList<>();
         ExamHistory examHistory = new ExamHistory();
         try {
-            String myQuery = "SELECT * FROM quiz_web.assignment where  user_id = ?";
+            String myQuery = "SELECT * \n" +
+                    "FROM quiz_web.assignment \n" +
+                    "inner join `user` on `user`.user_id  = assignment.user_id\n" +
+                    "inner join exam on exam.exam_id = assignment.exam_id\n" +
+                    "inner join `subject` on subject.subject_id = exam.subject_id\n" +
+                    "where  assignment.user_id = ?";
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 examHistory = new ExamHistory(rs.getInt("exam_id"),
                                                 rs.getInt("user_id"),
-                                                rs.getInt("exam_id"),
+                                                new Exam(rs.getInt("exam_id"),
+                                                        new Subject(rs.getInt("subject_id")
+                                                                ,rs.getString("subject_name"))
+                                                        ,rs.getString("allowed_time")
+                                                        ,rs.getString("exam_name")),
                                                 rs.getTime("starting_time"),
                                                 rs.getTime("completion_time"),
                                                 rs.getDouble("point"));
@@ -118,16 +128,14 @@ public class UserRepository {
 
     public void updateUserId(User user) {
         try {
-            String queryUpdate ="UPDATE `user` SET `name` = ? , email = ?  , phone = ? , address = ? , image = ? , username = ? WHERE user_id = ?" ;
+            String queryUpdate ="UPDATE `user` SET `name` = ? , email = ?  , phone = ? , address = ? WHERE user_id = ?" ;
             PreparedStatement preparedStatement = this.baseRepository
                     .getConnection().prepareStatement(queryUpdate);
             preparedStatement.setString(1,user.getName());
             preparedStatement.setString(2,user.getEmail());
             preparedStatement.setString(3,user.getPhone());
             preparedStatement.setString(4,user.getAddress());
-            preparedStatement.setString(5,user.getImage());
-            preparedStatement.setString(6,user.getAccount());
-            preparedStatement.setInt(7,user.getUserId());
+            preparedStatement.setInt(5,user.getUserId());
             int row = preparedStatement.executeUpdate();
             if(row > 0) {
                 System.out.println("Update thành công!!");
@@ -138,7 +146,6 @@ public class UserRepository {
         } catch (SQLException e) {
             System.out.println("lỗi rồi. không update được");
             e.printStackTrace();
-
         }
     }
 

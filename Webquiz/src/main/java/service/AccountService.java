@@ -6,4 +6,5 @@ public interface AccountService {
     public Account CheckLogIn(String userAccount, String password);
     public int CheckAccount(String userAccount);
     public void AddAccount(Account account);
+    public void editPassword(String ac, String ps);
 }

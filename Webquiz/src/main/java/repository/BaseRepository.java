@@ -18,8 +18,11 @@ public class BaseRepository {
             e.printStackTrace();
         }
     }
-
     public Connection getConnection() {
         return connection;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
