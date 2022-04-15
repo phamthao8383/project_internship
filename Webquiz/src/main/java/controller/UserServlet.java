@@ -7,6 +7,7 @@ import service.AccountService;
 import service.UserService;
 import service.impl.AccountServiceImpl;
 import service.impl.UserServiceImpl;
+import util.HandleString;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 
 @WebServlet(name = "UserServlet", urlPatterns = {"/userServlet", "/user"})
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
     private AccountService accountService = new AccountServiceImpl();
+    HandleString handleString = new HandleString();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action");
@@ -64,7 +68,7 @@ public class UserServlet extends HttpServlet {
     }
 
 
-//  Về trang chủ
+//  Ve trang chủ
     private void goHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Hiển thị danh sách vinh danh / thống kê thành viên
         response.setContentType("text/html;charset=UTF8");
@@ -83,7 +87,7 @@ public class UserServlet extends HttpServlet {
             HttpSession session = request.getSession();
 //            Hủy session
             session.invalidate();
-//            quay về trang đăng nhập
+//            quay ve trang đăng nhập
             goLogin(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
@@ -122,7 +126,7 @@ public class UserServlet extends HttpServlet {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request,response);
             }
-//            Thất bại thì quay về lại trang login
+//            Thất bại thì quay ve lại trang login
             else  {
                 goLogin(request,response);
             }
@@ -137,13 +141,19 @@ public class UserServlet extends HttpServlet {
     }
 
     private void createNewAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF8");
+//            response.setContentType("text/html;charset=UTF8");
+            response.setContentType("text/html; charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+
             String nameAccount = request.getParameter("nameAccount");
             String name = request.getParameter("name");
+            name = handleString.handleFont(name);
+            name = handleString.handleName(name);
             String ps1 = request.getParameter("passw");
             String ps2 = request.getParameter("con_passw");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
+            address = handleString.handleFont(address);
             String phone = request.getParameter("phone");
             int i = accountService.CheckAccount(nameAccount);
             if(i == 1 ) {
@@ -156,5 +166,4 @@ public class UserServlet extends HttpServlet {
                 goLogin(request,response);
             }
     }
-
 }
