@@ -12,15 +12,19 @@ import util.PasswordEncryption;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+@MultipartConfig(fileSizeThreshold = 1024 *1024 * 5,
+                maxFileSize = 1024*1024*20,
+                maxRequestSize = 1024*1024*100)
 @WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
@@ -47,11 +51,16 @@ public class UserServlet extends HttpServlet {
             case "updateMyInfo":
                 updateMyInfo(request,response);
                 break;
+            case "updateImage" :
+                updateImage(request,response);
+                break;
             case "updatePassword":
                 updatePassword(request, response);
                 break;
         }
     }
+
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -69,7 +78,6 @@ public class UserServlet extends HttpServlet {
             case "infoUser":
                 goGetInfo(request,response);
                 break;
-
             default:
                 goHomePage(request,response);
                 break;
@@ -164,6 +172,26 @@ public class UserServlet extends HttpServlet {
         goGetInfo(request,response);
     }
 
+    private void updateImage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF8");
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+        String account = request.getParameter("account");
+        Part part = request.getPart("inputFile");
+        String realPath = request.getServletContext().getRealPath("/uploads");
+        // chổ ni ae tự thêm đường link foder uploads của dự án vào
+        String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\New folder\\uploads";
+        String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+        if(!Files.exists(Paths.get(realPath2))) {
+            Files.createDirectory(Paths.get(realPath2));
+        }
+//        cái này xong là lưu file được rồi.
+        part.write(realPath2+"/"+account + filename);
+//        chừ lưu filename vào database nữa là ok
+        userService.updateImageUserId(idUser, account + filename);
+        goGetInfo(request,response);
+    }
+
     private void updatePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
@@ -176,9 +204,15 @@ public class UserServlet extends HttpServlet {
         ps2 = passwordEncryption.encrypt(ps2);
 
         if(ps1.equals(ps2)) {
-            accountService.editPassword(account, ps1);
-            System.out.println("dung rồi");
-            goGetInfo(request,response);
+            Account acc = accountService.CheckLogIn(account,password);
+            if(acc.getUsername()!=null) {
+                accountService.editPassword(account, ps1);
+                System.out.println("dung rồi");
+                goGetInfo(request,response);
+            } else {
+                goGetInfo(request,response);
+            }
+
         } else {
             System.out.println("sai roi cau a");
         }

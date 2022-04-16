@@ -149,6 +149,26 @@ public class UserRepository {
         }
     }
 
+    public void updateImageUserId(int id , String image) {
+        try {
+            String queryUpdate ="UPDATE `user` SET image = ?  WHERE user_id = ?" ;
+            PreparedStatement preparedStatement = this.baseRepository
+                    .getConnection().prepareStatement(queryUpdate);
+            preparedStatement.setString(1,image);
+            preparedStatement.setInt(2,id);
+            int row = preparedStatement.executeUpdate();
+            if(row > 0) {
+                System.out.println("Update thành công!!");
+            } else {
+                System.out.println("Lỗi ở updateUser ");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("lỗi rồi. không update được");
+            e.printStackTrace();
+        }
+    }
+
     public void deleteUser (int id) {
         try {
             PreparedStatement preparedStatement = this.baseRepository
