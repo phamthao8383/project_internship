@@ -40,7 +40,7 @@
                                     <div class="num-question col"><span><i class="fa fa-check-square"></i> 50 câu</span>
                                     </div>
                                     <div class="num-minutes col"><span><i class="fa fa-clock-o"
-                                                                          aria-hidden="true"></i>90 phút</span>
+                                                                          aria-hidden="true"></i>${exam.allowedTime} phút</span>
                                     </div>
                                     <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>80 lượt thi</span>
                                     </div>
