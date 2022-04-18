@@ -23,7 +23,7 @@
         </div>
         <div class="form__info-body">
             <div class="form__info-image">
-                <img src="${user.image}" class="form__info-img">
+                <img src="${user.image}" class="form__info-img" alt="avatar">
                 <input class="input_file" type="file">
             </div>
             <ul class="form__info-list">
