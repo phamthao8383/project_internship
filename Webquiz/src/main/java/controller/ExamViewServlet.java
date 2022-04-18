@@ -39,9 +39,6 @@ public class ExamViewServlet extends HttpServlet {
         }
     }
 
-
-
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -83,6 +80,7 @@ public class ExamViewServlet extends HttpServlet {
 
         int examId = Integer.parseInt(request.getParameter("examId"));
         request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+        request.setAttribute("exam",examViewService.getExamId(examId) );
         request.setAttribute("examId",examId );
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/start_exam.jsp");
         dispatcher.forward(request,response);

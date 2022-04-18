@@ -264,8 +264,6 @@ input {
 .custom-control-label {
     margin-bottom: 0;
 }
-
-
 .checked--true {
     background-color: #93f9ae75;
     border: 2px solid #93f9ae;
@@ -285,4 +283,24 @@ input {
 .question_answer > i {
     color: #1c7430;
     font-size: 18px;
+}
+.countdown{
+    border: solid 1px #ccc;
+    border-radius: 8px;
+    padding: 7px;
+    justify-content: center;
+    position: sticky;
+    top: 60px;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+.countdown__item{
+    display: flex;
+    justify-content: center;
+}
+.countdown__time{
+    font-size: 40px;
 }

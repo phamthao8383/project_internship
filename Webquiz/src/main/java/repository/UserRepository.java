@@ -5,6 +5,7 @@ import model.ExamHistory;
 import model.Subject;
 import model.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class UserRepository {
     private BaseRepository baseRepository = new BaseRepository();
+    private Connection connection = this.baseRepository.getConnection();
 
     public List<User> getUserList() {
         List<User> users = new ArrayList<>();
@@ -110,16 +112,18 @@ public class UserRepository {
 
     public void addUserList(User user) {
         try {
-            String queryInsert = "insert into `user` (name, email, phone, address, image, username) value(?,?,?,?,?,?)";
-            PreparedStatement preparedStatement = this.baseRepository.getConnection()
-                    .prepareStatement(queryInsert);
+            String insertUser = "insert into `user` (name, email, phone, address, image, username) value(?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(insertUser);
             preparedStatement.setString(1,user.getName());
             preparedStatement.setString(2,user.getEmail());
             preparedStatement.setString(3,user.getPhone());
             preparedStatement.setString(4,user.getAddress());
-            preparedStatement.setString(5,user.getImage());
+            preparedStatement.setString(5,"admin_profile.svg");
             preparedStatement.setString(6,user.getAccount());
-
+            preparedStatement.executeUpdate();
+            String insertAccumulated = "insert into accumulated_point (user_id, accumulated_point) values ((select user_id from `user` where username = ?), 0)";
+            preparedStatement = connection.prepareStatement(insertAccumulated);
+            preparedStatement.setString(1, user.getAccount());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
