@@ -2,6 +2,7 @@
 // show Lịch sử thi
 function showhistory() {
     document.getElementById("history").classList.toggle("show");
+    document.getElementById("btn_show").classList.toggle("active_btn");
 
 }
 

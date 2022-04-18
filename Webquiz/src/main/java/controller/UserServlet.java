@@ -22,9 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-@MultipartConfig(fileSizeThreshold = 1024 *1024 * 5,
-                maxFileSize = 1024*1024*20,
-                maxRequestSize = 1024*1024*100)
+@MultipartConfig
 @WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
@@ -179,13 +177,15 @@ public class UserServlet extends HttpServlet {
         Part part = request.getPart("inputFile");
         String realPath = request.getServletContext().getRealPath("/uploads");
         // chổ ni ae tự thêm đường link foder uploads của dự án vào
-        String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\New folder\\uploads";
+        String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\Folder_DuAn\\project_intership\\Webquiz\\src\\main\\webapp\\uploads";
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
         if(!Files.exists(Paths.get(realPath2))) {
             Files.createDirectory(Paths.get(realPath2));
         }
+        System.out.println(realPath);
 //        cái này xong là lưu file được rồi.
+//        part.write(realPath+"/"+account + filename);
         part.write(realPath2+"/"+account + filename);
 //        chừ lưu filename vào database nữa là ok
         userService.updateImageUserId(idUser, account + filename);

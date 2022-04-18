@@ -24,9 +24,9 @@
         <div class="form__info-body">
             <div class="form__info-image">
                 <img src="/uploads/${user.image}" class="form__info-img">
-                <button data-toggle="modal" data-target="#editImage" class="form__info-btn">Đổi ảnh</button>
+                <button data-toggle="modal" data-target="#editImage" class="form__info-btn-image">Đổi ảnh</button>
             </div>
-            <ul class="form__info-list">
+            <ul class="form__info-list" style="padding-left:20px">
                 <li class="form__info-item">
                     <span class="form__info-name">Tên đăng nhập:</span>
                     <p class="form__info-value">${user.account}</p>
@@ -74,9 +74,9 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${history}" var="exam">
+            <c:forEach items="${history}" var="exam" varStatus="loop">
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">${loop.index +1}</th>
                     <td>${exam.getExam().getSubject().subject_name}</td>
                     <td>${exam.getExam().examName}</td>
                     <td>${exam.point}</td>

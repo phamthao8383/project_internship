@@ -197,13 +197,4 @@ public class UserRepository {
         return 0;
     }*/
 
-    public static void main(String[] args) {
-        List<User> d = new UserRepository().getUserList();
-        for (User u: d
-             ) {
-            System.out.println(u);
-
-        }
-
-    }
 }
