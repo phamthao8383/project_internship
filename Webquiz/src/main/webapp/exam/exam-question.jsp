@@ -4,12 +4,14 @@
 <head>
     <jsp:include page="/view/head.jsp"/>
     <title>Đề thi minh họa tốt nghiệp THPT năm 2022 môn Toán - Bộ Giáo Dục và Đào Tạo</title>
-    <link rel="stylesheet" href="exam.css">
+    <link rel="stylesheet" href="/exam/exam.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body  oncopy="return false" oncut="return false" onpaste="return false">
+<jsp:include page="/view/header.jsp"/>
 <div class="wrapper">
-    <jsp:include page="/view/header.jsp"/>
     <div class="main-content">
     <div class="breadcrumb">
         <div class="container">
@@ -24,7 +26,6 @@
     </div>
 </div>
 </div>
-
 <div class="content-two-columns">
     <div class="container">
         <div class="row">
@@ -33,13 +34,13 @@
                     <div class="col-12 col-lg-12 col-sm-12">
                         <div class="row">
                             <div class="d9Box part-item detail">
-                                <h1 class="title22Bold "> ${listQuestion[0].subject.getSubject_name()}</h1>
+                                <h1 class="title22Bold "> ${exam.examName}</h1>
                                 <p>Bộ Giáo Dục và Đào Tạo</p>
                                 <div class="detail-question">
                                     <div class="num-question col"><span><i class="fa fa-check-square"></i> 50 câu</span>
                                     </div>
                                     <div class="num-minutes col"><span><i class="fa fa-clock-o"
-                                                                          aria-hidden="true"></i>90 phút</span>
+                                                                          aria-hidden="true"></i>${exam.allowedTime} phút</span>
                                     </div>
                                     <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>80 lượt thi</span>
                                     </div>
@@ -64,9 +65,7 @@
                                         <form action="/exam_list" method="post">
                                             <input type="hidden" name="action" value="goExam">
                                             <input type="hidden" name="examId" value="${examId}">
-                                            <input type="submit" style="margin-top: 10px;" class="btn orange f16b h51" >
-                                                Bắt Đầu Làm
-                                            </input>
+                                            <input type="submit" value="Bắt đầu thi" style="margin-top: 10px;" class="btn orange f16b h51" >
                                         </form>
                                     </div>
                                 </div>
@@ -79,13 +78,9 @@
     </div>
     </section>
 </div>
-</div>
-
 <jsp:include page="/view/footer.jsp"/>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
-
-</div>
 </body>
 </html>

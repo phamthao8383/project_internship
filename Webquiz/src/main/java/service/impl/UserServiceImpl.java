@@ -40,6 +40,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateImageUserId(int id, String image) {
+        userRepository.updateImageUserId(id, image);
+    }
+
+    @Override
     public void deleteUser(int id) {
         userRepository.deleteUser(id);
     }

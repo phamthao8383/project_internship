@@ -76,6 +76,8 @@ public class MemberServlet extends HttpServlet {
         int memberIDDelete = Integer.parseInt(request.getParameter("id"));
         Member member = new Member(memberIDDelete);
         boolean checkDeleted = memberService.deleteMember(member);
+        Boolean check = Boolean.valueOf(checkDeleted);
+        request.setAttribute("checkDeleted", check);
         response.sendRedirect("/admin/manage-user");
     }
 
