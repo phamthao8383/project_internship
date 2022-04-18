@@ -12,5 +12,6 @@ public interface UserService {
     public User getUserAccount(String accountName);
     public void addUserList(User user);
     public void updateUserId(User user);
+    public void updateImageUserId(int id , String image);
     public void deleteUser (int id);
 }
