@@ -14,6 +14,11 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.getMemberList();
     }
 
+//    @Override
+//    public Member viewMemberUpdate(Member member) {
+//        return memberRepository.viewMemberUpdate(member);
+//    }
+
     @Override
     public List<Member> getMaxPoint() {
         return memberRepository.getMaxPoint();
@@ -27,6 +32,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean deleteMember(Member member) {
         return memberRepository.deleteMember(member);
+    }
+
+    @Override
+    public void updateMember(Member memberSearch, Member memberUpdate) {
+        memberRepository.updateMember(memberSearch, memberUpdate);
     }
 
 }

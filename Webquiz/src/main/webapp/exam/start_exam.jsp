@@ -2,11 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="vi">
 <head>
-    <jsp:include page="/view/head.jsp"/>
-    <title>Đề thi minh họa tốt nghiệp THPT năm 2022 môn Toán - Bộ Giáo Dục và Đào Tạo</title>
     <link rel="stylesheet" href="/exam/exam.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <jsp:include page="/view/head.jsp"/>
+    <title>Đề thi minh họa tốt nghiệp THPT năm 2022 môn Toán - Bộ Giáo Dục và Đào Tạo</title>
 </head>
 
 <body  oncopy="return false" oncut="return false" onpaste="return false">
@@ -38,10 +39,10 @@
                                 <input type="hidden" name="examId" value="${examId}">
                                 <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                             <div class="d9Box part-item detail">
-                                <h1 class="title22Bold ">Đề thi minh họa tốt nghiệp THPT năm 2022 môn Toán</h1>
+                                <h1 class="title22Bold ">${exam.examName}</h1>
                                 <p>Bộ Giáo Dục và Đào Tạo</p>
                                 <div class="detail-question">
-                                    <div class="num-question col"><span><i class="fa fa-check-square"></i> 50 câu</span>
+                                    <div class="num-question col"><span><i class="fa fa-check-square"></i> ${examQuestion.total} câu</span>
                                     </div>
                                     <div class="number-of-questions">
 <%--                                        <div class="time-remain">--%>

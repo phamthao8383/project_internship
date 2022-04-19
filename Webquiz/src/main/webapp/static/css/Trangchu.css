@@ -315,3 +315,12 @@ button:active {
     background-color: #afafaf;
 }
 
+
+.sticky{
+     position: fixed;
+     top: 0;
+     width: 100%;
+    z-index: 10;
+    background-color: white;
+ }
+

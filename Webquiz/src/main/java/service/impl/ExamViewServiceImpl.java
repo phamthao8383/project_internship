@@ -1,6 +1,7 @@
 package service.impl;
 
 import model.Exam;
+import model.ExamQuestion;
 import model.Question;
 import repository.ExamViewRepository;
 import service.ExamViewService;
@@ -10,8 +11,13 @@ import java.util.List;
 public class ExamViewServiceImpl implements ExamViewService {
     ExamViewRepository examRepository = new ExamViewRepository();
     @Override
-    public List<Exam> examList(int sjId) {
+    public List<ExamQuestion> examList(int sjId) {
         return examRepository.examList(sjId);
+    }
+
+    @Override
+    public ExamQuestion getExamQuestionId(int id) {
+        return examRepository.getExamQuestionId(id);
     }
 
     @Override
