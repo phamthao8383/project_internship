@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <jsp:include page="/view/head.jsp"/>
-    <title>QuizGym - Đề thi môn ${listExam[0].subject.getSubject_name()} </title>
+    <title>QuizGym - Đề thi môn ${listExam[0].exam.getSubject().getSubject_name()} </title>
     <link rel="stylesheet" href="/static/css/danhSachDe.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-8">
-                <h4>Đề thi trắc nghiệm môn ${listExam[0].subject.getSubject_name()}</h4>
+                <h4>Đề thi trắc nghiệm môn ${listExam[0].exam.getSubject().getSubject_name()}</h4>
             </div>
             <div class="col-4">
                 <select class="custom-select">
@@ -33,21 +33,21 @@
 
         <div class="row">
             <div class="col-8">
-                <c:forEach items="${listExam}" var="exam">
+                <c:forEach items="${listExam}" var="examQuestion">
                     <div class="exam-cart row">
                         <div class="col-2">
                             <img src="https://s.tracnghiem.net/assets/images/thpt/hoa-hoc.png" alt="">
                         </div>
                         <div class="exam-cart__infor col-10">
-                            <h4 class="exam__label">${exam.examName}</h4>
+                            <h4 class="exam__label">${examQuestion.exam.getExamName()}</h4>
                             <div class="exam__description row">
-                                <p class="exam__time">Thời gian: ${exam.allowedTime}</p>
-                                <p class="exam__question-number">Số câu: 40</p>
+                                <p class="exam__time">Thời gian: ${examQuestion.exam.getAllowedTime()}</p>
+                                <p class="exam__question-number">Số câu: ${examQuestion.total}</p>
                                 <div class="exam__start-btn">
                                     <form method="post" action="/exam_list">
                                         <input type="hidden" name="action" value="examLoadQuestions">
-                                        <input type="hidden" name="examId" value="${exam.examId}">
-                                        <button type="submit" class="btn btn-outline-primary">Primary</button>
+                                        <input type="hidden" name="examId" value="${examQuestion.exam.getExamId()}">
+                                        <button type="submit" class="btn btn-outline-primary">Xem đề thi</button>
                                     </form>
                                 </div>
                             </div>

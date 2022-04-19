@@ -1,9 +1,6 @@
 package repository;
 
-import model.Account;
-import model.Exam;
-import model.Question;
-import model.Subject;
+import model.*;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,9 +15,9 @@ public class ExamViewRepository {
     private BaseRepository baseRepository = new BaseRepository();
 
 
-    public List<Exam> examList(int sjId) {
-        List<Exam> listExam = new ArrayList<>();
-        Exam exam = new Exam();
+    public List<ExamQuestion> examList(int sjId) {
+        List<ExamQuestion> listExam = new ArrayList<>();
+        ExamQuestion exam = new ExamQuestion();
         try {
             String myQuery = "SELECT *  FROM `exam` join `subject` on `exam`.subject_id = `subject`.subject_id  where `subject`.subject_id = ?";
 
@@ -28,11 +25,19 @@ public class ExamViewRepository {
             preparedStatement.setInt(1,sjId);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                exam = new Exam (rs.getInt("exam_id")
-                                ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
-                                ,rs.getString("allowed_time")
-                                ,rs.getString("exam_name"));
-                listExam.add(exam);
+
+                String queryTotal = "select count(exam.exam_id) as total from `exam` join exam_question on exam.exam_id = exam_question.exam_id where exam.exam_id = ?";
+
+                PreparedStatement preparedStatementTotal = this.baseRepository.getConnection().prepareStatement(queryTotal);
+                preparedStatementTotal.setInt(1,rs.getInt("exam_id"));
+                ResultSet rsTotal = preparedStatementTotal.executeQuery();
+                while (rsTotal.next()) {
+                    exam = new ExamQuestion (new Exam( rs.getInt("exam_id")
+                            ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
+                            ,rs.getString("allowed_time")
+                            ,rs.getString("exam_name")), rsTotal.getInt("total"));
+                    listExam.add(exam);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,17 +45,46 @@ public class ExamViewRepository {
         return listExam;
     }
 
-    public Exam getExamId(int id) {
+    public ExamQuestion getExamQuestionId(int id) {
 
-        Exam exam = new Exam();
+        ExamQuestion examQusetion = new ExamQuestion();
+        int total = 0;
         try {
             String myQuery = "SELECT *  FROM `exam` join `subject` on `exam`.subject_id = `subject`.subject_id  where exam_id = ?";
+            String queryTotal = "select count(exam.exam_id) as total from `exam` join exam_question on exam.exam_id = exam_question.exam_id where exam.exam_id = ?";
+            PreparedStatement preparedStatementTotal = this.baseRepository.getConnection().prepareStatement(queryTotal);
+            preparedStatementTotal.setInt(1,id);
+            ResultSet rsTotal = preparedStatementTotal.executeQuery();
+            while (rsTotal.next()) {
+                total =  rsTotal.getInt("total");
+            }
 
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
             preparedStatement.setInt(1,id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                exam = new Exam (rs.getInt("exam_id")
+                examQusetion = new ExamQuestion (new Exam( rs.getInt("exam_id")
+                        ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
+                        ,rs.getString("allowed_time")
+                        ,rs.getString("exam_name")), total);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return examQusetion;
+    }
+
+
+    public Exam getExamId(int id) {
+
+        Exam exam = new Exam();
+        try {
+            String myQuery = "SELECT *  FROM `exam` join `subject` on `exam`.subject_id = `subject`.subject_id  where exam_id = ?";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setInt(1,id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                exam = new Exam( rs.getInt("exam_id")
                         ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
                         ,rs.getString("allowed_time")
                         ,rs.getString("exam_name"));

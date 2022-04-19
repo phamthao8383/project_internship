@@ -9,7 +9,6 @@ public class BaseRepository {
     private String username = "root";
     // Thêm mật khẩu root mysql vào dưới
     private String password = "123456789";
-
     private Connection connection;
 
     public BaseRepository() {

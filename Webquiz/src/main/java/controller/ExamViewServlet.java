@@ -1,5 +1,6 @@
 package controller;
 
+import model.ExamQuestion;
 import service.ExamViewService;
 import service.impl.ExamViewServiceImpl;
 import util.HandleString;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ExamViewServlet extends HttpServlet {
     ExamViewService examViewService = new ExamViewServiceImpl();
     private HandleString handleString = new HandleString();
+    private UserServlet userServlet = new UserServlet();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -57,6 +59,10 @@ public class ExamViewServlet extends HttpServlet {
 
         int id_sj = Integer.parseInt(request.getParameter("sj_id"));
         request.setAttribute("listExam", examViewService.examList(id_sj));
+        for (ExamQuestion e:   examViewService.examList(id_sj)
+             ) {
+            System.out.println(e);
+        }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/DanhSachDe.jsp");
         dispatcher.forward(request,response);
     }
@@ -67,7 +73,7 @@ public class ExamViewServlet extends HttpServlet {
 
         int examId = Integer.parseInt(request.getParameter("examId"));
         request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
-        request.setAttribute("exam",examViewService.getExamId(examId) );
+        request.setAttribute("exam",examViewService.getExamQuestionId(examId));
         request.setAttribute("examId",examId);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/exam-question.jsp");
@@ -78,12 +84,20 @@ public class ExamViewServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        int examId = Integer.parseInt(request.getParameter("examId"));
-        request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
-        request.setAttribute("exam",examViewService.getExamId(examId) );
-        request.setAttribute("examId",examId );
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/start_exam.jsp");
-        dispatcher.forward(request,response);
+        String examIds = request.getParameter("examId");
+        String userId = request.getParameter("userId");
+        if (userId == null) {
+            userServlet.goLogin(request,response);
+        } else {
+            int examId = Integer.parseInt(examIds);
+            request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+            request.setAttribute("exam",examViewService.getExamId(examId));
+            request.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
+            request.setAttribute("examId",examId );
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/start_exam.jsp");
+            dispatcher.forward(request,response);
+        }
+
     }
 
     private void examSummit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -105,17 +119,18 @@ public class ExamViewServlet extends HttpServlet {
                 diem = diem +10;
             }
             questionMyCheck.add(question);
-            System.out.println("Câu " + i + ":");
-            System.out.println("Đáp án lựa chọn: " + question);
-            System.out.println("Đáp án đúng: " + answer);
-            System.out.println("Điểm hiện tại: " + diem);
-            System.out.println("--------------------------");
+//            System.out.println("Câu " + i + ":");
+//            System.out.println("Đ
+//            áp án lựa chọn: " + question);
+//            System.out.println("Đáp án đúng: " + answer);
+//            System.out.println("Điểm hiện tại: " + diem);
+//            System.out.println("--------------------------");
             i++;
         }
         System.out.println("Tổng điểm: " + diem);
         examViewService.addHistoryExam(examId,userId,diem);
         examViewService.updateAccumulatePoint(userId);
-        questionMyCheck.forEach(n -> System.out.println(n));
+//        questionMyCheck.forEach(n -> System.out.println(n));
         request.setAttribute("questionMyCheck",questionMyCheck );
         request.setAttribute("point",diem );
         request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
