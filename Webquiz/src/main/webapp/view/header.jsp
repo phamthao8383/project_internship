@@ -16,7 +16,7 @@
     </div>
     <ul class="navbar__item-list">
         <li class="navbar__item-sectors">
-            <a href="/index.jsp">
+            <a href="/">
                 <i class="fa-solid fa-house"></i>
                 Trang chủ
             </a>

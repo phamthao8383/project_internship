@@ -37,7 +37,7 @@ a:hover {
 
 .banner {
     background-image: url("/static/img/banner1.png");
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     width: 100%;
     background-size: auto;
     height: 300px;

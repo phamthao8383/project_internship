@@ -36,11 +36,11 @@
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             ONLINE
-                            <span class="badge badge-primary badge-pill">Slack</span>
+                            <span class="badge badge-primary badge-pill">Skype</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             HOTLINE
-                            <span class="badge badge-primary badge-pill">112221122</span>
+                            <span class="badge badge-primary badge-pill">0123456789</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             MESSENGER
@@ -207,5 +207,6 @@
     </div>
 </div>
 <jsp:include page="/view/footer.jsp"/>
+<jsp:include page="/view/messenger.jsp"/>
 </body>
 </html>
