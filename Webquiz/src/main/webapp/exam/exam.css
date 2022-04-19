@@ -264,7 +264,26 @@ input {
 .custom-control-label {
     margin-bottom: 0;
 }
+.checked--true {
+    background-color: #93f9ae75;
+    border: 2px solid #93f9ae;
+    border-radius: 4px;
+}
 
+.checked--false {
+    background-color: #ff9292ad;
+    border: 2px solid #ff9292;
+    border-radius: 4px;
+}
+.question_answer {
+    margin: 4px 0;
+    padding: 8px 16px;
+}
+
+.question_answer > i {
+    color: #1c7430;
+    font-size: 18px;
+}
 .countdown{
     border: solid 1px #ccc;
     border-radius: 8px;

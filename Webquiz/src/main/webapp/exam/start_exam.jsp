@@ -81,7 +81,7 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}D" value="${question.answer2}">
+                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}D" value="${question.answer4}">
                                                     <label class="form-check-label" for="question${loop.index + 1}">
                                                         <p>D. ${question.answer4}</p>
                                                     </label>

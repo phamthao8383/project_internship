@@ -2,10 +2,7 @@ package repository;
 
 import model.Member;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +12,14 @@ public class MemberRepository {
 
     public List<Member> getMemberList(){
         List<Member> members = new ArrayList<>();
+        String sql = "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
+                "from accumulated_point ap\n" +
+                "right join `user` u on u.user_id = ap.user_id\n" +
+                "inner join user_role ur on ur.username = u.username\n" +
+                "order by u.user_id;";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
-                            "from accumulated_point ap\n" +
-                            "right join `user` u on u.user_id = ap.user_id\n" +
-                            "inner join user_role ur on ur.username = u.username;\n"
-            );
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 members.add(new Member(resultSet.getInt("user_id"),
@@ -40,6 +37,25 @@ public class MemberRepository {
         }
 
         return members;
+    }
+
+    public void updateMember(Member memberSearch, Member memberUpdate){
+        String sql = "CALL UpdateMember(?,?,?,?,?,?,?,?)";
+
+        try {
+            CallableStatement callableStatement = connection.prepareCall(sql);
+            callableStatement.setInt(1, memberSearch.getUserId());
+            callableStatement.setString(2, memberUpdate.getName());
+            callableStatement.setString(3, memberUpdate.getEmail());
+            callableStatement.setString(4, memberUpdate.getPhone());
+            callableStatement.setString(5, memberUpdate.getAddress());
+            callableStatement.setString(6, memberSearch.getAccount());
+            callableStatement.setDouble(7, memberUpdate.getPoint());
+            callableStatement.setInt(8, memberUpdate.getRole());
+            callableStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Member> getMaxPoint(){
