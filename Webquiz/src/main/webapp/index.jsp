@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,26 +19,12 @@
                 </div>
                 <div class="div_group">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Nhạc Phạm</span>
-                            <span class="badge badge-primary badge-pill">14</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Hồng Sơn</span>
-                            <span class="badge badge-primary badge-pill">2</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Hiếu Cao</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Mỹ Vân</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>Thu Thảo</span>
-                            <span class="badge badge-primary badge-pill">1</span>
-                        </li>
+                        <c:forEach var="member" items="${memberList}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span><c:out value="${member.name}"></c:out></span>
+                                <span class="badge badge-primary badge-pill">${member.point}</span>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -152,18 +139,31 @@
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <c:if test="${sessionScope.account != null}">
-                                    <span> Chào bạn ${sessionScope.account.username}</span>
+                                    <span> Chào bạn ${sessionScope.user.name}</span>
                                 </c:if>
                                 <c:if test="${sessionScope.account == null}">
                                     <span>Chào khách</span>
                                 </c:if>
                             </li>
+                            <c:if test="${sessionScope.account != null}">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <a href="/user/TrangCaNhan.jsp"><span>Xem thông tin cá nhân</span></a>
+                                <form action="/userServlet" method="post">
+                                    <input type="hidden" name="action" value="infoUser">
+                                    <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
+
+                                        <button class="btn_info" type="submit">
+                                            <i class="fa-solid fa-gear"></i>
+                                            <span>Cài đặt thông tin</span>
+                                        </button>
+
+
+                                </form>
+
                             </li>
+                            </c:if>
                             <li class="btn_logout">
                                 <c:if test="${sessionScope.account != null}">
-                                    <button type="submit" class="btn-warning">
+                                    <button type="submit" class="btn-logout">
                                         <a href="/userServlet?action=logout">Đăng xuất</a>
                                     </button>
                                 </c:if>
@@ -173,18 +173,18 @@
                 </div>
                 <div class="user_log">
                     <div class="div_thongke">
-                        <a class="div_cus-link" href="" style="text-decoration: none; color: black">
+                        <div class="div_cus-link"  style="text-decoration: none; color: black">
                             <i class="fa-solid fa-user-group"></i>
                             <p>Thống kê thành viên</p>
-                        </a>
+                        </div>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Tổng Thành Viên
-                                <span class="badge badge-primary badge-pill"> 5</span>
+                                <span class="badge badge-primary badge-pill">${memberList2.size()}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Mới Nhất
-                                <span class="badge badge-primary badge-pill">Long</span>
+                                <span class="badge badge-primary badge-pill">${newMember.name}</span>
                             </li>
                         </ul>
                     </div>

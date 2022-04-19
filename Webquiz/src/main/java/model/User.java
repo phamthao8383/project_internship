@@ -19,10 +19,25 @@ public class User {
         this.account = account;
     }
 
+    public User(int userId, String name, String email, String phone, String address) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public User() {
     }
 
-
+    public User(String name, String email, String phone, String address, String image, String account) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.image = image;
+        this.account = account;
+    }
 
     @Override
     public String toString() {

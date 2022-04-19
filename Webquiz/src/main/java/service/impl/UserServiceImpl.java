@@ -1,5 +1,6 @@
 package service.impl;
 
+import model.ExamHistory;
 import model.User;
 import repository.UserRepository;
 import service.UserService;
@@ -14,13 +15,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer getIdMax() {
-        return userRepository.getIdMax();
+    public List<ExamHistory> getListExamHistory(int id) {
+        return userRepository.getListExamHistory(id);
     }
 
     @Override
     public User getUserId(int id) {
         return userRepository.getUserId(id);
+    }
+
+    @Override
+    public User getUserAccount(String accountName) {
+        return userRepository.getUserAccount(accountName);
     }
 
     @Override

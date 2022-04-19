@@ -15,4 +15,14 @@ public class AccountServiceImpl implements AccountService {
     public int CheckAccount(String userAccount) {
         return accountRepository.CheckAccount(userAccount);
     }
+
+    @Override
+    public void AddAccount(Account account) {
+        accountRepository.AddAccount(account);
+    }
+
+    @Override
+    public void editPassword(String ac, String ps) {
+        accountRepository.editPassword(ac,ps);
+    }
 }

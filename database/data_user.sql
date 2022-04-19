@@ -166,9 +166,23 @@ insert into assignment (user_id, exam_id, starting_time, completion_time, `point
             ,(2, 1, '2022-02-04 12:00:00', '2022-02-04 13:00:00', 90)
             ,(2, 2, '2022-02-03 12:00:00', '2022-02-03 13:00:00', 80);
             
+            
+            insert into assignment (user_id, exam_id, starting_time, completion_time, `point`) 
+	value 	 (3, 1, '2022-02-02 12:00:00', '2022-02-02 13:00:00', 100)
+			,(3, 2, '2022-02-03 12:00:00', '2022-02-03 13:00:00', 100)
+            ,(3, 1, '2022-02-04 12:00:00', '2022-02-04 13:00:00', 100)
+            ,(3, 2, '2022-02-03 12:00:00', '2022-02-03 13:00:00', 100);
+            
 -- insert accumulated_point
 insert into accumulated_point (user_id, accumulated_point) 
-value ( 1 , 155), (2,170);
+value ( 1 , 155), (2,170)
+		,(3,	3,	100),
+		(4,	5,	125),
+		(5,	7,	200),
+		(6,	9,	160),
+		(7,	11,	150),
+		(8,	13,	180),
+		(9,	15,	130);
 
 
 
