@@ -37,6 +37,7 @@
                             <form action="/exam_list" name="exam-form" id="exam-form" method="post">
                                 <input type="hidden" name="action" value="examSummit">
                                 <input type="hidden" name="examId" value="${examId}">
+                                <input type="hidden" name="timeStart" value="${timeStart}">
                                 <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                             <div class="d9Box part-item detail">
                                 <h1 class="title22Bold ">${exam.examName}</h1>

@@ -14,4 +14,7 @@ public interface UserService {
     public void updateUserId(User user);
     public void updateImageUserId(int id , String image);
     public void deleteUser (int id);
+
+    public List<ExamHistory> getListExamHistoryPage(int id, int pageIndex, int pageSize);
+    public int countHistory(int id);
 }

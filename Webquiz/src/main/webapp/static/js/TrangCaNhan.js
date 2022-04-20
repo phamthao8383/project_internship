@@ -6,6 +6,12 @@ function showhistory() {
 
 }
 
+// phân trang
+function activePage(id) {
+    document.getElementById("page"+id).className = "active";
+
+}
+
 //Show input ảnh
 function chooseFile(fileInput) {
     if(fileInput.files && fileInput.files[0] ) {

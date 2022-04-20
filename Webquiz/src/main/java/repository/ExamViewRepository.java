@@ -146,15 +146,15 @@ public class ExamViewRepository {
     }
 
 
-    public void addHistoryExam(int examId, int userId, int point) {
+    public void addHistoryExam(int examId, int userId, int point, String timeStart , String timeEnd) {
         try {
             String myQuery = "insert into `assignment` (user_id , exam_id , point, starting_time,completion_time ) value (?,?,?,?,?)";
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, examId);
             preparedStatement.setDouble(3, point);
-            preparedStatement.setString(4, "2022-02-02 12:00:00");
-            preparedStatement.setString(5, "2022-02-02 13:00:00");
+            preparedStatement.setString(4, timeStart);
+            preparedStatement.setString(5, timeEnd);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

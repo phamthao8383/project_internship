@@ -45,7 +45,8 @@
                                 <p class="exam__question-number">Số câu: ${examQuestion.total}</p>
                                 <div class="exam__start-btn">
                                     <form method="post" action="/exam_list">
-                                        <input type="hidden" name="action" value="examLoadQuestions">
+                                        <input type="hidden" name="action" value="goExam">
+                                        <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                                         <input type="hidden" name="examId" value="${examQuestion.exam.getExamId()}">
                                         <button type="submit" class="btn btn-outline-primary">Xem đề thi</button>
                                     </form>

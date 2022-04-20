@@ -31,8 +31,8 @@ public class ExamViewServiceImpl implements ExamViewService {
     }
 
     @Override
-    public void addHistoryExam(int examId, int userId, int point) {
-        examRepository.addHistoryExam(examId,userId,point);
+    public void addHistoryExam(int examId, int userId, int point, String timeStart , String timeEnd) {
+        examRepository.addHistoryExam(examId,userId,point, timeStart, timeEnd);
     }
 
     @Override
