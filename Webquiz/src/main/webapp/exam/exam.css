@@ -156,7 +156,7 @@ li {
 ol, ul {
     list-style: none;
 }
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+ h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite
     font: inherit;
     vertical-align: baseline;
 }
-h4 {
+ li > h4 {
     display: block;
     margin-block-start: 1.33em;
     margin-block-end: 1.33em;
@@ -263,4 +263,44 @@ input {
 }
 .custom-control-label {
     margin-bottom: 0;
+}
+.checked--true {
+    background-color: #93f9ae75;
+    border: 2px solid #93f9ae;
+    border-radius: 4px;
+}
+
+.checked--false {
+    background-color: #ff9292ad;
+    border: 2px solid #ff9292;
+    border-radius: 4px;
+}
+.question_answer {
+    margin: 4px 0;
+    padding: 8px 16px;
+}
+
+.question_answer > i {
+    color: #1c7430;
+    font-size: 18px;
+}
+.countdown{
+    border: solid 1px #ccc;
+    border-radius: 8px;
+    padding: 7px;
+    justify-content: center;
+    position: sticky;
+    top: 60px;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+.countdown__item{
+    display: flex;
+    justify-content: center;
+}
+.countdown__time{
+    font-size: 40px;
 }

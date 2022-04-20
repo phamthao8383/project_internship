@@ -27,7 +27,22 @@ public class User {
         this.address = address;
     }
 
+    public User(int userId, String account) {
+        this.userId = userId;
+        this.account = account;
+    }
+
+    public User(String name, String email, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public User() {
+    }
+    public User(int userId){
+        this.userId = userId;
     }
 
     public User(String name, String email, String phone, String address, String image, String account) {

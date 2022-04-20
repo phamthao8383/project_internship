@@ -22,23 +22,11 @@
             <h3 class="form__info-title">Thông tin của ${user.name} </h3>
         </div>
         <div class="form__info-body">
-
-
-
-            <form method="post" action="#" enctype="multipart/from-data">
-
-                <div class="form__info-image">
-
-                    <img src="${user.image}" class="form__info-img">
-                    <input class="input_file" name="image" id="image" type="file">
-                    <button type="submit" class="btn btn-primary"> helo</button>
-                </div>
-
-
-            </form>
-
-
-            <ul class="form__info-list">
+            <div class="form__info-image">
+                <img src="/uploads/${user.image}" class="form__info-img">
+                <button data-toggle="modal" data-target="#editImage" class="form__info-btn-image">Đổi ảnh</button>
+            </div>
+            <ul class="form__info-list" style="padding-left:20px">
                 <li class="form__info-item">
                     <span class="form__info-name">Tên đăng nhập:</span>
                     <p class="form__info-value">${user.account}</p>
@@ -86,9 +74,9 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${history}" var="exam">
+            <c:forEach items="${history}" var="exam" varStatus="loop">
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">${loop.index +1}</th>
                     <td>${exam.getExam().getSubject().subject_name}</td>
                     <td>${exam.getExam().examName}</td>
                     <td>${exam.point}</td>
@@ -118,6 +106,35 @@
 
 </div>
 
+<!-- Modal đổi avatar -->
+<div class="modal fade" id="editImage" tabindex="-1" role="dialog" aria-labelledby="modalEditImage"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="form__info-head" id="modalEditImage">
+                <h3 class="form__info-title">Đổi ảnh đại diện</h3>
+            </div>
+            <form id="formImage" action="/userServlet" method="post" enctype="multipart/form-data" >
+                <input type="hidden" name="action" value="updateImage">
+                <input type="hidden" name="idUser" value="${user.userId}">
+                <input type="hidden" name="account" value="${user.account}">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <img src="/uploads/${user.image}" width="200" height="200" id="imageInput">
+                    </div>
+                    <div class="form-group row">
+                            <input type="file" name="inputFile" id="inputFile" accept="image/gif, image/jpeg, image/png" onchange="chooseFile(this)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Edit  -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="modalEditInfor"
      aria-hidden="true">
@@ -143,15 +160,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-
-
-                    `
-
-
-
-
                     <label for="inputPhone" class="col-sm-2 col-form-label">SĐT</label>
-
                     <div class="col-sm-10">
                         <input type="phone" name="phone" value="${user.phone}" class="form-control" id="inputPhone"
                                placeholder="Số điện thoại của bạn">
@@ -222,111 +231,6 @@
     </div>
 </div>
 <jsp:include page="/view/footer.jsp"/>
-<script>
-    function showhistory() {
-        document.getElementById("history").classList.toggle("show");
-
-    }
-</script>
-
-<%--Validate ChangePassword--%>
-<script>
-    function ValidateChangePass() {
-
-
-        const inputNewPassword = document.getElementById('inputNewPassword').value;
-        const errPass = document.getElementById('errPass');
-
-        if ( inputNewPassword == '' || inputNewPassword== null) {
-        errPass.innerHTML = "Mật khẩu vui lòng không để trống!";
-    } else {
-        errPass.innerHTML = "";
-    }
-
-        const inputConfirmPassword = document.getElementById('inputConfirmPassword').value;
-        const errConPass = document.getElementById('errConPass');
-
-        if (inputConfirmPassword == '' || inputConfirmPassword == null) {
-        errConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
-    } else if (inputConfirmPassword != inputNewPassword) {
-        alert("Xác nhận mật khẩu không trùng khớp!");
-    } else {
-        errConPass.innerHTML = "";
-    }
-
-
-    if (inputConfirmPassword && inputNewPassword && inputConfirmPassword==inputNewPassword ) {
-
-        alert("Đổi mật khẩu thành công!");
-        document.getElementById("form-editpass").submit();
-
-    } else {
-
-    }
-
-    return false;
-
-    }
-
-</script>
-
-<%--Validate Edit--%>
-<script>
-    function ValidateEdit(){
-        var name = document.getElementById('inputName').value;
-        var errName = document.getElementById('errorName');
-        var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
-
-
-
-        var email = document.getElementById('inputEmail').value;
-        var errEmail = document.getElementById('erorEmail');
-        var reGexEmail = /^([a-z]{2}).+.[a-zA-Z0-9_.]{1,20}.+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
-
-        var phone = document.getElementById('inputPhone').value;
-        var erorPhone = document.getElementById('erorPhone');
-        var regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-
-
-        if(name==''||name==null){
-            errName.innerHTML="̣Tên đăng nhập không được để trống";
-        }
-        else if(!regexName.test(name)){
-            errName.innerHTML="Tên đăng nhập không hợp lệ";
-            return false;
-        }else{
-            errName.innerHTML="";
-        }
-
-        if(email==''||email==null){
-            errEmail.innerHTML="Email không được để trống";
-        }else if(!reGexEmail.test(email)){
-            errEmail.innerHTML="Email không hợp lệ";
-            return  false;
-        }else {
-            errEmail.innerHTML='';
-        }
-        if (phone == '' || phone == null) {
-            erorPhone.innerHTML = "Số điện thoại không được để trống!";
-        } else if (!regexPhone.test(phone)) {
-            erorPhone.innerHTML = "SĐT không hợp lệ!";
-            return false;
-        } else {
-            erorPhone.innerHTML = '';
-        }
-        if (name && phone && email ) {
-            document.getElementById("form-chinhsua").submit();
-        } else {
-
-        }
-
-        return false;
-
-
-
-    }
-</script>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -336,6 +240,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/static/js/TrangCaNhan.js"></script>
+
 </body>
 
 </html>

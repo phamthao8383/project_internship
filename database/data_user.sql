@@ -175,14 +175,15 @@ insert into assignment (user_id, exam_id, starting_time, completion_time, `point
             
 -- insert accumulated_point
 insert into accumulated_point (user_id, accumulated_point) 
-value ( 1 , 155), (2,170)
-		,(3,	3,	100),
-		(4,	5,	125),
-		(5,	7,	200),
-		(6,	9,	160),
-		(7,	11,	150),
-		(8,	13,	180),
-		(9,	15,	130);
+value ( 1 , 155), 
+		(2,170),
+		(3, 100),
+		(5,	125),
+		(7,	200),
+		(9,	160),
+		(11, 150),
+		(13, 180),
+		(15, 130);
 
 
 
