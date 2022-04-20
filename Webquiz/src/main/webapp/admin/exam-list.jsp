@@ -7,6 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:if test="${sessionScope.account.idRole != 1}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account.idRole == 1}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +43,6 @@
                             <th scope="col">Mã đề thi</th>
                             <th scope="col">Tên đề thi</th>
                             <th scope="col">Bộ môn</th>
-                            <th scope="col">Khối</th>
                             <th scope="col">Chọn</th>
                             <th scope="col">Xem </th>
                         </tr>
@@ -47,7 +53,6 @@
                             <td>001</td>
                             <td>Đề số 1</td>
                             <td>Vật lý</td>
-                            <td>A</td>
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -64,7 +69,6 @@
                             <td>002</td>
                             <td>Đề số 5</td>
                             <td>Hóa học</td>
-                            <td>B</td>
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
@@ -81,7 +85,6 @@
                             <td>003</td>
                             <td>Đề số 2</td>
                             <td>Tiếng Anh</td>
-                            <td>D</td>
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="">
@@ -193,3 +196,4 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </html>
+</c:if>

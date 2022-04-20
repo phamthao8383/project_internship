@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nhacp
@@ -7,6 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<c:if test="${sessionScope.account.idRole != 1}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account.idRole == 1}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,23 +22,7 @@
     <link rel="stylesheet" href="/static/css/exam-view.css">
 </head>
 <body>
-<header id="header">
-    <div class="header__logo">
-        <img src="/static/img/codegym-logo.png" class="header__imglogo" alt="logo">
-        <p class="header__logoname">BẢNG ĐIỀU KHIỂN CÂU ĐỐ THÔNG MINH</p>
-    </div>
-    <div class="header__admin">
-        <a href="#" class="header__adminlink dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <p class="header__nameadmin">QUẢN TRỊ VIÊN</p>
-            <img src="/static/img/admin_profile.svg" alt="admin-profile" class="header__imgadmin" data-bs-toggle="dropdown" aria-expanded="false">
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Hồ sơ</a></li>
-            <li><a class="dropdown-item" href="#">Cài đặt</a></li>
-            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-        </ul>
-    </div>
-</header>
+<jsp:include page="/admin/view/header.jsp"/>
 <div class="main">
     <div class="container-fluid">
         <div class="row">
@@ -254,3 +245,4 @@
     })
 </script>
 </html>
+</c:if>

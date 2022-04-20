@@ -111,7 +111,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/DangNhapDangKi.jsp");
         dispatcher.forward(request,response);
@@ -181,13 +181,13 @@ public class UserServlet extends HttpServlet {
         String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\Folder_DuAn\\project_intership\\Webquiz\\src\\main\\webapp\\uploads";
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
-        if(!Files.exists(Paths.get(realPath2))) {
-            Files.createDirectory(Paths.get(realPath2));
+        if(!Files.exists(Paths.get(realPath))) {
+            Files.createDirectory(Paths.get(realPath));
         }
         System.out.println(realPath);
 //        cái này xong là lưu file được rồi.
 //        part.write(realPath+"/"+account + filename);
-        part.write(realPath2+"/"+account + filename);
+        part.write(realPath+"/"+account + filename);
 //        chừ lưu filename vào database nữa là ok
         userService.updateImageUserId(idUser, account + filename);
         goGetInfo(request,response);

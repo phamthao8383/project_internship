@@ -19,7 +19,6 @@ import java.util.List;
 public class ExamViewServlet extends HttpServlet {
     ExamViewService examViewService = new ExamViewServiceImpl();
     private HandleString handleString = new HandleString();
-    private UserServlet userServlet = new UserServlet();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
@@ -86,8 +85,9 @@ public class ExamViewServlet extends HttpServlet {
 
         String examIds = request.getParameter("examId");
         String userId = request.getParameter("userId");
-        if (userId == null) {
-            userServlet.goLogin(request,response);
+        if (userId == "") {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/DangNhapDangKi.jsp");
+            dispatcher.forward(request,response);
         } else {
             int examId = Integer.parseInt(examIds);
             request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
@@ -110,7 +110,7 @@ public class ExamViewServlet extends HttpServlet {
         int diem = 0;
         int i = 1;
         List questionMyCheck = new ArrayList();
-        while (request.getParameter("answerQuestion"+i) != null) {
+        while (request.getParameter("question"+i) != null) {
             String answer = request.getParameter("answerQuestion"+i);
             answer = handleString.handleFont(answer);
             String question = request.getParameter("question"+i);
@@ -119,12 +119,11 @@ public class ExamViewServlet extends HttpServlet {
                 diem = diem +10;
             }
             questionMyCheck.add(question);
-//            System.out.println("Câu " + i + ":");
-//            System.out.println("Đ
-//            áp án lựa chọn: " + question);
-//            System.out.println("Đáp án đúng: " + answer);
-//            System.out.println("Điểm hiện tại: " + diem);
-//            System.out.println("--------------------------");
+            System.out.println("Câu " + i + ":");
+            System.out.println("Đáp án lựa chọn: " + question);
+            System.out.println("Đáp án đúng: " + answer);
+            System.out.println("Điểm hiện tại: " + diem);
+            System.out.println("--------------------------");
             i++;
         }
         System.out.println("Tổng điểm: " + diem);
@@ -134,8 +133,8 @@ public class ExamViewServlet extends HttpServlet {
         request.setAttribute("questionMyCheck",questionMyCheck );
         request.setAttribute("point",diem );
         request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+        request.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
         request.setAttribute("exam", examViewService.getExamId(examId));
-        request.setAttribute("tong",(i-1) *10 );
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/exam_result.jsp");
         dispatcher.forward(request,response);
     }

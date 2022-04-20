@@ -1,6 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<c:if test="${sessionScope.account != null}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account == null}">
+
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -312,4 +319,4 @@
     }
 </script>
 </html>
-
+</c:if>
