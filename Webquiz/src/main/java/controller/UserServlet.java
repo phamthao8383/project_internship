@@ -111,7 +111,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/DangNhapDangKi.jsp");
         dispatcher.forward(request,response);
@@ -143,6 +143,7 @@ public class UserServlet extends HttpServlet {
             }
 //            Thất bại thì quay ve lại trang login
             else  {
+                request.setAttribute("sai", 1);
                 goLogin(request,response);
             }
 

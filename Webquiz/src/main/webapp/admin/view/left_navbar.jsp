@@ -15,10 +15,10 @@
                 <a href="/admin/exam-view.jsp" class="list-group-item list-group-item-action">
                     <i class="fa-solid fa-file-lines"></i>
                     Quản lý đề thi</a>
-                <a href="/questions" class="list-group-item list-group-item-action">
+                <a href="/admin/questions" class="list-group-item list-group-item-action">
                     <i class="fa-solid fa-file-circle-question"></i>
                     Ngân hàng câu hỏi</a>
-                <a href="/admin/exam-list.jsp" class="list-group-item list-group-item-action">
+                <a href="/admin/exam-list" class="list-group-item list-group-item-action">
                     <i class="fa-solid fa-layer-group"></i>
                     Danh sách đề thi</a>
             </div>

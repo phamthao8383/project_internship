@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,6 +14,7 @@
    <link rel="stylesheet" href="../static/css/DangNhapDangKi.css">
 </head>
 <body>
+
 <div class="container">
     <input type="checkbox" id="flip">
     <div class="cover">
@@ -46,6 +48,11 @@
                             <i class="fas fa-lock"></i>
                             <input type="password" name="password" placeholder="Nhập mật khẩu..." required>
                         </div>
+
+                        <c:if test="${sai == 1}">
+                            <p style="color: red">Bạn nhập sai tài khoản mật khẩu!</p>
+                        </c:if>
+
                         <div class="text"><a href="#" data-toggle="modal" data-target="#editPassword">Quên mật khẩu ?</a></div>
                         <div class="button input-box">
                             <input type="submit" value="Đăng nhập">
@@ -105,6 +112,7 @@
         </div>
     </div>
 </div>
+
 <!-- Modal quên mật khẩu -->
 <div class="modal fade" id="editPassword" tabindex="-1" role="dialog" aria-labelledby="modalEditPassword" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

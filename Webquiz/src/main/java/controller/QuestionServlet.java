@@ -6,6 +6,7 @@ import service.QuestionService;
 import service.SubjectService;
 import service.impl.QuestionServiceImpl;
 import service.impl.SubjectServiceImpl;
+import util.HandleString;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,10 +14,12 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "QuestionServlet", urlPatterns = "/questions")
+@WebServlet(name = "QuestionServlet", urlPatterns = "/admin/questions")
 public class QuestionServlet extends HttpServlet {
     private QuestionService questionService = new QuestionServiceImpl();
     private SubjectService subjectService = new SubjectServiceImpl();
+    private HandleString handleString = new HandleString();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,17 +30,17 @@ public class QuestionServlet extends HttpServlet {
         switch (action) {
             case "create": {
                 showFormCreate(request, response);
-                response.sendRedirect("question/create.jsp");
+//                response.sendRedirect("admin/question-bank.jsp");
                 break;
             }
             case "edit": {
                 editQuestion(request, response);
                 break;
             }
-            case "delete": {
-                deleteQuestion(request, response);
-                break;
-            }
+//            case "delete": {
+//                deleteQuestion(request, response);
+//                break;
+//            }
             case "search": {
                 //   searchQuestion(request, response);
             }
@@ -58,25 +61,24 @@ public class QuestionServlet extends HttpServlet {
 
 
     private void deleteQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int question_id = Integer.parseInt(request.getParameter("id"));
+        int question_id = Integer.parseInt(request.getParameter("idQues"));
+        System.out.println(question_id);
         questionService.deleteQuestion(question_id);
         questionList(request, response);
-
+//        response.sendRedirect("/questions");
     }
-
     private void editQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int question_id = Integer.parseInt(request.getParameter("id"));
         Question question = questionService.selectQuestion(question_id);
         List<Subject> listSubject = subjectService.selectAllSubject();
         request.setAttribute("question", question);
         request.setAttribute("listSubject", listSubject);
-        request.getRequestDispatcher("question/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/question-bank.jsp").forward(request, response);
     }
-
     private void showFormCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Subject> subjects = subjectService.selectAllSubject();
         request.setAttribute("listSubject", subjects);
-        request.getRequestDispatcher("question/create.jsp").forward(request, response);
+        request.getRequestDispatcher("admin/question-bank.jsp").forward(request, response);
     }
 
     private void questionList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -84,10 +86,10 @@ public class QuestionServlet extends HttpServlet {
         request.setAttribute("listQuestion", listQuestion);
         List<Subject> listSubject = subjectService.selectAllSubject();
         request.setAttribute("listSubject", listSubject);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin/question-bank.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/question-bank.jsp");
         dispatcher.forward(request, response);
-    }
 
+    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -104,21 +106,25 @@ public class QuestionServlet extends HttpServlet {
                 break;
             }
             case "delete": {
-                //  deleteQuestion(request, response);
+                  deleteQuestion(request, response);
                 break;
             }
         }
-
     }
-
     private void updateQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int question_id = Integer.parseInt(request.getParameter("question_id"));
         String description = request.getParameter("description");
+        description= handleString.handleFont(description);
         String answer1 = request.getParameter("answer1");
+        answer1= handleString.handleFont(answer1);
         String answer2 = request.getParameter("answer2");
+        answer2= handleString.handleFont(answer2);
         String answer3 = request.getParameter("answer3");
+        answer3= handleString.handleFont(answer3);
         String answer4 = request.getParameter("answer4");
+        answer4= handleString.handleFont(answer4);
         String correct_answer = request.getParameter("correct_answer");
+        correct_answer= handleString.handleFont(correct_answer);
         int subject_id = Integer.parseInt(request.getParameter("subject_id"));
 //        String subject_name = request.getParameter("subject_name");
 
@@ -130,15 +136,22 @@ public class QuestionServlet extends HttpServlet {
     private void createQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //  int question_id= Integer.parseInt(request.getParameter("question_id"));
         String description = request.getParameter("description");
+        description= handleString.handleFont(description);
         String answer1 = request.getParameter("answer1");
+        answer1= handleString.handleFont(answer1);
         String answer2 = request.getParameter("answer2");
+        answer2= handleString.handleFont(answer2);
         String answer3 = request.getParameter("answer3");
+        answer3= handleString.handleFont(answer3);
         String answer4 = request.getParameter("answer4");
+        answer4= handleString.handleFont(answer4);
         String correct_answer = request.getParameter("correct_answer");
+        correct_answer= handleString.handleFont(correct_answer);
         int subject_id = Integer.parseInt(request.getParameter("subject_id"));
         Question question = new Question(description, answer1, answer2, answer3, answer4, correct_answer, new Subject(subject_id));
         questionService.insertQuestion(question);
-        response.sendRedirect("/questions");
+//        response.sendRedirect("/questions");
+        questionList(request, response);
 
     }
 }

@@ -45,10 +45,31 @@
                             <th></th>
                             <th></th>
                         </tr>
-                        <c:forEach var="question" items="${listQuestion}">
+                        <c:forEach var="question" items="${listQuestion}" varStatus="loop">
+                            <input type="hidden" name="indexQuestion${loop.index}" value="${loop.index}">
                             <tr>
+                                <td class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <form action="/admin/questions" method="post" class="modal-content">
+                                            <input type="hidden" name="idQues" value="${question.question_id}">
+                                            <input type="hidden" name="action" value="delete">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Xóa câu hỏi</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                <button  type="submit" class="btn btn-danger">Xóa</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+
                                 <td>
-                                    <span class="limit-text"><c:out value="${question.question_id}"/></span>
+                                    <span class="limit-text"><c:out value="${loop.index + 1}"/></span>
                                 </td>
                                 <td>
                                     <span class="limit-text"><c:out value="${question.description}"/></span>
@@ -72,19 +93,114 @@
                                 </td>
                                 <td><c:out value="${question.getSubject().getSubject_name()}"/></td>
                                 <td>
-                                    <button class="btn btn-outline-warning btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#editQuestionModal">
-                                        Edit
-<%--                                        href="/questions?action=edit&id=${question.question_id}"--%>
-                                    </button>
+                                    <a class="btn btn-outline-warning btn-sm" type="button" data-bs-toggle="modal"
+                                       data-bs-target="#editQuestionModal${loop.index}">Edit</a>
                                 </td>
                                 <td>
-                                    <button  class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                                       Delete
-<%--                                        href="/questions?action=delete&id=${question.question_id}"--%>
-                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#confirmDeleteModal${loop.index}">
+                                        Delete
+                                            <%--&lt;%&ndash;                                        href="/questions?action=delete&id=${question.question_id}"&ndash;%&gt;--%>
+                                            <%--                                    </button>--%>
+                                            <%--                                    <a href="/questions?action=delete&id=${question.question_id}" class="btn btn-outline-danger btn-sm" type="button" > Xóa</a>--%>
+
                                 </td>
 
                             </tr>
+
+
+                            <!-- Edit New Question Modal -->
+                            <div class="modal fade" id="editQuestionModal${loop.index}" tabindex="-1"
+                                 aria-labelledby="editQuestionLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editQuestionLabel">Chỉnh Sửa câu hỏi</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/questions" method="POST">
+                                                <input type="hidden" name="action" value="edit">
+                                                <div class="mb-3 row">
+                                                    <div class="col-sm-9">
+                                                        <input type="hidden" class="form-control" name="question_id"
+                                                               value="${question.question_id}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Câu hỏi</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="description"
+                                                               value="${question.description}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Đáp án 1</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="answer1"
+                                                               value="${question.answer1}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Đáp án 2</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="answer2"
+                                                               value="${question.answer2}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Đáp án 3</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="answer3"
+                                                               value="${question.answer3}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Đáp án 4</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="answer4"
+                                                               value="${question.answer4}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Câu trả lời</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="correct_answer"
+                                                               value="${question.correct_answer}"/><br>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-sm-3 col-form-label">Chọn môn</label>
+                                                    <div class="col-sm-9">
+                                                        <select name="subject_id">
+                                                            <c:forEach var="subject" items="${listSubject}">
+                                                                <c:choose>
+                                                                    <c:when test="${subject.subject_id == question.getSubject().getSubject_id()}">
+                                                                        <option value="${subject.subject_id}"
+                                                                                selected> ${subject.subject_name}</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option value="${subject.subject_id}">${subject.subject_name}</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Đóng
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Sửa</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </c:forEach>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -119,141 +235,70 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
-
+                <form action="/admin/questions" method="POST">
+                    <input type="hidden" name="action" value="create">
                     <div class="mb-3 row">
-                        <label for="inputQuestion" class="col-sm-3 col-form-label">Câu hỏi</label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="inputQuestion" rows="4"></textarea>
+                            <input type="hidden" class="form-control" name="question_id"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputAnswer1" class="col-sm-3 col-form-label">Đáp án 1</label>
+                        <label class="col-sm-3 col-form-label">Câu hỏi</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputAnswer1">
+                            <input type="text" class="form-control" name="description"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputAnswer2" class="col-sm-3 col-form-label">Đáp án 2</label>
+                        <label class="col-sm-3 col-form-label">Đáp án 1</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputAnswer2">
+                            <input type="text" class="form-control" name="answer1"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputAnswer3" class="col-sm-3 col-form-label">Đáp án 3</label>
+                        <label class="col-sm-3 col-form-label">Đáp án 2</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputAnswer3">
+                            <input type="text" class="form-control" name="answer2"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputAnswer4" class="col-sm-3 col-form-label">Đáp án 4</label>
+                        <label class="col-sm-3 col-form-label">Đáp án 3</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputAnswer4">
+                            <input type="text" class="form-control" name="answer3"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputAnswer" class="col-sm-3 col-form-label">Câu trả lời</label>
+                        <label class="col-sm-3 col-form-label">Đáp án 4</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputAnswer">
+                            <input type="text" class="form-control" name="answer4"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="inputSubject" class="col-sm-3 col-form-label">Chọn môn</label>
+                        <label class="col-sm-3 col-form-label">Câu trả lời</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputSubject">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary">Thêm</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Edit New Question Modal -->
-<div class="modal fade" id="editQuestionModal" tabindex="-1" aria-labelledby="editQuestionLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editQuestionLabel">Tạo mới câu hỏi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-
-                    <div class="mb-3 row">
-                        <label for="editQuestion" class="col-sm-3 col-form-label">Câu hỏi</label>
-                        <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="editQuestion" rows="4"></textarea>
+                            <input type="text" class="form-control" name="correct_answer"/><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="editAnswer1" class="col-sm-3 col-form-label">Đáp án 1</label>
+                        <label class="col-sm-3 col-form-label">Chọn môn</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="editAnswer1">
+                            <select name="subject_id">
+                                <c:forEach var="subject" items="${listSubject}">
+                                    <option value="${subject.getSubject_id()}">${subject.getSubject_name()}</option>
+                                </c:forEach>
+                            </select>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label for="editAnswer2" class="col-sm-3 col-form-label">Đáp án 2</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="editAnswer2">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="editAnswer3" class="col-sm-3 col-form-label">Đáp án 3</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="editAnswer3">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="editAnswer4" class="col-sm-3 col-form-label">Đáp án 4</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="editAnswer4">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="editAnswer" class="col-sm-3 col-form-label">Câu trả lời</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="editAnswer">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="editSubject" class="col-sm-3 col-form-label">Chọn môn</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="editSubject">
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary">Sửa</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Xóa câu hỏi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-danger">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"

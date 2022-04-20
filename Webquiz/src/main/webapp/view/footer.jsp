@@ -137,4 +137,14 @@
             <a class="text-white" href="https://mdbootstrap.com/">Nhóm 2</a>
         </div>
     </footer>
+
+    <script>
+        var header = document.querySelector('.navbar__item-list');
+        var origOffsetY = header.offsetTop;
+        function onScroll(e) {
+            window.scrollY >= origOffsetY ? header.classList.add('sticky') :
+                header.classList.remove('sticky');
+        }
+        document.addEventListener('scroll', onScroll);
+    </script>
 </div>
