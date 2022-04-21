@@ -30,7 +30,7 @@
             <div class="col-10 content">
                 <div class="content__title">
                     <div class="content_titlepath">
-                        <a href="/admin/exam-list.jsp" class="content__pathback">Danh sách đề thi</a>
+                        <a href="/admin/exams" class="content__pathback">Danh sách đề thi</a>
                         <p class="content__examname">
                             <i class="fa-solid fa-angle-right"></i>${subjectName} - ${examName}
                         </p>
@@ -48,8 +48,8 @@
                             <tr>
                                 <th scope="col">STT</th>
                                 <th scope="col">Mã câu hỏi</th>
-                                <th scope="col">Câu hỏi</th>
-                                <th scope="col">Đáp án đúng</th>
+                                <th scope="col" style="width: 35%">Câu hỏi</th>
+                                <th scope="col" style="width: 30%">Đáp án đúng</th>
                                 <th scope="col">Chọn</th>
                             </tr>
                         </thead>
@@ -57,9 +57,9 @@
                         <c:forEach items="${listExamQuestion}" var="question" varStatus="loop">
                             <tr>
                                 <th scope="row">${loop.index + 1}</th>
-                                <td>${question.question_id}</td>
-                                <td>${question.description}</td>
-                                <td>${question.correct_answer}</td>
+                                <td >${question.question_id}</td>
+                                <td><span class="limit-text">${question.description}</span></td>
+                                <td><span class="limit-text">${question.correct_answer}</span></td>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -107,9 +107,9 @@
                             <tr>
                                 <th scope="col">STT</th>
                                 <th scope="col">Mã câu hỏi</th>
-                                <th scope="col">Câu hỏi</th>
-                                <th scope="col">Phương án</th>
-                                <th scope="col">Đáp án</th>
+                                <th scope="col" style="width: 30%">Câu hỏi</th>
+                                <th scope="col" style="width: 30%">Phương án</th>
+                                <th scope="col" style="width: 20%">Đáp án</th>
                                 <th scope="col">
                                     <button type="submit" class="btn btn-primary btn-sm" >
                                         Thêm
@@ -123,7 +123,7 @@
                                 <tr>
                                     <th scope="row">${loop.index + 1}</th>
                                     <td>${qs.question_id}</td>
-                                    <td>${qs.description}</td>
+                                    <td> <span class="limit-text">${qs.description}</span></td>
                                     <td>
                                         <ul class="list-group">
                                             <li class="list-group-item list-group-item-primary">${qs.answer1}</li>

@@ -43,15 +43,13 @@
                         <table border="1" cellpadding="4" class="table table-hover">
                             <thead>
                             <tr>
-                                <th>STT</th>
-                                <th>Mã đề thi</th>
-                                <th>Môn học</th>
-                                <th>Thời gian cho phép</th>
-                                <th>Tên đề thi</th>
-                                <th>Chọn</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th scope="col">STT</th>
+                                <th scope="col" style="width: 10%">Mã đề thi</th>
+                                <th scope="col" style="width: 20%">Môn học</th>
+                                <th scope="col" style="width: 35%">Tên đề thi</th>
+                                <th scope="col" style="width: 10%">Thời gian</th>
+                                <th scope="col">Chọn</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,8 +59,8 @@
                                     <td>${loop.index + 1}</td>
                                     <td><c:out value="${exam.examId}"/></td>
                                     <td><c:out value="${exam.getSubject().getSubject_name()}"/></td>
-                                    <td><c:out value="${exam.allowedTime}"/></td>
                                     <td><c:out value="${exam.examName}"/></td>
+                                    <td><c:out value="${exam.allowedTime} phút"/></td>
                                     <td>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="">
@@ -71,28 +69,28 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button class="btn btn-outline-warning btn-sm" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#editExamModal${loop.index}">
-                                            Sửa
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-outline-danger btn-sm" type="button"
-                                                data-bs-toggle="modal" data-bs-target="#deleteModal1${loop.index}">
-                                            Xóa
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <form method="post" action="/admin/examQuestion">
-                                            <input type="hidden" name="action" value="getExamQuestion">
-                                            <input type="hidden" name="examId" value="${exam.examId}">
-                                            <input type="hidden" name="examName" value="${exam.examName}">
-                                            <input type="hidden" name="subjectName" value="${exam.getSubject().getSubject_name()}">
-                                            <input type="hidden" name="subjectId" value="${exam.getSubject().getSubject_id()}">
-                                            <button class="btn btn-outline-primary btn-sm" type="submit">
-                                                Xem
+                                        <div class="d-flex">
+                                            <form method="post" action="/admin/examQuestion">
+                                                <input type="hidden" name="action" value="getExamQuestion">
+                                                <input type="hidden" name="examId" value="${exam.examId}">
+                                                <input type="hidden" name="examName" value="${exam.examName}">
+                                                <input type="hidden" name="subjectName" value="${exam.getSubject().getSubject_name()}">
+                                                <input type="hidden" name="subjectId" value="${exam.getSubject().getSubject_id()}">
+                                                <button class="btn btn-outline-primary btn-sm" type="submit">
+                                                    Xem
+                                                </button>
+                                            </form>
+                                            <button class="btn btn-outline-warning btn-sm" type="button"
+                                                    data-bs-toggle="modal" data-bs-target="#editExamModal${loop.index}" style="margin: 0 8px">
+                                                Sửa
                                             </button>
-                                        </form>
+
+                                            <button class="btn btn-outline-danger btn-sm" type="button"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteModal1${loop.index}">
+                                                Xóa
+                                            </button>
+                                        </div>
+
 
                                     </td>
                                 </tr>

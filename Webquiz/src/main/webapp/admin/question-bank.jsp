@@ -49,8 +49,7 @@
                             <th>C</th>
                             <th>D</th>
                             <th>Đáp án</th>
-                            <th>Môn Học</th>
-                            <th></th>
+                            <th style="width: 10%;">Môn Học</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -82,15 +81,17 @@
                                     </span>
                                 </td>
                                 <td><c:out value="${question.getSubject().getSubject_name()}"/></td>
-                                <td>
-                                    <a class="btn btn-outline-warning btn-sm" type="button" data-bs-toggle="modal"
-                                       data-bs-target="#editQuestionModal${loop.index}">Sửa</a>
-                                </td>
-                                <td>
-                                    <button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#confirmDeleteModal${loop.index}">
-                                        Xóa
-                                    </button>
+                                <td >
+                                    <div class="d-flex">
+                                        <a class="btn btn-outline-warning btn-sm" type="button" data-bs-toggle="modal"
+                                           data-bs-target="#editQuestionModal${loop.index}" style="margin-right: 8px">Sửa</a>
+
+                                        <button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal${loop.index}">
+                                            Xóa
+                                        </button>
+                                    </div>
+
                                 </td>
 
                             </tr>

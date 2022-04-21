@@ -12,7 +12,7 @@
         <a href="/admin/manage-user" class="list-group-item list-group-item-action">
             <i class="fa-solid fa-user-group"></i>
             Quản lý người dùng</a>
-        <a href="/admin/examQuestions" class="list-group-item list-group-item-action">
+        <a href="/admin/exams" class="list-group-item list-group-item-action">
             <i class="fa-solid fa-file-lines"></i>
             Quản lý đề thi</a>
         <a href="/admin/questions" class="list-group-item list-group-item-action">
