@@ -10,16 +10,20 @@ public class MemberRepository {
     BaseRepository baseRepository = new BaseRepository();
     Connection connection = this.baseRepository.getConnection();
 
-    public List<Member> getMemberList(){
+    public List<Member> getMemberList(int indexPage){
         List<Member> members = new ArrayList<>();
+        int numOfMemberDisplay = 5;
         String sql = "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
                 "from accumulated_point ap\n" +
                 "right join `user` u on u.user_id = ap.user_id\n" +
                 "inner join user_role ur on ur.username = u.username\n" +
-                "order by u.user_id;";
+                "order by u.user_id\n" +
+                "limit ?, ?;";  // Phân trang bảng Thành viên, bắt đầu từ index (?) hiển thị (?) Thành viên.
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, (indexPage-1)*numOfMemberDisplay );
+            preparedStatement.setInt(2, numOfMemberDisplay);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 members.add(new Member(resultSet.getInt("user_id"),
@@ -39,8 +43,22 @@ public class MemberRepository {
         return members;
     }
 
+    public int getTotalMember(){
+        String sql = "Select count(*) from user;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public void updateMember(Member memberSearch, Member memberUpdate){
-        String sql = "CALL UpdateMember(?,?,?,?,?,?,?,?)";
+        String sql = "CALL UpdateMember(?,?,?,?,?,?,?)";
 
         try {
             CallableStatement callableStatement = connection.prepareCall(sql);
@@ -50,8 +68,7 @@ public class MemberRepository {
             callableStatement.setString(4, memberUpdate.getPhone());
             callableStatement.setString(5, memberUpdate.getAddress());
             callableStatement.setString(6, memberSearch.getAccount());
-            callableStatement.setDouble(7, memberUpdate.getPoint());
-            callableStatement.setInt(8, memberUpdate.getRole());
+            callableStatement.setInt(7, memberUpdate.getRole());
             callableStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();

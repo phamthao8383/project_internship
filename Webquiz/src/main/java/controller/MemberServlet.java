@@ -48,8 +48,17 @@ public class MemberServlet extends HttpServlet {
     }
 
     private void getMemberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        List<Member> memberList = memberService.getMemberList();
+        String index = request.getParameter("index");
+        if (index == null){
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
+        // Tạo bảng
+        List<Member> memberList = memberService.getMemberList(indexPage);
         request.setAttribute("memberList", memberList);
+        // Dãy số phân trang dưới bảng
+        pagingNumber(request, response);
+        request.setAttribute("currentPage", indexPage);
         request.getRequestDispatcher("/admin/manage-user.jsp").forward(request, response);
     }
 
@@ -62,10 +71,8 @@ public class MemberServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String address = handleString.handleFont(request.getParameter("address"));
-        double point = Double.parseDouble(request.getParameter("point"));
         int role = Integer.parseInt(request.getParameter("role"));
-//        System.out.println(role);
-        Member memberUpdate = new Member(name, email, phone, address, point, role);
+        Member memberUpdate = new Member(name, email, phone, address, role);
         memberService.updateMember(memberSearch, memberUpdate);
 
         response.sendRedirect("/admin/manage-user");
@@ -79,6 +86,16 @@ public class MemberServlet extends HttpServlet {
         Boolean check = Boolean.valueOf(checkDeleted);
         request.setAttribute("checkDeleted", check);
         response.sendRedirect("/admin/manage-user");
+    }
+
+    private void pagingNumber(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        int totalMember = memberService.getTotalMember();
+        int numberDisplay = 5;
+        int maxPages = totalMember/numberDisplay;
+        if (totalMember % numberDisplay != 0){
+            maxPages++;
+        }
+        request.setAttribute("maxPages", maxPages);
     }
 
 }
