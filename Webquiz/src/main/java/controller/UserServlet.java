@@ -21,6 +21,8 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @MultipartConfig
 @WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
@@ -225,7 +227,6 @@ public class UserServlet extends HttpServlet {
 //            response.setContentType("text/html;charset=UTF8");
             response.setContentType("text/html; charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-
             String nameAccount = request.getParameter("nameAccount");
             String name = request.getParameter("name");
             name = handleString.handleFont(name);
@@ -237,15 +238,21 @@ public class UserServlet extends HttpServlet {
             String address = request.getParameter("address");
             address = handleString.handleFont(address);
             String phone = request.getParameter("phone");
-            int i = accountService.CheckAccount(nameAccount);
-            if(i == 1 ) {
+            Account account = accountService.CheckAccount(nameAccount);
+            System.out.println(account.getUsername()); //hongson1
+            if(account != null ) {
                 System.out.println("Trùng tên account!!");
-            } else if(i == 0) {
+                System.out.println(account.getUsername());
+                request.setAttribute("checkAccount", account);
+                goLogin(request,response);
+                account = null;
+            } else {
                 User user = new User(name, email,phone,address,"img",nameAccount);
-                Account account = new Account(nameAccount, ps1, 2);
-                accountService.AddAccount(account);
+                Account account1 = new Account(nameAccount, ps1, 2);
+                accountService.AddAccount(account1);
                 userService.addUserList(user);
                 goLogin(request,response);
             }
+
     }
 }

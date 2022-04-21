@@ -14,6 +14,10 @@ public class Account {
     public Account() {
     }
 
+    public Account(String username){
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "Account{" +

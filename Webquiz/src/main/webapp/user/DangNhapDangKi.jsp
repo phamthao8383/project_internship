@@ -8,8 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="../static/css/DangNhapDangKi.css">
 </head>
@@ -101,13 +100,34 @@
                             <span  style="color: red"  id="erorEmail"></span>
                             <span style="color: red"   id="errorPass"></span>
                             <span  style="color: red"  id="errorConPass"></span>
+                            <span  style="color: red"  id="usernameExist"></span>
                         </div>
                         <div class="button input-box">
                             <input type="submit" value="Đăng Ký">
                         </div>
+                        <%int check = 0;%>
+                        <c:if test="${checkAccount != null}">
+                            <% check = 1;%>
+                        </c:if>
                         <div class="text sign-up-text">Bạn đã có tài khoản? <label for="flip">Đăng nhập nhanh</label></div>
                     </div>
                 </form>
+                <div div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thông báo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Đăng ký tài khoản thành công.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -164,17 +184,21 @@
 
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <%--validate quên mật khẩu--%>
 <script>
@@ -182,8 +206,6 @@
         var name = document.getElementById('inputNameAccount').value;
         var errName = document.getElementById('errName');
         var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
-
-
 
         var email = document.getElementById('inputEmail').value;
         var errEmail = document.getElementById('errEmail');
@@ -223,24 +245,27 @@
         if (inputNewPassword == '' || inputNewPassword == null) {
             errConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
         } else if (inputNewPassword != inputNewPass) {
-            alert("Xác nhận mật khẩu không trùng khớp!");
+            errConPass.innerHTML = "Xác nhận mật khẩu không trùng khớp!";
         } else {
             errConPass.innerHTML = "";
         }
         if (name &&  email && inputNewPassword  &&inputNewPass && inputNewPassword==inputNewPass ) {
-            alert("gửi mã thành công!");
+            Swal.fire({
+                position: 'center-center',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
         } else {
         }
         return false;
     }
 </script>
 
-
 <%--Validate đăng kí--%>
 <script>
     function Validate() {
-
-
         var name = document.getElementById('name').value;
         var errorName = document.getElementById('errorName');
         var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
@@ -295,19 +320,30 @@
         if (ConPass == '' || ConPass == null) {
             errorConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
         } else if (ConPass != passW) {
-            alert("Xác nhận mật khẩu không trùng khớp!");
+            errorConPass.innerHTML = ("Xác nhận mật khẩu không trùng khớp!");
         } else {
             errorConPass.innerHTML = "";
         }
 
-
+        var check = <%= check%>;
         if (name && phone && email && ConPass && passW && passW == ConPass) {
-            alert("Đăng ký thành công!");
-            document.getElementById("form-dangky").submit();
+            if(check == 1){
+                alert("Tên đăng nhập đã tồn tại.")
+            }
+            // Swal.fire({
+            //     position: 'center-center',
+            //     icon: 'success',
+            //     title: 'Đăng ký thành công!',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
+            else {
+                alert("Đăng ký thành công!")
+                document.getElementById("form-dangky").submit();
+            }
         } else {
 
         }
-
         return false;
     }
 </script>
