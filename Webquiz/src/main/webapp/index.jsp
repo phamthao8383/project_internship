@@ -148,6 +148,7 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <form action="/userServlet" method="post">
                                     <input type="hidden" name="action" value="infoUser">
+                                    <input type="hidden" name="index" value="1">
                                     <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
 
                                         <button class="btn_info" type="submit">

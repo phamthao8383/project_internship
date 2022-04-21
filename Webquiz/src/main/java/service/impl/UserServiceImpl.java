@@ -48,4 +48,14 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(int id) {
         userRepository.deleteUser(id);
     }
+
+    @Override
+    public List<ExamHistory> getListExamHistoryPage(int id, int pageIndex, int pageSize) {
+        return userRepository.getListExamHistoryPage(id, pageIndex,pageSize);
+    }
+
+    @Override
+    public int countHistory(int id) {
+        return userRepository.countHistory(id);
+    }
 }

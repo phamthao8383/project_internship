@@ -37,6 +37,7 @@
                             <form action="/exam_list" name="exam-form" id="exam-form" method="post">
                                 <input type="hidden" name="action" value="examSummit">
                                 <input type="hidden" name="examId" value="${examId}">
+                                <input type="hidden" name="timeStart" value="${timeStart}">
                                 <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                             <div class="d9Box part-item detail">
                                 <h1 class="title22Bold ">${exam.examName}</h1>
@@ -51,7 +52,7 @@
 <%--                                        </div>--%>
                                         <span><i class="fa fa-clock-o"></i>${exam.allowedTime} phút</span>
                                     </div>
-                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>80 lượt thi</span>
+                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>${examQuestion.timesExam} lượt thi</span>
                                     </div>
                                 </div>
                                 <div class="exam-content">

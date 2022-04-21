@@ -3,9 +3,24 @@ package model;
 public class ExamQuestion {
     private Exam exam;
     private int total;
+    private int timesExam;
 
 
     public ExamQuestion() {
+    }
+
+    public ExamQuestion(Exam exam, int total, int timesExam) {
+        this.exam = exam;
+        this.total = total;
+        this.timesExam = timesExam;
+    }
+
+    public int getTimesExam() {
+        return timesExam;
+    }
+
+    public void setTimesExam(int timesExam) {
+        this.timesExam = timesExam;
     }
 
     public ExamQuestion(Exam exam, int total) {
@@ -18,6 +33,7 @@ public class ExamQuestion {
         return "ExamQuestion{" +
                 "exam=" + exam +
                 ", total=" + total +
+                ", timesExam=" + timesExam +
                 '}';
     }
 

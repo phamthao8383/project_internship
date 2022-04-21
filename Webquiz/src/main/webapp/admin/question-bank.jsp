@@ -9,6 +9,13 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
+<c:if test="${sessionScope.account.idRole != 1}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account.idRole == 1}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,16 +101,13 @@
                                 <td><c:out value="${question.getSubject().getSubject_name()}"/></td>
                                 <td>
                                     <a class="btn btn-outline-warning btn-sm" type="button" data-bs-toggle="modal"
-                                       data-bs-target="#editQuestionModal${loop.index}">Edit</a>
+                                       data-bs-target="#editQuestionModal${loop.index}">Sửa</a>
                                 </td>
                                 <td>
                                     <button class="btn btn-outline-danger btn-sm" type="button" data-bs-toggle="modal"
                                             data-bs-target="#confirmDeleteModal${loop.index}">
-                                        Delete
-                                            <%--&lt;%&ndash;                                        href="/questions?action=delete&id=${question.question_id}"&ndash;%&gt;--%>
-                                            <%--                                    </button>--%>
-                                            <%--                                    <a href="/questions?action=delete&id=${question.question_id}" class="btn btn-outline-danger btn-sm" type="button" > Xóa</a>--%>
-
+                                        Xóa
+                                    </button>
                                 </td>
 
                             </tr>
@@ -131,8 +135,7 @@
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Câu hỏi</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="description"
-                                                               value="${question.description}"/><br>
+                                                        <textarea  type="text" class="form-control" name="description">${question.description}</textarea><br>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
@@ -173,7 +176,7 @@
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Chọn môn</label>
                                                     <div class="col-sm-9">
-                                                        <select name="subject_id">
+                                                        <select name="subject_id" class="form-select">
                                                             <c:forEach var="subject" items="${listSubject}">
                                                                 <c:choose>
                                                                     <c:when test="${subject.subject_id == question.getSubject().getSubject_id()}">
@@ -245,7 +248,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Câu hỏi</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="description"/><br>
+                            <textarea  type="text" class="form-control" name="description"></textarea><br>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -281,7 +284,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Chọn môn</label>
                         <div class="col-sm-9">
-                            <select name="subject_id">
+                            <select name="subject_id" class="form-select">
                                 <c:forEach var="subject" items="${listSubject}">
                                     <option value="${subject.getSubject_id()}">${subject.getSubject_name()}</option>
                                 </c:forEach>
@@ -307,3 +310,4 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
 </html>
+</c:if>

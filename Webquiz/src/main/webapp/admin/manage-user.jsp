@@ -7,6 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<c:if test="${sessionScope.account.idRole != 1}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account.idRole == 1}">
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,3 +225,5 @@
     }
 </script>
 </html>
+
+</c:if>

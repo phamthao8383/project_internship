@@ -49,6 +49,21 @@
                 </ul>
             </div>
         </li>
+
+        <li class="navbar__item-sectors">
+            <a href="/exam_list?action=list_exam&sj_id=100">
+                <i class="fa-solid fa-book"></i>
+                Khối C
+            </a>
+            <div class="sector-detail">
+                <ul class="sector-detail__list">
+                    <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=100" class="sector-detail__item-link">Ngữ Văn</a></li>
+                    <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=100" class="sector-detail__item-link">Lịch Sử</a></li>
+                    <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=100"  class="sector-detail__item-link">Địa Lý</a></li>
+                </ul>
+            </div>
+        </li>
+
         <li class="navbar__item-sectors">
             <a href="#">
                 <i class="fa-solid fa-book"></i>
