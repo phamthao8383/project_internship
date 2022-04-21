@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                             <c:forEach var="member" items="${memberList}" varStatus="loop">
-                            <tr>
+                            <tr class="${member.role == 1?"table-success":""}">
                                 <th scope="row">${member.userId}</th>
                                 <td>${member.account}</td>
                                 <td>${member.name}</td>
@@ -61,7 +61,7 @@
                                 <td>${member.phone}</td>
                                 <td class="text-center">${member.point}</td>
                                 <td class="text-center">
-                                    <button onclick="checkRole(${member.role})" type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal${loop.index}">Sửa</button>
+                                    <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal${loop.index}">Sửa</button>
                                     <button onclick="onDeleteMember(${member.userId})" type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
 <%--                                Update Modal --%>
@@ -118,11 +118,11 @@
                                                                 <p class="mb-0">Phân quyền người dùng</p>
                                                                 <div>
                                                                     <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1" required>
+                                                                        <input class="form-check-input" name="role" value="1" type="radio" ${member.role == 1?"checked":""} id="inlineRadio1" required>
                                                                         <label class="form-check-label" for="inlineRadio1">Quản trị viên</label>
                                                                     </div>
                                                                     <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="2">
+                                                                        <input class="form-check-input" name="role" value="2" type="radio" ${member.role == 2?"checked":""} id="inlineRadio2">
                                                                         <label class="form-check-label" for="inlineRadio2">Thành viên</label>
                                                                     </div>
                                                                 </div>
@@ -216,13 +216,6 @@
         console.log(document.getElementById("MemberIDUpdate").value);
     }
 
-    function checkRole(memberRole){
-        if (memberRole == 1){
-            document.getElementById("inlineRadio1").checked = true;
-        } else if (memberRole == 2){
-            document.getElementById("inlineRadio2").checked = true;
-        }
-    }
 </script>
 </html>
 
