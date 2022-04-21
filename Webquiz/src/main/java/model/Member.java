@@ -15,9 +15,8 @@ public class Member extends User {
         super(userId, account);
     }
 
-    public Member(String name, String email, String phone, String address, double point, int role) {
+    public Member(String name, String email, String phone, String address, int role) {
         super(name, email, phone, address);
-        this.point = point;
         this.role = role;
     }
 

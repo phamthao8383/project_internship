@@ -104,7 +104,7 @@
                                                             <div class="row mb-3">
                                                                 <label for="pointInput" class="col-sm-3 col-form-label">Điểm tích lũy</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="point" value="${member.point}" id="pointInput" required>
+                                                                    <input type="text" class="form-control" name="point" value="${member.point}" id="pointInput" disabled>
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-between mt-3">
@@ -139,17 +139,29 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-sm justify-content-center">
                             <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true"><< Trang trước</span>
-                                </a>
+                                <c:if test="${currentPage > 1}">
+                                    <c:url value="/admin/manage-user" var="prevUrl">
+                                        <c:param name="index" value="${currentPage - 1}"/>
+                                    </c:url>
+                                    <a href="<c:out value="${prevUrl}"/>" class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </c:if>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <c:forEach var="i" begin="1" end="${maxPages}">
+                                <li class="page-item ${currentPage == i?"active":""}">
+                                    <a class="page-link" href="/admin/manage-user?index=${i}">${i}</a>
+                                </li>
+                            </c:forEach>
                             <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">Trang sau >></span>
-                                </a>
+                                <c:if test="${maxPages > currentPage}">
+                                    <c:url value="/admin/manage-user" var="nextUrl">
+                                        <c:param name="index" value="${currentPage + 1}"/>
+                                    </c:url>
+                                    <a href="<c:out value="${nextUrl}"/>" class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </c:if>
                             </li>
                         </ul>
                     </nav>
