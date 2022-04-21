@@ -1,5 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<c:if test="${sessionScope.account == null}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account != null}">
+
 <html lang="vi">
 <head>
     <link rel="stylesheet" href="/exam/exam.css">
@@ -9,13 +16,12 @@
     <jsp:include page="/view/head.jsp"/>
     <title>Đề thi minh họa tốt nghiệp THPT năm 2022 môn Toán - Bộ Giáo Dục và Đào Tạo</title>
 </head>
-
 <body  oncopy="return false" oncut="return false" onpaste="return false">
 <jsp:include page="/view/header.jsp"/>
 <div class="wrapper">
     <div class="main-content">
     <div class="breadcrumb">
-        <div class="container" onload="start(${exam.allowedTime}, 0)">
+        <div class="container" onload="start()">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="">Trang chủ</a></li>
@@ -127,71 +133,128 @@
     </section>
 </div>
 <jsp:include page="/view/footer.jsp"/>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
+
+
 <script language="javascript">
+    function start(){
+        let time = new Date("${sessionScope.timeStartS}");
+        let m = ${exam.allowedTime};
+        let timeEnd = time.setMinutes(time.getMinutes() + m );
+        timeEnd = time.setSeconds(time.getSeconds() + 3 );
+        const demgio = setInterval(function () {
+            var today = new Date();
+            var timeBack = timeEnd - today;
+            console.log(timeBack);
+            var hours = Math.floor(timeBack / (1000 * 60 * 60))
+            var minutes = Math.floor(timeBack / (1000 * 60))
+            var seconds = Math.floor(timeBack / (1000))
+            hours %= 24
+            minutes %= 60
+            seconds %= 60
+            if (seconds < 0) {
+                clearInterval(demgio);
+                document.forms["exam-form"].submit();
+                alert('Hết giờ');
+                return false;
+            }
 
-    var h = null; // Giờ
-    var m = null; // Phút
-    var s = null; // Giây
+            if (minutes === 0 && seconds <= 59) {
+                document.getElementById("countdown").style.color = "white";
+                document.getElementById("countdown").style.backgroundColor = "yellow";
+            }
+            if (minutes === 0 && seconds <= 10) {
+                document.getElementById("countdown").style.color = "white";
+                document.getElementById("countdown").style.backgroundColor = "red";
+                document.getElementById("countdown").style.animation = "blinker 1s linear infinite";
+            }
+            console.log(seconds);
+            document.getElementById('m').innerText = minutes.toString();
+            document.getElementById('s').innerText = seconds.toString();
 
-    var timeout = null; // Timeout
-
-    function start(m, s)
-    {
-        /*BƯỚC 1: LẤY GIÁ TRỊ BAN ĐẦU*/
-        if (m === null){
-            this.m = m;
-            this.s = s;
-        }
-
-        /*BƯỚC 1: CHUYỂN ĐỔI DỮ LIỆU*/
-        // Nếu số giây = -1 tức là đã chạy ngược hết số giây, lúc này:
-        //  - giảm số phút xuống 1 đơn vị
-        //  - thiết lập số giây lại 59
-        if (s === -1){
-            m -= 1;
-            s = 59;
-        }
-        if(m === 0 && s <= 59){
-            document.getElementById("countdown").style.color = "white";
-            document.getElementById("countdown").style.backgroundColor = "yellow";
-        }
-        if(m === 0 && s <= 10){
-            document.getElementById("countdown").style.color = "white";
-            document.getElementById("countdown").style.backgroundColor = "red";
-            document.getElementById("countdown").style.animation = "blinker 1s linear infinite";
-        }
-
-        // Nếu số phút = -1 tức là đã hết giờ, lúc này:
-        //  - Dừng chương trình
-        if (m == -1){
-            clearTimeout(timeout);
-            document.forms["exam-form"].submit();
-            alert('Hết giờ');
-            return false;
-        }
-
-        /*BƯỚC 1: HIỂN THỊ ĐỒNG HỒ*/
-        // document.getElementById('h').innerText = h.toString();
-        document.getElementById('m').innerText = m.toString();
-        document.getElementById('s').innerText = s.toString();
-
-        /*BƯỚC 1: GIẢM PHÚT XUỐNG 1 GIÂY VÀ GỌI LẠI SAU 1 GIÂY */
-        timeout = setTimeout(function(){
-            s--;
-            start(m, s);
         }, 1000);
+
+
     }
 
     window.onload = function () {
-        start(${exam.allowedTime}, 0);
+        start();
     }
 
     function stop(){
-        clearTimeout(timeout);
+        clearInterval(demgio);
     }
+
 </script>
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<%--<script language="javascript">--%>
+
+<%--    var h = null; // Giờ--%>
+<%--    var m = null; // Phút--%>
+<%--    var s = null; // Giây--%>
+
+<%--    var timeout = null; // Timeout--%>
+
+<%--    function start(m, s)--%>
+<%--    {--%>
+<%--        /*BƯỚC 1: LẤY GIÁ TRỊ BAN ĐẦU*/--%>
+<%--        if (m === null){--%>
+<%--            this.m = m;--%>
+<%--            this.s = s;--%>
+<%--        }--%>
+
+<%--        /*BƯỚC 1: CHUYỂN ĐỔI DỮ LIỆU*/--%>
+<%--        // Nếu số giây = -1 tức là đã chạy ngược hết số giây, lúc này:--%>
+<%--        //  - giảm số phút xuống 1 đơn vị--%>
+<%--        //  - thiết lập số giây lại 59--%>
+<%--        if (s === -1){--%>
+<%--            m -= 1;--%>
+<%--            s = 59;--%>
+<%--        }--%>
+<%--        if(m === 0 && s <= 59){--%>
+<%--            document.getElementById("countdown").style.color = "white";--%>
+<%--            document.getElementById("countdown").style.backgroundColor = "yellow";--%>
+<%--        }--%>
+<%--        if(m === 0 && s <= 10){--%>
+<%--            document.getElementById("countdown").style.color = "white";--%>
+<%--            document.getElementById("countdown").style.backgroundColor = "red";--%>
+<%--            document.getElementById("countdown").style.animation = "blinker 1s linear infinite";--%>
+<%--        }--%>
+
+<%--        // Nếu số phút = -1 tức là đã hết giờ, lúc này:--%>
+<%--        //  - Dừng chương trình--%>
+<%--        if (m == -1){--%>
+<%--            clearTimeout(timeout);--%>
+<%--            document.forms["exam-form"].submit();--%>
+<%--            alert('Hết giờ');--%>
+<%--            return false;--%>
+<%--        }--%>
+
+<%--        /*BƯỚC 1: HIỂN THỊ ĐỒNG HỒ*/--%>
+<%--        // document.getElementById('h').innerText = h.toString();--%>
+<%--        document.getElementById('m').innerText = m.toString();--%>
+<%--        document.getElementById('s').innerText = s.toString();--%>
+
+<%--        /*BƯỚC 1: GIẢM PHÚT XUỐNG 1 GIÂY VÀ GỌI LẠI SAU 1 GIÂY */--%>
+<%--        timeout = setTimeout(function(){--%>
+<%--            s--;--%>
+<%--            start(m, s);--%>
+<%--        }, 1000);--%>
+<%--    }--%>
+
+<%--    window.onload = function () {--%>
+<%--        start(${exam.allowedTime}, 0);--%>
+<%--    }--%>
+
+<%--    function stop(){--%>
+<%--        clearTimeout(timeout);--%>
+<%--    }--%>
+<%--</script>--%>
+
+
 </body>
 </html>
+
+</c:if>

@@ -40,7 +40,8 @@
                 </div>
                 <div class="user-list">
                     <table border="1" cellpadding="5" class="table table-hover">
-                        <tr>
+                        <thead>
+                            <tr>
                             <th>STT</th>
                             <th>Câu hỏi</th>
                             <th>A</th>
@@ -52,29 +53,11 @@
                             <th></th>
                             <th></th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <c:forEach var="question" items="${listQuestion}" varStatus="loop">
                             <input type="hidden" name="indexQuestion${loop.index}" value="${loop.index}">
                             <tr>
-                                <td class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <form action="/admin/questions" method="post" class="modal-content">
-                                            <input type="hidden" name="idQues" value="${question.question_id}">
-                                            <input type="hidden" name="action" value="delete">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Xóa câu hỏi</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                <button  type="submit" class="btn btn-danger">Xóa</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </td>
-
                                 <td>
                                     <span class="limit-text"><c:out value="${loop.index + 1}"/></span>
                                 </td>
@@ -111,8 +94,6 @@
                                 </td>
 
                             </tr>
-
-
                             <!-- Edit New Question Modal -->
                             <div class="modal fade" id="editQuestionModal${loop.index}" tabindex="-1"
                                  aria-labelledby="editQuestionLabel" aria-hidden="true">
@@ -200,11 +181,33 @@
                                                 </div>
                                             </form>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
+
+                            <%-- Delete modal--%>
+                            <td class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="/admin/questions" method="post" class="modal-content">
+                                        <input type="hidden" name="idQues" value="${question.question_id}">
+                                        <input type="hidden" name="action" value="delete">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Xóa câu hỏi</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                            <button  type="submit" class="btn btn-danger">Xóa</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+
                         </c:forEach>
+                        </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-sm justify-content-center">
@@ -228,7 +231,7 @@
         </div>
     </div>
 </div>
-</body>
+
 <!-- Create New Question Modal -->
 <div class="modal fade" id="createQuestionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -300,6 +303,9 @@
         </div>
     </div>
 </div>
+
+
+</body>
 
 <!-- Delete Modal -->
 

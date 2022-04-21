@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -97,10 +98,15 @@ public class ExamViewServlet extends HttpServlet {
             request.setAttribute("exam",examViewService.getExamId(examId));
             request.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
             request.setAttribute("examId",examId );
-            Date date = new Date(System.currentTimeMillis());
-            Time sqlTime = new Time(System.currentTimeMillis());
-            String timeStart = String.valueOf(date) +" " + String.valueOf(sqlTime);
-            request.setAttribute("timeStart",timeStart );
+            HttpSession session = request.getSession();
+            if (session.getAttribute("timeStartS") == null) {
+                Date date = new Date(System.currentTimeMillis());
+                Time sqlTime = new Time(System.currentTimeMillis());
+                String timeStart = String.valueOf(date) +" " + String.valueOf(sqlTime);
+                session.setAttribute("timeStartS", timeStart);
+                request.setAttribute("timeStart",timeStart );
+            }
+//                  Thiết lập giá trị trong session
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/start_exam.jsp");
             dispatcher.forward(request,response);
@@ -111,6 +117,10 @@ public class ExamViewServlet extends HttpServlet {
     private void examSummit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+
+        HttpSession session = request.getSession();
+//            Hủy session
+        session.removeAttribute("timeStartS");
 
         int userId = Integer.parseInt(request.getParameter("userId"));
         int examId = Integer.parseInt(request.getParameter("examId"));
