@@ -22,16 +22,17 @@
                 <h4>Đề thi trắc nghiệm môn ${listExam[0].exam.getSubject().getSubject_name()}</h4>
             </div>
             <div class="col-4">
-                <select name="subject_id" class="custom-select">
+                <form id="formSJ" method="get" action="/exam_list?action=list_exam">
+                <select onchange="submitForm()" name="sj_id" class="custom-select">
                     <c:forEach var="subject" items="${listSubject}">
                         <c:choose>
                             <c:when test="${subject.subject_name eq listExam[0].exam.getSubject().getSubject_name()}">
-                                <option selected>
+                                <option value="${subject.subject_id}" selected>
                                     <a href="/exam_list?action=list_exam&sj_id=${subject.subject_id}"> ${subject.subject_name}</a>
                                 </option>
                             </c:when>
                             <c:otherwise>
-                                <option >
+                                <option value="${subject.subject_id}" >
                                     <a href="/exam_list?action=list_exam&sj_id=${subject.subject_id}">${subject.subject_name}</a>
 
                                 </option>
@@ -39,6 +40,7 @@
                         </c:choose>
                     </c:forEach>
                 </select>
+                </form>
             </div>
         </div>
 
@@ -95,6 +97,11 @@
         </div>
     </div>
     <jsp:include page="/view/footer.jsp"/>
+<script>
+    function submitForm() {
+       document.getElementById("formSJ").submit()
+    }
 
+</script>
 </body>
 </html>

@@ -150,7 +150,7 @@
                 <input type="hidden" id="imageLink" name="imageLink" value="">
                 <div class="modal-body">
                     <div class="form-group row">
-                        <img src="${user.image}" width="200" height="200" id="imageInput" style="border-radius: 50%;margin: auto;">
+                        <img src="${user.image}" width="200" height="200" id="imageInput">
                     </div>
                     <div class="form-group row">
                             <input type="file" name="inputFile" id="inputFile" accept="image/gif, image/jpeg, image/png" onchange="chooseFile(this)">

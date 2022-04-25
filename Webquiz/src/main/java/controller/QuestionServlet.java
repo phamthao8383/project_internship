@@ -187,7 +187,6 @@ public class QuestionServlet extends HttpServlet {
 
     private void pagingQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int totalQuestion = questionService.getTotalQuestion();
-        System.out.println(totalQuestion);
         int maxPages = (totalQuestion/entryDisplay);
         if (totalQuestion % entryDisplay != 0){
             maxPages++;
