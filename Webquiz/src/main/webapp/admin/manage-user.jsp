@@ -143,35 +143,43 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination-sm justify-content-center">
-                            <li class="page-item">
-                                <c:if test="${currentPage > 1}">
-                                    <c:url value="/admin/manage-user" var="prevUrl">
-                                        <c:param name="index" value="${currentPage - 1}"/>
-                                    </c:url>
-                                    <a href="<c:out value="${prevUrl}"/>" class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
+<%--                    Phân trang  --%>
+                        <div class="row">
+                            <div class="col-4">
+                                <c:set var="indexMemberEnd" scope="session" value="${indexMember + entryDisplay -1}"/>
+                                <c:if test="${indexMemberEnd > totalMember}">
+                                    <c:set var="indexMemberEnd" scope="session" value="${totalMember}"/>
                                 </c:if>
-                            </li>
-                            <c:forEach var="i" begin="1" end="${maxPages}">
-                                <li class="page-item ${currentPage == i?"active":""}">
-                                    <a class="page-link" href="/admin/manage-user?index=${i}">${i}</a>
-                                </li>
-                            </c:forEach>
-                            <li class="page-item">
-                                <c:if test="${maxPages > currentPage}">
-                                    <c:url value="/admin/manage-user" var="nextUrl">
-                                        <c:param name="index" value="${currentPage + 1}"/>
-                                    </c:url>
-                                    <a href="<c:out value="${nextUrl}"/>" class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </c:if>
-                            </li>
-                        </ul>
-                    </nav>
+                                <span>Hiển thị ${indexMember} - <c:out value="${indexMemberEnd}"/> trong tổng số ${totalMember} mục.</span>
+                            </div>
+                            <div class="col-8">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination pagination-sm justify-content-center">
+                                        <li class="page-item ${currentPage <= 1?"disabled":""}">
+                                            <c:url value="/admin/manage-user" var="prevUrl">
+                                                <c:param name="index" value="${currentPage - 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${prevUrl}"/>" class="page-link" aria-label="Previous">
+                                                Trang trước
+                                            </a>
+                                        </li>
+                                        <c:forEach var="i" begin="1" end="${maxPages}">
+                                            <li class="page-item ${currentPage == i?"active":""}">
+                                                <a class="page-link" href="/admin/manage-user?index=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item ${currentPage >= maxPages?"disabled":""}">
+                                            <c:url value="/admin/manage-user" var="nextUrl">
+                                                <c:param name="index" value="${currentPage + 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${nextUrl}"/>" class="page-link" aria-label="Next">
+                                                Trang sau
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </c:if>
                 </div>
             </div>
@@ -209,11 +217,6 @@
 <script>
     function onDeleteMember(MemberIDDelete) {
         document.getElementById("MemberIDDelete").value = MemberIDDelete;
-    }
-
-    function onUpdateMember(MemberIDUpdate) {
-        document.getElementById("MemberIDUpdate").value = MemberIDUpdate;
-        console.log(document.getElementById("MemberIDUpdate").value);
     }
 
 </script>

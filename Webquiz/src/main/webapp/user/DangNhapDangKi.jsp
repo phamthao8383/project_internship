@@ -77,12 +77,14 @@
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-                            <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required >
+                            <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required=""
+                                   oninvalid="this.setCustomValidity('Họ và tên không được để trống.')" oninput="setCustomValidity('')">
                         </div>
                         <span style="color: red" id="errorName"></span>
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-                            <input  type="text"  name="nameAccount" id="nameAccount" placeholder="Nhập vào tên đăng nhập" required >
+                            <input  type="text"  name="nameAccount" id="nameAccount" placeholder="Nhập vào tên đăng nhập" required=""
+                                    oninvalid="this.setCustomValidity('Tên đăng nhập không được để trống.')" oninput="setCustomValidity('')">
                         </div>
                         <span  style="color: red"  id="errorUsername"></span>
                         <c:if test="${isExist == true}">
@@ -90,28 +92,34 @@
                         </c:if>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="passw" id="pass" placeholder="Nhập mật khẩu" required>
+                            <input type="password" name="passw" id="pass" placeholder="Nhập mật khẩu" required=""
+                                   oninvalid="this.setCustomValidity('Mật khẩu không được để trống.')" oninput="setCustomValidity('')">
                         </div>
                         <span style="color: red"   id="errorPass"></span>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="con_passw" id="passw" placeholder="Nhập lại mật khẩu" required>
+                            <input type="password" name="con_passw" id="passw" placeholder="Nhập lại mật khẩu" required=""
+                                   oninvalid="this.setCustomValidity('Xác nhận mật khẩu không được để trống.')" oninput="setCustomValidity('')">
                         </div>
                         <span style="color: red"   id="errorConPass"></span>
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" name="email"id="email" placeholder="Nhập email của bạn" required>
+                            <input type="text" name="email"id="email" placeholder="Nhập email của bạn" required=""
+                                   oninvalid="this.setCustomValidity('Email không được để trống.')" oninput="setCustomValidity('')">
                         </div>
                         <span  style="color: red"  id="errorEmail"></span>
                         <div class="input-box">
                             <i class="fa-solid fa-location-dot"></i>
-                            <input type="text" name="address" placeholder="Nhập địa chỉ" required>
+                            <input type="text" id="address" name="address" placeholder="Nhập địa chỉ" required=""
+                                   oninvalid="this.setCustomValidity('Địa chỉ không được để trống.')" oninput="setCustomValidity('')">
                         </div>
+                        <span style="color: red"  id="errorAddress"></span>
                         <div class="input-box">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="text" name="phone" id="phone" placeholder="Nhập vào số điện thoại" required>
+                            <input type="text" name="phone" id="phone" placeholder="Nhập vào số điện thoại" required=""
+                                   oninvalid="this.setCustomValidity('Số điện thoại không được để trống.')" oninput="setCustomValidity('')">
                         </div>
-                        <span style="color: red"  id="erorPhone"></span>
+                        <span style="color: red"  id="errorPhone"></span>
 
                         <div class="button input-box">
                             <input type="submit" value="Đăng Ký" >
@@ -119,29 +127,6 @@
                         <div class="text sign-up-text">Bạn đã có tài khoản? <label for="flip">Đăng nhập nhanh</label></div>
                     </div>
                 </form>
-<%--                <%boolean check = false;%>--%>
-<%--                <c:if test="${checkAccount.username != null}">--%>
-<%--                    <% check = true; %>--%>
-<%--                </c:if>--%>
-<%--                <c:if test="${checkAccount.username == null}">--%>
-<%--                    <% check = false; %>--%>
-<%--                </c:if>--%>
-                <div div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Thông báo</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Đăng ký tài khoản thành công.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -278,143 +263,114 @@
 <%--Validate đăng kí--%>
 <script>
     function Validate() {
-        var name = document.getElementById('name').value;
-        var errorName = document.getElementById('errorName');
-        var regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
-
-        var phone = document.getElementById('phone').value;
-        var erorPhone = document.getElementById('erorPhone');
-        var regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-
-        var email = document.getElementById('email').value;
-        var errorEmail = document.getElementById('errorEmail');
-        var reGexEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
-
+        let name = document.getElementById('name').value;
+        let errorName = document.getElementById('errorName');
+        let regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
         if (name == '' || name == null) {
-            errorName.innerHTML = "Họ tên không được để trống!";
+            errorName.innerHTML = "Họ tên không được để trống.";
             return false;
         } else if (!regexName.test(name)) {
-            errorName.innerHTML = "Họ tên không hợp lệ!";
+            errorName.innerHTML = "Họ tên không hợp lệ.";
             return false;
         } else {
-            errorName.innerHTML = '';
+            errorName.innerHTML = "";
         }
 
-        if (phone == '' || phone == null) {
-            erorPhone.innerHTML = "Số điện thoại không được để trống!";
+        let username = document.getElementById("nameAccount").value;
+        let errorUsername = document.getElementById("errorUsername");
+        if(username == '' || username == null){
+            errorUsername.innerHTML = "Tên đăng nhập không được để trống.";
             return false;
-        } else if (!regexPhone.test(phone)) {
-            erorPhone.innerHTML = "SĐT không hợp lệ!";
-            return false;
-        } else {
-            erorPhone.innerHTML = '';
         }
+        else
+            errorUsername.innerHTML = "";
 
-        if (email == '' || email == null) {
-            errorEmail.innerHTML = "Email không được để trống!";
-            return false;
-        } else if (!reGexEmail.test(email)) {
-            errorEmail.innerHTML = "Email không hợp lệ!";
-            email = '';
-            return false;
-        } else {
-            errorEmail.innerHTML = '';
-        }
-
-        var passW = document.getElementById('pass').value;
-        var errorPass = document.getElementById('errorPass');
-
-        if (passW == '' || passW == null) {
-            errorPass.innerHTML = "Mật khẩu vui lòng không để trống!";
+        let password = document.getElementById('pass').value;
+        let errorPass = document.getElementById('errorPass');
+        if (password == '' || password == null) {
+            errorPass.innerHTML = "Mật khẩu không được để trống.";
             return false;
         } else {
             errorPass.innerHTML = "";
         }
 
-        var ConPass = document.getElementById('passw').value;
-        var errorConPass = document.getElementById('errorConPass');
-
-        if (ConPass == '' || ConPass == null) {
-            errorConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
+        let rePassword = document.getElementById('passw').value;
+        let errorRePassword = document.getElementById('errorConPass');
+        if (rePassword == '' || rePassword == null) {
+            errorRePassword.innerHTML = "Xác nhận mật khẩu không được để trống.";
             return false;
-        } else if (ConPass != passW) {
-            errorConPass.innerHTML = "Xác nhận mật khẩu không trùng khớp!";
+        } else if (rePassword != password) {
+            errorRePassword.innerHTML = "Xác nhận mật khẩu và mật khẩu không trùng khớp.";
             return false;
         } else {
-            errorConPass.innerHTML = "";
+            errorRePassword.innerHTML = "";
         }
+
+        let email = document.getElementById('email').value;
+        let errorEmail = document.getElementById('errorEmail');
+        let reGexEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
+        if (email == '' || email == null) {
+            errorEmail.innerHTML = "Email không được để trống.";
+            return false;
+        } else if (!reGexEmail.test(email)) {
+            errorEmail.innerHTML = "Email không hợp lệ.";
+            return false;
+        } else {
+            errorEmail.innerHTML = "";
+        }
+
+        let address = document.getElementById('address').value;
+        let errorAddress = document.getElementById('errorAddress');
+        if(address == '' || address == null){
+            errorAddress.innerHTML = "Địa chỉ không được để trống.";
+            return false;
+        }
+        else
+            errorAddress.innerHTML = "";
+
+        let phone = document.getElementById('phone').value;
+        let errorPhone = document.getElementById('errorPhone');
+        let regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        if (phone == '' || phone == null) {
+            errorPhone.innerHTML = "Số điện thoại không được để trống.";
+            return false;
+        } else if (!regexPhone.test(phone)) {
+            errorPhone.innerHTML = "Số điện thoại không hợp lệ.";
+            return false;
+        } else {
+            errorPhone.innerHTML = "";
+        }
+        if(!name || !username || !password || !rePassword || !email || !address || !phone || password!=rePassword)
+            return false;
         return true;
     }
-    <%--function isAccountExist() {--%>
-    <%--    var check = <%= isExist%>--%>
-    <%--    var errorUsername = document.getElementById("errorUsername").value;--%>
-    <%--    if(check == 1){--%>
-    <%--        errorUsername.innerHTML = "Tên đăng nhập đã tồn tại";--%>
-    <%--        return false--%>
-    <%--    }--%>
-    <%--    return true;--%>
-    <%--}--%>
     function onSubmit() {
         if(Validate()){
+            console.log(Validate());
             document.getElementById("form-dangky").submit();
             localStorage.setItem('isSubmit', true);
-<%--            <%boolean isExist = false;%>--%>
-<%--            <c:if test="${isExist}">--%>
-<%--                <%isExist = true;%>--%>
-<%--            </c:if>--%>
-<%--            var checkAccount = <%= isExist%>;--%>
-<%--            console.log(checkAccount);--%>
-<%--            if(checkAccount)--%>
-<%--                alert("Tên đăng nhập đã tồn tại.");--%>
-<%--            else--%>
-
         }
-        return
     }
     $( document ).ready(function() {
-        if($("#usernameExist").length <= 0 && localStorage.getItem("isSubmit"))
-            alert("Đăng ký thành công.");
+        if($("#usernameExist").length <= 0 && localStorage.getItem("isSubmit")){
+            Swal.fire({
+                position: 'center-center',
+                icon: 'success',
+                title: 'Đăng ký thành công!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
         else if($("#usernameExist").length > 0 && localStorage.getItem("isSubmit")){
+            Swal.fire({
+                icon: 'error',
+                title: 'Đăng ký không thành công!',
+                text: 'Tên đăng nhập đã tồn tại.'
+            })
             $("#registerLabel").trigger('click');
         }
         localStorage.removeItem("isSubmit");
     });
-
-    <%--function checkAccount() {--%>
-    <%--    &lt;%&ndash;var accountList = [&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;    <c:forEach var="account" items="${accountList}">&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;        '<c:out value="${account}"/>',&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;    </c:forEach>&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;]&ndash;%&gt;--%>
-    <%--    var username = document.getElementById("nameAccount").value;--%>
-    <%--    var errorUsername = document.getElementById("usernameExist").value;--%>
-
-    <%--    if (username == null){--%>
-    <%--        errorUsername.innerHTML = "Tên đăng nhập không được để trống.";--%>
-    <%--    }else {--%>
-    <%--        for (let account of accountList) {--%>
-    <%--            if (username == account)--%>
-    <%--                errorUsername.innerHTML = "Tên đăng nhập đã tồn tại.";--%>
-    <%--        }--%>
-    <%--    }--%>
-    <%--}--%>
-
-
-    <%--function registerAlert() {--%>
-    <%--    var check = <%= check%>;--%>
-    <%--    if(check == true){--%>
-    <%--        alert("Tên đăng nhập đã tồn tại.");--%>
-    <%--        // Swal.fire({--%>
-    <%--    //     position: 'center-center',--%>
-    <%--    //     icon: 'success',--%>
-    <%--    //     title: 'Đăng ký thành công!',--%>
-    <%--    //     showConfirmButton: false,--%>
-    <%--    //     timer: 1500--%>
-    <%--    // })--%>
-    <%--    } else{--%>
-    <%--        alert("Đăng ký thành công!")--%>
-    <%--    }--%>
-    <%--}--%>
 </script>
 </html>
 </c:if>

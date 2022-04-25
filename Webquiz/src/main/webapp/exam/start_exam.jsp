@@ -134,6 +134,7 @@
 </div>
 <jsp:include page="/view/footer.jsp"/>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <script language="javascript">
     function start(){
@@ -153,8 +154,30 @@
             seconds %= 60
             if (seconds < 0) {
                 clearInterval(demgio);
-                document.forms["exam-form"].submit();
-                alert('Hết giờ');
+                Swal.fire({
+                    title: '<strong>Hết giờ!</strong>',
+                    icon: 'info',
+                    showCloseButton: true,
+                    showConfirmButton: true,
+                    html: 'Hộp thoại tự đóng sau <b></b> giây.',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = (Swal.getTimerLeft() / 1000)
+                                .toFixed(0)
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                })
+                if(document.getElementById("exam-form"))
+                    setTimeout(function () {
+                        document.forms["exam-form"].submit();
+                    }, 3000);
                 return false;
             }
 
@@ -172,14 +195,10 @@
             document.getElementById('s').innerText = seconds.toString();
 
         }, 1000);
-
-
     }
-
     window.onload = function () {
         start();
     }
-
     function stop(){
         clearInterval(demgio);
     }

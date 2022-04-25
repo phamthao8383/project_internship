@@ -255,8 +255,10 @@ public class UserServlet extends HttpServlet {
 //            List<Account> accountList = accountService.CheckAccount(nameAccount);
 //            request.setAttribute("accountList", accountList);
             String name = request.getParameter("name");
-            name = handleString.handleFont(name);
-            name = handleString.handleName(name);
+            if(name!=null && name != ""){
+                name = handleString.handleFont(name);
+                name = handleString.handleName(name);
+            }
             String ps1 = request.getParameter("passw");
             String ps2 = request.getParameter("con_passw");
             ps1 = passwordEncryption.encrypt(ps1);
