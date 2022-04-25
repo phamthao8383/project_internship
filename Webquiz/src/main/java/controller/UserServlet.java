@@ -30,7 +30,7 @@ public class UserServlet extends HttpServlet {
     private HandleString handleString = new HandleString();
     private PasswordEncryption passwordEncryption = new PasswordEncryption();
 
-    private int pageSize = 10;
+    private int pageSize = 2;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -170,13 +170,12 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("pageSize", pageSize);
 
         System.out.println(engPage);
-
-
-
         request.setAttribute("user", userService.getUserId(idUser));
         request.setAttribute("history", userService.getListExamHistoryPage(idUser,index,pageSize));
         request.getRequestDispatcher("/user/TrangCaNhan.jsp").forward(request, response);
     }
+
+
 
     private void updateMyInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
@@ -196,7 +195,9 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
         String account = request.getParameter("account");
-        Part part = request.getPart("inputFile");
+        String imageLink = request.getParameter("imageLink");
+        System.out.println(imageLink);
+/*        Part part = request.getPart("inputFile");
         String realPath = request.getServletContext().getRealPath("/uploads");
         // chổ ni ae tự thêm đường link foder uploads của dự án vào
         String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\Folder_DuAn\\project_intership\\Webquiz\\src\\main\\webapp\\uploads";
@@ -209,8 +210,8 @@ public class UserServlet extends HttpServlet {
 //        cái này xong là lưu file được rồi.
 //        part.write(realPath+"/"+account + filename);
         part.write(realPath+"/"+account + filename);
-//        chừ lưu filename vào database nữa là ok
-        userService.updateImageUserId(idUser, account + filename);
+//        chừ lưu filename vào database nữa là ok*/
+        userService.updateImageUserId(idUser, imageLink);
         goGetInfo(request,response);
     }
 
