@@ -21,6 +21,8 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @MultipartConfig
 @WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
@@ -57,6 +59,8 @@ public class UserServlet extends HttpServlet {
             case "updatePassword":
                 updatePassword(request, response);
                 break;
+            default:
+                goLogin(request, response);
         }
     }
 
@@ -68,7 +72,6 @@ public class UserServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
             case "login":
                 goLogin(request, response);
                 break;
@@ -249,9 +252,14 @@ public class UserServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
 
             String nameAccount = request.getParameter("nameAccount");
+            System.out.println(nameAccount);
+//            List<Account> accountList = accountService.CheckAccount(nameAccount);
+//            request.setAttribute("accountList", accountList);
             String name = request.getParameter("name");
-            name = handleString.handleFont(name);
-            name = handleString.handleName(name);
+            if(name!=null && name != ""){
+                name = handleString.handleFont(name);
+                name = handleString.handleName(name);
+            }
             String ps1 = request.getParameter("passw");
             String ps2 = request.getParameter("con_passw");
             ps1 = passwordEncryption.encrypt(ps1);
@@ -259,15 +267,29 @@ public class UserServlet extends HttpServlet {
             String address = request.getParameter("address");
             address = handleString.handleFont(address);
             String phone = request.getParameter("phone");
-            int i = accountService.CheckAccount(nameAccount);
-            if(i == 1 ) {
+            boolean isExist = isExistAccount(nameAccount);
+            if (isExist) {
+                request.setAttribute("isExist", true);
                 System.out.println("Trùng tên account!!");
-            } else if(i == 0) {
+                goLogin(request,response);
+                return;
+                //
+                    //                accountList = null;
+            } else {
+
                 User user = new User(name, email,phone,address,"img",nameAccount);
-                Account account = new Account(nameAccount, ps1, 2);
-                accountService.AddAccount(account);
+                Account account1 = new Account(nameAccount, ps1, 2);
+                accountService.AddAccount(account1);
                 userService.addUserList(user);
+                request.setAttribute("isExist", false);
                 goLogin(request,response);
             }
+    }
+    public boolean isExistAccount(String username){
+        int isExist = accountService.CheckAccount2(username);
+        if(isExist > 0){
+            return true;
+        }
+        return false;
     }
 }

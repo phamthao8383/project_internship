@@ -134,6 +134,7 @@
 </div>
 <jsp:include page="/view/footer.jsp"/>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
 <script language="javascript">
     function start(){
@@ -153,8 +154,30 @@
             seconds %= 60
             if (seconds < 0) {
                 clearInterval(demgio);
-                document.forms["exam-form"].submit();
-                alert('Hết giờ');
+                Swal.fire({
+                    title: '<strong>Hết giờ!</strong>',
+                    icon: 'info',
+                    showCloseButton: true,
+                    showConfirmButton: true,
+                    html: 'Hộp thoại tự đóng sau <b></b> giây.',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        timerInterval = setInterval(() => {
+                            b.textContent = (Swal.getTimerLeft() / 1000)
+                                .toFixed(0)
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                })
+                if(document.getElementById("exam-form"))
+                    setTimeout(function () {
+                        document.forms["exam-form"].submit();
+                    }, 3000);
                 return false;
             }
 
@@ -172,14 +195,10 @@
             document.getElementById('s').innerText = seconds.toString();
 
         }, 1000);
-
-
     }
-
     window.onload = function () {
         start();
     }
-
     function stop(){
         clearInterval(demgio);
     }
@@ -189,70 +208,6 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
-<%--<script language="javascript">--%>
-
-<%--    var h = null; // Giờ--%>
-<%--    var m = null; // Phút--%>
-<%--    var s = null; // Giây--%>
-
-<%--    var timeout = null; // Timeout--%>
-
-<%--    function start(m, s)--%>
-<%--    {--%>
-<%--        /*BƯỚC 1: LẤY GIÁ TRỊ BAN ĐẦU*/--%>
-<%--        if (m === null){--%>
-<%--            this.m = m;--%>
-<%--            this.s = s;--%>
-<%--        }--%>
-
-<%--        /*BƯỚC 1: CHUYỂN ĐỔI DỮ LIỆU*/--%>
-<%--        // Nếu số giây = -1 tức là đã chạy ngược hết số giây, lúc này:--%>
-<%--        //  - giảm số phút xuống 1 đơn vị--%>
-<%--        //  - thiết lập số giây lại 59--%>
-<%--        if (s === -1){--%>
-<%--            m -= 1;--%>
-<%--            s = 59;--%>
-<%--        }--%>
-<%--        if(m === 0 && s <= 59){--%>
-<%--            document.getElementById("countdown").style.color = "white";--%>
-<%--            document.getElementById("countdown").style.backgroundColor = "yellow";--%>
-<%--        }--%>
-<%--        if(m === 0 && s <= 10){--%>
-<%--            document.getElementById("countdown").style.color = "white";--%>
-<%--            document.getElementById("countdown").style.backgroundColor = "red";--%>
-<%--            document.getElementById("countdown").style.animation = "blinker 1s linear infinite";--%>
-<%--        }--%>
-
-<%--        // Nếu số phút = -1 tức là đã hết giờ, lúc này:--%>
-<%--        //  - Dừng chương trình--%>
-<%--        if (m == -1){--%>
-<%--            clearTimeout(timeout);--%>
-<%--            document.forms["exam-form"].submit();--%>
-<%--            alert('Hết giờ');--%>
-<%--            return false;--%>
-<%--        }--%>
-
-<%--        /*BƯỚC 1: HIỂN THỊ ĐỒNG HỒ*/--%>
-<%--        // document.getElementById('h').innerText = h.toString();--%>
-<%--        document.getElementById('m').innerText = m.toString();--%>
-<%--        document.getElementById('s').innerText = s.toString();--%>
-
-<%--        /*BƯỚC 1: GIẢM PHÚT XUỐNG 1 GIÂY VÀ GỌI LẠI SAU 1 GIÂY */--%>
-<%--        timeout = setTimeout(function(){--%>
-<%--            s--;--%>
-<%--            start(m, s);--%>
-<%--        }, 1000);--%>
-<%--    }--%>
-
-<%--    window.onload = function () {--%>
-<%--        start(${exam.allowedTime}, 0);--%>
-<%--    }--%>
-
-<%--    function stop(){--%>
-<%--        clearTimeout(timeout);--%>
-<%--    }--%>
-<%--</script>--%>
-
 
 </body>
 </html>

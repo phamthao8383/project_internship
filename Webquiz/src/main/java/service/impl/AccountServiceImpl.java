@@ -4,6 +4,8 @@ import model.Account;
 import repository.AccountRepository;
 import service.AccountService;
 
+import java.util.List;
+
 public class AccountServiceImpl implements AccountService {
     AccountRepository accountRepository = new AccountRepository();
     @Override
@@ -12,9 +14,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public int CheckAccount(String userAccount) {
-        return accountRepository.CheckAccount(userAccount);
+    public int CheckAccount2(String username) {
+        return accountRepository.CheckAccount2(username);
     }
+
+//    @Override
+//    public List<Account> CheckAccount(String username) {
+//        return accountRepository.CheckAccount(username);
+//    }
 
     @Override
     public void AddAccount(Account account) {
