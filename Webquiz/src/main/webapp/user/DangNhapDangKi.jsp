@@ -1,6 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<c:if test="${sessionScope.account != null}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account == null}">
+
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -53,7 +60,12 @@
                             <p style="color: red">Bạn nhập sai tài khoản mật khẩu!</p>
                         </c:if>
 
-                        <div class="text"><a href="#" data-toggle="modal" data-target="#editPassword">Quên mật khẩu ?</a></div>
+
+
+                            <%--                 Quên mật khẩu       --%>
+                        <div class="text"><a href="/user/forgotPassword.jsp">Quên mật khẩu ?</a></div>
+
+
                         <div class="button input-box">
                             <input type="submit" value="Đăng nhập">
                         </div>
@@ -113,57 +125,6 @@
     </div>
 </div>
 
-<!-- Modal quên mật khẩu -->
-<div class="modal fade" id="editPassword" tabindex="-1" role="dialog" aria-labelledby="modalEditPassword" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalEditPassword">Quên mật khẩu</h5>
-            </div>
-            <form action="/userServlet" method="post" name="register" onsubmit="return ValidateForgot()">
-            <div class="modal-body">
-                <div class="form-group row">
-                    <label  class="col-sm-3 control-labelform-label">Tên đăng nhập: </label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputNameAccount" name="inputNameAccount" placeholder="Nhập tên đăng nhập">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label  class="col-sm-3 control-labelform-label">Mật email: </label>
-                    <div class="col-sm-9">
-                        <input type="email" class="form-control"name="inputEmail" id="inputEmail" placeholder="Nhập email...">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 control-labelform-label">Mật khẩu mới: </label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="inputNewPassword" id="inputNewPass" placeholder="Nhập mật khẩu mới">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label  class="col-sm-3 control-labelform-label">Xác nhận mật khẩu: </label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="inputConfirmPassword" id="inputNewPassword" placeholder="Nhập lại mật khẩu">
-                    </div>
-                </div>
-            </div>
-                <div>
-                    <span style="color: red" id="errName"></span>
-                    <span  style="color: red"  id="errEmail"></span>
-                    <span style="color: red"   id="errPass"></span>
-                    <span  style="color: red"  id="errConPass"></span>
-
-
-                </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                <button type="submit" class="btn btn-primary">Cập nhật</button>
-            </div>
-            </form>
-        </div>
-
-    </div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -312,4 +273,4 @@
     }
 </script>
 </html>
-
+</c:if>

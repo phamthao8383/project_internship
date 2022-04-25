@@ -51,7 +51,7 @@
 <%--                                        </div>--%>
                                         <span><i class="fa fa-clock-o"></i>${exam.allowedTime} phút</span>
                                     </div>
-                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>80 lượt thi</span>
+                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>${examQuestion.timesExam} lượt thi</span>
                                     </div>
                                 </div>
                                 <div class="exam-content">

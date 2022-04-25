@@ -111,7 +111,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void goLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/DangNhapDangKi.jsp");
         dispatcher.forward(request,response);

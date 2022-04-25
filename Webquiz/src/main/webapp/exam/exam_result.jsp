@@ -40,11 +40,11 @@
                                 <h2 style="text-align: center"> Kết quả bài làm</h2>
                                 <div class="detail-question">
                                     <div class="num-question col" style="text-align: center"><span><i
-                                            class="fa fa-check-square"></i> ${point}/${tong} Điểm</span>
+                                            class="fa fa-check-square"></i> ${point}/${examQuestion.total * 10} Điểm</span>
                                     </div>
                                     <div class="num-minutes col" style="text-align: center"><span><i
                                             class="fa fa-clock-o"
-                                            aria-hidden="true"></i>85 phút</span>
+                                            aria-hidden="true"></i>${exam.allowedTime} phút</span>
                                     </div>
                                 </div>
                                 <div class="exam-content">

@@ -25,17 +25,27 @@ public class ExamViewRepository {
             preparedStatement.setInt(1,sjId);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-
                 String queryTotal = "select count(exam.exam_id) as total from `exam` join exam_question on exam.exam_id = exam_question.exam_id where exam.exam_id = ?";
 
                 PreparedStatement preparedStatementTotal = this.baseRepository.getConnection().prepareStatement(queryTotal);
                 preparedStatementTotal.setInt(1,rs.getInt("exam_id"));
                 ResultSet rsTotal = preparedStatementTotal.executeQuery();
+
+                String queryTimesExam = "select count(exam_id) as timesExam from `assignment` where exam_id = ?";
+
+                PreparedStatement preparedStatementTimesExam = this.baseRepository.getConnection().prepareStatement(queryTimesExam);
+                preparedStatementTimesExam.setInt(1,rs.getInt("exam_id"));
+                ResultSet rsTimesExam = preparedStatementTimesExam.executeQuery();
+                int timesExam = 0;
+                while (rsTimesExam.next()) {
+                    timesExam = rsTimesExam.getInt("timesExam");
+                }
+
                 while (rsTotal.next()) {
                     exam = new ExamQuestion (new Exam( rs.getInt("exam_id")
                             ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
                             ,rs.getString("allowed_time")
-                            ,rs.getString("exam_name")), rsTotal.getInt("total"));
+                            ,rs.getString("exam_name")), rsTotal.getInt("total"), timesExam);
                     listExam.add(exam);
                 }
             }
@@ -47,10 +57,12 @@ public class ExamViewRepository {
 
     public ExamQuestion getExamQuestionId(int id) {
 
-        ExamQuestion examQusetion = new ExamQuestion();
+        ExamQuestion examQuestion = new ExamQuestion();
         int total = 0;
         try {
             String myQuery = "SELECT *  FROM `exam` join `subject` on `exam`.subject_id = `subject`.subject_id  where exam_id = ?";
+            String queryTimesExam = "select count(exam_id) as timesExam from `assignment` where exam_id = ?";
+
             String queryTotal = "select count(exam.exam_id) as total from `exam` join exam_question on exam.exam_id = exam_question.exam_id where exam.exam_id = ?";
             PreparedStatement preparedStatementTotal = this.baseRepository.getConnection().prepareStatement(queryTotal);
             preparedStatementTotal.setInt(1,id);
@@ -59,19 +71,27 @@ public class ExamViewRepository {
                 total =  rsTotal.getInt("total");
             }
 
+            PreparedStatement preparedStatementTimesExam = this.baseRepository.getConnection().prepareStatement(queryTimesExam);
+            preparedStatementTimesExam.setInt(1,id);
+            ResultSet rsTimesExam = preparedStatementTimesExam.executeQuery();
+            int timesExam = 0;
+            while (rsTimesExam.next()) {
+                timesExam = rsTimesExam.getInt("timesExam");
+            }
+
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
             preparedStatement.setInt(1,id);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                examQusetion = new ExamQuestion (new Exam( rs.getInt("exam_id")
+                examQuestion = new ExamQuestion (new Exam( rs.getInt("exam_id")
                         ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
                         ,rs.getString("allowed_time")
-                        ,rs.getString("exam_name")), total);
+                        ,rs.getString("exam_name")), total, timesExam);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return examQusetion;
+        return examQuestion;
     }
 
 
