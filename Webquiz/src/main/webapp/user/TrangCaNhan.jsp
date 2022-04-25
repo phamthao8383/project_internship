@@ -23,7 +23,7 @@
         </div>
         <div class="form__info-body">
             <div class="form__info-image">
-                <img src="/uploads/${user.image}" class="form__info-img">
+                <img src="${user.image}" class="form__info-img">
                 <button data-toggle="modal" data-target="#editImage" class="form__info-btn-image">Đổi ảnh</button>
             </div>
             <ul class="form__info-list" style="padding-left:20px">
@@ -73,7 +73,7 @@
                 <th scope="col">Thời gian</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="content">
             <c:forEach items="${history}" var="exam" varStatus="loop">
                 <tr>
                     <th scope="row">${loop.index +1 +  (indexPage-1)*pageSize}</th>
@@ -147,18 +147,21 @@
                 <input type="hidden" name="idUser" value="${user.userId}">
                 <input type="hidden" name="account" value="${user.account}">
                 <input type="hidden" name="index" value="${indexPage}">
+                <input type="hidden" id="imageLink" name="imageLink" value="">
                 <div class="modal-body">
                     <div class="form-group row">
-                        <img src="/uploads/${user.image}" width="200" height="200" id="imageInput">
+                        <img src="${user.image}" width="200" height="200" id="imageInput">
                     </div>
                     <div class="form-group row">
                             <input type="file" name="inputFile" id="inputFile" accept="image/gif, image/jpeg, image/png" onchange="chooseFile(this)">
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="button"  id="btnUpload" class="btn btn-primary">Cập nhật</button>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary">Cập nhật</button>
-                </div>
+
             </form>
         </div>
     </div>
@@ -271,6 +274,48 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+<script type="module">
+    const firebaseConfig = {
+        apiKey: "AIzaSyBTvluOVU-z5bsZLJTgrGogrJlTEYzCzJU",
+        authDomain: "quizgym-f6283.firebaseapp.com",
+        projectId: "quizgym-f6283",
+        storageBucket: "quizgym-f6283.appspot.com",
+        messagingSenderId: "244734517152",
+        appId: "1:244734517152:web:952cf6f50243f7d9fecec5",
+        measurementId: "G-8HMY0ZTSRK"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+
+
+    // upload anhr filebase
+    const btn = document.getElementById("btnUpload");
+    btn.onclick = function() {
+        const ref = firebase.storage().ref();
+        const file = document.querySelector('#inputFile').files[0];
+        const metadata = {
+            contentType: file.type
+        };
+        console.log(file);
+        const name = "${user.account}"  + file.name;
+        const uploadIMG = ref.child(name).put(file, metadata);
+        uploadIMG
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                document.getElementById("imageLink").value = url;
+                console.log(url);
+                document.getElementById("formImage").submit();
+            })
+            .catch(console.error)
+
+    };
+</script>
+
 <script src="/static/js/TrangCaNhan.js"></script>
 
 </body>

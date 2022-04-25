@@ -61,7 +61,12 @@
                             <p style="color: red">Bạn nhập sai tài khoản mật khẩu!</p>
                         </c:if>
 
-                        <div class="text"><a href="#" data-toggle="modal" data-target="#editPassword">Quên mật khẩu ?</a></div>
+
+
+                            <%--                 Quên mật khẩu       --%>
+                        <div class="text"><a href="/user/forgotPassword.jsp">Quên mật khẩu ?</a></div>
+
+
                         <div class="button input-box">
                             <input type="submit" value="Đăng nhập">
                         </div>
@@ -131,7 +136,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal quên mật khẩu -->
 <div class="modal fade" id="editPassword" tabindex="-1" role="dialog" aria-labelledby="modalEditPassword" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

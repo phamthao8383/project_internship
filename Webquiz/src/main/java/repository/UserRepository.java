@@ -1,10 +1,14 @@
 package repository;
 
+import com.sun.org.apache.xerces.internal.impl.XMLEntityManager;
 import model.Exam;
 import model.ExamHistory;
 import model.Subject;
 import model.User;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

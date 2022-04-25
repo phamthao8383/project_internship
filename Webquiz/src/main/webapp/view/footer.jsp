@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="footer">
     <!-- Footer -->
+
     <footer class="bg-dark text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
