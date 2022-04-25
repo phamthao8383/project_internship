@@ -20,6 +20,12 @@ public class Exam {
     public Exam() {
     }
 
+    public Exam(Subject subject, String allowedTime, String examName) {
+        this.subject = subject;
+        this.allowedTime = allowedTime;
+        this.examName = examName;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +

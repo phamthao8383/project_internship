@@ -10,14 +10,14 @@ public class MemberServiceImpl implements MemberService {
     MemberRepository memberRepository = new MemberRepository();
 
     @Override
-    public List<Member> getMemberList() {
-        return memberRepository.getMemberList();
+    public List<Member> getMemberList(int indexPage) {
+        return memberRepository.getMemberList(indexPage);
     }
 
-//    @Override
-//    public Member viewMemberUpdate(Member member) {
-//        return memberRepository.viewMemberUpdate(member);
-//    }
+    @Override
+    public int getTotalMember() {
+        return memberRepository.getTotalMember();
+    }
 
     @Override
     public List<Member> getMaxPoint() {

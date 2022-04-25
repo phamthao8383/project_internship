@@ -76,7 +76,7 @@
             <tbody>
             <c:forEach items="${history}" var="exam" varStatus="loop">
                 <tr>
-                    <th scope="row">${loop.index +1}</th>
+                    <th scope="row">${loop.index +1 +  (indexPage-1)*pageSize}</th>
                     <td>${exam.getExam().getSubject().subject_name}</td>
                     <td>${exam.getExam().examName}</td>
                     <td>${exam.point}</td>
@@ -86,18 +86,46 @@
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-sm justify-content-center">
+            <ul class="pagination">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true"><i class="fa-solid fa-angles-left"></i></span>
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <c:forEach begin="1" end="${countPage}"  var="p">
+                    <c:choose>
+                        <c:when test="${p == indexPage}">
+                            <li class="page-item active">
+                                <form action="/userServlet" method="post">
+                                    <input type="hidden" name="action" value="infoUser">
+                                    <input type="hidden" name="index" value="${p}">
+                                    <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
+
+                                    <button  class="page-link" id="page${p}" onclick="activePage(${p})" type="submit">
+                                            ${p}
+                                    </button>
+                                </form>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <form action="/userServlet" method="post">
+                                    <input type="hidden" name="action" value="infoUser">
+                                    <input type="hidden" name="index" value="${p}">
+                                    <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
+                                    <button  class="page-link" id="page${p}" onclick="activePage(${p})" type="submit">
+                                            ${p}
+                                    </button>
+                                </form>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true"><i class="fa-solid fa-angles-right"></i> </span>
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
                     </a>
                 </li>
             </ul>
@@ -118,6 +146,7 @@
                 <input type="hidden" name="action" value="updateImage">
                 <input type="hidden" name="idUser" value="${user.userId}">
                 <input type="hidden" name="account" value="${user.account}">
+                <input type="hidden" name="index" value="${indexPage}">
                 <div class="modal-body">
                     <div class="form-group row">
                         <img src="/uploads/${user.image}" width="200" height="200" id="imageInput">
@@ -146,6 +175,7 @@
             <form id="form-chinhsua"  action="/userServlet" method="post" name="register" onsubmit="return ValidateEdit()">
                 <input type="hidden" name="action" value="updateMyInfo">
                 <input type="hidden" name="idUser" value="${user.userId}">
+                <input type="hidden" name="index" value="${indexPage}">
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-2 col-form-label">Họ tên</label>
@@ -198,6 +228,7 @@
                 <input type="hidden" name="action" value="updatePassword">
                 <input type="hidden" name="idUser" value="${user.userId}">
                 <input type="hidden" name="nameAccount" value="${user.account}">
+                <input type="hidden" name="index" value="${indexPage}">
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 control-labelform-label">Mật khẩu hiện tại: </label>

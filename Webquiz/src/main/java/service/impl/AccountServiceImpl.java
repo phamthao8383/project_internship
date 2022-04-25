@@ -14,9 +14,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account CheckAccount(String username) {
-        return accountRepository.CheckAccount(username);
+    public int CheckAccount2(String username) {
+        return accountRepository.CheckAccount2(username);
     }
+
+//    @Override
+//    public List<Account> CheckAccount(String username) {
+//        return accountRepository.CheckAccount(username);
+//    }
 
     @Override
     public void AddAccount(Account account) {

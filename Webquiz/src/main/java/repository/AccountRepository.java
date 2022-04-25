@@ -36,20 +36,45 @@ public class AccountRepository {
         }
         return account;
     }
-    public Account CheckAccount(String username) {
-        Account account = new Account();
+//    public List<Account> CheckAccount(String username) {
+//        List<Account> accountList = new ArrayList<>();
+//        Account account;
+//        try {
+//            String myQuery = "SELECT count(username) FROM `account` where username = ?";
+//            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+//            preparedStatement.setString(1, username);
+//            ResultSet rs = preparedStatement.executeQuery();
+//            while (rs.next()) {
+//                account = new Account(rs.getString(1));
+//                accountList.add(account);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println(accountList.toString());
+//        return accountList;
+//
+//    }
+
+    public int CheckAccount2(String username) {
+//        List<Account> accountList = new ArrayList<>();
+//        Account account;
+        int count = 0;
         try {
-            String myQuery = "SELECT username FROM `account` where username = ?";
+            String myQuery = "SELECT count(username) FROM `account` where username = ?";
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                account = new Account(rs.getString(1));
+//                account = new Account(rs.getString(1));
+//                accountList.add(account);
+                count = rs.getInt(1);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return account;
+        System.out.println(count);
+        return count;
     }
 
     public void AddAccount(Account account) {
