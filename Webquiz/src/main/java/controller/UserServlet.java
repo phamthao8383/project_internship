@@ -200,7 +200,7 @@ public class UserServlet extends HttpServlet {
 /*        Part part = request.getPart("inputFile");
         String realPath = request.getServletContext().getRealPath("/uploads");
         // chổ ni ae tự thêm đường link foder uploads của dự án vào
-        String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\Folder_DuAn\\project_intership\\Webquiz\\src\\main\\webapp\\uploads";
+        String realPath2 = "D:\\InternNhom2\\project_internship\\Webquiz\\src\\main\\webapp\\uploads";
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
         if(!Files.exists(Paths.get(realPath))) {

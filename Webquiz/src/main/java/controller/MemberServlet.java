@@ -2,6 +2,7 @@ package controller;
 
 import model.Member;
 import org.omg.PortableInterceptor.INACTIVE;
+import repository.MemberRepository;
 import service.MemberService;
 import service.impl.MemberServiceImpl;
 import util.HandleString;
@@ -18,6 +19,7 @@ import java.util.List;
 public class MemberServlet extends HttpServlet {
     MemberService memberService = new MemberServiceImpl();
     HandleString handleString = new HandleString();
+    int entryDisplay = MemberRepository.entryDisplay();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -53,12 +55,15 @@ public class MemberServlet extends HttpServlet {
             index = "1";
         }
         int indexPage = Integer.parseInt(index);
+        int indexMember = ((indexPage - 1)*entryDisplay + 1);
         // Tạo bảng
         List<Member> memberList = memberService.getMemberList(indexPage);
         request.setAttribute("memberList", memberList);
-        // Dãy số phân trang dưới bảng
-        pagingNumber(request, response);
-        request.setAttribute("currentPage", indexPage);
+
+        pagingNumber(request, response);                          // Dãy số phân trang dưới bảng
+        request.setAttribute("currentPage", indexPage);     // Index của trang(bảng) đang hiển thị thông tin
+        request.setAttribute("indexMember", indexMember);   // Index vị trí của thành viên đầu tiên trong bảng
+        request.setAttribute("entryDisplay", entryDisplay); // Số thành viên được hiển thị trên mỗi trang(bảng)
         request.getRequestDispatcher("/admin/manage-user.jsp").forward(request, response);
     }
 
@@ -90,11 +95,11 @@ public class MemberServlet extends HttpServlet {
 
     private void pagingNumber(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int totalMember = memberService.getTotalMember();
-        int numberDisplay = 5;
-        int maxPages = totalMember/numberDisplay;
-        if (totalMember % numberDisplay != 0){
+        int maxPages = (totalMember/entryDisplay);
+        if (totalMember % entryDisplay != 0){
             maxPages++;
         }
+        request.setAttribute("totalMember", totalMember);
         request.setAttribute("maxPages", maxPages);
     }
 
