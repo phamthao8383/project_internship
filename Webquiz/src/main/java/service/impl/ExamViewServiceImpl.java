@@ -16,6 +16,11 @@ public class ExamViewServiceImpl implements ExamViewService {
     }
 
     @Override
+    public List<ExamQuestion> examListTop5() {
+        return examRepository.examListTop5();
+    }
+
+    @Override
     public ExamQuestion getExamQuestionId(int id) {
         return examRepository.getExamQuestionId(id);
     }

@@ -42,13 +42,31 @@ public class QuestionServlet extends HttpServlet {
 //                break;
 //            }
             case "search": {
-                //   searchQuestion(request, response);
+                searchQuestion(request, response);
+                break;
+            }
+            case "export":{
+                exportExcel(request,response);
+                break;
             }
             default:
                 questionList(request, response);
                 break;
         }
 
+    }
+
+    private void searchQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String description=request.getParameter("description");
+        List<Question>questions=questionService.findAllByDescription(description);
+        request.setAttribute("listQuestion",questions);
+        request.getRequestDispatcher("/admin/question-bank.jsp").forward(request,response);
+    }
+
+    private void exportExcel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Question> questions = questionService.selectAllQuestion();
+        questionService.exportCSV(questions);
+        questionList(request, response);
     }
 
 //    private void showFormDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -106,7 +124,7 @@ public class QuestionServlet extends HttpServlet {
                 break;
             }
             case "delete": {
-                  deleteQuestion(request, response);
+                deleteQuestion(request, response);
                 break;
             }
         }

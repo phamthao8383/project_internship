@@ -32,12 +32,24 @@
             <div class="col-10 content">
                 <div class="content__title">
                     <p>Danh sách câu hỏi</p>
-                    <div class="title-actions">
-                        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#createQuestionModal">Tạo mới
-                        </button>
-                    </div>
                 </div>
+                <nav class="navbar justify-content-between">
+                    <div class="d-flex">
+                        <div class="title-actions" style="margin-right: 8px">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#createQuestionModal">Tạo mới
+                            </button>
+                        </div>
+                        <div class="title-actions">
+                            <a class="btn btn-outline-warning" role="button" href="/admin/questions?action=export">Xuất file</a>
+                        </div>
+                    </div>
+                    <form method="get" action="/admin/questions" class="form-inline d-flex">
+                        <input type="hidden" name="action" value="search">
+                        <input class="form-control mr-sm-2" type="search" name="description" placeholder="Nhập từ khóa..." aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm</button>
+                    </form>
+                </nav>
                 <div class="user-list">
                     <table border="1" cellpadding="5" class="table table-hover">
                         <thead>

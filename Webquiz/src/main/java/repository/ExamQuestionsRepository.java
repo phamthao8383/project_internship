@@ -80,4 +80,16 @@ public class ExamQuestionsRepository {
         }
     }
 
+    public void DeleteQuestionExam (int exam_id, int question_id) {
+        String myQuery = "DELETE FROM exam_question WHERE   exam_id = ? and  question_id = ?";
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setInt(1,exam_id);
+            preparedStatement.setInt(2,question_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

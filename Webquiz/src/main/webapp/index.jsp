@@ -53,15 +53,15 @@
         </div>
         <div class="col-6 col-md-6">
             <div class="row">
-                <div class="col-6">
+                <a href="/exam_list?action=list_exam&sj_id=1" class="col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/Thiết-kế-không-tên-1-1.png" style="height: 180px" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">Toán Học</h5>
                         </div>
                     </div>
-                </div>
-                <div class="col-6">
+                </a>
+                <a href="/exam_list?action=list_exam&sj_id=3" class="col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/vai-tro-cua-hoa-hoc-lop-8_3.png" style="height: 180px"
                              alt="Card image cap">
@@ -69,9 +69,9 @@
                             <h5 class="card-title">Hóa Học</h5>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class=" col-6">
+                <a href="/exam_list?action=list_exam&sj_id=2" class=" col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/sach-hay-ve-vat-ly-cover-780x470.png" style="height: 180px" alt="Card image cap">
                         <div class="card-body">
@@ -79,8 +79,8 @@
 
                         </div>
                     </div>
-                </div>
-                <div class=" col-6">
+                </a>
+                <a href="/exam_list?action=list_exam&sj_id=10" class=" col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/500-mau-cau-tieng-anh-giao-tiep-hay-dung-nhat-phan-1.png"
                              style="height: 180px" alt="Card image cap">
@@ -88,8 +88,8 @@
                             <h5 class="card-title">Tiếng Anh</h5>
                         </div>
                     </div>
-                </div>
-                <div class="col-6">
+                </a>
+                <a href="/exam_list?action=list_exam&sj_id=10" class="col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/quy-dinh-thi-bang-lai-xe-may.png" style="height: 180px"
                              alt="Card image cap">
@@ -98,8 +98,8 @@
 
                         </div>
                     </div>
-                </div>
-                <div class=" col-6">
+                </a>
+                <a href="/exam_list?action=list_exam&sj_id=10" class=" col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/post-thumb-ngon-ngu-lap-trinh.png" style="height: 180px"
                              alt="Card image cap">
@@ -107,7 +107,7 @@
                             <h5 class="card-title">Ngôn Ngữ Lập Trình</h5>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
 
         </div>

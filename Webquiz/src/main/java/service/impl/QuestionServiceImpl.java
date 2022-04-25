@@ -4,6 +4,9 @@ import model.Question;
 import repository.QuestionRepository;
 import service.QuestionService;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class QuestionServiceImpl implements QuestionService {
@@ -34,7 +37,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Question> findAllByName(String name) {
-        return null;
+    public List<Question> findAllByDescription(String description) {
+        return questionRepository.findAllByDescription(description);
+    }
+
+
+    @Override
+    public void exportCSV(List<Question> questions) throws IOException {
+
     }
 }

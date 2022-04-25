@@ -1,8 +1,11 @@
 package controller;
 
 import model.ExamQuestion;
+import model.Subject;
 import service.ExamViewService;
+import service.SubjectService;
 import service.impl.ExamViewServiceImpl;
+import service.impl.SubjectServiceImpl;
 import util.HandleString;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +26,7 @@ import java.util.List;
 @WebServlet(name = "ExamViewServlet", urlPatterns = "/exam_list")
 public class ExamViewServlet extends HttpServlet {
     ExamViewService examViewService = new ExamViewServiceImpl();
+    private SubjectService subjectService = new SubjectServiceImpl();
     private HandleString handleString = new HandleString();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -66,6 +70,9 @@ public class ExamViewServlet extends HttpServlet {
              ) {
             System.out.println(e);
         }
+        request.setAttribute("list5Exam", examViewService.examListTop5());
+        List<Subject> listSubject = subjectService.selectAllSubject();
+        request.setAttribute("listSubject", listSubject);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/DanhSachDe.jsp");
         dispatcher.forward(request,response);
     }

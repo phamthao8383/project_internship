@@ -17,6 +17,7 @@ public class QuestionRepository {
     private static final String SELECT_ALL_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id;";
     private static final String INSERT_QUESTION = "INSERT INTO question" + " (question_id,`description`,answer1,answer2,answer3,answer4,correct_answer,subject_id) VALUES" + "(?,?,?,?,?,?,?,?);";
     private static final String UPDATE_QUESTION = "update question set `description` = ?,answer1 = ?,answer2 = ?,answer3 = ?,answer4 = ?,correct_answer = ?,subject_id= ? where question_id = ?";
+    private static final String SEARCH_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id where `description` like ?;";
 
     public List<Question> selectAllQuestion() {
         List<Question> questions = new ArrayList<>();
@@ -123,5 +124,34 @@ public class QuestionRepository {
             e.printStackTrace();
         }
         return rowDeleted;
+    }
+
+    public List<Question> findAllByDescription(String description) {
+        List<Question> questionList = new ArrayList<>();
+        try {
+            Connection connection = baseRepository.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_QUESTION);
+            String description1 = "%" + description + "%";
+            preparedStatement.setString(1, description1);
+            ResultSet rs = preparedStatement.executeQuery();
+            Question question;
+            while (rs.next()) {
+                question = new Question();
+                question.setQuestion_id(rs.getInt("question_id"));
+                question.setDescription(rs.getString("description"));
+                question.setAnswer1(rs.getString("answer1"));
+                question.setAnswer2(rs.getString("answer2"));
+                question.setAnswer3(rs.getString("answer3"));
+                question.setAnswer4(rs.getString("answer4"));
+                question.setCorrect_answer(rs.getString("correct_answer"));
+                int subject_id = rs.getInt("subject_id");
+                String subject_name = rs.getString("subject_name");
+                question.setSubject(new Subject(subject_id, subject_name));
+                questionList.add(question);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return questionList;
     }
 }

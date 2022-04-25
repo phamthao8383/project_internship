@@ -23,4 +23,9 @@ public class ExamQuestionsServiceImpl implements ExamQuestionsService {
     public void addQuestionExam(int exam_id, int question_id) {
         examQuestionsRepository.addQuestionExam(exam_id,question_id);
     }
+
+    @Override
+    public void DeleteQuestionExam(int exam_id, int question_id) {
+        examQuestionsRepository.DeleteQuestionExam(exam_id,question_id);
+    }
 }

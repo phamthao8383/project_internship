@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ExamViewService {
     public List<ExamQuestion> examList(int sjId);
+    public List<ExamQuestion> examListTop5();
     public ExamQuestion getExamQuestionId(int id);
     public Exam getExamId(int id);
     public List<Question> loadExamQuestion(int idExam);

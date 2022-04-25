@@ -29,6 +29,9 @@ public class ExamQuestionServlet extends HttpServlet {
             case "addQuestion":
                 AddQuestionExam(request,response);
                 break;
+            case "deleteQuestion":
+                DeleteQuestionExam(request,response);
+                break;
             default:
                 ExamQuestionList(request, response);
                 break;
@@ -56,6 +59,16 @@ public class ExamQuestionServlet extends HttpServlet {
         String[] Id_list = request.getParameterValues("question");
         for (String s : Id_list) {
             examQuestionsService.addQuestionExam(examId, Integer.parseInt(s));
+        }
+        ExamQuestionList(request,response);
+    }
+
+    private void DeleteQuestionExam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int examId = Integer.parseInt(request.getParameter("examId"));
+        // lấy list đã chọn về
+        String[] Id_list = request.getParameterValues("questionDel");
+        for (String s : Id_list) {
+            examQuestionsService.DeleteQuestionExam(examId, Integer.parseInt(s));
         }
         ExamQuestionList(request,response);
     }

@@ -22,11 +22,22 @@
                 <h4>Đề thi trắc nghiệm môn ${listExam[0].exam.getSubject().getSubject_name()}</h4>
             </div>
             <div class="col-4">
-                <select class="custom-select">
-                    <option selected>Chọn môn</option>
-                    <option value="1">Toán</option>
-                    <option value="2">Lý</option>
-                    <option value="3">Hoá</option>
+                <select name="subject_id" class="custom-select">
+                    <c:forEach var="subject" items="${listSubject}">
+                        <c:choose>
+                            <c:when test="${subject.subject_name eq listExam[0].exam.getSubject().getSubject_name()}">
+                                <option selected>
+                                    <a href="/exam_list?action=list_exam&sj_id=${subject.subject_id}"> ${subject.subject_name}</a>
+                                </option>
+                            </c:when>
+                            <c:otherwise>
+                                <option >
+                                    <a href="/exam_list?action=list_exam&sj_id=${subject.subject_id}">${subject.subject_name}</a>
+
+                                </option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -64,50 +75,19 @@
                     </div>
                     <div class="common-exam__body">
                         <ul class="common-exam__list">
-                            <li class="common-exam__item">
-                                <div class="common-exam__cart">
-                                    <a href="" class="ce__link">
-                                        <h6 class="ce_label">Đề thi giữa HK2 môn Toán 12 năm 2021-2022</h6>
-                                    </a>
-                                    <div class="ce__description row">
-                                        <p class="ce__time">Thời gian: 60 phút</p>
-                                        <p class="ce__question-number">Số câu: 40</p>
+                            <c:forEach items="${list5Exam}" var="exam">
+                                <li class="common-exam__item">
+                                    <div class="common-exam__cart">
+                                        <a href="" class="ce__link">
+                                            <h6 class="ce_label">${exam.exam.examName}</h6>
+                                        </a>
+                                        <div class="ce__description row">
+                                            <p class="ce__time">Thời gian: ${exam.exam.allowedTime}</p>
+                                            <p class="ce__question-number">Số câu: ${exam.total} - Lượt thi: ${exam.timesExam}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="common-exam__item">
-                                <div class="common-exam__cart">
-                                    <a href="" class="ce__link">
-                                        <h6 class="ce_label">Đề thi giữa HK2 môn Toán 12 năm 2021-2022</h6>
-                                    </a>
-                                    <div class="ce__description row">
-                                        <p class="ce__time">Thời gian: 60 phút</p>
-                                        <p class="ce__question-number">Số câu: 40</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="common-exam__item">
-                                <div class="common-exam__cart">
-                                    <a href="" class="ce__link">
-                                        <h6 class="ce_label">Đề thi giữa HK2 môn Toán 12 năm 2021-2022</h6>
-                                    </a>
-                                    <div class="ce__description row">
-                                        <p class="ce__time">Thời gian: 60 phút</p>
-                                        <p class="ce__question-number">Số câu: 40</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="common-exam__item">
-                                <div class="common-exam__cart">
-                                    <a href="" class="ce__link">
-                                        <h6 class="ce_label">Đề thi giữa HK2 môn Toán 12 năm 2021-2022</h6>
-                                    </a>
-                                    <div class="ce__description row">
-                                        <p class="ce__time">Thời gian: 60 phút</p>
-                                        <p class="ce__question-number">Số câu: 40</p>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>

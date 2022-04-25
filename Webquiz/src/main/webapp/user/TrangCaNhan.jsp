@@ -150,16 +150,17 @@
                 <input type="hidden" id="imageLink" name="imageLink" value="">
                 <div class="modal-body">
                     <div class="form-group row">
-                        <img src="${user.image}" width="200" height="200" id="imageInput">
+                        <img src="${user.image}" width="200" height="200" id="imageInput" style="border-radius: 50%;margin: auto;">
                     </div>
                     <div class="form-group row">
                             <input type="file" name="inputFile" id="inputFile" accept="image/gif, image/jpeg, image/png" onchange="chooseFile(this)">
 
-                        <div class="modal-footer">
-                            <button type="button"  class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                            <button type="button"  id="btnUpload" class="btn btn-primary">Cập nhật</button>
-                        </div>
                     </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button"  id="btnUpload" class="btn btn-primary">Cập nhật</button>
                 </div>
 
             </form>
