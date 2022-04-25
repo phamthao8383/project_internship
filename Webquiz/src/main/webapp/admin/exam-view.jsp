@@ -30,10 +30,9 @@
             <div class="col-10 content">
                 <div class="content__title">
                     <div class="content_titlepath">
-                        <a href="/admin/exam-list.jsp" class="content__pathback">Danh sách đề thi</a>
+                        <a href="/admin/exams" class="content__pathback">Danh sách đề thi</a>
                         <p class="content__examname">
-                            <i class="fa-solid fa-angle-right"></i>
-                            Đề thi số 1 - Toán
+                            <i class="fa-solid fa-angle-right"></i>${subjectName} - ${examName}
                         </p>
                     </div>
                     <div class="title-actions">
@@ -46,54 +45,30 @@
                 <div id="exam-question-list" class="user-list">
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã câu hỏi</th>
-                            <th scope="col">Câu hỏi</th>
-                            <th scope="col">Câu trả lời</th>
-                            <th scope="col">Chọn</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Mã câu hỏi</th>
+                                <th scope="col" style="width: 35%">Câu hỏi</th>
+                                <th scope="col" style="width: 30%">Đáp án đúng</th>
+                                <th scope="col">Chọn</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>001</td>
-                            <td>Chuyển động tăng dần đều là gì?</td>
-                            <td>Vận tốc tăng dần với gia tốc không đổi.</td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>002</td>
-                            <td>Tính chất chung của kim loại?</td>
-                            <td>Dẻo, dẫn nhiệt, dẫn điện, ánh kim.</td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                                    <label class="form-check-label" for="flexCheckDefault2">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>003</td>
-                            <td>I am interested in (listen)_____ to music.</td>
-                            <td>listening</td>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                                    <label class="form-check-label" for="flexCheckDefault1">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
+                        <c:forEach items="${listExamQuestion}" var="question" varStatus="loop">
+                            <tr>
+                                <th scope="row">${loop.index + 1}</th>
+                                <td >${question.question_id}</td>
+                                <td><span class="limit-text">${question.description}</span></td>
+                                <td><span class="limit-text">${question.correct_answer}</span></td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <nav aria-label="Page navigation example">
@@ -116,80 +91,58 @@
                 </div>
 
                 <div id="add-question" class="d-none">
-                    <table class="table table-hover">
-                        <colgroup>
-                            <col width=auto span="1">
-                            <col width="100px" span="1">
-                            <col width=auto span="4">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Mã câu hỏi</th>
-                            <th scope="col">Câu hỏi</th>
-                            <th scope="col">Phương án</th>
-                            <th scope="col">Đáp án</th>
-                            <th scope="col">
-                                <button type="button" class="btn btn-primary btn-sm" >
-                                    Thêm
-                                </button>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>001</td>
-                            <td>Chuyển động tăng dần đều là gì?</td>
-                            <td>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-primary">Gia tốc không thay đổi.</li>
-                                    <li class="list-group-item list-group-item-success">Vận tốc không thay đổi.</li>
-                                    <li class="list-group-item list-group-item-danger">Quảng đường đi lớn nhất</li>
-                                    <li class="list-group-item list-group-item-warning">Vận tốc tăng dần với gia tốc không đổi</li>
-                                </ul>
-                            </td>
-                            <td>Vận tốc tăng dần với gia tốc không đổi</td>
-                            <td>
-                                <input class="form-check-input" type="checkbox" value="" >
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>002</td>
-                            <td>Chuyển động tăng dần đều là gì?</td>
-                            <td>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-primary">Gia tốc không thay đổi.</li>
-                                    <li class="list-group-item list-group-item-success">Vận tốc không thay đổi.</li>
-                                    <li class="list-group-item list-group-item-danger">Quảng đường đi lớn nhất</li>
-                                    <li class="list-group-item list-group-item-warning">Vận tốc tăng dần với gia tốc không đổi</li>
-                                </ul>
-                            </td>
-                            <td>Vận tốc tăng dần với gia tốc không đổi</td>
-                            <td>
-                                <input class="form-check-input" type="checkbox" value="" >
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>003</td>
-                            <td>Chuyển động tăng dần đều là gì?</td>
-                            <td>
-                                <ul class="list-group">
-                                    <li class="list-group-item list-group-item-primary">Gia tốc không thay đổi.</li>
-                                    <li class="list-group-item list-group-item-success">Vận tốc không thay đổi.</li>
-                                    <li class="list-group-item list-group-item-danger">Quảng đường đi lớn nhất</li>
-                                    <li class="list-group-item list-group-item-warning">Vận tốc tăng dần với gia tốc không đổi</li>
-                                </ul>
-                            </td>
-                            <td>Vận tốc tăng dần với gia tốc không đổi</td>
-                            <td>
-                                <input class="form-check-input" type="checkbox" value="" >
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <form action="/admin/examQuestion" method="post">
+                        <input type="hidden" name="action" value="addQuestion">
+                        <input type="hidden" name="examId" value="${examId}">
+                        <input type="hidden" name="examName" value="${examName}">
+                        <input type="hidden" name="subjectName" value="${subjectName}">
+                        <input type="hidden" name="subjectId" value="${subjectId}">
+                        <table class="table table-hover">
+                            <colgroup>
+                                <col width=auto span="1">
+                                <col width="100px" span="1">
+                                <col width=auto span="4">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Mã câu hỏi</th>
+                                <th scope="col" style="width: 30%">Câu hỏi</th>
+                                <th scope="col" style="width: 30%">Phương án</th>
+                                <th scope="col" style="width: 20%">Đáp án</th>
+                                <th scope="col">
+                                    <button type="submit" class="btn btn-primary btn-sm" >
+                                        Thêm
+                                    </button>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${listQuestion}" var="qs" varStatus="loop">
+
+                                <tr>
+                                    <th scope="row">${loop.index + 1}</th>
+                                    <td>${qs.question_id}</td>
+                                    <td> <span class="limit-text">${qs.description}</span></td>
+                                    <td>
+                                        <ul class="list-group">
+                                            <li class="list-group-item list-group-item-primary">${qs.answer1}</li>
+                                            <li class="list-group-item list-group-item-success">${qs.answer2}</li>
+                                            <li class="list-group-item list-group-item-danger">${qs.answer3}</li>
+                                            <li class="list-group-item list-group-item-warning">${qs.answer4}</li>
+                                        </ul>
+                                    </td>
+                                    <td>${qs.correct_answer}</td>
+                                    <td>
+                                        <input class="form-check-input" name="question" type="checkbox" value="${qs.question_id}" >
+                                    </td>
+                                </tr>
+
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
+
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-sm justify-content-center">
                             <li class="page-item">

@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                             <c:forEach var="member" items="${memberList}" varStatus="loop">
-                            <tr>
+                            <tr class="${member.role == 1?"table-success":""}">
                                 <th scope="row">${member.userId}</th>
                                 <td>${member.account}</td>
                                 <td>${member.name}</td>
@@ -61,7 +61,7 @@
                                 <td>${member.phone}</td>
                                 <td class="text-center">${member.point}</td>
                                 <td class="text-center">
-                                    <button onclick="checkRole(${member.role})" type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal${loop.index}">Sửa</button>
+                                    <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal${loop.index}">Sửa</button>
                                     <button onclick="onDeleteMember(${member.userId})" type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
 <%--                                Update Modal --%>
@@ -111,18 +111,18 @@
                                                             <div class="row mb-3">
                                                                 <label for="pointInput" class="col-sm-3 col-form-label">Điểm tích lũy</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="point" value="${member.point}" id="pointInput" required>
+                                                                    <input type="text" class="form-control" name="point" value="${member.point}" id="pointInput" disabled>
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-between mt-3">
                                                                 <p class="mb-0">Phân quyền người dùng</p>
                                                                 <div>
                                                                     <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1" required>
+                                                                        <input class="form-check-input" name="role" value="1" type="radio" ${member.role == 1?"checked":""} id="inlineRadio1" required>
                                                                         <label class="form-check-label" for="inlineRadio1">Quản trị viên</label>
                                                                     </div>
                                                                     <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="2">
+                                                                        <input class="form-check-input" name="role" value="2" type="radio" ${member.role == 2?"checked":""} id="inlineRadio2">
                                                                         <label class="form-check-label" for="inlineRadio2">Thành viên</label>
                                                                     </div>
                                                                 </div>
@@ -143,23 +143,43 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination-sm justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true"><< Trang trước</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">Trang sau >></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+<%--                    Phân trang  --%>
+                        <div class="row">
+                            <div class="col-4">
+                                <c:set var="indexMemberEnd" scope="session" value="${indexMember + entryDisplay -1}"/>
+                                <c:if test="${indexMemberEnd > totalMember}">
+                                    <c:set var="indexMemberEnd" scope="session" value="${totalMember}"/>
+                                </c:if>
+                                <span>Hiển thị ${indexMember} - <c:out value="${indexMemberEnd}"/> trong tổng số ${totalMember} mục.</span>
+                            </div>
+                            <div class="col-8">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination pagination-sm justify-content-center">
+                                        <li class="page-item ${currentPage <= 1?"disabled":""}">
+                                            <c:url value="/admin/manage-user" var="prevUrl">
+                                                <c:param name="index" value="${currentPage - 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${prevUrl}"/>" class="page-link" aria-label="Previous">
+                                                Trang trước
+                                            </a>
+                                        </li>
+                                        <c:forEach var="i" begin="1" end="${maxPages}">
+                                            <li class="page-item ${currentPage == i?"active":""}">
+                                                <a class="page-link" href="/admin/manage-user?index=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item ${currentPage >= maxPages?"disabled":""}">
+                                            <c:url value="/admin/manage-user" var="nextUrl">
+                                                <c:param name="index" value="${currentPage + 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${nextUrl}"/>" class="page-link" aria-label="Next">
+                                                Trang sau
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </c:if>
                 </div>
             </div>
@@ -199,18 +219,6 @@
         document.getElementById("MemberIDDelete").value = MemberIDDelete;
     }
 
-    function onUpdateMember(MemberIDUpdate) {
-        document.getElementById("MemberIDUpdate").value = MemberIDUpdate;
-        console.log(document.getElementById("MemberIDUpdate").value);
-    }
-
-    function checkRole(memberRole){
-        if (memberRole == 1){
-            document.getElementById("inlineRadio1").checked = true;
-        } else if (memberRole == 2){
-            document.getElementById("inlineRadio2").checked = true;
-        }
-    }
 </script>
 </html>
 

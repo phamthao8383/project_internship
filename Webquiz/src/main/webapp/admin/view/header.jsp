@@ -10,8 +10,8 @@
 <header id="header">
     <div class="header__admin">
         <a href="#" class="header__adminlink dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <p class="header__nameadmin">${sessionScope.user.name}</p>
             <img src="/static/img/admin_profile.svg" alt="admin-profile" class="header__imgadmin" data-bs-toggle="dropdown" aria-expanded="false">
+            <p class="header__nameadmin">${sessionScope.user.name}</p>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="/userServlet">Về trang chủ</a></li>

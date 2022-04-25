@@ -30,6 +30,8 @@ public class UserServlet extends HttpServlet {
     private HandleString handleString = new HandleString();
     private PasswordEncryption passwordEncryption = new PasswordEncryption();
 
+    private int pageSize = 10;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action");
@@ -152,8 +154,27 @@ public class UserServlet extends HttpServlet {
     private void goGetInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
+        int index = Integer.parseInt(request.getParameter("index"));
+        if (index == 0) {
+            index = 1;
+        }
+        int count = userService.countHistory(idUser);
+        System.out.println(count);
+        int engPage = count / pageSize;
+        if(count % pageSize != 0) {
+            engPage++;
+        }
+
+        request.setAttribute("countPage", engPage);
+        request.setAttribute("indexPage", index);
+        request.setAttribute("pageSize", pageSize);
+
+        System.out.println(engPage);
+
+
+
         request.setAttribute("user", userService.getUserId(idUser));
-        request.setAttribute("history", userService.getListExamHistory(idUser));
+        request.setAttribute("history", userService.getListExamHistoryPage(idUser,index,pageSize));
         request.getRequestDispatcher("/user/TrangCaNhan.jsp").forward(request, response);
     }
 

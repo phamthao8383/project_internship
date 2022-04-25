@@ -11,6 +11,6 @@ public interface ExamViewService {
     public ExamQuestion getExamQuestionId(int id);
     public Exam getExamId(int id);
     public List<Question> loadExamQuestion(int idExam);
-    public void addHistoryExam(int examId, int userId, int point);
+    public void addHistoryExam(int examId, int userId, int point, String timeStart , String timeEnd);
     public void updateAccumulatePoint(int userId);
 }

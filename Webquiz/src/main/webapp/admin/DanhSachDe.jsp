@@ -41,13 +41,14 @@
                         <div class="exam-cart__infor col-10">
                             <h4 class="exam__label">${examQuestion.exam.getExamName()}</h4>
                             <div class="exam__description row">
-                                <p class="exam__time">Thời gian: ${examQuestion.exam.getAllowedTime()}</p>
+                                <p class="exam__time">Thời gian: ${examQuestion.exam.getAllowedTime()} Phút</p>
                                 <p class="exam__question-number">Số câu: ${examQuestion.total}</p>
                                 <div class="exam__start-btn">
                                     <form method="post" action="/exam_list">
-                                        <input type="hidden" name="action" value="examLoadQuestions">
+                                        <input type="hidden" name="action" value="goExam">
+                                        <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                                         <input type="hidden" name="examId" value="${examQuestion.exam.getExamId()}">
-                                        <button type="submit" class="btn btn-outline-primary">Xem đề thi</button>
+                                        <button type="submit" class="btn btn-outline-primary">Bắt đầu thi</button>
                                     </form>
                                 </div>
                             </div>

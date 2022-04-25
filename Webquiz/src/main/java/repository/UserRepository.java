@@ -72,6 +72,73 @@ public class UserRepository {
         return examHistoryList;
     }
 
+
+
+    public List<ExamHistory> getListExamHistoryPage(int id, int pageIndex, int pageSize) {
+        List<ExamHistory> examHistoryList = new ArrayList<>();
+        ExamHistory examHistory = new ExamHistory();
+        try {
+            String myQuery = " with x as(SELECT exam.exam_id,user.user_id,subject.subject_id,subject.subject_name, starting_time, completion_time, point, allowed_time, exam.exam_name, row_number() over (order by assignment_id asc) as r \n" +
+                    "                    FROM quiz_web.assignment\n" +
+                    "                    inner join `user` on `user`.user_id  = assignment.user_id\n" +
+                    "                    inner join exam on exam.exam_id = assignment.exam_id\n" +
+                    "                    inner join `subject` on subject.subject_id = exam.subject_id\n" +
+                    "                    where  assignment.user_id = ?)\n" +
+                    "                    select  * from x where  r between  ((? * ? ) - ? + 1) and ? * ?";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, pageIndex);
+            preparedStatement.setInt(3 ,pageSize);
+            preparedStatement.setInt(4, pageSize);
+            preparedStatement.setInt(5, pageIndex);
+            preparedStatement.setInt(6, pageSize);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                examHistory = new ExamHistory(rs.getInt("exam_id"),
+                        rs.getInt("user_id"),
+                        new Exam(rs.getInt("exam_id"),
+                                new Subject(rs.getInt("subject_id")
+                                        ,rs.getString("subject_name"))
+                                ,rs.getString("allowed_time")
+                                ,rs.getString("exam_name")),
+                        rs.getTime("starting_time"),
+                        rs.getTime("completion_time"),
+                        rs.getDouble("point"));
+                examHistoryList.add(examHistory);
+            }
+        } catch (SQLException e) {
+            System.out.println("sai rồi");
+            e.printStackTrace();
+        }
+        return examHistoryList;
+    }
+
+//    đếm số lịch sử thi
+    public int countHistory(int id) {
+        try {
+            String myQuery = "with x as(SELECT assignment_id FROM quiz_web.assignment inner join `user` on `user`.user_id  = assignment.user_id \n" +
+                    "                    inner join exam on exam.exam_id = assignment.exam_id\n" +
+                    "                    inner join `subject` on subject.subject_id = exam.subject_id\n" +
+                    "                    where  assignment.user_id = ?) select  count(*) from x";
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
+
+
+
     public User getUserId(int id) {
         User user = new User();
         try {
