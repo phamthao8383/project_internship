@@ -72,7 +72,7 @@
                                                 <h5 class="modal-title" id="editModalLabel">Sửa thông tin người dùng</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form action="/admin/manage-user?action=update" method="post">
+                                            <form action="/admin/manage-user?action=update" method="post" id="updateMemberForm">
                                                 <input type="hidden" name="idUpdate" id="MemberIDUpdate" value="${member.userId}">
                                                 <input type="hidden" name="usernameUpdate" id="MemberUsernameUpdate" value="${member.account}">
                                                 <div class="modal-body">
@@ -132,7 +132,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <button type="submit" class="btn btn-primary">Lưu</button>
+                                                    <button type="submit" class="btn btn-primary" onclick="showAlertUpdate()">Lưu</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -192,17 +192,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Xóa xác nhận người dùng</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Xác nhận xoá thành viên?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/admin/manage-user?action=delete" method="post">
+            <form action="/admin/manage-user?action=delete" method="post" id="deleteMemberForm">
                 <input type="hidden" name="id" id="MemberIDDelete">
                 <div class="modal-body">
-                    Xác nhận xoá thành viên?
+                    Hành động này không thể hoàn tác. Bạn xác nhận muốn xóa thành viên?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button onclick="checkDeleted(${checkDeleted})" type="submit" class="btn btn-primary">Xác nhận</button>
+                    <button onclick="showAlertDelete()" type="submit" class="btn btn-primary">Xác nhận</button>
                 </div>
             </form>
         </div>
@@ -210,15 +210,57 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+<%--SweatAlert2:--%>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.9/dist/sweetalert2.all.min.js"></script>
 
 <script>
+    let updateForm = document.getElementById("updateMemberForm");
+    let deleteForm = document.getElementById("deleteMemberForm");
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
     function onDeleteMember(MemberIDDelete) {
         document.getElementById("MemberIDDelete").value = MemberIDDelete;
     }
 
+    function showAlertDelete() {
+        if(deleteForm.checkValidity()){
+            localStorage.setItem("isDeleted", true);
+        }
+    }
+
+    function showAlertUpdate() {
+        if(updateForm.checkValidity()){
+            localStorage.setItem("isUpdated", true);
+        }
+    }
+
+    $(document).ready(function () {
+        if (localStorage.getItem("isDeleted")){
+            Toast.fire({
+                icon: 'warning',
+                title: 'Xóa thành công!'
+            })
+            localStorage.removeItem("isDeleted");
+        }
+
+        if (localStorage.getItem("isUpdated")){
+            Toast.fire({
+                icon: 'info',
+                title: 'Cập nhật thành công!'
+            })
+            localStorage.removeItem("isUpdated");
+        }
+    });
 </script>
 </html>
 

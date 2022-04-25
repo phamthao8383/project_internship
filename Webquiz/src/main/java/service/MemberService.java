@@ -5,10 +5,10 @@ import model.Member;
 import java.util.List;
 
 public interface MemberService {
-    public List<Member> getMemberList(int indexPage);
-    public int getTotalMember();
-    public List<Member> getMaxPoint();
-    public List<Member> getMemberNumber();
-    public boolean deleteMember(Member member);
-    public void updateMember(Member memberSearch, Member memberUpdate);
+    List<Member> getMemberList(int indexPage);
+    int getTotalMember();
+    List<Member> getMaxPoint();
+    List<Member> getMemberNumber();
+    boolean deleteMember(Member member);
+    void updateMember(Member memberSearch, Member memberUpdate);
 }

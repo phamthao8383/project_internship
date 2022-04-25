@@ -2,6 +2,7 @@ package controller;
 
 import model.Question;
 import model.Subject;
+import repository.QuestionRepository;
 import service.QuestionService;
 import service.SubjectService;
 import service.impl.QuestionServiceImpl;
@@ -19,7 +20,7 @@ public class QuestionServlet extends HttpServlet {
     private QuestionService questionService = new QuestionServiceImpl();
     private SubjectService subjectService = new SubjectServiceImpl();
     private HandleString handleString = new HandleString();
-
+    private final int entryDisplay = QuestionRepository.entryDisplay;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,11 +100,22 @@ public class QuestionServlet extends HttpServlet {
         request.getRequestDispatcher("admin/question-bank.jsp").forward(request, response);
     }
 
+    // Danh sach cau hoi + Phan trang
     private void questionList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Question> listQuestion = questionService.selectAllQuestion();
+        String index = request.getParameter("index");
+        if (index == null){
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
+        int indexQuestionStart = ((indexPage - 1)*entryDisplay + 1);
+        request.setAttribute("currentPage", indexPage);
+        request.setAttribute("indexQuestionStart", indexQuestionStart);
+        request.setAttribute("entryDisplay", entryDisplay);
+        List<Question> listQuestion = questionService.paginateQuestion(indexPage);
         request.setAttribute("listQuestion", listQuestion);
         List<Subject> listSubject = subjectService.selectAllSubject();
         request.setAttribute("listSubject", listSubject);
+        pagingQuestion(request, response);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/question-bank.jsp");
         dispatcher.forward(request, response);
 
@@ -171,5 +183,16 @@ public class QuestionServlet extends HttpServlet {
 //        response.sendRedirect("/questions");
         questionList(request, response);
 
+    }
+
+    private void pagingQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        int totalQuestion = questionService.getTotalQuestion();
+        System.out.println(totalQuestion);
+        int maxPages = (totalQuestion/entryDisplay);
+        if (totalQuestion % entryDisplay != 0){
+            maxPages++;
+        }
+        request.setAttribute("totalQuestion", totalQuestion);
+        request.setAttribute("maxPages", maxPages);
     }
 }
