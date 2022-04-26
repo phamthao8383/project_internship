@@ -77,7 +77,7 @@
 <%--            Đăng ký   --%>
             <div class="signup-form">
                 <div class="title">Đăng ký</div>
-                <form id="form-dangky" action="/userServlet" method="post" name="register" onsubmit="onSubmit()">
+                <form id="form-dangky" action="/userServlet" method="post" name="register">
                     <input type="hidden" name="action" value="createAccount">
                     <div class="input-boxes">
                         <div class="input-box">
@@ -127,7 +127,7 @@
                         <span style="color: red"  id="errorPhone"></span>
 
                         <div class="button input-box">
-                            <input type="submit" value="Đăng Ký" >
+                            <input onclick="onSubmit()" type="button" value="Đăng Ký">
                         </div>
                         <div class="text sign-up-text">Bạn đã có tài khoản? <label for="flip">Đăng nhập nhanh</label></div>
                     </div>
@@ -294,9 +294,9 @@
         if (password == '' || password == null) {
             errorPass.innerHTML = "Mật khẩu không được để trống.";
             return false;
-        } else {
+        } else
             errorPass.innerHTML = "";
-        }
+
 
         let rePassword = document.getElementById('passw').value;
         let errorRePassword = document.getElementById('errorConPass');
@@ -306,9 +306,9 @@
         } else if (rePassword != password) {
             errorRePassword.innerHTML = "Xác nhận mật khẩu và mật khẩu không trùng khớp.";
             return false;
-        } else {
+        } else
             errorRePassword.innerHTML = "";
-        }
+
 
         let email = document.getElementById('email').value;
         let errorEmail = document.getElementById('errorEmail');
@@ -334,7 +334,7 @@
 
         let phone = document.getElementById('phone').value;
         let errorPhone = document.getElementById('errorPhone');
-        let regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
         if (phone == '' || phone == null) {
             errorPhone.innerHTML = "Số điện thoại không được để trống.";
             return false;
@@ -344,15 +344,20 @@
         } else {
             errorPhone.innerHTML = "";
         }
-        if(!name || !username || !password || !rePassword || !email || !address || !phone || password!=rePassword)
-            return false;
+
+        if (name && username && inputNewPassword==inputNewPass &&  email && inputNewPassword  &&inputNewPass ){
+            return true;
+        }
         return true;
     }
     function onSubmit() {
-        if(Validate()){
-            console.log(Validate());
+        let checkValidation = Validate();
+        console.log(checkValidation);
+        if(checkValidation){
             document.getElementById("form-dangky").submit();
             localStorage.setItem('isSubmit', true);
+        } else {
+            localStorage.setItem('isSubmit', false);
         }
     }
     $( document ).ready(function() {
@@ -365,11 +370,11 @@
                 timer: 1500
             });
         }
-        else if($("#usernameExist").length > 0 && localStorage.getItem("isSubmit")){
+        else if($("#usernameExist").length > 0 || localStorage.getItem("isSubmit")){
             Swal.fire({
                 icon: 'error',
                 title: 'Đăng ký không thành công!',
-                text: 'Tên đăng nhập đã tồn tại.'
+                // text: 'Tên đăng nhập đã tồn tại.'
             })
             $("#registerLabel").trigger('click');
         }

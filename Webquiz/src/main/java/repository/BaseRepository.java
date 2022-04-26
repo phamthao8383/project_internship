@@ -8,7 +8,7 @@ public class BaseRepository {
     private String jdbcUrl = "jdbc:mysql://localhost:3306/quiz_web?autoReconnect=true&useSSL=false";
     private String username = "root";
     // Thêm mật khẩu root mysql vào dưới
-    private String password = "123123";
+    private String password = "hongson";
     private Connection connection;
 
     public BaseRepository() {
