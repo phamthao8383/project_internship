@@ -99,4 +99,7 @@ public class Question {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
+    public void setSubject(int intValue) {
+    }
 }
