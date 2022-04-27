@@ -46,24 +46,24 @@
                                 <input type="hidden" name="timeStart" value="${timeStart}">
                                 <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                             <div class="d9Box part-item detail">
-                                <h1 class="title22Bold ">${exam.examName}</h1>
+                                <h1 class="title22Bold ">${sessionScope.exam.examName}</h1>
                                 <p>Bộ Giáo Dục và Đào Tạo</p>
                                 <div class="detail-question">
-                                    <div class="num-question col"><span><i class="fa fa-check-square"></i> ${examQuestion.total} câu</span>
+                                    <div class="num-question col"><span><i class="fa fa-check-square"></i> ${sessionScope.examQuestion.total} câu</span>
                                     </div>
                                     <div class="number-of-questions">
 <%--                                        <div class="time-remain">--%>
 <%--                                            <div class="time" style="display: flex; align-items: center"><i class="fa fa-clock-o" style="padding-right: 5px" aria-hidden="true"></i><countdown-time autostart add="90m"></countdown-time>--%>
 <%--                                            </div>--%>
 <%--                                        </div>--%>
-                                        <span><i class="fa fa-clock-o"></i>${exam.allowedTime} phút</span>
+                                        <span><i class="fa fa-clock-o"></i>${sessionScope.exam.allowedTime} phút</span>
                                     </div>
-                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>${examQuestion.timesExam} lượt thi</span>
+                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>${sessionScope.examQuestion.timesExam} lượt thi</span>
                                     </div>
                                 </div>
                                 <div class="exam-content">
                                     <ul>
-                                        <c:forEach items="${listQuestion}" var="question" varStatus="loop">
+                                        <c:forEach items="${sessionScope.listQuestion}" var="question" varStatus="loop">
                                             <input type="hidden" name="answerQuestion${loop.index + 1}" value="${question.correct_answer}">
 
                                             <li>
@@ -141,10 +141,10 @@
         let time = new Date("${sessionScope.timeStartS}");
         let m = ${exam.allowedTime};
         let timeEnd = time.setMinutes(time.getMinutes() + m );
-        timeEnd = time.setSeconds(time.getSeconds() + 3 );
+        // timeEnd = time.setSeconds(time.getSeconds() + 3 );
         const demgio = setInterval(function () {
-            var today = new Date();
-            var timeBack = timeEnd - today;
+            const today = new Date();
+            const timeBack = timeEnd - today;
             console.log(timeBack);
             var hours = Math.floor(timeBack / (1000 * 60 * 60))
             var minutes = Math.floor(timeBack / (1000 * 60))

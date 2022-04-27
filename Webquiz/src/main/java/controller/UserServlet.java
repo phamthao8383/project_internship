@@ -200,9 +200,10 @@ public class UserServlet extends HttpServlet {
         String account = request.getParameter("account");
         String imageLink = request.getParameter("imageLink");
         System.out.println(imageLink);
-/*        Part part = request.getPart("inputFile");
-        String realPath = request.getServletContext().getRealPath("/uploads");
-        // chổ ni ae tự thêm đường link foder uploads của dự án vào
+        Part part = request.getPart("inputFile");
+        System.out.println(part);
+       /* String realPath = request.getServletContext().getRealPath("/uploads");
+//         chổ ni ae tự thêm đường link foder uploads của dự án vào
         String realPath2 = "D:\\InternNhom2\\project_internship\\Webquiz\\src\\main\\webapp\\uploads";
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
@@ -211,9 +212,9 @@ public class UserServlet extends HttpServlet {
         }
         System.out.println(realPath);
 //        cái này xong là lưu file được rồi.
-//        part.write(realPath+"/"+account + filename);
         part.write(realPath+"/"+account + filename);
-//        chừ lưu filename vào database nữa là ok*/
+        part.write(realPath+"/"+account + filename);*/
+//        chừ lưu filename vào database nữa là ok
         userService.updateImageUserId(idUser, imageLink);
         goGetInfo(request,response);
     }

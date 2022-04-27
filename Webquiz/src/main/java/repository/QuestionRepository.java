@@ -15,9 +15,12 @@ public class QuestionRepository {
     private static final String DELETE_QUESTION_SQL = "delete from question where `question_id` = ?;";
     private static final String SELECT_QUESTION_BY_ID = "select * from question join `subject` on question.subject_id=`subject`.subject_id where question_id =?;";
     private static final String SELECT_ALL_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id;";
+    private static final String PAGINATE_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id limit ?,?;";
     private static final String INSERT_QUESTION = "INSERT INTO question" + " (question_id,`description`,answer1,answer2,answer3,answer4,correct_answer,subject_id) VALUES" + "(?,?,?,?,?,?,?,?);";
     private static final String UPDATE_QUESTION = "update question set `description` = ?,answer1 = ?,answer2 = ?,answer3 = ?,answer4 = ?,correct_answer = ?,subject_id= ? where question_id = ?";
     private static final String SEARCH_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id where `description` like ?;";
+    private static final String TOTAL_QUESTION = "select count(*) from question;";
+    public static final int entryDisplay = 5;   // Đặt hiển thị 5 mục/câu hỏi trong mỗi trang của bảng
 
     public List<Question> selectAllQuestion() {
         List<Question> questions = new ArrayList<>();
@@ -153,5 +156,47 @@ public class QuestionRepository {
             e.printStackTrace();
         }
         return questionList;
+    }
+
+    public int getTotalQuestion(){
+        Connection connection = this.baseRepository.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(TOTAL_QUESTION);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Question> paginateQuestion(int indexPage) {
+        List<Question> questions = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(PAGINATE_QUESTION);
+            preparedStatement.setInt(1, (indexPage-1)*entryDisplay);    // Vị trí của index query bắt đầu từ (index trang - 1) * số mục hiển thị cho mỗi trang
+            preparedStatement.setInt(2, entryDisplay);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int question_id = rs.getInt("question_id");
+                String description = rs.getString("description");
+                String answer1 = rs.getString("answer1");
+                String answer2 = rs.getString("answer2");
+                String answer3 = rs.getString("answer3");
+                String answer4 = rs.getString("answer4");
+                String correct_answer = rs.getString("correct_answer");
+                int subject_id = rs.getInt("subject_id");
+                String subject_name = rs.getString("subject_name");
+                questions.add(new Question(question_id, description, answer1, answer2, answer3, answer4, correct_answer, new Subject(subject_id, subject_name)));
+            }
+            rs.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return questions;
     }
 }

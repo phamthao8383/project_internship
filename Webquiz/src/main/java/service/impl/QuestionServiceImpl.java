@@ -46,4 +46,14 @@ public class QuestionServiceImpl implements QuestionService {
     public void exportCSV(List<Question> questions) throws IOException {
 
     }
+
+    @Override
+    public int getTotalQuestion() {
+        return questionRepository.getTotalQuestion();
+    }
+
+    @Override
+    public List<Question> paginateQuestion(int indexPage) {
+        return questionRepository.paginateQuestion(indexPage);
+    }
 }

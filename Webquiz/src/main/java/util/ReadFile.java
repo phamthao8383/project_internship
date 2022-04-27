@@ -1,6 +1,7 @@
 package util;
 
 import model.Question;
+import model.Subject;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -24,24 +25,71 @@ public class ReadFile {
 
 
 
-    public static void ReadFileQuestion() throws IOException {
+    public static List<Question> ReadFileQuestion() throws IOException {
+        List<Question> questions = new ArrayList<>();
         FileInputStream inputStream = new FileInputStream(new File("C:\\Users\\nhacp\\Downloads\\de_12.XLSX"));
         XSSFWorkbook wb = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = wb.getSheetAt(0);
         FormulaEvaluator formulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
         for (Row row : sheet) {
-            if (row.getCell(0) != null) {
 
-                System.out.println(row.getCell(0));
+            // Set value for book object
+            Question question = new Question();
+            if (row.getRowNum() > 0) {
+                for (Cell cell : row) {
+                    if (cell.getColumnIndex() == COLUMN_QUESTION_ID) {
+                        String c = cell.toString();
+                        int d = (int) Double.parseDouble(c);
+                        System.out.println(d);
+                        question.setQuestion_id(d);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_DESCRIPTION) {
+                        String i = cell.toString();
+                        System.out.println(i);
+                        question.setDescription(i);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_ANSWER_1) {
+                        String i = cell.toString();
+                        System.out.println(i);
+                        question.setAnswer1(i);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_ANSWER_2) {
+                        String i = cell.toString();
+                        System.out.println(i);
+                        question.setAnswer2(i);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_ANSWER_3) {
+                        String i = cell.toString();
+                        System.out.println(i);
+                        question.setAnswer3(i);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_ANSWER_4) {
+                        String i = cell.toString();
+                        System.out.println(i);
+                        question.setAnswer4(i);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_CORRECT_ANSWER) {
+                        String i = cell.toString();
+                        System.out.println(i);
+                        question.setCorrect_answer(i);
+                    }
+                    if (cell.getColumnIndex() == COLUMN_SUBJECT_ID) {
+                        String c = cell.toString();
+                        int d = (int) Double.parseDouble(c);
+                        question.setSubject(new Subject(d));
+                        System.out.println(d);
+
+                    }
+
+                }
+                questions.add(question);
             }
-            if (row.getCell(1) != null) {
-                System.out.println(row.getCell(1));
-            }
+
+
         }
         wb.close();
         inputStream.close();
-
-
+        return questions;
     }
     public static void main(String[] args) throws IOException {
 //        final String excelFilePath = "C:\\Users\\nhacp\\Downloads\\de_12.XLSX";
@@ -49,7 +97,11 @@ public class ReadFile {
 //        for (Question question : questions) {
 //            System.out.println(question);
 //        }
-        ReadFileQuestion();
+        List<Question> abc =  ReadFileQuestion();
+        for (Question q: abc
+             ) {
+            System.out.println(q);
+        }
     }
 
     public static List<Question> readExcel(String excelFilePath) throws IOException {

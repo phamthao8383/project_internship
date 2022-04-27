@@ -20,4 +20,7 @@ public interface QuestionService {
 
     List<Question> findAllByDescription(String description);
     void exportCSV(List<Question> questions) throws IOException, IOException;
+
+    int getTotalQuestion();
+    List<Question> paginateQuestion(int indexPage);
 }

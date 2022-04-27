@@ -39,6 +39,8 @@ public class MemberRepository {
                         resultSet.getDouble("accumulated_point"),
                         resultSet.getInt("role_id")));
             }
+            resultSet.close();
+            preparedStatement.close();
         } catch (Exception e){
             e.printStackTrace();
         }
