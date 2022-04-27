@@ -101,6 +101,7 @@
                                     <input type="hidden" name="action" value="infoUser">
                                     <input type="hidden" name="index" value="${p}">
                                     <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
+                                    <input type="hidden" class="check" name="check" value="">
 
                                     <button  class="page-link" id="page${p}" onclick="activePage(${p})" type="submit">
                                             ${p}
@@ -113,6 +114,7 @@
                                 <form action="/userServlet" method="post">
                                     <input type="hidden" name="action" value="infoUser">
                                     <input type="hidden" name="index" value="${p}">
+                                    <input type="hidden" class="check" name="check" value="">
                                     <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
                                     <button  class="page-link" id="page${p}" onclick="activePage(${p})" type="submit">
                                             ${p}
@@ -147,6 +149,7 @@
                 <input type="hidden" name="idUser" value="${user.userId}">
                 <input type="hidden" name="account" value="${user.account}">
                 <input type="hidden" name="index" value="${indexPage}">
+                <input type="hidden" class="check" name="check" value="">
                 <input type="hidden" id="imageLink" name="imageLink" value="">
                 <div class="modal-body">
                     <div class="form-group row">
@@ -179,6 +182,7 @@
             <form id="form-chinhsua"  action="/userServlet" method="post" name="register" onsubmit="return ValidateEdit()">
                 <input type="hidden" name="action" value="updateMyInfo">
                 <input type="hidden" name="idUser" value="${user.userId}">
+                <input type="hidden" class="check" name="check" value="">
                 <input type="hidden" name="index" value="${indexPage}">
             <div class="modal-body">
                 <div class="form-group row">
@@ -233,6 +237,7 @@
                 <input type="hidden" name="idUser" value="${user.userId}">
                 <input type="hidden" name="nameAccount" value="${user.account}">
                 <input type="hidden" name="index" value="${indexPage}">
+                <input type="hidden" class="check" name="check" value="">
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 control-labelform-label">Mật khẩu hiện tại: </label>
@@ -315,6 +320,25 @@
             .catch(console.error)
 
     };
+</script>
+<script>
+    // show Lịch sử thi
+    function showhistory() {
+
+        document.getElementById("history").classList.toggle("show");
+        document.getElementById("btn_show").classList.toggle("active_btn");
+
+    }
+
+
+    $( document ).ready(function() {
+        let check = ${check}
+        if(check == 0) {
+            document.getElementById("history").classList.add("show");
+            document.getElementById("btn_show").classList.add("active_btn");
+
+        }
+    });
 </script>
 
 <script src="/static/js/TrangCaNhan.js"></script>

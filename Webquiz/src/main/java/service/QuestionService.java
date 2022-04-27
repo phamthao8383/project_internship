@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface QuestionService {
     void insertQuestion(Question question);
+    public void insertQuestionFile(Question question);
 
     Question selectQuestion(int question_id);
 

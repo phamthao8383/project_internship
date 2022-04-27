@@ -17,6 +17,8 @@ public class QuestionRepository {
     private static final String SELECT_ALL_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id;";
     private static final String PAGINATE_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id limit ?,?;";
     private static final String INSERT_QUESTION = "INSERT INTO question" + " (question_id,`description`,answer1,answer2,answer3,answer4,correct_answer,subject_id) VALUES" + "(?,?,?,?,?,?,?,?);";
+    private static final String INSERT_QUESTION_FILE = "INSERT INTO question" + " (`description`,answer1,answer2,answer3,answer4,correct_answer,subject_id) VALUES" + "(?,?,?,?,?,?,?);";
+
     private static final String UPDATE_QUESTION = "update question set `description` = ?,answer1 = ?,answer2 = ?,answer3 = ?,answer4 = ?,correct_answer = ?,subject_id= ? where question_id = ?";
     private static final String SEARCH_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id where `description` like ?;";
     private static final String TOTAL_QUESTION = "select count(*) from question;";
@@ -60,6 +62,25 @@ public class QuestionRepository {
             preparedStatement.setString(6, question.getAnswer4());
             preparedStatement.setString(7, question.getCorrect_answer());
             preparedStatement.setInt(8, question.getSubject().getSubject_id());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void insertQuestionFile(Question question) {
+        try {
+            Connection connection = baseRepository.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUESTION_FILE);
+            preparedStatement.setString(1, question.getDescription());
+            preparedStatement.setString(2, question.getAnswer1());
+            preparedStatement.setString(3, question.getAnswer2());
+            preparedStatement.setString(4, question.getAnswer3());
+            preparedStatement.setString(5, question.getAnswer4());
+            preparedStatement.setString(6, question.getCorrect_answer());
+            preparedStatement.setInt(7, question.getSubject().getSubject_id());
             preparedStatement.executeUpdate();
             preparedStatement.close();
         } catch (SQLException e) {

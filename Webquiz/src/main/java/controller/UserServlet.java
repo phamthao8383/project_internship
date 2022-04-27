@@ -157,19 +157,28 @@ public class UserServlet extends HttpServlet {
     private void goGetInfo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
-        int index = Integer.parseInt(request.getParameter("index"));
-        if (index == 0) {
-            index = 1;
+        String indexStr = request.getParameter("index");
+        String check = request.getParameter("check");
+        if(check == "") {
+            check ="0";
         }
+
+        if (indexStr == "" ) {
+            indexStr = "1";
+        }
+        int index = Integer.parseInt(indexStr);
+
         int count = userService.countHistory(idUser);
         System.out.println(count);
         int engPage = count / pageSize;
         if(count % pageSize != 0) {
             engPage++;
         }
-
+//                  Thiết lập giá trị trong session
+        request.setAttribute("check", check);
         request.setAttribute("countPage", engPage);
         request.setAttribute("indexPage", index);
+        request.setAttribute("check", check);
         request.setAttribute("pageSize", pageSize);
 
         System.out.println(engPage);
@@ -200,8 +209,8 @@ public class UserServlet extends HttpServlet {
         String account = request.getParameter("account");
         String imageLink = request.getParameter("imageLink");
         System.out.println(imageLink);
-        Part part = request.getPart("inputFile");
-        System.out.println(part);
+//        Part part = request.getPart("inputFile");
+//        System.out.println(part);
        /* String realPath = request.getServletContext().getRealPath("/uploads");
 //         chổ ni ae tự thêm đường link foder uploads của dự án vào
         String realPath2 = "D:\\InternNhom2\\project_internship\\Webquiz\\src\\main\\webapp\\uploads";

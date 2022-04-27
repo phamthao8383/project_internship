@@ -13,6 +13,15 @@ public class Question {
     public Question(String description) {
     }
 
+    public Question(String description, String answer1, String answer2, String answer3, String answer4, String correct_answer) {
+        this.description = description;
+        this.answer1 = answer1;
+        this.answer2 = answer2;
+        this.answer3 = answer3;
+        this.answer4 = answer4;
+        this.correct_answer = correct_answer;
+    }
+
     @Override
     public String toString() {
         return "Question{" +

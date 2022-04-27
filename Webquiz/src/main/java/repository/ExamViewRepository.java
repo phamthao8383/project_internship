@@ -85,6 +85,38 @@ public class ExamViewRepository {
         return listExam;
     }
 
+
+    public List<ExamQuestion> examListSearch(String str) {
+        List<ExamQuestion> listExam = new ArrayList<>();
+        ExamQuestion exam = new ExamQuestion();
+        try {
+            String myQuery = "with x as (SELECT distinct ex.*, sj.subject_name , count(exq.exam_id) as total , times.timesExam FROM `exam` ex\n" +
+                    "join subject sj on ex.subject_id = sj.subject_id\n" +
+                    "join exam_question exq on ex.exam_id = exq.exam_id\n" +
+                    "join (select exam_id, count(exam_id) as timesExam from `assignment` \n" +
+                    "group by exam_id) times on times.exam_id = ex.exam_id\n" +
+                    "group by exq.exam_id) select * from x where exam_name like ?;";
+
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(myQuery);
+            preparedStatement.setString(1, '%' +str+'%');
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+
+                exam = new ExamQuestion (new Exam( rs.getInt("exam_id")
+                        ,new Subject(rs.getInt("subject_id"),rs.getString("subject_name"))
+                        ,rs.getString("allowed_time")
+                        ,rs.getString("exam_name")), rs.getInt("total"), rs.getInt("timesExam"));
+                listExam.add(exam);
+            }
+            System.out.println("thêm được rồi");
+
+        } catch (SQLException e) {
+            System.out.println("Lỗi rồi bạn chẻ");
+            e.printStackTrace();
+        }
+        return listExam;
+    }
+
     public ExamQuestion getExamQuestionId(int id) {
 
         ExamQuestion examQuestion = new ExamQuestion();

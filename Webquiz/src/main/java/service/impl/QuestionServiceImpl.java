@@ -17,6 +17,11 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public void insertQuestionFile(Question question) {
+        questionRepository.insertQuestionFile(question);
+    }
+
+    @Override
     public Question selectQuestion(int question_id) {
         return questionRepository.selectByIdQuestion(question_id);
     }

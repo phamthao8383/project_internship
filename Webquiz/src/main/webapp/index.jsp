@@ -22,7 +22,9 @@
                         <c:forEach var="member" items="${memberList}">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <span><c:out value="${member.name}"></c:out></span>
-                                <span class="badge badge-primary badge-pill">${member.point}</span>
+                                <span class="badge badge-primary badge-pill">
+                                        ${member.point}
+                                </span>
                             </li>
                         </c:forEach>
                     </ul>
@@ -149,7 +151,8 @@
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <form action="/userServlet" method="post">
                                     <input type="hidden" name="action" value="infoUser">
-                                    <input type="hidden" name="index" value="1">
+                                    <input type="hidden" name="index" value="">
+                                    <input type="hidden" name="check" value="">
                                     <input type="hidden" name="idUser" value="${sessionScope.user.userId}">
 
                                         <button class="btn_info" type="submit">
@@ -197,8 +200,11 @@
                             <p>Tìm kiếm</p>
                         </div>
                         <div class="search_b">
-                            <input class="search_input" type="text" placeholder="Nhập...">
+                            <form action="/exam_list" method="get">
+                                <input type="hidden" name="action" value="sa">
+                            <input class="search_input" type="text" name="search" placeholder="Nhập...">
                             <button class="btn_search"type="submit" class="btn-success">Tìm</button>
+                            </form>
                         </div>
                     </div>
                 </div>

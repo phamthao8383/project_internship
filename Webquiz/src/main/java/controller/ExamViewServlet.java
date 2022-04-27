@@ -1,6 +1,7 @@
 package controller;
 
 import model.ExamQuestion;
+import model.Question;
 import model.Subject;
 import service.ExamViewService;
 import service.SubjectService;
@@ -16,11 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(name = "ExamViewServlet", urlPatterns = "/exam_list")
@@ -58,10 +62,25 @@ public class ExamViewServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "sa":
+                searchExamList(request,response);
+                break;
             default:
                 examList(request, response);
                 break;
         }
+    }
+
+    private void searchExamList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String str = request.getParameter("search");
+        request.setAttribute("listExam", examViewService.examListSearch(str));
+        request.setAttribute("list5Exam", examViewService.examListTop5());
+        List<Subject> listSubject = subjectService.selectAllSubject();
+        request.setAttribute("listSubject", listSubject);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/DanhSachDe.jsp");
+        dispatcher.forward(request,response);
     }
 
     private void examList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -106,7 +125,9 @@ public class ExamViewServlet extends HttpServlet {
             HttpSession session = request.getSession();
             if (session.getAttribute("timeStartS") == null) {
                 int examId = Integer.parseInt(examIds);
-                session.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+                List<Question> questionList = examViewService.loadExamQuestion(examId);
+                 Collections.shuffle(questionList);
+                session.setAttribute("listQuestion",questionList);
                 session.setAttribute("exam",examViewService.getExamId(examId));
                 session.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
                 session.setAttribute("examId",examId );
@@ -138,7 +159,9 @@ public class ExamViewServlet extends HttpServlet {
         String userId = request.getParameter("userId");
 
         int examId = Integer.parseInt(examIds);
-        session.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+        List<Question> questionList = examViewService.loadExamQuestion(examId);
+        Collections.shuffle(questionList);
+        session.setAttribute("listQuestion",questionList);
         session.setAttribute("exam",examViewService.getExamId(examId));
         session.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
         session.setAttribute("examId",examId );
@@ -158,6 +181,7 @@ public class ExamViewServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 //            Hủy session
+        List<Question> questionList = (List<Question>) session.getAttribute("listQuestion");
         session.removeAttribute("timeStartS");
         session.removeAttribute("listQuestion");
         session.removeAttribute("exam");
@@ -174,6 +198,7 @@ public class ExamViewServlet extends HttpServlet {
         int diem = 0;
         int i = 1;
         List questionMyCheck = new ArrayList();
+//        List<Question> questionList = new ArrayList<>();
         while (request.getParameter("question"+i) != null) {
             String answer = request.getParameter("answerQuestion"+i);
             answer = handleString.handleFont(answer);
@@ -183,20 +208,30 @@ public class ExamViewServlet extends HttpServlet {
                 diem = diem +10;
             }
             questionMyCheck.add(question);
-            System.out.println("Câu " + i + ":");
-            System.out.println("Đáp án lựa chọn: " + question);
-            System.out.println("Đáp án đúng: " + answer);
-            System.out.println("Điểm hiện tại: " + diem);
-            System.out.println("--------------------------");
+            /*String description = request.getParameter("description"+i);
+            description = handleString.handleFont(description);
+            String answer1 = request.getParameter("answer1"+i);
+            answer1 = handleString.handleFont(answer1);
+            String answer2 = request.getParameter("answer2"+i);
+            answer2 = handleString.handleFont(answer2);
+            String answer3 = request.getParameter("answer3"+i);
+            answer3 = handleString.handleFont(answer3);
+            String answer4 = request.getParameter("answer4"+i);
+            answer4 = handleString.handleFont(answer4);
+
+            questionList.add(new Question( description,answer1,answer2,answer3,answer4,answer));*/
+
+
             i++;
         }
+
         System.out.println("Tổng điểm: " + diem);
         examViewService.addHistoryExam(examId,userId,diem, timeStart,timeEnd);
         examViewService.updateAccumulatePoint(userId);
 //        questionMyCheck.forEach(n -> System.out.println(n));
         request.setAttribute("questionMyCheck",questionMyCheck );
         request.setAttribute("point",diem );
-        request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+        request.setAttribute("listQuestion", questionList);
         request.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
         request.setAttribute("exam", examViewService.getExamId(examId));
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/exam_result.jsp");

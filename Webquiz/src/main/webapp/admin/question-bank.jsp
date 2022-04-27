@@ -35,13 +35,19 @@
                 </div>
                 <nav class="navbar justify-content-between">
                     <div class="d-flex">
-                        <div class="title-actions" style="margin-right: 8px">
+                        <div class="title-actions" >
                             <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#createQuestionModal">Tạo mới
                             </button>
                         </div>
-                        <div class="title-actions">
+                        <div class="title-actions" style="margin-left: 8px;margin-right: 8px;">
                             <a class="btn btn-outline-warning" role="button" href="/admin/questions?action=export">Xuất file</a>
+                        </div>
+                        <div class="title-actions" >
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#createFileModal">
+                                Thêm bằng file
+                            </button>
                         </div>
                     </div>
                     <form method="get" action="/admin/questions" class="form-inline d-flex">
@@ -199,7 +205,7 @@
                             </div>
 
                             <%-- Delete modal--%>
-                            <td class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                            <div class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <form action="/admin/questions" method="post" class="modal-content">
                                         <input type="hidden" name="idQues" value="${question.question_id}">
@@ -217,7 +223,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </td>
+                            </div>
 
                         </c:forEach>
                         </tbody>
@@ -336,7 +342,24 @@
     </div>
 </div>
 
-
+    <%-- Create File--%>
+<div class="modal fade" id="createFileModal" tabindex="-1" aria-labelledby="modalCreateFile" aria-hidden="true">
+    <div class="modal-dialog">
+        <form  action="/admin/questions" method="post" enctype="multipart/form-data" class="modal-content" >
+            <input type="hidden" name="action" value="importfile">
+            <div class="modal-header">
+                <h5 class="modal-title">Chọn file bạn muốn thêm</h5>
+            </div>
+            <div class="modal-body">
+                <input type="file" id="inputFile" name="inputFile">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button  type="submit" id="btnUpload" class="btn btn-primary">Thêm</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 
 <!-- Delete Modal -->
@@ -347,5 +370,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+
 </html>
 </c:if>

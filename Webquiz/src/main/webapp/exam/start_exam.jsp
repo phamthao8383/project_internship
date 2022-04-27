@@ -64,6 +64,11 @@
                                 <div class="exam-content">
                                     <ul>
                                         <c:forEach items="${sessionScope.listQuestion}" var="question" varStatus="loop">
+                                            <input type="hidden" name="description${loop.index + 1}" value="${question.description}">
+                                            <input type="hidden" name="answer1${loop.index + 1}" value="${question.answer1}">
+                                            <input type="hidden" name="answer2${loop.index + 1}" value="${question.answer2}">
+                                            <input type="hidden" name="answer3${loop.index + 1}" value="${question.answer3}">
+                                            <input type="hidden" name="answer4${loop.index + 1}" value="${question.answer4}">
                                             <input type="hidden" name="answerQuestion${loop.index + 1}" value="${question.correct_answer}">
 
                                             <li>

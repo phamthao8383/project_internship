@@ -8,19 +8,23 @@ import service.SubjectService;
 import service.impl.QuestionServiceImpl;
 import service.impl.SubjectServiceImpl;
 import util.HandleString;
+import util.ReadFile;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-
+@MultipartConfig
 @WebServlet(name = "QuestionServlet", urlPatterns = "/admin/questions")
 public class QuestionServlet extends HttpServlet {
     private QuestionService questionService = new QuestionServiceImpl();
     private SubjectService subjectService = new SubjectServiceImpl();
     private HandleString handleString = new HandleString();
     private final int entryDisplay = QuestionRepository.entryDisplay;
+    private ReadFile readFile = new ReadFile();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,6 +52,10 @@ public class QuestionServlet extends HttpServlet {
             }
             case "export":{
                 exportExcel(request,response);
+                break;
+            }
+            case "importfile": {
+                addQuestionFile(request,response);
                 break;
             }
             default:
@@ -138,9 +146,16 @@ public class QuestionServlet extends HttpServlet {
             case "delete": {
                 deleteQuestion(request, response);
                 break;
+
+            }
+            case "importfile": {
+                addQuestionFile(request,response);
+                break;
             }
         }
     }
+
+
     private void updateQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int question_id = Integer.parseInt(request.getParameter("question_id"));
         String description = request.getParameter("description");
@@ -184,6 +199,33 @@ public class QuestionServlet extends HttpServlet {
         questionList(request, response);
 
     }
+
+    private void addQuestionFile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html;charset=UTF8");
+        Part part = request.getPart("inputFile");
+        System.out.println(part);
+//         chổ ni ae tự thêm đường link foder uploads của dự án vào
+        String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\Folder_DuAn\\project_intership\\fileQuestion";
+        String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+        if(!Files.exists(Paths.get(realPath2))) {
+            Files.createDirectory(Paths.get(realPath2));
+        }
+        System.out.println(realPath2);
+//        cái này xong là lưu file được rồi.
+        part.write(realPath2+"/"+ filename);
+        System.out.println(realPath2+"/"+ filename);
+//        chừ lưu filename vào database nữa là ok
+        List<Question> questions = readFile.ReadFileQuestion(realPath2+"/"+ filename);
+        for (Question q: questions
+             ) {
+            System.out.println(q);
+            questionService.insertQuestionFile(q);
+        }
+        questionList(request, response);
+
+    }
+
 
     private void pagingQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int totalQuestion = questionService.getTotalQuestion();
