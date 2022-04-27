@@ -40,6 +40,9 @@ public class ExamViewServlet extends HttpServlet {
             case "goExam" :
                 goExam(request, response);
                 break;
+            case "goExamNew" :
+                goExamNew(request, response);
+                break;
             case "examSummit" :
                 examSummit(request,response);
                 break;
@@ -100,13 +103,13 @@ public class ExamViewServlet extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user/DangNhapDangKi.jsp");
             dispatcher.forward(request,response);
         } else {
-            int examId = Integer.parseInt(examIds);
-            request.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
-            request.setAttribute("exam",examViewService.getExamId(examId));
-            request.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
-            request.setAttribute("examId",examId );
             HttpSession session = request.getSession();
             if (session.getAttribute("timeStartS") == null) {
+                int examId = Integer.parseInt(examIds);
+                session.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+                session.setAttribute("exam",examViewService.getExamId(examId));
+                session.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
+                session.setAttribute("examId",examId );
                 Date date = new Date(System.currentTimeMillis());
                 Time sqlTime = new Time(System.currentTimeMillis());
                 String timeStart = String.valueOf(date) +" " + String.valueOf(sqlTime);
@@ -114,13 +117,41 @@ public class ExamViewServlet extends HttpServlet {
                 request.setAttribute("timeStart",timeStart );
             }
 //                  Thiết lập giá trị trong session
-
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/start_exam.jsp");
             dispatcher.forward(request,response);
         }
 
     }
+    private void goExamNew(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
+        HttpSession session = request.getSession();
+//            Hủy session
+        session.removeAttribute("timeStartS");
+        session.removeAttribute("listQuestion");
+        session.removeAttribute("exam");
+        session.removeAttribute("examQuestion");
+        session.removeAttribute("examId");
+
+        String examIds = request.getParameter("examId");
+        String userId = request.getParameter("userId");
+
+        int examId = Integer.parseInt(examIds);
+        session.setAttribute("listQuestion", examViewService.loadExamQuestion(examId));
+        session.setAttribute("exam",examViewService.getExamId(examId));
+        session.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
+        session.setAttribute("examId",examId );
+        Date date = new Date(System.currentTimeMillis());
+        Time sqlTime = new Time(System.currentTimeMillis());
+        String timeStart = String.valueOf(date) +" " + String.valueOf(sqlTime);
+        session.setAttribute("timeStartS", timeStart);
+        request.setAttribute("timeStart",timeStart );
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/start_exam.jsp");
+        dispatcher.forward(request,response);
+
+
+    }
     private void examSummit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
@@ -128,6 +159,10 @@ public class ExamViewServlet extends HttpServlet {
         HttpSession session = request.getSession();
 //            Hủy session
         session.removeAttribute("timeStartS");
+        session.removeAttribute("listQuestion");
+        session.removeAttribute("exam");
+        session.removeAttribute("examQuestion");
+        session.removeAttribute("examId");
 
         int userId = Integer.parseInt(request.getParameter("userId"));
         int examId = Integer.parseInt(request.getParameter("examId"));
