@@ -9,6 +9,7 @@ import java.util.List;
 public class MemberRepository {
     BaseRepository baseRepository = new BaseRepository();
     Connection connection = this.baseRepository.getConnection();
+    private final int entryDisplay = BaseRepository.entryDisplay;
 
     public List<Member> getMemberList(int indexPage){
         List<Member> members = new ArrayList<>();
@@ -21,7 +22,6 @@ public class MemberRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            int entryDisplay = BaseRepository.entryDisplay;
             preparedStatement.setInt(1, (indexPage-1)* entryDisplay);
             preparedStatement.setInt(2, entryDisplay);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -33,8 +33,45 @@ public class MemberRepository {
                         resultSet.getString("address"),
                         resultSet.getString("image"),
                         resultSet.getString("username"),
-                        resultSet.getDouble("accumulated_point"),
+                        resultSet.getInt("accumulated_point"),
                         resultSet.getInt("role_id")));
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return members;
+    }
+
+    public List<Member> searchMemberList(int indexPage, String nameSearch){
+        List<Member> members = new ArrayList<>();
+        Member member;
+        String sql = "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
+                "from accumulated_point ap\n" +
+                "right join `user` u on u.user_id = ap.user_id\n" +
+                "inner join user_role ur on ur.username = u.username\n" +
+                "where u.`name` like ?" +
+                "order by u.user_id\n" +
+                "limit ?, ?;";  // Phân trang bảng Thành viên, bắt đầu từ index (?) hiển thị (?) Thành viên.
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%"+nameSearch+"%");
+            preparedStatement.setInt(2, (indexPage-1)*entryDisplay);
+            preparedStatement.setInt(3, entryDisplay);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                member = new Member(resultSet.getInt("user_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("address"),
+                        resultSet.getString("image"),
+                        resultSet.getString("username"),
+                        resultSet.getInt("accumulated_point"),
+                        resultSet.getInt("role_id"));
+                members.add(member);
             }
             resultSet.close();
             preparedStatement.close();
@@ -88,7 +125,7 @@ public class MemberRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");
-                double point = resultSet.getDouble("accumulated_point");
+                int point = resultSet.getInt("accumulated_point");
                 int userId = resultSet.getInt("user_id");
                 String email = resultSet.getString("email");
                 String phone = resultSet.getString("phone");
@@ -114,7 +151,7 @@ public class MemberRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");
-                double point = resultSet.getDouble("accumulated_point");
+                int point = resultSet.getInt("accumulated_point");
                 int userId = resultSet.getInt("user_id");
                 String email = resultSet.getString("email");
                 String phone = resultSet.getString("phone");

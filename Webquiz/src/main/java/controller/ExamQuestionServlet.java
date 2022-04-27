@@ -60,7 +60,6 @@ public class ExamQuestionServlet extends HttpServlet {
 
     private void AddQuestionExam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int examId = Integer.parseInt(request.getParameter("examId"));
-        // lấy list đã chọn về
         String[] Id_list = request.getParameterValues("question");
         for (String s : Id_list) {
             examQuestionsService.addQuestionExam(examId, Integer.parseInt(s));
@@ -70,7 +69,6 @@ public class ExamQuestionServlet extends HttpServlet {
 
     private void DeleteQuestionExam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int examId = Integer.parseInt(request.getParameter("examId"));
-        // lấy list đã chọn về
         String[] Id_list = request.getParameterValues("questionDel");
         for (String s : Id_list) {
             examQuestionsService.DeleteQuestionExam(examId, Integer.parseInt(s));

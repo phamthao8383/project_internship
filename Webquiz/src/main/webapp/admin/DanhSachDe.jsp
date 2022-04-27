@@ -61,8 +61,52 @@
                                         <input type="hidden" name="action" value="goExam">
                                         <input type="hidden" name="userId" value="${sessionScope.user.userId}">
                                         <input type="hidden" name="examId" value="${examQuestion.exam.getExamId()}">
-                                        <button type="submit" class="btn btn-outline-primary">Bắt đầu thi</button>
+                                        <c:if test="${sessionScope.examId != null}">
+                                            <c:if test="${examQuestion.exam.getExamId() == sessionScope.examId}">
+                                                <button type="submit" class="btn btn-outline-primary">Bắt đầu thi</button>
+                                            </c:if>
+                                            <c:if test="${examQuestion.exam.getExamId() != sessionScope.examId}">
+                                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalExams${examQuestion.exam.getExamId()}">Bắt đầu thi</button>
+                                            </c:if>
+                                        </c:if>
+                                        <c:if test="${sessionScope.examId == null}">
+                                            <button type="submit" class="btn btn-outline-primary">Bắt đầu thi</button>
+                                        </c:if>
+
                                     </form>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalExams${examQuestion.exam.getExamId()}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Vui lòng đưa ra lựa chọn</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Bạn đang trong 1 bài thi khác. Vui lòng bấm</p>
+                                                    <p>"Tiếp tục thi" nếu muốn tiếp tục bài thi trước!</p>
+                                                    <p>"Thi bài này" để hủy bài thi trước đó bắt đầu bài thi mới.</p>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+
+                                                    <form method="post" action="/exam_list">
+                                                        <input type="hidden" name="action" value="goExamNew">
+                                                        <input type="hidden" name="userId" value="${sessionScope.user.userId}">
+                                                        <input type="hidden" name="examId" value="${examQuestion.exam.getExamId()}">
+                                                        <button type="submit" class="btn btn-warning" >Thi bài này</button>
+                                                    </form>
+
+                                                    <form method="post" action="/exam_list">
+                                                        <input type="hidden" name="action" value="goExam">
+                                                        <input type="hidden" name="userId" value="${sessionScope.user.userId}">
+                                                        <input type="hidden" name="examId" value="${examQuestion.exam.getExamId()}">
+                                                        <button type="submit" class="btn btn-primary">Tiếp tục thi</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +145,7 @@
     function submitForm() {
        document.getElementById("formSJ").submit()
     }
+
 
 </script>
 </body>

@@ -45,30 +45,28 @@
         <div class="form-content">
             <div class="login-form">
                 <div class="title">Đăng nhập</div>
-                <form action="/userServlet" method="post">
+                <form id="loginForm" action="/userServlet" method="post">
                     <input type="hidden" name="action" value="login">
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" name="account" placeholder="Nhập tên đăng nhập..." required>
+                            <input id="accountLoginInput" type="text" name="account" placeholder="Nhập tên đăng nhập...">
                         </div>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="password" placeholder="Nhập mật khẩu..." required>
+                            <input id="passwordLoginInput" type="password" name="password" placeholder="Nhập mật khẩu...">
                         </div>
-
+                        <p id="errorLoginMessage" style="color: red"></p>
                         <c:if test="${sai == 1}">
                             <p style="color: red">Bạn nhập sai tài khoản mật khẩu!</p>
                         </c:if>
-
-
 
                             <%--                 Quên mật khẩu       --%>
                         <div class="text"><a href="/user/forgotPassword.jsp">Quên mật khẩu ?</a></div>
 
 
                         <div class="button input-box">
-                            <input type="submit" value="Đăng nhập">
+                            <input onclick="onSubmitLoginForm()" type="button" value="Đăng nhập">
                         </div>
                         <div class="text sign-up-text">Bạn chưa có tài khoản? <label for="flip" id="registerLabel">Đăng kí nhanh</label></div>
                     </div>
@@ -77,19 +75,17 @@
 <%--            Đăng ký   --%>
             <div class="signup-form">
                 <div class="title">Đăng ký</div>
-                <form id="form-dangky" action="/userServlet" method="post" name="register" onsubmit="onSubmit()">
+                <form id="form-dangky" action="/userServlet" method="post" name="register">
                     <input type="hidden" name="action" value="createAccount">
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-                            <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn" required=""
-                                   oninvalid="this.setCustomValidity('Họ và tên không được để trống.')" oninput="setCustomValidity('')">
+                            <input type="text"  name="name" id="name" placeholder="Nhập vào tên của bạn">
                         </div>
                         <span style="color: red" id="errorName"></span>
                         <div class="input-box">
                             <i class="fas fa-user"></i>
-                            <input  type="text"  name="nameAccount" id="nameAccount" placeholder="Nhập vào tên đăng nhập" required=""
-                                    oninvalid="this.setCustomValidity('Tên đăng nhập không được để trống.')" oninput="setCustomValidity('')">
+                            <input  type="text"  name="nameAccount" id="nameAccount" placeholder="Nhập vào tên đăng nhập">
                         </div>
                         <span  style="color: red"  id="errorUsername"></span>
                         <c:if test="${isExist == true}">
@@ -97,37 +93,32 @@
                         </c:if>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="passw" id="pass" placeholder="Nhập mật khẩu" required=""
-                                   oninvalid="this.setCustomValidity('Mật khẩu không được để trống.')" oninput="setCustomValidity('')">
+                            <input type="password" name="passw" id="pass" placeholder="Nhập mật khẩu">
                         </div>
                         <span style="color: red"   id="errorPass"></span>
                         <div class="input-box">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="con_passw" id="passw" placeholder="Nhập lại mật khẩu" required=""
-                                   oninvalid="this.setCustomValidity('Xác nhận mật khẩu không được để trống.')" oninput="setCustomValidity('')">
+                            <input type="password" name="con_passw" id="passw" placeholder="Nhập lại mật khẩu">
                         </div>
                         <span style="color: red"   id="errorConPass"></span>
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" name="email"id="email" placeholder="Nhập email của bạn" required=""
-                                   oninvalid="this.setCustomValidity('Email không được để trống.')" oninput="setCustomValidity('')">
+                            <input type="text" name="email"id="email" placeholder="Nhập email của bạn">
                         </div>
                         <span  style="color: red"  id="errorEmail"></span>
                         <div class="input-box">
                             <i class="fa-solid fa-location-dot"></i>
-                            <input type="text" id="address" name="address" placeholder="Nhập địa chỉ" required=""
-                                   oninvalid="this.setCustomValidity('Địa chỉ không được để trống.')" oninput="setCustomValidity('')">
+                            <input type="text" id="address" name="address" placeholder="Nhập địa chỉ">
                         </div>
                         <span style="color: red"  id="errorAddress"></span>
                         <div class="input-box">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="text" name="phone" id="phone" placeholder="Nhập vào số điện thoại" required=""
-                                   oninvalid="this.setCustomValidity('Số điện thoại không được để trống.')" oninput="setCustomValidity('')">
+                            <input type="text" name="phone" id="phone" placeholder="Nhập vào số điện thoại">
                         </div>
                         <span style="color: red"  id="errorPhone"></span>
 
                         <div class="button input-box">
-                            <input type="submit" value="Đăng Ký" >
+                            <input onclick="onSubmit()" type="button" value="Đăng Ký">
                         </div>
                         <div class="text sign-up-text">Bạn đã có tài khoản? <label for="flip">Đăng nhập nhanh</label></div>
                     </div>
@@ -201,6 +192,28 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
+<%--Validate đăng nhập--%>
+<script>
+    function validateLogin() {
+        let username = document.getElementById("accountLoginInput").value;
+        let password = document.getElementById('passwordLoginInput').value;
+        let errorLoginMessage = document.getElementById("errorLoginMessage");
+        if(username == '' || username == null || password == '' || password == null){
+            errorLoginMessage.innerHTML = "Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu.";
+            return false;
+        }
+        else
+            errorLoginMessage.innerHTML = "";
+        return true;
+    }
+
+    function onSubmitLoginForm() {
+        if(validateLogin()){
+            document.getElementById("loginForm").submit();
+        }
+    }
+</script>
+
 <%--validate quên mật khẩu--%>
 <script>
     function ValidateForgot() {
@@ -266,10 +279,10 @@
 
 <%--Validate đăng kí--%>
 <script>
-    function Validate() {
-        let name = document.getElementById('name').value;
+    function validate() {
+        let name = document.getElementById('name').value.toLowerCase();
         let errorName = document.getElementById('errorName');
-        let regexName = /^[^\d+]*[\d+]{0}[^\d+]*$/;
+        let regexName = /^(([a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ']+)\s*)+$/;
         if (name == '' || name == null) {
             errorName.innerHTML = "Họ tên không được để trống.";
             return false;
@@ -294,9 +307,9 @@
         if (password == '' || password == null) {
             errorPass.innerHTML = "Mật khẩu không được để trống.";
             return false;
-        } else {
+        } else
             errorPass.innerHTML = "";
-        }
+
 
         let rePassword = document.getElementById('passw').value;
         let errorRePassword = document.getElementById('errorConPass');
@@ -306,9 +319,9 @@
         } else if (rePassword != password) {
             errorRePassword.innerHTML = "Xác nhận mật khẩu và mật khẩu không trùng khớp.";
             return false;
-        } else {
+        } else
             errorRePassword.innerHTML = "";
-        }
+
 
         let email = document.getElementById('email').value;
         let errorEmail = document.getElementById('errorEmail');
@@ -334,7 +347,7 @@
 
         let phone = document.getElementById('phone').value;
         let errorPhone = document.getElementById('errorPhone');
-        let regexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
         if (phone == '' || phone == null) {
             errorPhone.innerHTML = "Số điện thoại không được để trống.";
             return false;
@@ -344,15 +357,20 @@
         } else {
             errorPhone.innerHTML = "";
         }
-        if(!name || !username || !password || !rePassword || !email || !address || !phone || password!=rePassword)
-            return false;
+
+        if (name && username && inputNewPassword==inputNewPass &&  email && inputNewPassword  &&inputNewPass ){
+            return true;
+        }
         return true;
     }
     function onSubmit() {
-        if(Validate()){
-            console.log(Validate());
+        let checkValidation = validate();
+        console.log(checkValidation);
+        if(checkValidation){
             document.getElementById("form-dangky").submit();
             localStorage.setItem('isSubmit', true);
+        } else {
+            localStorage.setItem('isSubmit', false);
         }
     }
     $( document ).ready(function() {
@@ -365,11 +383,11 @@
                 timer: 1500
             });
         }
-        else if($("#usernameExist").length > 0 && localStorage.getItem("isSubmit")){
+        else if($("#usernameExist").length > 0 || localStorage.getItem("isSubmit")){
             Swal.fire({
                 icon: 'error',
                 title: 'Đăng ký không thành công!',
-                text: 'Tên đăng nhập đã tồn tại.'
+                // text: 'Tên đăng nhập đã tồn tại.'
             })
             $("#registerLabel").trigger('click');
         }

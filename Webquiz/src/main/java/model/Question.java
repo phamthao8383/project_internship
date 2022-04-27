@@ -13,6 +13,20 @@ public class Question {
     public Question(String description) {
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question_id=" + question_id +
+                ", description='" + description + '\'' +
+                ", answer1='" + answer1 + '\'' +
+                ", answer2='" + answer2 + '\'' +
+                ", answer3='" + answer3 + '\'' +
+                ", answer4='" + answer4 + '\'' +
+                ", correct_answer='" + correct_answer + '\'' +
+                ", subject=" + subject +
+                '}';
+    }
+
     public Question(int question_id, String description, String answer1, String answer2, String answer3, String answer4, String correct_answer, Subject subject) {
         this.question_id = question_id;
         this.description = description;
@@ -98,5 +112,8 @@ public class Question {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public void setSubject(int intValue) {
     }
 }
