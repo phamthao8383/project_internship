@@ -18,6 +18,8 @@ public class ExamRepository {
     private static final String SELECT_ALL_EXAM = "select * from exam join `subject` on exam.subject_id=`subject`.subject_id;";
     private static final String INSERT_EXAM = "INSERT INTO exam (subject_id, allowed_time, exam_name) VALUE (?,?,?)";
     private static final String UPDATE_EXAM = "update exam set subject_id = ?,allowed_time = ?,exam_name = ? where exam_id = ?";
+    private static final String PAGINATE_EXAM = "select * from exam join `subject` on exam.subject_id=`subject`.subject_id limit ?,?;";
+    private static final String TOTAL_EXAM = "select count(*) from exam;";
 
     public List<Exam> selectAllExam() {
         List<Exam> exams = new ArrayList<>();
@@ -108,6 +110,45 @@ public class ExamRepository {
             e.printStackTrace();
         }
         return rowDeleted;
+    }
+
+    public int getTotalExam(){
+        Connection connection = this.baseRepository.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(TOTAL_EXAM);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Exam> paginateExam(int indexPage){
+        List<Exam> exams = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(PAGINATE_EXAM);
+            int entryDisplay = BaseRepository.entryDisplay;
+            preparedStatement.setInt(1,(indexPage-1)*entryDisplay);
+            preparedStatement.setInt(2, entryDisplay);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int exam_id = rs.getInt("exam_id");
+                int subject_id = rs.getInt("subject_id");
+                String subject_name = rs.getString("subject_name");
+                String allowed_time = rs.getString("allowed_time");
+                String exam_name = rs.getString("exam_name");
+                exams.add(new Exam(exam_id, new Subject(subject_id, subject_name), allowed_time, exam_name));
+            }
+            rs.close();
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exams;
     }
 }
 

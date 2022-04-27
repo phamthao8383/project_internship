@@ -70,7 +70,10 @@
                             <input type="hidden" name="indexQuestion${loop.index}" value="${loop.index}">
                             <tr>
                                 <td>
-                                    <span class="limit-text"><c:out value="${loop.index + 1}"/></span>
+                                    <span class="limit-text">
+                                        <c:set var="questionIndexHelper" value="${(currentPage-1)*entryDisplay}" scope="session"/>
+                                        <c:out value="${questionIndexHelper + loop.index + 1}"/>
+                                    </span>
                                 </td>
                                 <td>
                                     <span class="limit-text"><c:out value="${question.description}"/></span>

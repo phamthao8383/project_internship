@@ -5,9 +5,10 @@ import model.Question;
 import java.util.List;
 
 public interface ExamQuestionsService {
-    public List<Question> selectAllExamQuestion(int exam_id);
-    public List<Question> selectAllQuestionSj(int id_sj , int exam_id);
-    public void addQuestionExam (int exam_id, int question_id);
-    public void DeleteQuestionExam (int exam_id, int question_id);
-
+    List<Question> selectAllExamQuestion(int exam_id);
+    List<Question> selectAllQuestionSj(int id_sj, int exam_id);
+    void addQuestionExam(int exam_id, int question_id);
+    void DeleteQuestionExam(int exam_id, int question_id);
+    int getTotalExamQuestion(int exam_id);
+    List<Question> paginateExamQuestion(int exam_id, int indexPage);
 }

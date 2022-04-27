@@ -28,4 +28,14 @@ public class ExamQuestionsServiceImpl implements ExamQuestionsService {
     public void DeleteQuestionExam(int exam_id, int question_id) {
         examQuestionsRepository.DeleteQuestionExam(exam_id,question_id);
     }
+
+    @Override
+    public int getTotalExamQuestion(int exam_id) {
+        return examQuestionsRepository.getTotalExamQuestion(exam_id);
+    }
+
+    @Override
+    public List<Question> paginateExamQuestion(int exam_id, int indexPage) {
+        return examQuestionsRepository.paginateExamQuestion(exam_id, indexPage);
+    }
 }

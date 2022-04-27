@@ -10,10 +10,6 @@ public class MemberRepository {
     BaseRepository baseRepository = new BaseRepository();
     Connection connection = this.baseRepository.getConnection();
 
-    public static int entryDisplay(){
-        return 5;   // Hiển thị 5 mục/thành viên trong mỗi trang của bảng
-    }
-
     public List<Member> getMemberList(int indexPage){
         List<Member> members = new ArrayList<>();
         String sql = "SELECT u.user_id, u.username, `name`, email, address, phone, image, ap.accumulated_point, ur.role_id\n" +
@@ -25,8 +21,9 @@ public class MemberRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, (indexPage-1)*entryDisplay() );
-            preparedStatement.setInt(2, entryDisplay());
+            int entryDisplay = BaseRepository.entryDisplay;
+            preparedStatement.setInt(1, (indexPage-1)* entryDisplay);
+            preparedStatement.setInt(2, entryDisplay);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 members.add(new Member(resultSet.getInt("user_id"),

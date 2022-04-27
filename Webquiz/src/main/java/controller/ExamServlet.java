@@ -4,6 +4,7 @@ import model.Exam;
 import model.Member;
 import model.Question;
 import model.Subject;
+import repository.BaseRepository;
 import service.ExamService;
 import service.QuestionService;
 import service.SubjectService;
@@ -26,6 +27,7 @@ public class ExamServlet extends HttpServlet {
     private ExamService examService = new ExamServiceImpl();
     private SubjectService subjectService = new SubjectServiceImpl();
     private HandleString handleString = new HandleString();
+    private final int entryDisplay = BaseRepository.entryDisplay;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -79,10 +81,21 @@ public class ExamServlet extends HttpServlet {
     }
 
     private void examList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Exam> listExam = examService.selectAllExam();
-        request.setAttribute("listExam", listExam);
+        String index = request.getParameter("index");
+        if(index == null){
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
+        int indexExamStart = ((indexPage - 1)*entryDisplay + 1);
+
+        List<Exam> listExam = examService.paginateExam(indexPage);
         List<Subject> listSubject = subjectService.selectAllSubject();
+        request.setAttribute("listExam", listExam);
         request.setAttribute("listSubject", listSubject);
+        request.setAttribute("currentPage", indexPage);
+        request.setAttribute("indexExamStart", indexExamStart);
+        request.setAttribute("entryDisplay", entryDisplay);
+        pagingExam(request);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/exam-list.jsp");
         dispatcher.forward(request, response);
     }
@@ -132,5 +145,15 @@ public class ExamServlet extends HttpServlet {
         examService.insertExam(exam);
         response.sendRedirect("/admin/exams");
 
+    }
+
+    private void pagingExam(HttpServletRequest request) throws ServletException, IOException{
+        int totalExam = examService.getTotalExam();
+        int maxPages = totalExam/entryDisplay;
+        if (totalExam%entryDisplay != 0){
+            maxPages++;
+        }
+        request.setAttribute("totalExam", totalExam);
+        request.setAttribute("maxPages", maxPages);
     }
 }
