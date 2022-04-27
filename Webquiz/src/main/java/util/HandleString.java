@@ -9,7 +9,7 @@ public class HandleString {
     public String handleFont(String str){
         byte[] bytes = str.getBytes(StandardCharsets.ISO_8859_1);
         str = new String(bytes, StandardCharsets.UTF_8);
-        return str;
+        return str.trim();
     }
 
     public String handleName(String str){

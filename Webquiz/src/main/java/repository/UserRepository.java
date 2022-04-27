@@ -63,7 +63,7 @@ public class UserRepository {
                                                         ,rs.getString("exam_name")),
                                                 rs.getTime("starting_time"),
                                                 rs.getTime("completion_time"),
-                                                rs.getDouble("point"));
+                                                rs.getInt("point"));
                 examHistoryList.add(examHistory);
             }
         } catch (SQLException e) {
@@ -103,7 +103,7 @@ public class UserRepository {
                                 ,rs.getString("exam_name")),
                         rs.getTime("starting_time"),
                         rs.getTime("completion_time"),
-                        rs.getDouble("point"));
+                        rs.getInt("point"));
                 examHistoryList.add(examHistory);
             }
         } catch (SQLException e) {

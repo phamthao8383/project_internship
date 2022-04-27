@@ -29,11 +29,23 @@
             <div class="col-10 content">
                 <div class="content__title">
                     <p>Quản lý thành viên</p>
+                    <form onsubmit="searchMember()" id="searchForm" class="d-flex" action="/admin/manage-user?action=search" method="post">
+                        <input id="searchInput" class="form-control me-2" name="nameSearch" type="search" placeholder="Nhập tên cần tìm" aria-label="Search">
+                            <div id="searchContent" class="searchContent d-none">
+                                <span id="searchLabel">Tìm kiếm với tên: </span>
+                                <button onclick="unSearch()" type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+                            </div>
+                        </input>
+                        <button  class="btn btn-outline-success" type="submit">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </form>
                 </div>
                 <div class="user-list">
                     <c:if test="${empty memberList}">
-                        <h2>Danh sách thành viên trống.</h2>
+                        <h2 id="emptyMessage" class="">Danh sách thành viên trống.</h2>
                     </c:if>
+                    <h2 id="message"></h2>
                     <c:if test="${not empty memberList}">
                         <table id="user_table" class="table table-hover">
                             <colgroup>
@@ -72,7 +84,7 @@
                                                 <h5 class="modal-title" id="editModalLabel">Sửa thông tin người dùng</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form action="/admin/manage-user?action=update" method="post" id="updateMemberForm">
+                                            <form action="/admin/manage-user?action=update" method="post" id="updateMemberForm${loop.index}">
                                                 <input type="hidden" name="idUpdate" id="MemberIDUpdate" value="${member.userId}">
                                                 <input type="hidden" name="usernameUpdate" id="MemberUsernameUpdate" value="${member.account}">
                                                 <div class="modal-body">
@@ -85,27 +97,31 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                <label for="nameInput" class="col-sm-3 col-form-label">Họ và Tên</label>
+                                                                <label for="nameInput${loop.index}" class="col-sm-3 col-form-label">Họ và Tên</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="name" value="${member.name}" id="nameInput" required>
+                                                                    <input type="text" class="form-control" name="name" value="${member.name}" id="nameInput${loop.index}">
+                                                                    <span style="color: red" id="errorName${loop.index}"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                <label for="emailInput" class="col-sm-3 col-form-label">Email</label>
+                                                                <label for="emailInput${loop.index}" class="col-sm-3 col-form-label">Email</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="email" class="form-control" name="email" value="${member.email}" id="emailInput" required>
+                                                                    <input type="email" class="form-control" name="email" value="${member.email}" id="emailInput${loop.index}">
+                                                                    <span style="color: red" id="errorEmail${loop.index}"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                <label for="phoneInput" class="col-sm-3 col-form-label">Số điện thoại</label>
+                                                                <label for="phoneInput${loop.index}" class="col-sm-3 col-form-label">Số điện thoại</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="phone" value="${member.phone}" id="phoneInput" required>
+                                                                    <input type="text" class="form-control" name="phone" value="${member.phone}" id="phoneInput${loop.index}">
+                                                                    <span style="color: red" id="errorPhone${loop.index}"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
-                                                                <label for="addressInput" class="col-sm-3 col-form-label">Địa chỉ</label>
+                                                                <label for="addressInput${loop.index}" class="col-sm-3 col-form-label">Địa chỉ</label>
                                                                 <div class="col-sm-9">
-                                                                    <input type="text" class="form-control" name="address" value="${member.address}" id="addressInput" required>
+                                                                    <input type="text" class="form-control" name="address" value="${member.address}" id="addressInput${loop.index}">
+                                                                    <span style="color: red" id="errorAddress${loop.index}"></span>
                                                                 </div>
                                                             </div>
                                                             <div class="row mb-3">
@@ -132,7 +148,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                    <button type="submit" class="btn btn-primary" onclick="showAlertUpdate()">Lưu</button>
+                                                    <button type="button" onclick="onSubmit(${loop.index})" class="btn btn-primary">Lưu</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -144,7 +160,7 @@
                             </tbody>
                         </table>
 <%--                    Phân trang  --%>
-                        <div class="row">
+                        <div id="pagination" class="row">
                             <div class="col-4">
                                 <c:set var="indexMemberEnd" scope="session" value="${indexMember + entryDisplay -1}"/>
                                 <c:if test="${indexMemberEnd > totalMember}">
@@ -213,8 +229,9 @@
 <%--SweatAlert2:--%>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.9/dist/sweetalert2.all.min.js"></script>
 
+
+<%-- Message thông báo --%>
 <script>
-    let updateForm = document.getElementById("updateMemberForm");
     let deleteForm = document.getElementById("deleteMemberForm");
     const Toast = Swal.mixin({
         toast: true,
@@ -238,7 +255,8 @@
         }
     }
 
-    function showAlertUpdate() {
+    function showAlertUpdate(index) {
+        let updateForm = document.getElementById("updateMemberForm"+index);
         if(updateForm.checkValidity()){
             localStorage.setItem("isUpdated", true);
         }
@@ -261,6 +279,108 @@
             localStorage.removeItem("isUpdated");
         }
     });
+</script>
+
+<%--Validate form sửa thông tin người dùng--%>
+<script>
+    function validate(index) {
+        let name = document.getElementById('nameInput'+index).value.toLowerCase();
+        let errorName = document.getElementById('errorName'+index);
+        let regexName = /^(([a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ']+)\s*)+$/;
+        if (name == '' || name == null) {
+            errorName.innerHTML = "Họ tên không được để trống.";
+            return false;
+        } else if (!regexName.test(name)) {
+            errorName.innerHTML = "Họ tên không hợp lệ.";
+            return false;
+        } else {
+            errorName.innerHTML = "";
+        }
+
+        let email = document.getElementById('emailInput'+index).value;
+        let errorEmail = document.getElementById('errorEmail'+index);
+        let reGexEmail = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
+        if (email == '' || email == null) {
+            errorEmail.innerHTML = "Email không được để trống.";
+            return false;
+        } else if (!reGexEmail.test(email)) {
+            errorEmail.innerHTML = "Email không hợp lệ.";
+            return false;
+        } else {
+            errorEmail.innerHTML = "";
+        }
+
+        let phone = document.getElementById('phoneInput'+index).value;
+        let errorPhone = document.getElementById('errorPhone'+index);
+        let regexPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if (phone == '' || phone == null) {
+            errorPhone.innerHTML = "Số điện thoại không được để trống.";
+            return false;
+        } else if (!regexPhone.test(phone)) {
+            errorPhone.innerHTML = "Số điện thoại không hợp lệ.";
+            return false;
+        } else {
+            errorPhone.innerHTML = "";
+        }
+
+        let address = document.getElementById('addressInput'+index).value;
+        let errorAddress = document.getElementById('errorAddress'+index);
+        if(address == '' || address == null){
+            errorAddress.innerHTML = "Địa chỉ không được để trống.";
+            return false;
+        }
+        else
+            errorAddress.innerHTML = "";
+
+        if(name && email && phone && address)
+            return true;
+        return true;
+    }
+
+    function onSubmit(index) {
+        if(validate(index)){
+            document.getElementById("updateMemberForm"+index).submit();
+            showAlertUpdate(index);
+        }
+    }
+</script>
+
+<%-- Tìm kiếm--%>
+<script>
+    let searchContent = document.getElementById("searchContent");
+    let searchLabel = document.getElementById("searchLabel");
+    let message = document.getElementById("message");
+    let pagination = document.getElementById("pagination");
+    let searchInput;
+    function searchMember() {
+        searchInput = document.getElementById("searchInput").value;
+        let searchForm = document.getElementById("searchForm");
+        localStorage.setItem('isSearch', false);
+        if(searchInput!=''&&searchInput!=null){
+            localStorage.setItem('isSearch', true);
+            localStorage.setItem('nameSearch', searchInput);
+        }
+    }
+
+    $(document).ready(function () {
+        if(localStorage.getItem('isSearch')=="true"){
+            searchContent.classList.remove("d-none");
+            searchLabel.textContent += localStorage.getItem('nameSearch');
+            message.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
+            pagination.classList.add("d-none");
+        } else if(localStorage.getItem('isSearch')=="false"){
+            searchContent.classList.remove("d-none");
+            searchLabel.textContent = "Vui lòng nhập tên để tìm.";
+            localStorage.removeItem('isSearch');
+        }
+    })
+
+    function unSearch() {
+        document.getElementById("searchInput").value = '';
+        document.getElementById("searchForm").submit();
+        pagination.classList.remove("d-none");
+        localStorage.removeItem('isSearch');
+    }
 </script>
 </html>
 

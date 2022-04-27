@@ -8,9 +8,9 @@ public class ExamHistory {
     Exam exam;
     Time startTime;
     Time endTime;
-    Double point;
+    int point;
 
-    public ExamHistory(int examHistoryId, int userId, Exam exam, Time startTime, Time endTime, Double point) {
+    public ExamHistory(int examHistoryId, int userId, Exam exam, Time startTime, Time endTime, int point) {
         this.examHistoryId = examHistoryId;
         this.userId = userId;
         this.exam = exam;
@@ -78,11 +78,11 @@ public class ExamHistory {
         this.endTime = endTime;
     }
 
-    public Double getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(Double point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 }

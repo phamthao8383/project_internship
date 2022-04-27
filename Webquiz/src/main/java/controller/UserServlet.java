@@ -252,7 +252,6 @@ public class UserServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
 
             String nameAccount = request.getParameter("nameAccount");
-            System.out.println(nameAccount);
 //            List<Account> accountList = accountService.CheckAccount(nameAccount);
 //            request.setAttribute("accountList", accountList);
             String name = request.getParameter("name");
