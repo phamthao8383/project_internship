@@ -33,6 +33,9 @@ public class MemberServlet extends HttpServlet {
             case "update":
                 updateMember(request, response);
                 break;
+            case "search":
+                searchMemberList(request, response);
+                break;
             default:
                 getMemberList(request, response);
         }
@@ -67,12 +70,31 @@ public class MemberServlet extends HttpServlet {
         request.getRequestDispatcher("/admin/manage-user.jsp").forward(request, response);
     }
 
+    private void searchMemberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String index = request.getParameter("index");
+        if (index == null){
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
+        int indexMember = ((indexPage - 1)*entryDisplay + 1);
+        String nameSearch = handleString.handleFont(request.getParameter("nameSearch"));
+        // Tạo bảng
+        List<Member> memberList = memberService.searchMemberList(indexPage, nameSearch);
+        request.setAttribute("memberList", memberList);
+
+        pagingNumber(request, response);                          // Dãy số phân trang dưới bảng
+        request.setAttribute("currentPage", indexPage);     // Index của trang(bảng) đang hiển thị thông tin
+        request.setAttribute("indexMember", indexMember);   // Index vị trí của thành viên đầu tiên trong bảng
+        request.setAttribute("entryDisplay", entryDisplay); // Số thành viên được hiển thị trên mỗi trang(bảng)
+        request.getRequestDispatcher("/admin/manage-user.jsp").forward(request, response);
+    }
+
     private void updateMember(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         int memberIDSearch = Integer.parseInt(request.getParameter("idUpdate"));
         String memberUsernameSearch = request.getParameter("usernameUpdate");
         Member memberSearch = new Member(memberIDSearch, memberUsernameSearch);
 
-        String name = handleString.handleFont(request.getParameter("name"));
+        String name = handleString.handleName(handleString.handleFont(request.getParameter("name")));
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String address = handleString.handleFont(request.getParameter("address"));

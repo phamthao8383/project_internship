@@ -97,11 +97,16 @@ h1 {
 
 .main .content__title{
     margin: 1rem 0;
+    padding-bottom: 10px;
     border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .main .content__title > p{
     font-size: 1.5rem;
+    margin: 0;
 }
 
 .main .col-2{
@@ -119,4 +124,20 @@ h1 {
     -webkit-line-clamp: 3; /* number of lines to show */
     line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.searchContent{
+    border-radius: 50px;
+    padding: 6px 8px;
+    background-color: #3A4BCD;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+#searchInput{
+    position: relative;
+}
+#searchContent{
+    position: absolute;
+    right: 300px;
 }

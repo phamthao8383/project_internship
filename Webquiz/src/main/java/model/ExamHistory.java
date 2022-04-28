@@ -1,16 +1,17 @@
 package model;
 
 import java.sql.Time;
+import java.time.format.DateTimeFormatter;
 
 public class ExamHistory {
     int examHistoryId;
     int userId;
     Exam exam;
-    Time startTime;
-    Time endTime;
-    Double point;
+    String startTime;
+    String endTime;
+    int point;
 
-    public ExamHistory(int examHistoryId, int userId, Exam exam, Time startTime, Time endTime, Double point) {
+    public ExamHistory(int examHistoryId, int userId, Exam exam, String startTime, String endTime, int point) {
         this.examHistoryId = examHistoryId;
         this.userId = userId;
         this.exam = exam;
@@ -62,27 +63,27 @@ public class ExamHistory {
         this.exam = exam;
     }
 
-    public Time getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public Double getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(Double point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 }

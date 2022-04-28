@@ -1,7 +1,7 @@
 package model;
 
 public class Member extends User {
-    double point;
+    int point;
     int role;
 
     public Member() {
@@ -27,18 +27,18 @@ public class Member extends User {
                   String address,
                   String image,
                   String account,
-                  double point,
+                  int point,
                   int role) {
         super(userId, name, email, phone, address, image, account);
         this.point = point;
         this.role = role;
     }
 
-    public double getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(double point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 

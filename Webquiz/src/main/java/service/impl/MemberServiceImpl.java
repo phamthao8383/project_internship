@@ -15,6 +15,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<Member> searchMemberList(int indexPage, String nameSearch) {
+        return memberRepository.searchMemberList(indexPage, nameSearch);
+    }
+
+    @Override
     public int getTotalMember() {
         return memberRepository.getTotalMember();
     }

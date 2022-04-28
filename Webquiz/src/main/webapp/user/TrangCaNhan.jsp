@@ -55,13 +55,12 @@
         <div class="form__info-footer">
             <button data-toggle="modal" data-target="#editModal" class="form__info-btn">Chỉnh sửa</button>
             <button data-toggle="modal" data-target="#editPassword" class="form__info-btn">Đổi mật khẩu</button>
-            <button id="btn_show" onclick="showhistory()" type="button" class="form__info-btn">Xem lịch sử thi</button>
         </div>
     </div>
 
 
     <!-- Lịch xử thi -->
-    <div class="history" id="history">
+    <div class="history show">
         <h2 class="history__title">Lịch sử thi</h2>
         <table class="table table-striped">
             <thead>
@@ -69,8 +68,9 @@
                 <th scope="col">STT</th>
                 <th scope="col">Môn thi</th>
                 <th scope="col">Đề thi</th>
+                <th scope="col">Bắt đầu</th>
+                <th scope="col">Kết thúc</th>
                 <th scope="col">Điểm</th>
-                <th scope="col">Thời gian</th>
             </tr>
             </thead>
             <tbody id="content">
@@ -79,14 +79,15 @@
                     <th scope="row">${loop.index +1 +  (indexPage-1)*pageSize}</th>
                     <td>${exam.getExam().getSubject().subject_name}</td>
                     <td>${exam.getExam().examName}</td>
+                    <td>${exam.startTime}</td>
+                    <td>${exam.endTime}</td>
                     <td>${exam.point}</td>
-                    <td>${exam.getExam().allowedTime}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
         <nav aria-label="Page navigation example">
-            <ul class="pagination">
+            <ul class="pagination" style="justify-content: center">
                 <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
@@ -320,25 +321,6 @@
             .catch(console.error)
 
     };
-</script>
-<script>
-    // show Lịch sử thi
-    function showhistory() {
-
-        document.getElementById("history").classList.toggle("show");
-        document.getElementById("btn_show").classList.toggle("active_btn");
-
-    }
-
-
-    $( document ).ready(function() {
-        let check = ${check}
-        if(check == 0) {
-            document.getElementById("history").classList.add("show");
-            document.getElementById("btn_show").classList.add("active_btn");
-
-        }
-    });
 </script>
 
 <script src="/static/js/TrangCaNhan.js"></script>

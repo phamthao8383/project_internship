@@ -1,7 +1,6 @@
 package controller;
 
 import model.Account;
-import model.ExamHistory;
 import model.User;
 import service.AccountService;
 import service.UserService;
@@ -15,14 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 @MultipartConfig
 @WebServlet(name = "UserServlet", urlPatterns = {"/userServlet"})
@@ -32,7 +25,7 @@ public class UserServlet extends HttpServlet {
     private HandleString handleString = new HandleString();
     private PasswordEncryption passwordEncryption = new PasswordEncryption();
 
-    private int pageSize = 2;
+    private int pageSize = 5;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -262,7 +255,6 @@ public class UserServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
 
             String nameAccount = request.getParameter("nameAccount");
-            System.out.println(nameAccount);
 //            List<Account> accountList = accountService.CheckAccount(nameAccount);
 //            request.setAttribute("accountList", accountList);
             String name = request.getParameter("name");
