@@ -20,7 +20,6 @@ public class QuestionRepository {
     private static final String UPDATE_QUESTION = "update question set `description` = ?,answer1 = ?,answer2 = ?,answer3 = ?,answer4 = ?,correct_answer = ?,subject_id= ? where question_id = ?";
     private static final String SEARCH_QUESTION = "select * from question join `subject` on question.subject_id=`subject`.subject_id where `description` like ?;";
     private static final String TOTAL_QUESTION = "select count(*) from question;";
-    public static final int entryDisplay = 5;   // Đặt hiển thị 5 mục/câu hỏi trong mỗi trang của bảng
 
     public List<Question> selectAllQuestion() {
         List<Question> questions = new ArrayList<>();
@@ -176,7 +175,8 @@ public class QuestionRepository {
         List<Question> questions = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = this.baseRepository.getConnection().prepareStatement(PAGINATE_QUESTION);
-            preparedStatement.setInt(1, (indexPage-1)*entryDisplay);    // Vị trí của index query bắt đầu từ (index trang - 1) * số mục hiển thị cho mỗi trang
+            int entryDisplay = BaseRepository.entryDisplay;
+            preparedStatement.setInt(1, (indexPage-1)* entryDisplay);    // Vị trí của index query bắt đầu từ (index trang - 1) * số mục hiển thị cho mỗi trang
             preparedStatement.setInt(2, entryDisplay);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {

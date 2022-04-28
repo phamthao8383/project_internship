@@ -2,6 +2,7 @@ package controller;
 
 import model.Member;
 import org.omg.PortableInterceptor.INACTIVE;
+import repository.BaseRepository;
 import repository.MemberRepository;
 import service.MemberService;
 import service.impl.MemberServiceImpl;
@@ -19,7 +20,7 @@ import java.util.List;
 public class MemberServlet extends HttpServlet {
     MemberService memberService = new MemberServiceImpl();
     HandleString handleString = new HandleString();
-    int entryDisplay = MemberRepository.entryDisplay();
+    private final int entryDisplay = BaseRepository.entryDisplay;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

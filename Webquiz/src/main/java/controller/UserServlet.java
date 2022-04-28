@@ -223,27 +223,25 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF8");
         int idUser = Integer.parseInt(request.getParameter("idUser"));
         String account = request.getParameter("nameAccount");
+        System.out.println(account);
         String password = request.getParameter("password");
-        password = passwordEncryption.encrypt(password);
+        System.out.println(password);
         String ps1 = request.getParameter("newPassword");
         ps1 = passwordEncryption.encrypt(ps1);
         String ps2 = request.getParameter("confirmPassword");
         ps2 = passwordEncryption.encrypt(ps2);
 
-        if(ps1.equals(ps2)) {
-            Account acc = accountService.CheckLogIn(account,password);
-            if(acc.getUsername()!=null) {
-                accountService.editPassword(account, ps1);
-                System.out.println("dung rồi");
-                goGetInfo(request,response);
-            } else {
-                goGetInfo(request,response);
-            }
-
+        Account acc = accountService.CheckLogIn(account,password);
+        System.out.println(acc.getUsername());
+        if(acc.getUsername()!=null) {
+            accountService.editPassword(account, ps1);
+            System.out.println("da doi mat khau");
+            goGetInfo(request,response);
         } else {
-            System.out.println("sai roi cau a");
+            System.out.println("Chua doi mat khau");
+            request.setAttribute("checkPassword", 0);
+            goGetInfo(request,response);
         }
-
     }
 
 

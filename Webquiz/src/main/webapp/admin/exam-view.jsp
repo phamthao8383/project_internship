@@ -30,10 +30,12 @@
             <div class="col-10 content">
                 <div class="content__title">
                     <div class="content_titlepath">
-                        <a href="/admin/exams" class="content__pathback">Danh sách đề thi</a>
-                        <p class="content__examname">
-                            <i class="fa-solid fa-angle-right"></i> ${subjectName} - ${examName}
-                        </p>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item fs-4"><a href="/admin/exams">Danh sách đề thi</a></li>
+                                <li class="breadcrumb-item active fs-4" aria-current="page">${examName} (${subjectName})</li>
+                            </ol>
+                        </nav>
                     </div>
                     <div class="title-actions">
                         <button id="add-question-btn" type="button" class="btn btn-outline-primary btn-sm" >Thêm câu hỏi</button>
@@ -94,24 +96,50 @@
                             </tbody>
                         </table>
                     </form>
-
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination pagination-sm justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+<%--                    Phân trang (CHƯA HOẠT ĐỘNG!) --%>
+                    <div class="row">
+                        <div class="col-4">
+                            <c:set var="indexExamQuestionEnd" scope="session" value="${indexExamQuestionStart + entryDisplay - 1}"/>
+                            <c:if test="${indexExamQuestionEnd > totalExamQuestion}">
+                                <c:set var="indexExamQuestionEnd" scope="session" value="${totalExamQuestion}"/>
+                            </c:if>
+                            <span>Hiển thị ${indexExamQuestionStart} - <c:out value="${indexExamQuestionEnd}"/> trong tổng số ${totalExamQuestion} mục.</span>
+                        </div>
+                        <div class="col-8">
+                            <form method="post" action="/admin/examQuestion" id="pagingForm">
+<%--                                <input type="hidden" name="action" value="pagingExamQuestion">--%>
+                                <input type="hidden" name="examId" value="${examId}">
+                                <input type="hidden" name="examName" value="${examName}">
+                                <input type="hidden" name="subjectName" value="${subjectName}">
+                                <input type="hidden" name="subjectId" value="${subjectId}">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination pagination-sm justify-content-center">
+                                        <li class="page-item ${currentPage <= 1?"disabled":""}">
+                                            <c:url var="prevUrl" value="/admin/examQuestion">
+                                                <c:param name="index" value="${currentPage - 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${prevUrl}"/>" class="page-link" aria-label="Previous" id="prevSubmit">
+                                                Trang trước
+                                            </a>
+                                        </li>
+                                        <c:forEach var="i" begin="1" end="${maxPages}">
+                                            <li class="page-item ${currentPage == i?"active":""}">
+                                                <a class="page-link" id="pageSubmit" href="/admin/examQuestion?index=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item ${currentPage >= maxPages?"disabled":""}">
+                                            <c:url value="/admin/examQuestion" var="nextUrl">
+                                                <c:param name="index" value="${currentPage + 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${nextUrl}"/>" class="page-link" aria-label="Next" id="nextSubmit">
+                                                Trang sau
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="add-question" class="d-none">
@@ -199,6 +227,12 @@
         $('#add-question-btn').click(function () {
             $('#exam-question-list').addClass('d-none');
             $('#add-question').removeClass('d-none');
+        })
+
+        $('#prevSubmit, #pageSubmit, #nextSubmit').each(function () {
+            $(this).click(function () {
+                $('#pagingForm').submit();
+            })
         })
     })
 </script>

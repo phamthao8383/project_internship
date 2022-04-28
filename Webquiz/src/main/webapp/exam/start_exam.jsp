@@ -18,119 +18,121 @@
 </head>
 <body  oncopy="return false" oncut="return false" onpaste="return false">
 <jsp:include page="/view/header.jsp"/>
-<div class="wrapper">
-    <div class="main-content">
-    <div class="breadcrumb">
-        <div class="container" onload="start()">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="">Trang chủ</a></li>
-                    <li class="breadcrumb-item"><a href="">Thi THPTQG </a></li>
-                    <li class="breadcrumb-item"><a href="">Toán</a></li>
-                </ol>
-            </nav>
+<div class="container-fluid">
+    <div class="wrapper">
+        <div class="main-content">
+            <div class="breadcrumb">
+                <div class="container" onload="start()">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="">Thi THPTQG </a></li>
+                            <li class="breadcrumb-item"><a href="">Toán</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
-<div class="content-two-columns">
-    <div class="container">
-        <div class="row">
-            <div class="col-10">
-                <div class="skill-test-lists common-test-detail">
-                    <div class="col-12 col-lg-12 col-sm-12">
-                        <div class="row">
-                            <form action="/exam_list" name="exam-form" id="exam-form" method="post">
-                                <input type="hidden" name="action" value="examSummit">
-                                <input type="hidden" name="examId" value="${examId}">
-                                <input type="hidden" name="timeStart" value="${timeStart}">
-                                <input type="hidden" name="userId" value="${sessionScope.user.userId}">
-                            <div class="d9Box part-item detail">
-                                <h1 class="title22Bold ">${sessionScope.exam.examName}</h1>
-                                <p>Bộ Giáo Dục và Đào Tạo</p>
-                                <div class="detail-question">
-                                    <div class="num-question col"><span><i class="fa fa-check-square"></i> ${sessionScope.examQuestion.total} câu</span>
-                                    </div>
-                                    <div class="number-of-questions">
-<%--                                        <div class="time-remain">--%>
-<%--                                            <div class="time" style="display: flex; align-items: center"><i class="fa fa-clock-o" style="padding-right: 5px" aria-hidden="true"></i><countdown-time autostart add="90m"></countdown-time>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-                                        <span><i class="fa fa-clock-o"></i>${sessionScope.exam.allowedTime} phút</span>
-                                    </div>
-                                    <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>${sessionScope.examQuestion.timesExam} lượt thi</span>
-                                    </div>
-                                </div>
-                                <div class="exam-content">
-                                    <ul>
-                                        <c:forEach items="${sessionScope.listQuestion}" var="question" varStatus="loop">
-                                            <input type="hidden" name="answerQuestion${loop.index + 1}" value="${question.correct_answer}">
+    <div class="content-two-columns">
+        <div class="container">
+            <div class="row">
+                <div class="col-10">
+                    <div class="skill-test-lists common-test-detail">
+                        <div class="col-12 col-lg-12 col-sm-12">
+                            <div class="row">
+                                <form action="/exam_list" name="exam-form" id="exam-form" method="post">
+                                    <input type="hidden" name="action" value="examSummit">
+                                    <input type="hidden" name="examId" value="${examId}">
+                                    <input type="hidden" name="timeStart" value="${timeStart}">
+                                    <input type="hidden" name="userId" value="${sessionScope.user.userId}">
+                                    <div class="d9Box part-item detail">
+                                        <h1 class="title22Bold ">${sessionScope.exam.examName}</h1>
+                                        <p>Bộ Giáo Dục và Đào Tạo</p>
+                                        <div class="detail-question">
+                                            <div class="num-question col"><span><i class="fa fa-check-square"></i> ${sessionScope.examQuestion.total} câu</span>
+                                            </div>
+                                            <div class="number-of-questions">
+                                                    <%--                                        <div class="time-remain">--%>
+                                                    <%--                                            <div class="time" style="display: flex; align-items: center"><i class="fa fa-clock-o" style="padding-right: 5px" aria-hidden="true"></i><countdown-time autostart add="90m"></countdown-time>--%>
+                                                    <%--                                            </div>--%>
+                                                    <%--                                        </div>--%>
+                                                <span><i class="fa fa-clock-o"></i>${sessionScope.exam.allowedTime} phút</span>
+                                            </div>
+                                            <div class="num-attempt col"><span><i class="fa fa-user" aria-hidden="true"></i>${sessionScope.examQuestion.timesExam} lượt thi</span>
+                                            </div>
+                                        </div>
+                                        <div class="exam-content">
+                                            <ul>
+                                                <c:forEach items="${sessionScope.listQuestion}" var="question" varStatus="loop">
+                                                    <input type="hidden" name="answerQuestion${loop.index + 1}" value="${question.correct_answer}">
 
-                                            <li>
-                                                <h4>Câu ${loop.index + 1}:</h4>
-                                                <h4><p>${question.description}</p></h4>
-                                                <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}"
-                                                           id="question${loop.index + 1}A" value="${question.answer1}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
-                                                        <p>A. ${question.answer1}</p>
-                                                    </label>
+                                                    <li>
+                                                        <h4>Câu ${loop.index + 1}:</h4>
+                                                        <h4><p>${question.description}</p></h4>
+                                                        <div class="form-check mx-4">
+                                                            <input class="form-check-input" type="radio" name="question${loop.index + 1}"
+                                                                   id="question${loop.index + 1}A" value="${question.answer1}">
+                                                            <label class="form-check-label" for="question${loop.index + 1}">
+                                                                <p>A. ${question.answer1}</p>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mx-4">
+                                                            <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}B" value="${question.answer2}">
+                                                            <label class="form-check-label" for="question${loop.index + 1}">
+                                                                <p>B. ${question.answer2}</p>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mx-4">
+                                                            <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}C" value="${question.answer3}">
+                                                            <label class="form-check-label" for="question${loop.index + 1}">
+                                                                <p>C. ${question.answer3}</p>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mx-4">
+                                                            <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}D" value="${question.answer4}">
+                                                            <label class="form-check-label" for="question${loop.index + 1}">
+                                                                <p>D. ${question.answer4}</p>
+                                                            </label>
+                                                        </div>
+                                                    </li>
+                                                    <hr  width="90%" align="left" />
+                                                </c:forEach>
+                                            </ul>
+                                            <div class="ml-3 mt-4 btn-group-do-exam-share">
+                                                <div>
+                                                    <button type="submit" style="margin-top: 10px;" href="exam_result.jsp"
+                                                            class="btn orange f16b h51">
+                                                        Nộp Bài
+                                                    </button>
                                                 </div>
-                                                <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}B" value="${question.answer2}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
-                                                        <p>B. ${question.answer2}</p>
-                                                    </label>
-                                                </div>
-                                                <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}C" value="${question.answer3}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
-                                                        <p>C. ${question.answer3}</p>
-                                                    </label>
-                                                </div>
-                                                <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}D" value="${question.answer4}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
-                                                        <p>D. ${question.answer4}</p>
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <hr  width="90%" align="left" />
-                                        </c:forEach>
-                                    </ul>
-                                    <div class="ml-3 mt-4 btn-group-do-exam-share">
-                                        <div>
-                                            <button type="submit" style="margin-top: 10px;" href="exam_result.jsp"
-                                                   class="btn orange f16b h51">
-                                                Nộp Bài
-                                            </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div id="countdown" class="countdown">
+                        <div class="countdown__item">
+                            <h5 class="countdown__label">
+                                Thời gian còn lại <br/>
+                            </h5>
+                        </div>
+                        <div class="countdown__item">
+                            <span id="m" class="countdown__time">Phút</span>
+                            <span class="countdown__time">:</span>
+                            <span id="s" class="countdown__time">Giây</span>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-2">
-                <div id="countdown" class="countdown">
-                    <div class="countdown__item">
-                        <h5 class="countdown__label">
-                            Thời gian còn lại <br/>
-                        </h5>
-                    </div>
-                    <div class="countdown__item">
-                        <span id="m" class="countdown__time">Phút</span>
-                        <span class="countdown__time">:</span>
-                        <span id="s" class="countdown__time">Giây</span>
-                    </div>
-                </div>
-            </div>
         </div>
+        </section>
     </div>
-    </section>
 </div>
 <jsp:include page="/view/footer.jsp"/>
 

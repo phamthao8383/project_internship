@@ -2,6 +2,7 @@ package controller;
 
 import model.Question;
 import model.Subject;
+import repository.BaseRepository;
 import repository.QuestionRepository;
 import service.QuestionService;
 import service.SubjectService;
@@ -13,6 +14,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @WebServlet(name = "QuestionServlet", urlPatterns = "/admin/questions")
@@ -20,7 +22,7 @@ public class QuestionServlet extends HttpServlet {
     private QuestionService questionService = new QuestionServiceImpl();
     private SubjectService subjectService = new SubjectServiceImpl();
     private HandleString handleString = new HandleString();
-    private final int entryDisplay = QuestionRepository.entryDisplay;
+    private final int entryDisplay = BaseRepository.entryDisplay;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

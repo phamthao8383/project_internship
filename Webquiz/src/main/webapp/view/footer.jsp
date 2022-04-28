@@ -140,10 +140,16 @@
 
     <script>
         var header = document.querySelector('.navbar__item-list');
+        var content = document.querySelector('.container-fluid');
         var origOffsetY = header.offsetTop;
         function onScroll(e) {
-            window.scrollY >= origOffsetY ? header.classList.add('sticky') :
+            if(window.scrollY >= origOffsetY){
+                header.classList.add('sticky');
+                content.classList.add('top-padding-80');
+            } else {
                 header.classList.remove('sticky');
+                content.classList.remove('top-padding-80');
+            }
         }
         document.addEventListener('scroll', onScroll);
     </script>
