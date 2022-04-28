@@ -2,6 +2,7 @@ package controller;
 
 import model.Question;
 import model.Subject;
+import repository.BaseRepository;
 import repository.QuestionRepository;
 import service.QuestionService;
 import service.SubjectService;
@@ -23,7 +24,7 @@ public class QuestionServlet extends HttpServlet {
     private QuestionService questionService = new QuestionServiceImpl();
     private SubjectService subjectService = new SubjectServiceImpl();
     private HandleString handleString = new HandleString();
-    private final int entryDisplay = QuestionRepository.entryDisplay;
+    private final int entryDisplay = BaseRepository.entryDisplay;
     private ReadFile readFile = new ReadFile();
 
     @Override

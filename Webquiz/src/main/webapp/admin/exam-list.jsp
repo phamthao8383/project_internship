@@ -56,7 +56,10 @@
                             <c:forEach var="exam" items="${listExam}" varStatus="loop">
                                 <input type="hidden" name="indexExam${loop.index}" value="${loop.index}">
                                 <tr>
-                                    <td>${loop.index + 1}</td>
+                                    <td>
+                                        <c:set var="examIndexHelper" value="${(currentPage-1)*entryDisplay}" scope="session"/>
+                                        <c:out value="${examIndexHelper + loop.index + 1}"/>
+                                    </td>
                                     <td><c:out value="${exam.examId}"/></td>
                                     <td><c:out value="${exam.getSubject().getSubject_name()}"/></td>
                                     <td><c:out value="${exam.examName}"/></td>
@@ -196,23 +199,43 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pagination-sm justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+<%--                        Phân trang --%>
+                        <div class="row">
+                            <div class="col-4">
+                                <c:set var="indexExamEnd" scope="session" value="${indexExamStart + entryDisplay - 1}"/>
+                                <c:if test="${indexExamEnd > totalExam}">
+                                    <c:set var="indexExamEnd" scope="session" value="${totalExam}"/>
+                                </c:if>
+                                <span>Hiển thị ${indexExamStart} - <c:out value="${indexExamEnd}"/> trong tổng số ${totalExam} mục.</span>
+                            </div>
+                            <div class="col-8">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination pagination-sm justify-content-center">
+                                        <li class="page-item ${currentPage <= 1?"disabled":""}">
+                                            <c:url value="/admin/exams" var="prevUrl">
+                                                <c:param name="index" value="${currentPage - 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${prevUrl}"/>" class="page-link" aria-label="Previous">
+                                                Trang trước
+                                            </a>
+                                        </li>
+                                        <c:forEach var="i" begin="1" end="${maxPages}">
+                                            <li class="page-item ${currentPage == i?"active":""}">
+                                                <a class="page-link" href="/admin/exams?index=${i}">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item ${currentPage >= maxPages?"disabled":""}">
+                                            <c:url value="/admin/exams" var="nextUrl">
+                                                <c:param name="index" value="${currentPage + 1}"/>
+                                            </c:url>
+                                            <a href="<c:out value="${nextUrl}"/>" class="page-link" aria-label="Next">
+                                                Trang sau
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

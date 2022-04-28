@@ -10,6 +10,7 @@ public class BaseRepository {
     // Thêm mật khẩu root mysql vào dưới
     private String password = "12345";
     private Connection connection;
+    public static final int entryDisplay = 5;   // Đặt hiển thị 5 mục trong mỗi trang của bảng
 
     public BaseRepository() {
         try {

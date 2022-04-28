@@ -37,17 +37,23 @@
                 </div>
                 <div class="div_group_call">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            ONLINE
-                            <span class="badge badge-primary badge-pill">Skype</span>
+                        <li class="list-group-item">
+                            <a class="d-flex justify-content-between align-items-center" href="skype:example123?chat">
+                                ONLINE
+                                <span class="badge badge-primary badge-pill">Skype</span>
+                            </a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            HOTLINE
-                            <span class="badge badge-primary badge-pill">0123456789</span>
+                        <li class="list-group-item">
+                            <a class="d-flex justify-content-between align-items-center" href="tel:0123456789">
+                                HOTLINE
+                                <span class="badge badge-primary badge-pill">0123456789</span>
+                            </a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            MESSENGER
-                            <span class="badge badge-primary badge-pill"></span>
+                        <li class="list-group-item">
+                            <a class="d-flex justify-content-between align-items-center" href="https://www.facebook.com/QuizGym-102791849085267" target="_blank">
+                                FAN PAGE
+                                <span class="badge badge-primary badge-pill">QuizGym</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

@@ -40,4 +40,14 @@ public class ExamServiceImpl implements ExamService {
     public List<Exam> findAllByName(String name) {
         return null;
     }
+
+    @Override
+    public int getTotalExam() {
+        return examRepository.getTotalExam();
+    }
+
+    @Override
+    public List<Exam> paginateExam(int indexPage) {
+        return examRepository.paginateExam(indexPage);
+    }
 }

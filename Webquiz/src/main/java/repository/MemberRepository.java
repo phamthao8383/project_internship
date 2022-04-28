@@ -9,10 +9,7 @@ import java.util.List;
 public class MemberRepository {
     BaseRepository baseRepository = new BaseRepository();
     Connection connection = this.baseRepository.getConnection();
-
-    public static int entryDisplay(){
-        return 5;   // Hiển thị 5 mục/thành viên trong mỗi trang của bảng
-    }
+    private final int entryDisplay = BaseRepository.entryDisplay;
 
     public List<Member> getMemberList(int indexPage){
         List<Member> members = new ArrayList<>();
@@ -25,8 +22,8 @@ public class MemberRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, (indexPage-1)*entryDisplay() );
-            preparedStatement.setInt(2, entryDisplay());
+            preparedStatement.setInt(1, (indexPage-1)* entryDisplay);
+            preparedStatement.setInt(2, entryDisplay);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 members.add(new Member(resultSet.getInt("user_id"),
@@ -61,8 +58,8 @@ public class MemberRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, "%"+nameSearch+"%");
-            preparedStatement.setInt(2, (indexPage-1)*entryDisplay() );
-            preparedStatement.setInt(3, entryDisplay());
+            preparedStatement.setInt(2, (indexPage-1)*entryDisplay);
+            preparedStatement.setInt(3, entryDisplay);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 member = new Member(resultSet.getInt("user_id"),

@@ -208,19 +208,6 @@ public class ExamViewServlet extends HttpServlet {
                 diem = diem +10;
             }
             questionMyCheck.add(question);
-            /*String description = request.getParameter("description"+i);
-            description = handleString.handleFont(description);
-            String answer1 = request.getParameter("answer1"+i);
-            answer1 = handleString.handleFont(answer1);
-            String answer2 = request.getParameter("answer2"+i);
-            answer2 = handleString.handleFont(answer2);
-            String answer3 = request.getParameter("answer3"+i);
-            answer3 = handleString.handleFont(answer3);
-            String answer4 = request.getParameter("answer4"+i);
-            answer4 = handleString.handleFont(answer4);
-
-            questionList.add(new Question( description,answer1,answer2,answer3,answer4,answer));*/
-
 
             i++;
         }

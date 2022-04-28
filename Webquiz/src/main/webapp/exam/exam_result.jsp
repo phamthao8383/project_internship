@@ -114,60 +114,66 @@
                                                 </c:if>
 
                                                     <%--   Kiểm tra phải câu mình chọn không câu C  --%>
-                                                <c:if test="${questionMyCheck[loop.index] eq question.answer3}">
-                                                    <c:if test="${question.answer3 eq question.correct_answer}">
-                                                        <p class="question_answer checked--true">
-                                                            C. ${question.answer3}
-                                                            <i class="fa-solid fa-circle-check"></i>
-                                                        </p>
+                                                <c:if test="${question.answer3 != ''}">
+                                                    <c:if test="${questionMyCheck[loop.index] eq question.answer3}">
+                                                        <c:if test="${question.answer3 eq question.correct_answer}">
+                                                            <p class="question_answer checked--true">
+                                                                C. ${question.answer3}
+                                                                <i class="fa-solid fa-circle-check"></i>
+                                                            </p>
+                                                        </c:if>
+                                                        <c:if test="${question.answer3 != question.correct_answer}">
+                                                            <p class="question_answer my_checked--false">
+                                                                C. ${question.answer3}
+                                                            </p>
+                                                        </c:if>
                                                     </c:if>
-                                                    <c:if test="${question.answer3 != question.correct_answer}">
-                                                        <p class="question_answer my_checked--false">
-                                                            C. ${question.answer3}
-                                                        </p>
-                                                    </c:if>
-                                                </c:if>
-                                                <c:if test="${questionMyCheck[loop.index] != question.answer3}">
-                                                    <c:if test="${question.answer3 eq question.correct_answer}">
-                                                        <p class="question_answer">
-                                                            C. ${question.answer3}
-                                                            <i class="fa-solid fa-circle-check"></i>
-                                                        </p>
-                                                    </c:if>
-                                                    <c:if test="${question.answer3 != question.correct_answer}">
-                                                        <p class="question_answer">
-                                                            C. ${question.answer3}
-                                                        </p>
+                                                    <c:if test="${questionMyCheck[loop.index] != question.answer3}">
+                                                        <c:if test="${question.answer3 eq question.correct_answer}">
+                                                            <p class="question_answer">
+                                                                C. ${question.answer3}
+                                                                <i class="fa-solid fa-circle-check"></i>
+                                                            </p>
+                                                        </c:if>
+                                                        <c:if test="${question.answer3 != question.correct_answer}">
+                                                            <p class="question_answer">
+                                                                C. ${question.answer3}
+                                                            </p>
+                                                        </c:if>
                                                     </c:if>
                                                 </c:if>
 
+
                                                     <%--   Kiểm tra phải câu mình chọn không câu D  --%>
-                                                <c:if test="${questionMyCheck[loop.index] eq question.answer4}">
-                                                    <c:if test="${question.answer4 eq question.correct_answer}">
-                                                        <p class="question_answer checked--true">
-                                                            D. ${question.answer4}
-                                                            <i class="fa-solid fa-circle-check"></i>
-                                                        </p>
+                                                <c:if test="${question.answer4 != ''}">
+                                                    <c:if test="${questionMyCheck[loop.index] eq question.answer4}">
+                                                        <c:if test="${question.answer4 eq question.correct_answer}">
+                                                            <p class="question_answer checked--true">
+                                                                D. ${question.answer4}
+                                                                <i class="fa-solid fa-circle-check"></i>
+                                                            </p>
+                                                        </c:if>
+                                                        <c:if test="${question.answer4 != question.correct_answer}">
+                                                            <p class="question_answer checked--false">
+                                                                D. ${question.answer4}
+                                                            </p>
+                                                        </c:if>
                                                     </c:if>
-                                                    <c:if test="${question.answer4 != question.correct_answer}">
-                                                        <p class="question_answer checked--false">
-                                                            D. ${question.answer4}
-                                                        </p>
+                                                    <c:if test="${questionMyCheck[loop.index] != question.answer4}">
+                                                        <c:if test="${question.answer4 eq question.correct_answer}">
+                                                            <p class="question_answer">
+                                                                D. ${question.answer4}
+                                                                <i class="fa-solid fa-circle-check"></i>
+                                                            </p>
+                                                        </c:if>
+                                                        <c:if test="${question.answer4 != question.correct_answer}">
+                                                            <p class="question_answer">
+                                                                D. ${question.answer4}
+                                                            </p>
+                                                        </c:if>
                                                     </c:if>
                                                 </c:if>
-                                                <c:if test="${questionMyCheck[loop.index] != question.answer4}">
-                                                    <c:if test="${question.answer4 eq question.correct_answer}">
-                                                        <p class="question_answer">
-                                                            D. ${question.answer4}
-                                                            <i class="fa-solid fa-circle-check"></i>
-                                                        </p>
-                                                    </c:if>
-                                                    <c:if test="${question.answer4 != question.correct_answer}">
-                                                        <p class="question_answer">
-                                                            D. ${question.answer4}
-                                                        </p>
-                                                    </c:if>
-                                                </c:if>
+
                                             </li>
                                             <hr width="90%" align="left"/>
                                         </c:forEach>

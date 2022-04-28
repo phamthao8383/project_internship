@@ -77,35 +77,40 @@
                                                 <div class="form-check mx-4">
                                                     <input class="form-check-input" type="radio" name="question${loop.index + 1}"
                                                            id="question${loop.index + 1}A" value="${question.answer1}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
+                                                    <label class="form-check-label" for="question${loop.index + 1}A">
                                                         <p>A. ${question.answer1}</p>
                                                     </label>
                                                 </div>
                                                 <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}B" value="${question.answer2}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
+                                                    <input  class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}B" value="${question.answer2}">
+                                                    <label class="form-check-label" for="question${loop.index + 1}B">
                                                         <p>B. ${question.answer2}</p>
                                                     </label>
                                                 </div>
-                                                <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}C" value="${question.answer3}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
-                                                        <p>C. ${question.answer3}</p>
-                                                    </label>
-                                                </div>
-                                                <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}D" value="${question.answer4}">
-                                                    <label class="form-check-label" for="question${loop.index + 1}">
-                                                        <p>D. ${question.answer4}</p>
-                                                    </label>
-                                                </div>
+                                                <c:if test="${question.answer3 != ''}">
+                                                    <div class="form-check mx-4">
+                                                        <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}C" value="${question.answer3}">
+                                                        <label class="form-check-label" for="question${loop.index + 1}C">
+                                                            <p>C. ${question.answer3}</p>
+                                                        </label>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${question.answer4 != ''}">
+                                                    <div  class="form-check mx-4">
+                                                        <input class="form-check-input" type="radio" name="question${loop.index + 1}" id="question${loop.index + 1}D" value="${question.answer4}">
+                                                        <label class="form-check-label" for="question${loop.index + 1}D">
+                                                            <p>D. ${question.answer4}</p>
+                                                        </label>
+                                                    </div>
+                                                </c:if>
+
                                             </li>
                                             <hr  width="90%" align="left" />
                                         </c:forEach>
                                     </ul>
                                     <div class="ml-3 mt-4 btn-group-do-exam-share">
                                         <div>
-                                            <button type="submit" style="margin-top: 10px;" href="exam_result.jsp"
+                                            <button id="btn_submit" type="button" style="margin-top: 10px;" href="exam_result.jsp"
                                                    class="btn orange f16b h51">
                                                 Nộp Bài
                                             </button>
@@ -208,6 +213,29 @@
         clearInterval(demgio);
     }
 
+</script>
+
+<script language="javascript">
+
+    $(document).ready(function() {
+        var checked = 0;
+        let ques = ${sessionScope.examQuestion.total}
+        function count() {
+            checked = $("input:checked").length;
+            console.log(checked)
+        }
+        count();
+        $(":radio").click(count);
+
+        $("#btn_submit").click(function () {
+                if (checked == ques) {
+                    document.forms["exam-form"].submit();
+                }
+                else {
+                    alert("còn câu chưa trả lời!")
+                }
+        })
+    });
 </script>
 
 <script type="text/javascript"
