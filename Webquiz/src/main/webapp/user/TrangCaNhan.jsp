@@ -54,7 +54,7 @@
 
         <div class="form__info-footer">
             <button data-toggle="modal" data-target="#editModal" class="form__info-btn">Chỉnh sửa</button>
-            <button data-toggle="modal" data-target="#editPassword" class="form__info-btn">Đổi mật khẩu</button>
+            <button id="changePasswordBtn" data-toggle="modal" data-target="#editPassword" class="form__info-btn">Đổi mật khẩu</button>
         </div>
     </div>
 
@@ -233,7 +233,7 @@
             <div class="form__info-head" id="modalEditPassword">
                 <h3 class="form__info-title">Đổi mật khẩu</h3>
             </div>
-            <form id="form-editpass" action="/userServlet" method="post" name="register" onsubmit="return ValidateChangePass()">
+            <form id="form-editpass" action="/userServlet" method="post" name="register">
                 <input type="hidden" name="action" value="updatePassword">
                 <input type="hidden" name="idUser" value="${user.userId}">
                 <input type="hidden" name="nameAccount" value="${user.account}">
@@ -243,29 +243,31 @@
                 <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 control-labelform-label">Mật khẩu hiện tại: </label>
                     <div class="col-sm-9">
-                        <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Nhập mật khẩu hiện tại">
+                        <input id="currentPassword" type="password" name="password" class="form-control" id="inputPassword" placeholder="Nhập mật khẩu hiện tại">
+                        <c:if test="${checkPassword == 0}">
+                            <span style="color: red"   id="errorCurrentPassword">Mật khẩu không đúng. Vui lòng nhập lại!</span>
+                        </c:if>
+                        <span style="color: red"   id="errorCurrentPassword1"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputNewPassword" class="col-sm-3 control-labelform-label">Mật khẩu mới: </label>
                     <div class="col-sm-9">
                         <input type="password" name="newPassword" class="form-control" id="inputNewPassword" placeholder="Nhập mật khẩu mới">
+                        <span style="color: red"   id="errPass"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="inputConfirmPassword" class="col-sm-3 control-labelform-label">Xác nhận mật khẩu: </label>
                     <div class="col-sm-9">
                         <input type="password"  name="confirmPassword" class="form-control" id="inputConfirmPassword" placeholder="Nhập lại mật khẩu">
+                        <span  style="color: red"  id="errConPass"></span>
                     </div>
                 </div>
             </div>
-                <div>
-                    <span style="color: red"   id="errPass"></span>
-                    <span  style="color: red"  id="errConPass"></span>
-                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
-                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <button onclick="changePassword()" type="button" class="btn btn-primary">Cập nhật</button>
             </div>
             </form>
         </div>
@@ -284,6 +286,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 <script type="module">
     const firebaseConfig = {
         apiKey: "AIzaSyBTvluOVU-z5bsZLJTgrGogrJlTEYzCzJU",
@@ -322,7 +325,6 @@
 
     };
 </script>
-
 <script src="/static/js/TrangCaNhan.js"></script>
 
 </body>

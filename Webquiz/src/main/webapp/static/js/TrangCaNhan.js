@@ -21,14 +21,21 @@ function chooseFile(fileInput) {
 
 
 // Validate ChangePassword
-function ValidateChangePass() {
-
+function validateChangePass() {
+    let currentPassword = document.getElementById("currentPassword").value;
+    let errorCurrentPassword = document.getElementById('errorCurrentPassword1');
+    if(currentPassword == '' || currentPassword == null){
+        errorCurrentPassword.innerHTML = 'Vui lòng nhập mật khẩu hiện tại';
+        return false;
+    } else {
+        errorCurrentPassword.innerHTML = '';
+    }
 
     const inputNewPassword = document.getElementById('inputNewPassword').value;
     const errPass = document.getElementById('errPass');
-
     if ( inputNewPassword == '' || inputNewPassword== null) {
         errPass.innerHTML = "Mật khẩu vui lòng không để trống!";
+        return false;
     } else {
         errPass.innerHTML = "";
     }
@@ -38,25 +45,47 @@ function ValidateChangePass() {
 
     if (inputConfirmPassword == '' || inputConfirmPassword == null) {
         errConPass.innerHTML = "Xác nhận mật khẩu vui lòng không để trống!";
+        return false;
     } else if (inputConfirmPassword != inputNewPassword) {
-        alert("Xác nhận mật khẩu không trùng khớp!");
+        errConPass.innerHTML = 'Xác nhận mật khẩu không trùng khớp.';
+        return false;
     } else {
         errConPass.innerHTML = "";
     }
 
-
-    if (inputConfirmPassword && inputNewPassword && inputConfirmPassword==inputNewPassword ) {
-
-        alert("Đổi mật khẩu thành công!");
-        document.getElementById("form-editpass").submit();
-
-    } else {
-
-    }
-
-    return false;
-
+    return true;
 }
+
+function changePassword() {
+    if(validateChangePass()){
+        document.getElementById("form-editpass").submit();
+        localStorage.setItem('isPasswordChange', true);
+    }
+}
+
+$(document).ready(function () {
+    if(localStorage.getItem('isPasswordChange')=="true" && $("#errorCurrentPassword").length <= 0){
+        Swal.fire({
+            position: 'center-center',
+            icon: 'success',
+            title: 'Đổi mật khẩu thành công!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        localStorage.removeItem('isPasswordChange');
+    } else if ($("#errorCurrentPassword").length > 0) {
+        Swal.fire({
+            position: 'center-center',
+            icon: 'error',
+            title: 'Đổi mật khẩu không thành công!',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        $("#changePasswordBtn").trigger('click');
+        localStorage.removeItem('isPasswordChange');
+    }
+    localStorage.removeItem('isPasswordChange');
+})
 
 // <%--Validate Edit--%>
 function ValidateEdit(){

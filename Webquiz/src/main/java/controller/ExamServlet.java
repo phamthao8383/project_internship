@@ -135,12 +135,12 @@ public class ExamServlet extends HttpServlet {
 
     private void createExam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //  int exam_id= Integer.parseInt(request.getParameter("exam_id"));
-        int subject_id = Integer.parseInt(request.getParameter("subject"));
+        int subject_id = Integer.parseInt(request.getParameter("subject_id"));
         System.out.println(subject_id);
-//        String allowed_time = request.getParameter("allowed_time");
+        String allowed_time = request.getParameter("allowed_time");
         String exam_name = handleString.handleFont(request.getParameter("exam_name"));
         System.out.println(exam_name);
-        Exam exam = new Exam(1,new Subject(subject_id,"abc"),"12", exam_name);
+        Exam exam = new Exam(1,new Subject(subject_id),allowed_time, exam_name);
         System.out.println(exam);
         examService.insertExam(exam);
         response.sendRedirect("/admin/exams");
