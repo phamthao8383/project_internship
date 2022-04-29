@@ -150,7 +150,7 @@
                                                                 </p>
                                                             </c:if>
                                                             <c:if test="${question.answer3 != question.correct_answer}">
-                                                                <p class="question_answer my_checked--false">
+                                                                <p class="question_answer checked--false">
                                                                     C. ${question.answer3}
                                                                 </p>
                                                             </c:if>
