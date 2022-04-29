@@ -235,6 +235,16 @@ input{
 input {
     overflow: visible;
 }
+
+.col__box {
+    width: 140px;
+    color: white;
+    background-color: #0d6efd;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px 12px;
+}
+
 .do-exercise .question-answer-detail .radio-control .custom-control-label {
     padding: 15px 14px 15px 35px;
     width: 100%;

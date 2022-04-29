@@ -13,7 +13,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
               crossorigin="anonymous">
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.9/dist/sweetalert2.all.min.js"></script>
         <jsp:include page="/view/head.jsp"/>
         <title>Đề thi minh họa tốt nghiệp THPT năm 2022 môn Toán - Bộ Giáo Dục và Đào Tạo</title>
     </head>
@@ -261,7 +261,12 @@
                 if (checked == ques) {
                     document.forms["exam-form"].submit();
                 } else {
-                    alert("còn câu chưa trả lời!")
+                    // alert("còn câu chưa trả lời!")
+                    Swal.fire(
+                        'Bạn vẫn còn câu hỏi chưa trả lời!',
+                        'Vui lòng kiểm tra lại.',
+                        'question'
+                    )
                 }
             })
         });

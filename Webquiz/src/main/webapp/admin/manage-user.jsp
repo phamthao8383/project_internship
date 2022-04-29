@@ -10,7 +10,7 @@
 
 <c:if test="${sessionScope.account.idRole != 1}">
     <%--    ${pageContext.request.contextPath} --%>
-    <jsp:include page="/view/error.jsp"/>
+    <jsp:include page="/view/error403.jsp"/>
 </c:if>
 <c:if test="${sessionScope.account.idRole == 1}">
 

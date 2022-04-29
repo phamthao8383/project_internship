@@ -10,7 +10,7 @@
 
 <c:if test="${sessionScope.account.idRole != 1}">
     <%--    ${pageContext.request.contextPath} --%>
-    <jsp:include page="/view/error.jsp"/>
+    <jsp:include page="/view/error403.jsp"/>
 </c:if>
 <c:if test="${sessionScope.account.idRole == 1}">
 
@@ -106,12 +106,6 @@
                             <span>Hiển thị ${indexExamQuestionStart} - <c:out value="${indexExamQuestionEnd}"/> trong tổng số ${totalExamQuestion} mục.</span>
                         </div>
                         <div class="col-8">
-                            <form method="post" action="/admin/examQuestion" id="pagingForm">
-<%--                                <input type="hidden" name="action" value="pagingExamQuestion">--%>
-                                <input type="hidden" name="examId" value="${examId}">
-                                <input type="hidden" name="examName" value="${examName}">
-                                <input type="hidden" name="subjectName" value="${subjectName}">
-                                <input type="hidden" name="subjectId" value="${subjectId}">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination pagination-sm justify-content-center">
                                         <li class="page-item ${currentPage <= 1?"disabled":""}">
@@ -124,7 +118,14 @@
                                         </li>
                                         <c:forEach var="i" begin="1" end="${maxPages}">
                                             <li class="page-item ${currentPage == i?"active":""}">
-                                                <a class="page-link" id="pageSubmit" href="/admin/examQuestion?index=${i}">${i}</a>
+                                                <form method="post" action="/admin/examQuestion" id="pagingForm">
+                                                    <input type="hidden" name="examId" value="${examId}">
+                                                    <input type="hidden" name="examName" value="${examName}">
+                                                    <input type="hidden" name="subjectName" value="${subjectName}">
+                                                    <input type="hidden" name="subjectId" value="${subjectId}">
+                                                    <input type="hidden" name="index" value="${i}">
+                                                <button class="page-link" type="submit">${i}</button>
+                                                </form>
                                             </li>
                                         </c:forEach>
                                         <li class="page-item ${currentPage >= maxPages?"disabled":""}">

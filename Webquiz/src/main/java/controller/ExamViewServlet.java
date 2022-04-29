@@ -205,13 +205,12 @@ public class ExamViewServlet extends HttpServlet {
             String question = request.getParameter("question"+i);
             question = handleString.handleFont(question);
             if(answer.equals((question))) {
-                diem = diem +10;
+                diem = diem +1;
             }
             questionMyCheck.add(question);
 
             i++;
         }
-
         System.out.println("Tổng điểm: " + diem);
         examViewService.addHistoryExam(examId,userId,diem, timeStart,timeEnd);
         examViewService.updateAccumulatePoint(userId);
@@ -219,6 +218,8 @@ public class ExamViewServlet extends HttpServlet {
         request.setAttribute("questionMyCheck",questionMyCheck );
         request.setAttribute("point",diem );
         request.setAttribute("listQuestion", questionList);
+        request.setAttribute("timeStart", timeStart);
+        request.setAttribute("timeEnd", timeEnd);
         request.setAttribute("examQuestion",examViewService.getExamQuestionId(examId));
         request.setAttribute("exam", examViewService.getExamId(examId));
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/exam/exam_result.jsp");

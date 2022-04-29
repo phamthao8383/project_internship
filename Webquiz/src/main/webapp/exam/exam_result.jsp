@@ -1,5 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:if test="${sessionScope.account == null}">
+    <%--    ${pageContext.request.contextPath} --%>
+    <jsp:include page="/view/error.jsp"/>
+</c:if>
+<c:if test="${sessionScope.account != null}">
 <html lang="vi">
 <head>
     <link rel="stylesheet" href="/exam/exam.css">
@@ -38,16 +43,38 @@
                                 <div class="d9Box part-item detail">
                                     <h1 class="title22Bold ">${exam.examName}</h1>
                                     <p>Bộ Giáo Dục và Đào Tạo</p>
-                                    <h2 style="text-align: center"> Kết quả bài làm</h2>
                                     <div class="detail-question">
                                         <div class="num-question col" style="text-align: center"><span><i
-                                                class="fa fa-check-square"></i> ${point}/${examQuestion.total * 10} Điểm</span>
+                                                class="fa fa-check-square"></i>${examQuestion.total} Câu</span>
                                         </div>
-                                        <div class="num-minutes col" style="text-align: center"><span><i
-                                                class="fa fa-clock-o"
-                                                aria-hidden="true"></i>${exam.allowedTime} phút</span>
+                                        <div class="num-minutes col" style="text-align: center">
+                                            <span><i class="fa-solid fa-clock"></i> ${exam.allowedTime} Phút</span>
+                                        </div>
+                                        <div class="num-minutes col" style="text-align: center">
+                                            <span><i class="fa-solid fa-user"></i> ${examQuestion.timesExam} Lượt thi</span>
                                         </div>
                                     </div>
+                                    <h2 style="text-align: center; margin: 16px 0"> Kết quả bạn đạt được</h2>
+                                    <div style="display: flex; justify-content: space-around">
+                                        <div class="col__box">
+                                            <p>Số câu đúng</p>
+                                            <h3> ${point} /${examQuestion.total}</h3>
+                                        </div>
+                                        <div class="col__box">
+                                            <p>Điểm số</p>
+                                            <h3> ${point * 10}</h3>
+                                        </div>
+                                        <div class="col__box">
+                                            <p>Thời gian làm</p>
+                                            <h3><span id="m">00</span>:<span id="s">00</span></h3>
+                                        </div>
+                                    </div>
+                                    <c:if test="${examQuestion.total / point >= 2 }">
+                                        <h3 style="color: red; text-align: center; margin-top: 16px">Bạn cần cố gắng hơn!</h3>
+                                    </c:if>
+                                    <c:if test="${examQuestion.total / point < 2 }">
+                                        <h3 class="text-primary" style=" text-align: center; margin-top: 16px">Bạn cần cố gắng hơn!</h3>
+                                    </c:if>
                                     <div class="exam-content">
                                         <ul>
                                             <c:forEach items="${listQuestion}" var="question" varStatus="loop">
@@ -199,5 +226,25 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
+<script language="javascript">
+    function start() {
+        let timeStart = new Date("${timeStart}");
+        let timeEnd = new Date("${timeEnd}");
+        let times = timeEnd - timeStart
+        var hours = Math.floor(times / (1000 * 60 * 60))
+        var minutes = Math.floor(times / (1000 * 60))
+        var seconds = Math.floor(times / (1000))
+        hours %= 24
+        minutes %= 60
+        seconds %= 60
+        document.getElementById('m').innerText = minutes.toString();
+        document.getElementById('s').innerText = seconds.toString();
+    }
+
+    window.onload = function () {
+        start();
+    }
+</script>
 </body>
 </html>
+</c:if>
