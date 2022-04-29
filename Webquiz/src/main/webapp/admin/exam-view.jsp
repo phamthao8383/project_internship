@@ -226,8 +226,14 @@
 <script>
     $(document).ready(function () {
         $('#add-question-btn').click(function () {
-            $('#exam-question-list').addClass('d-none');
-            $('#add-question').removeClass('d-none');
+            $('#exam-question-list').toggleClass('d-none');
+            $('#add-question').toggleClass('d-none');
+            let str = document.getElementById("add-question-btn").innerText;
+            if(str === "Câu hỏi đã thêm") {
+                document.getElementById("add-question-btn").innerText = "Thêm câu hỏi";
+            } else {
+                document.getElementById("add-question-btn").innerText = "Câu hỏi đã thêm";
+            }
         })
 
         $('#prevSubmit, #pageSubmit, #nextSubmit').each(function () {

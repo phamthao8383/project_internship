@@ -7,11 +7,11 @@
     <jsp:include page="/view/head.jsp"/>
     <title>QuizGym</title>
 </head>
-<body>
+<body style="max-width: 1400px; margin: auto">
 <jsp:include page="/view/header.jsp"/>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-3 col-md-3">
+        <div class="col-md-3">
             <div class="honour">
                 <div class="gold_pound">
                     <i class="fa-solid fa-award"></i>
@@ -119,7 +119,7 @@
             </div>
 
         </div>
-        <div class="col-3 col-md-3">
+        <div class="col-3 col-md-3 ">
             <div class="honour">
                 <div class="gold_pound">
                     <c:set var="role" scope="session" value="${sessionScope.account.idRole}"/>

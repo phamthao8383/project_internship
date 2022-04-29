@@ -206,28 +206,27 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <%-- Delete modal--%>
-                            <div class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                            <div class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1"  aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/admin/questions" method="post" class="modal-content">
-                                        <input type="hidden" name="idQues" value="${question.question_id}">
-                                        <input type="hidden" name="action" value="delete">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Xóa câu hỏi</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button  type="submit" class="btn btn-danger">Xóa</button>
-                                        </div>
-                                    </form>
+                                    <div class="modal-content">
+                                        <form action="/admin/questions" method="post">
+                                            <input type="hidden" name="idQues" value="${question.question_id}">
+                                            <input type="hidden" name="action" value="delete">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Xóa câu hỏi</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                <button  type="submit" class="btn btn-danger">Xóa</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-
                         </c:forEach>
                         </tbody>
                     </table>
@@ -251,9 +250,34 @@
                                         </a>
                                     </li>
                                     <c:forEach var="i" begin="1" end="${maxPages}">
-                                        <li class="page-item ${currentPage == i?"active":""}">
-                                            <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
-                                        </li>
+                                        <c:if test="${ i < currentPage  && currentPage - i == 3}">
+                                            <li class="page-item disabled">
+                                                <button class="page-link " >...</button>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${ i < currentPage  && currentPage - i <= 2}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${currentPage == i}">
+                                            <li class="page-item active">
+                                                <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+<%--                                        <li class="page-item ${currentPage == i?"active":""}">--%>
+<%--                                            <a class="page-link" href="/admin/questions?index=${i}">${i}</a>--%>
+<%--                                        </li>--%>
+                                        <c:if test="${i > currentPage  && i - currentPage  <= 2}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${i > currentPage  && i - currentPage  == 3}">
+                                            <li class="page-item disabled">
+                                                <button class="page-link ">...</button>
+                                            </li>
+                                        </c:if>
                                     </c:forEach>
                                     <li class="page-item ${currentPage >= maxPages?"disabled":""}">
                                         <c:url value="/admin/questions" var="nextUrl">
