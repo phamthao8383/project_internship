@@ -239,8 +239,7 @@ public class ExamViewRepository {
             preparedStatement1.setDouble(1, pointAcc );
             preparedStatement1.setInt(2, userId );
             preparedStatement1.executeUpdate();
-
-
+            System.out.println(pointAcc);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

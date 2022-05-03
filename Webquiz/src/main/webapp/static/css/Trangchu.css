@@ -17,9 +17,12 @@ html {
     box-sizing: border-box;
 }
 
-body>{
+body {
     width: 100%;
     box-sizing: border-box;
+    max-width: 1400px;
+    margin: auto ;
+    box-shadow: 0px 1px 6px 0px #808080;
 
 }
 ul ,li {
@@ -233,7 +236,7 @@ button:active {
     height: 65px;
     justify-content: space-around;
     align-items:center;
-    box-shadow: 3px 1px 6px 1px #888888;
+    box-shadow: 0px 1px 6px 0px #808080;
 }
 
 .navbar__item-sectors{
@@ -259,7 +262,7 @@ button:active {
 .sector-detail {
     background-color : #fff;
     position:absolute;
-    left: -8px;
+    left: -32px;
     top: 70px;
     display:flex;
     padding:  16px 0;
@@ -281,7 +284,7 @@ button:active {
 
 .sector-detail__list {
     border-right: 1px solid #ddd;
-    width: 250px;
+    width: 200px;
 }
 
 .sector-detail__item{

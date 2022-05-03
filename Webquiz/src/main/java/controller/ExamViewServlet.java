@@ -212,7 +212,7 @@ public class ExamViewServlet extends HttpServlet {
             i++;
         }
         System.out.println("Tổng điểm: " + diem);
-        examViewService.addHistoryExam(examId,userId,diem, timeStart,timeEnd);
+        examViewService.addHistoryExam(examId,userId,diem * 10, timeStart,timeEnd);
         examViewService.updateAccumulatePoint(userId);
 //        questionMyCheck.forEach(n -> System.out.println(n));
         request.setAttribute("questionMyCheck",questionMyCheck );

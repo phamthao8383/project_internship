@@ -7,7 +7,7 @@
     <jsp:include page="/view/head.jsp"/>
     <title>QuizGym</title>
 </head>
-<body style="max-width: 1400px; margin: auto">
+<body>
 <jsp:include page="/view/header.jsp"/>
 <div class="container-fluid">
     <div class="row">
