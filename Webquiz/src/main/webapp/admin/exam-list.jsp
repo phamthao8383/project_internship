@@ -346,9 +346,9 @@
         let examName = document.getElementById('examName'+index).value;
         let errorExamName = document.getElementById('errorExamName'+index);
         let examTime = document.getElementById('examTime'+index).value;
-        console.log("examTime: "+examTime);
-        console.log("number examTime: "+Number(examTime));
-        console.log('kiem tra: '+ (!Number.isInteger(Number(examTime)) || Number(examTime)<=0))
+        // console.log("examTime: "+examTime);
+        // console.log("number examTime: "+Number(examTime));
+        // console.log('kiem tra: '+ (!Number.isInteger(Number(examTime)) || Number(examTime)<=0))
         let errorExamTime = document.getElementById('errorExamTime'+index);
         if(examName == '' || examName == null){
             errorExamName.innerHTML = 'Vui lòng nhập tên đề thi.';
