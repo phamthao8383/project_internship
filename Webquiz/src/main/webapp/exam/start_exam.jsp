@@ -213,8 +213,9 @@
                         }
                     })
                     if (document.getElementById("exam-form"))
+                        document.forms["exam-form"].submit();
                         setTimeout(function () {
-                            document.forms["exam-form"].submit();
+
                         }, 3000);
                     return false;
                 }

@@ -72,8 +72,11 @@
                                     <c:if test="${examQuestion.total / point >= 2 }">
                                         <h3 style="color: red; text-align: center; margin-top: 16px">Bạn cần cố gắng hơn!</h3>
                                     </c:if>
-                                    <c:if test="${examQuestion.total / point < 2 }">
-                                        <h3 class="text-primary" style=" text-align: center; margin-top: 16px">Bạn cần cố gắng hơn!</h3>
+                                    <c:if test="${examQuestion.total / point < 2 && examQuestion.total / point > 1}">
+                                        <h3 class="text-primary" style=" text-align: center; margin-top: 16px">Kết quả này khá tốt. Cố lên bạn nhé!</h3>
+                                    </c:if>
+                                    <c:if test="${examQuestion.total / point == 1 }">
+                                        <h3 style="color: green; text-align: center; margin-top: 16px"> Đúng 100% - Bạn thật Pro!</h3>
                                     </c:if>
                                     <div class="exam-content">
                                         <ul>
