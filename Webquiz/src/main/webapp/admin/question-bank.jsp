@@ -116,7 +116,7 @@
                                 </td>
 
                             </tr>
-                            <!-- Edit New Question Modal -->
+                            <!-- Edit Question Modal -->
                             <div class="modal fade" id="editQuestionModal${loop.index}" tabindex="-1"
                                  aria-labelledby="editQuestionLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
@@ -212,28 +212,28 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <%-- Delete modal--%>
-                            <div class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+<%--                            Delete Question Modal--%>
+                            <div class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1"  aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/admin/questions" method="post" id="deleteQuestionForm${loop.index}" class="modal-content">
-                                        <input type="hidden" name="idQues" value="${question.question_id}">
-                                        <input type="hidden" name="action" value="delete">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Xóa câu hỏi</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button  type="submit" class="btn btn-danger">Xóa</button>
-                                        </div>
-                                    </form>
+                                    <div class="modal-content">
+                                        <form action="/admin/questions" method="post" id="deleteQuestionForm${loop.index}" class="modal-content">
+                                            <input type="hidden" name="idQues" value="${question.question_id}">
+                                            <input type="hidden" name="action" value="delete">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Xóa câu hỏi</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Câu hỏi này sẽ bị xóa. Nhấp chuột <b>Xóa</b> nếu bạn muốn xóa. Hoặc <b>Đóng</b> nếu muốn dừng.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                                <button  type="submit" onclick="onSubmitDeleteQuestion(${loop.index})" class="btn btn-danger">Xóa</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-
                         </c:forEach>
                         </tbody>
                     </table>
@@ -241,7 +241,7 @@
                         <div class="col-4">
                             <c:set var="indexQuestionEnd" scope="session" value="${indexQuestionStart + entryDisplay - 1}"/>
                             <c:if test="${indexQuestionEnd > totalQuestion}">
-                                <c:set var="indexMemberEnd" scope="session" value="${totalQuestion}"/>
+                                <c:set var="indexQuestionEnd" scope="session" value="${totalQuestion}"/>
                             </c:if>
                             <span>Hiển thị ${indexQuestionStart} - <c:out value="${indexQuestionEnd}"/> trong tổng số ${totalQuestion} mục.</span>
                         </div>
@@ -257,9 +257,34 @@
                                         </a>
                                     </li>
                                     <c:forEach var="i" begin="1" end="${maxPages}">
-                                        <li class="page-item ${currentPage == i?"active":""}">
-                                            <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
-                                        </li>
+                                        <c:if test="${ i < currentPage  && currentPage - i == 3}">
+                                            <li class="page-item disabled">
+                                                <button class="page-link " >...</button>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${ i < currentPage  && currentPage - i <= 2}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${currentPage == i}">
+                                            <li class="page-item active">
+                                                <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+<%--                                        <li class="page-item ${currentPage == i?"active":""}">--%>
+<%--                                            <a class="page-link" href="/admin/questions?index=${i}">${i}</a>--%>
+<%--                                        </li>--%>
+                                        <c:if test="${i > currentPage  && i - currentPage  <= 2}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/questions?index=${i}">${i}</a>
+                                            </li>
+                                        </c:if>
+                                        <c:if test="${i > currentPage  && i - currentPage  == 3}">
+                                            <li class="page-item disabled">
+                                                <button class="page-link ">...</button>
+                                            </li>
+                                        </c:if>
                                     </c:forEach>
                                     <li class="page-item ${currentPage >= maxPages?"disabled":""}">
                                         <c:url value="/admin/questions" var="nextUrl">
@@ -333,7 +358,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Câu trả lời</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="correct_answer"/><br>
+                            <input type="text" class="form-control" id="answerDesc" name="correct_answer"/><br>
                             <span style="color: red" id="errorAnswerDesc"></span>
                         </div>
                     </div>
@@ -349,7 +374,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="button" onclick="onSubmitCreateQuestion()" class="btn btn-primary">Thêm</button>
                     </div>
                 </form>
             </div>
@@ -360,7 +385,7 @@
     <%-- Create File--%>
 <div class="modal fade" id="createFileModal" tabindex="-1" aria-labelledby="modalCreateFile" aria-hidden="true">
     <div class="modal-dialog">
-        <form  action="/admin/questions" method="post" enctype="multipart/form-data" class="modal-content" >
+        <form  action="/admin/questions" method="post" enctype="multipart/form-data" class="modal-content" id="importQuestionForm">
             <input type="hidden" name="action" value="importfile">
             <div class="modal-header">
                 <h5 class="modal-title">Chọn file bạn muốn thêm</h5>
@@ -370,14 +395,14 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button  type="submit" id="btnUpload" class="btn btn-primary">Thêm</button>
+                <button  type="button" onclick="onSubmitImportQuestion()" id="btnUpload" class="btn btn-primary">Thêm</button>
             </div>
         </form>
     </div>
 </div>
 </body>
 
-<!-- Delete Modal -->
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -441,23 +466,110 @@
         return true;
     }
 
+    function validateCreateQuestion() {
+        let createQuestionDesc = document.getElementById("questionDesc").value;
+        let createOptionsList = Array.from((document.getElementsByClassName("optionDesc")), opt => opt.value);
+        let createAnswerDesc = document.getElementById("answerDesc").value;
+        let errQuestionDesc = document.getElementById("errorQuestionDesc");
+        let errOptionsList = document.getElementsByClassName("errorOptionDesc");
+        let errAnswerDesc = document.getElementById("errorAnswerDesc");
+        if (createQuestionDesc == "" || createQuestionDesc == null){
+            errQuestionDesc.innerText = "Vui lòng nhập câu hỏi.";
+            return false;
+        } else {
+            errQuestionDesc.innerText = "";
+        }
+
+        for (let i = 0; i < createOptionsList.length; i++ ){
+            if (createOptionsList[i] == "" || createOptionsList[i] == null){
+                errOptionsList[i].innerHTML = "Vui lòng nhập đáp án.";
+                return false;
+            } else{
+                errOptionsList[i].innerHTML = "";
+            }
+        }
+
+        if (createAnswerDesc == "" || createAnswerDesc == null){
+            errAnswerDesc.innerText = "Vui lòng nhập câu trả lời.";
+            return false;
+        } else{
+            errAnswerDesc.innerText = "";
+        }
+
+        if (!createOptionsList.includes(createAnswerDesc)){
+            errAnswerDesc.innerText = "Câu trả lời phải trùng với 1 trong 4 đáp án.";
+            return false;
+        } else {
+            errAnswerDesc.innerText = "";
+        }
+        return true;
+    }
+
     function onSubmitUpdateQuestion(index) {
         let updateQuestionForm = document.getElementById("updateQuestionForm"+index);
-        console.log(updateQuestionForm);
         if (validateUpdateQuestion(index)){
             updateQuestionForm.submit();
             localStorage.setItem("isUpdate", true);
         }
     }
 
+    function onSubmitDeleteQuestion(index) {
+        let deleteQuestionForm = document.getElementById("deleteQuestionForm"+index);
+        console.log(deleteQuestionForm);
+        if (deleteQuestionForm.checkValidity()){
+            deleteQuestionForm.submit();
+            localStorage.setItem("isDelete", true);
+        }
+    }
+
+    function onSubmitCreateQuestion(){
+        let createQuestionForm = document.getElementById("createQuestionForm");
+        if(validateCreateQuestion()){
+            createQuestionForm.submit();
+            localStorage.setItem("isCreate", true);
+        }
+    }
+
+    function onSubmitImportQuestion(){
+        let importQuestionForm = document.getElementById("importQuestionForm");
+        if(importQuestionForm.checkValidity()){
+            importQuestionForm.submit();
+            localStorage.setItem("isImport", true)
+        }
+    }
+
     $(document).ready(function () {
         if (localStorage.getItem("isUpdate")){
             Toast.fire({
-                icon: 'success',
+                icon: 'info',
                 title: 'Cập nhật câu hỏi thành công!'
             })
             localStorage.removeItem("isUpdate");
         }
+
+        if (localStorage.getItem("isDelete")){
+            Toast.fire({
+                icon: 'warning',
+                title: 'Xoá câu hỏi thành công!'
+            })
+            localStorage.removeItem("isDelete");
+        }
+
+        if (localStorage.getItem("isCreate")){
+            Toast.fire({
+                icon: 'success',
+                title: 'Thêm câu hỏi thành công!'
+            })
+            localStorage.removeItem("isCreate");
+        }
+
+        // if (localStorage.getItem("isImport")){
+        //     Toast.fire({
+        //         icon: 'success',
+        //         title: 'Nhập bộ câu hỏi thành công!'
+        //     })
+        //     localStorage.removeItem("isImport");
+        // }
     })
 </script>
 </html>
