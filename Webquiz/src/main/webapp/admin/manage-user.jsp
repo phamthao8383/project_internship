@@ -366,14 +366,12 @@
 
     $(document).ready(function () {
         if(localStorage.getItem('isSearch')=="true"){
-            // searchContent.classList.remove("d-none");
             $(searchContent).removeClass("d-none");
             searchLabel.textContent += localStorage.getItem('nameSearch');
-            // message.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
+            // messages.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
             // pagination.classList.add("d-none");
             $(pagination).addClass("d-none");
         } else if(localStorage.getItem('isSearch')=="false"){
-            // searchContent.classList.remove("d-none");
             $(searchContent).removeClass("d-none");
             searchLabel.textContent = "Vui lòng nhập tên để tìm.";
             // message.innerHTML = '';
@@ -382,8 +380,6 @@
     })
 
     function unSearch() {
-        // document.getElementById("searchInput").value = '';
-        // document.getElementById("searchForm").submit();
         searchContent.classList.add("d-none");
         pagination.classList.remove("d-none");
         localStorage.removeItem('isSearch');
