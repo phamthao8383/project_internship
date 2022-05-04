@@ -70,6 +70,8 @@ public class QuestionServlet extends HttpServlet {
         String description=request.getParameter("description");
         List<Question>questions=questionService.findAllByDescription(description);
         request.setAttribute("listQuestion",questions);
+        List<Subject> listSubject = subjectService.selectAllSubject();
+        request.setAttribute("listSubject", listSubject);
         request.getRequestDispatcher("/admin/question-bank.jsp").forward(request,response);
     }
 

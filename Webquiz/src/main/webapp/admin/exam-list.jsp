@@ -47,8 +47,7 @@
                             <th scope="col" style="width: 20%">Môn học</th>
                             <th scope="col" style="width: 35%">Tên đề thi</th>
                             <th scope="col" style="width: 10%">Thời gian</th>
-                            <th scope="col">Chọn</th>
-                            <th scope="col"></th>
+                            <th scope="col">Tác vụ</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,13 +62,6 @@
                                 <td><c:out value="${exam.getSubject().getSubject_name()}"/></td>
                                 <td><c:out value="${exam.examName}"/></td>
                                 <td><c:out value="${exam.allowedTime} phút"/></td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="">
-                                        <label class="form-check-label">
-                                        </label>
-                                    </div>
-                                </td>
                                 <td>
                                     <div class="d-flex">
                                         <form method="post" action="/admin/examQuestion">
@@ -92,8 +84,6 @@
                                             Xóa
                                         </button>
                                     </div>
-
-
                                 </td>
                             </tr>
                             <!-- Edit Exam Modal -->
@@ -346,9 +336,9 @@
         let examName = document.getElementById('examName'+index).value;
         let errorExamName = document.getElementById('errorExamName'+index);
         let examTime = document.getElementById('examTime'+index).value;
-        console.log("examTime: "+examTime);
-        console.log("number examTime: "+Number(examTime));
-        console.log('kiem tra: '+ (!Number.isInteger(Number(examTime)) || Number(examTime)<=0))
+        // console.log("examTime: "+examTime);
+        // console.log("number examTime: "+Number(examTime));
+        // console.log('kiem tra: '+ (!Number.isInteger(Number(examTime)) || Number(examTime)<=0))
         let errorExamTime = document.getElementById('errorExamTime'+index);
         if(examName == '' || examName == null){
             errorExamName.innerHTML = 'Vui lòng nhập tên đề thi.';

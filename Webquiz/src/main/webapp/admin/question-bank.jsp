@@ -35,16 +35,13 @@
                 </div>
                 <nav class="navbar justify-content-between">
                     <div class="d-flex">
-                        <div class="title-actions" >
+                        <div class="title-actions" style="margin-right: 8px">
                             <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#createQuestionModal">Tạo mới
                             </button>
                         </div>
-                        <div class="title-actions" style="margin-left: 8px;margin-right: 8px;">
-                            <a class="btn btn-outline-warning" role="button" href="/admin/questions?action=export">Xuất file</a>
-                        </div>
                         <div class="title-actions" >
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#createFileModal">
                                 Thêm bằng file
                             </button>
@@ -52,7 +49,7 @@
                     </div>
                     <form method="get" action="/admin/questions" class="form-inline d-flex">
                         <input type="hidden" name="action" value="search">
-                        <input class="form-control mr-sm-2" type="search" name="description" placeholder="Nhập từ khóa..." aria-label="Search">
+                        <input class="form-control mr-sm-2 me-2" type="search" name="description" placeholder="Nhập từ khóa..." aria-label="Search">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Tìm</button>
                     </form>
                 </nav>
@@ -61,12 +58,12 @@
                         <thead>
                             <tr>
                             <th>STT</th>
-                            <th>Câu hỏi</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                            <th>Đáp án</th>
+                            <th style="width: 16%;">Câu hỏi</th>
+                            <th style="width: 12%;">A</th>
+                            <th style="width: 12%;">B</th>
+                            <th style="width: 12%;">C</th>
+                            <th style="width: 12%;">D</th>
+                            <th style="width: 12%;">Đáp án</th>
                             <th style="width: 10%;">Môn Học</th>
                             <th></th>
                         </tr>
@@ -116,7 +113,7 @@
                                 </td>
 
                             </tr>
-                            <!-- Edit New Question Modal -->
+                            <!-- Edit Question Modal -->
                             <div class="modal fade" id="editQuestionModal${loop.index}" tabindex="-1"
                                  aria-labelledby="editQuestionLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
@@ -127,7 +124,7 @@
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="/admin/questions" method="POST">
+                                            <form action="/admin/questions" method="POST" id="updateQuestionForm${loop.index}">
                                                 <input type="hidden" name="action" value="edit">
                                                 <div class="mb-3 row">
                                                     <div class="col-sm-9">
@@ -138,42 +135,48 @@
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Câu hỏi</label>
                                                     <div class="col-sm-9">
-                                                        <textarea  type="text" class="form-control" name="description">${question.description}</textarea><br>
+                                                        <textarea  type="text" id="questionId${loop.index}" class="form-control" name="description">${question.description}</textarea><br>
+                                                        <span style="color: red" id="errorQuestionId${loop.index}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Đáp án 1</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="answer1"
+                                                        <input type="text" class="form-control optionId${loop.index}" name="answer1"
                                                                value="${question.answer1}"/><br>
+                                                        <span style="color: red" class="errorOptionId${loop.index}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Đáp án 2</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="answer2"
+                                                        <input type="text" class="form-control optionId${loop.index}" name="answer2"
                                                                value="${question.answer2}"/><br>
+                                                        <span style="color: red" class="errorOptionId${loop.index}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Đáp án 3</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="answer3"
+                                                        <input type="text" class="form-control optionId${loop.index}" name="answer3"
                                                                value="${question.answer3}"/><br>
+                                                        <span style="color: red" class="errorOptionId${loop.index}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Đáp án 4</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="answer4"
+                                                        <input type="text" class="form-control optionId${loop.index}" name="answer4"
                                                                value="${question.answer4}"/><br>
+                                                        <span style="color: red" class="errorOptionId${loop.index}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label class="col-sm-3 col-form-label">Câu trả lời</label>
                                                     <div class="col-sm-9">
-                                                        <input type="text" class="form-control" name="correct_answer"
+                                                        <input type="text" id="answerId${loop.index}" class="form-control" name="correct_answer"
                                                                value="${question.correct_answer}"/><br>
+                                                        <span style="color: red;" id="errorAnswerId${loop.index}"></span>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
@@ -199,17 +202,18 @@
                                                     <button type="button" class="btn btn-secondary"
                                                             data-bs-dismiss="modal">Đóng
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary">Sửa</button>
+                                                    <button type="button" onclick="onSubmitUpdateQuestion(${loop.index})" class="btn btn-primary">Sửa</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+<%--                            Delete Question Modal--%>
                             <div class="modal fade" id="confirmDeleteModal${loop.index}" tabindex="-1"  aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="/admin/questions" method="post">
+                                        <form action="/admin/questions" method="post" id="deleteQuestionForm${loop.index}" class="modal-content">
                                             <input type="hidden" name="idQues" value="${question.question_id}">
                                             <input type="hidden" name="action" value="delete">
                                             <div class="modal-header">
@@ -221,7 +225,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                                <button  type="submit" class="btn btn-danger">Xóa</button>
+                                                <button  type="submit" onclick="onSubmitDeleteQuestion(${loop.index})" class="btn btn-danger">Xóa</button>
                                             </div>
                                         </form>
                                     </div>
@@ -234,7 +238,7 @@
                         <div class="col-4">
                             <c:set var="indexQuestionEnd" scope="session" value="${indexQuestionStart + entryDisplay - 1}"/>
                             <c:if test="${indexQuestionEnd > totalQuestion}">
-                                <c:set var="indexMemberEnd" scope="session" value="${totalQuestion}"/>
+                                <c:set var="indexQuestionEnd" scope="session" value="${totalQuestion}"/>
                             </c:if>
                             <span>Hiển thị ${indexQuestionStart} - <c:out value="${indexQuestionEnd}"/> trong tổng số ${totalQuestion} mục.</span>
                         </div>
@@ -306,7 +310,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="/admin/questions" method="POST">
+                <form action="/admin/questions" method="POST" id="createQuestionForm">
                     <input type="hidden" name="action" value="create">
                     <div class="mb-3 row">
                         <div class="col-sm-9">
@@ -316,37 +320,43 @@
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Câu hỏi</label>
                         <div class="col-sm-9">
-                            <textarea  type="text" class="form-control" name="description"></textarea><br>
+                            <textarea  type="text" id="questionDesc" class="form-control" name="description"></textarea><br>
+                            <span style="color: red" id="errorQuestionDesc"></span>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Đáp án 1</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="answer1"/><br>
+                            <input type="text" class="form-control optionDesc" name="answer1"/><br>
+                            <span style="color: red;" class="errorOptionDesc"></span>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Đáp án 2</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="answer2"/><br>
+                            <input type="text" class="form-control optionDesc" name="answer2"/><br>
+                            <span style="color: red;" class="errorOptionDesc"></span>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Đáp án 3</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="answer3"/><br>
+                            <input type="text" class="form-control optionDesc" name="answer3"/><br>
+                            <span style="color: red;" class="errorOptionDesc"></span>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Đáp án 4</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="answer4"/><br>
+                            <input type="text" class="form-control optionDesc" name="answer4"/><br>
+                            <span style="color: red;" class="errorOptionDesc"></span>
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Câu trả lời</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="correct_answer"/><br>
+                            <input type="text" class="form-control" id="answerDesc" name="correct_answer"/><br>
+                            <span style="color: red" id="errorAnswerDesc"></span>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -361,7 +371,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <button type="button" onclick="onSubmitCreateQuestion()" class="btn btn-primary">Thêm</button>
                     </div>
                 </form>
             </div>
@@ -372,7 +382,7 @@
     <%-- Create File--%>
 <div class="modal fade" id="createFileModal" tabindex="-1" aria-labelledby="modalCreateFile" aria-hidden="true">
     <div class="modal-dialog">
-        <form  action="/admin/questions" method="post" enctype="multipart/form-data" class="modal-content" >
+        <form  action="/admin/questions" method="post" enctype="multipart/form-data" class="modal-content" id="importQuestionForm">
             <input type="hidden" name="action" value="importfile">
             <div class="modal-header">
                 <h5 class="modal-title">Chọn file bạn muốn thêm</h5>
@@ -382,14 +392,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button  type="submit" id="btnUpload" class="btn btn-primary">Thêm</button>
+                <button  type="button" onclick="onSubmitImportQuestion()" id="btnUpload" class="btn btn-primary">Thêm</button>
             </div>
         </form>
     </div>
 </div>
 </body>
 
-<!-- Delete Modal -->
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -397,6 +406,168 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.all.min.js"></script>
+<script>
+    // let createQuestionForm = document.getElementById("createQuestionForm");
+    // let deleteQuestionForm = document.getElementById("deleteQuestionForm"+index);
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+    
+    function validateUpdateQuestion(index) {
+        console.log("validation index: " + index);
 
+        let updateQuestionDesc = document.getElementById("questionId"+index).value;
+        let updateOptionsList = Array.from((document.getElementsByClassName("optionId"+index)), opt => opt.value);
+        let updateAnswerDesc = document.getElementById("answerId"+index).value;
+        let errQuestionDesc = document.getElementById("errorQuestionId"+index);
+        let errOptionsList = document.getElementsByClassName("errorOptionId"+index);
+        let errAnswerDesc = document.getElementById("errorAnswerId"+index);
+        if (updateQuestionDesc == "" || updateQuestionDesc == null){
+            errQuestionDesc.innerText = "Vui lòng nhập câu hỏi.";
+            return false;
+        } else {
+            errQuestionDesc.innerText = "";
+        }
+
+        for (let i = 0; i < updateOptionsList.length; i++ ){
+            if (updateOptionsList[i] == "" || updateOptionsList[i] == null){
+                errOptionsList[i].innerHTML = "Vui lòng nhập đáp án.";
+                return false;
+            } else{
+                errOptionsList[i].innerHTML = "";
+            }
+        }
+
+        if (updateAnswerDesc == "" || updateAnswerDesc == null){
+            errAnswerDesc.innerText = "Vui lòng nhập câu trả lời.";
+            return false;
+        } else{
+            errAnswerDesc.innerText = "";
+        }
+
+        if (!updateOptionsList.includes(updateAnswerDesc)){
+            errAnswerDesc.innerText = "Câu trả lời phải trùng với 1 trong 4 đáp án.";
+            return false;
+        } else {
+            errAnswerDesc.innerText = "";
+        }
+        return true;
+    }
+
+    function validateCreateQuestion() {
+        let createQuestionDesc = document.getElementById("questionDesc").value;
+        let createOptionsList = Array.from((document.getElementsByClassName("optionDesc")), opt => opt.value);
+        let createAnswerDesc = document.getElementById("answerDesc").value;
+        let errQuestionDesc = document.getElementById("errorQuestionDesc");
+        let errOptionsList = document.getElementsByClassName("errorOptionDesc");
+        let errAnswerDesc = document.getElementById("errorAnswerDesc");
+        if (createQuestionDesc == "" || createQuestionDesc == null){
+            errQuestionDesc.innerText = "Vui lòng nhập câu hỏi.";
+            return false;
+        } else {
+            errQuestionDesc.innerText = "";
+        }
+
+        for (let i = 0; i < createOptionsList.length; i++ ){
+            if (createOptionsList[i] == "" || createOptionsList[i] == null){
+                errOptionsList[i].innerHTML = "Vui lòng nhập đáp án.";
+                return false;
+            } else{
+                errOptionsList[i].innerHTML = "";
+            }
+        }
+
+        if (createAnswerDesc == "" || createAnswerDesc == null){
+            errAnswerDesc.innerText = "Vui lòng nhập câu trả lời.";
+            return false;
+        } else{
+            errAnswerDesc.innerText = "";
+        }
+
+        if (!createOptionsList.includes(createAnswerDesc)){
+            errAnswerDesc.innerText = "Câu trả lời phải trùng với 1 trong 4 đáp án.";
+            return false;
+        } else {
+            errAnswerDesc.innerText = "";
+        }
+        return true;
+    }
+
+    function onSubmitUpdateQuestion(index) {
+        let updateQuestionForm = document.getElementById("updateQuestionForm"+index);
+        if (validateUpdateQuestion(index)){
+            updateQuestionForm.submit();
+            localStorage.setItem("isUpdate", true);
+        }
+    }
+
+    function onSubmitDeleteQuestion(index) {
+        let deleteQuestionForm = document.getElementById("deleteQuestionForm"+index);
+        console.log(deleteQuestionForm);
+        if (deleteQuestionForm.checkValidity()){
+            deleteQuestionForm.submit();
+            localStorage.setItem("isDelete", true);
+        }
+    }
+
+    function onSubmitCreateQuestion(){
+        let createQuestionForm = document.getElementById("createQuestionForm");
+        if(validateCreateQuestion()){
+            createQuestionForm.submit();
+            localStorage.setItem("isCreate", true);
+        }
+    }
+
+    function onSubmitImportQuestion(){
+        let importQuestionForm = document.getElementById("importQuestionForm");
+        if(importQuestionForm.checkValidity()){
+            importQuestionForm.submit();
+            localStorage.setItem("isImport", true)
+        }
+    }
+
+    $(document).ready(function () {
+        if (localStorage.getItem("isUpdate")){
+            Toast.fire({
+                icon: 'info',
+                title: 'Cập nhật câu hỏi thành công!'
+            })
+            localStorage.removeItem("isUpdate");
+        }
+
+        if (localStorage.getItem("isDelete")){
+            Toast.fire({
+                icon: 'warning',
+                title: 'Xoá câu hỏi thành công!'
+            })
+            localStorage.removeItem("isDelete");
+        }
+
+        if (localStorage.getItem("isCreate")){
+            Toast.fire({
+                icon: 'success',
+                title: 'Thêm câu hỏi thành công!'
+            })
+            localStorage.removeItem("isCreate");
+        }
+
+        // if (localStorage.getItem("isImport")){
+        //     Toast.fire({
+        //         icon: 'success',
+        //         title: 'Nhập bộ câu hỏi thành công!'
+        //     })
+        //     localStorage.removeItem("isImport");
+        // }
+    })
+</script>
 </html>
 </c:if>
