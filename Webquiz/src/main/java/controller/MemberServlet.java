@@ -54,6 +54,7 @@ public class MemberServlet extends HttpServlet {
     }
 
     private void getMemberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF8");
         String index = request.getParameter("index");
         if (index == null){
             index = "1";
@@ -63,7 +64,6 @@ public class MemberServlet extends HttpServlet {
         // Tạo bảng
         List<Member> memberList = memberService.getMemberList(indexPage);
         request.setAttribute("memberList", memberList);
-
         pagingNumber(request, response);                          // Dãy số phân trang dưới bảng
         request.setAttribute("currentPage", indexPage);     // Index của trang(bảng) đang hiển thị thông tin
         request.setAttribute("indexMember", indexMember);   // Index vị trí của thành viên đầu tiên trong bảng
@@ -72,6 +72,7 @@ public class MemberServlet extends HttpServlet {
     }
 
     private void searchMemberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF8");
         String index = request.getParameter("index");
         if (index == null){
             index = "1";
@@ -82,7 +83,6 @@ public class MemberServlet extends HttpServlet {
         // Tạo bảng
         List<Member> memberList = memberService.searchMemberList(indexPage, nameSearch);
         request.setAttribute("memberList", memberList);
-
         pagingNumber(request, response);                          // Dãy số phân trang dưới bảng
         request.setAttribute("currentPage", indexPage);     // Index của trang(bảng) đang hiển thị thông tin
         request.setAttribute("indexMember", indexMember);   // Index vị trí của thành viên đầu tiên trong bảng
