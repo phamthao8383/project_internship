@@ -350,6 +350,7 @@
     let searchContent = document.getElementById("searchContent");
     let searchLabel = document.getElementById("searchLabel");
     let message = document.getElementById("message");
+    let messages = document.getElementById("emptyMessage");
     let pagination = document.getElementById("pagination");
     let searchInput;
     function searchMember() {
@@ -366,7 +367,7 @@
         if(localStorage.getItem('isSearch')=="true"){
             searchContent.classList.remove("d-none");
             searchLabel.textContent += localStorage.getItem('nameSearch');
-            message.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
+            messages.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
             pagination.classList.add("d-none");
         } else if(localStorage.getItem('isSearch')=="false"){
             searchContent.classList.remove("d-none");

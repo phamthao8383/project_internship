@@ -33,9 +33,6 @@
                         <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">Tạo mới
                         </button>
-                        <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">Xóa danh mục
-                        </button>
                     </div>
                 </div>
                 <div class="user-list">
