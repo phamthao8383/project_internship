@@ -17,15 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "ExamViewServlet", urlPatterns = "/exam_list")
 public class ExamViewServlet extends HttpServlet {
@@ -212,7 +206,7 @@ public class ExamViewServlet extends HttpServlet {
             i++;
         }
         System.out.println("Tổng điểm: " + diem);
-        examViewService.addHistoryExam(examId,userId,diem, timeStart,timeEnd);
+        examViewService.addHistoryExam(examId,userId,diem * 10, timeStart,timeEnd);
         examViewService.updateAccumulatePoint(userId);
 //        questionMyCheck.forEach(n -> System.out.println(n));
         request.setAttribute("questionMyCheck",questionMyCheck );

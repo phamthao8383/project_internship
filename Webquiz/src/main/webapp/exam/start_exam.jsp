@@ -159,9 +159,9 @@
                                 </h5>
                             </div>
                             <div class="countdown__item">
-                                <span id="m" class="countdown__time">Phút</span>
+                                <span id="m" class="countdown__time"></span>
                                 <span class="countdown__time">:</span>
-                                <span id="s" class="countdown__time">Giây</span>
+                                <span id="s" class="countdown__time"></span>
                             </div>
                         </div>
                     </div>
@@ -192,30 +192,12 @@
                 seconds %= 60
                 if (seconds < 0) {
                     clearInterval(demgio);
-                    Swal.fire({
-                        title: '<strong>Hết giờ!</strong>',
-                        icon: 'info',
-                        showCloseButton: true,
-                        showConfirmButton: true,
-                        html: 'Hộp thoại tự đóng sau <b></b> giây.',
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                                b.textContent = (Swal.getTimerLeft() / 1000)
-                                    .toFixed(0)
-                            }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                    })
-                    if (document.getElementById("exam-form"))
-                        setTimeout(function () {
-                            document.forms["exam-form"].submit();
-                        }, 3000);
+                    localStorage.setItem('isTimeUp', true);
+                    // if (document.getElementById("exam-form"))
+                    //     setTimeout(function () {
+                    //         document.forms["exam-form"].submit();
+                    //     }, 3000);
+                    document.forms["exam-form"].submit();
                     return false;
                 }
 
@@ -231,13 +213,12 @@
                 console.log(seconds);
                 document.getElementById('m').innerText = minutes.toString();
                 document.getElementById('s').innerText = seconds.toString();
-
             }, 1000);
         }
 
-        window.onload = function () {
+        $(document).ready(function () {
             start();
-        }
+        })
 
         function stop() {
             clearInterval(demgio);

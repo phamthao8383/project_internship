@@ -72,8 +72,11 @@
                                     <c:if test="${examQuestion.total / point >= 2 }">
                                         <h3 style="color: red; text-align: center; margin-top: 16px">Bạn cần cố gắng hơn!</h3>
                                     </c:if>
-                                    <c:if test="${examQuestion.total / point < 2 }">
-                                        <h3 class="text-primary" style=" text-align: center; margin-top: 16px">Bạn cần cố gắng hơn!</h3>
+                                    <c:if test="${examQuestion.total / point < 2 && examQuestion.total / point > 1}">
+                                        <h3 class="text-primary" style=" text-align: center; margin-top: 16px">Kết quả này khá tốt. Cố lên bạn nhé!</h3>
+                                    </c:if>
+                                    <c:if test="${examQuestion.total / point == 1 }">
+                                        <h3 style="color: green; text-align: center; margin-top: 16px"> Đúng 100% - Bạn thật Pro!</h3>
                                     </c:if>
                                     <div class="exam-content">
                                         <ul>
@@ -226,14 +229,19 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 <script language="javascript">
     function start() {
         let timeStart = new Date("${timeStart}");
+        console.log(timeStart);
         let timeEnd = new Date("${timeEnd}");
-        let times = timeEnd - timeStart
+        console.log(timeEnd);
+        let times = timeEnd - timeStart;
         var hours = Math.floor(times / (1000 * 60 * 60))
         var minutes = Math.floor(times / (1000 * 60))
+        console.log(minutes);
         var seconds = Math.floor(times / (1000))
+        console.log(seconds);
         hours %= 24
         minutes %= 60
         seconds %= 60
@@ -241,9 +249,59 @@
         document.getElementById('s').innerText = seconds.toString();
     }
 
-    window.onload = function () {
+    // window.onload = function () {
+    //     start();
+    //     if(localStorage.getItem('isTimeUp')=="true"){
+    //         Swal.fire({
+    //             title: '<strong>Hết giờ!</strong>',
+    //             icon: 'info',
+    //             showCloseButton: true,
+    //             showConfirmButton: true,
+    //             html: 'Hộp thoại tự đóng sau <b></b> giây.',
+    //             timer: 3000,
+    //             timerProgressBar: true,
+    //             didOpen: () => {
+    //                 Swal.showLoading()
+    //                 const b = Swal.getHtmlContainer().querySelector('b')
+    //                 timerInterval = setInterval(() => {
+    //                     b.textContent = (Swal.getTimerLeft() / 1000)
+    //                         .toFixed(0)
+    //                 }, 100)
+    //             },
+    //             willClose: () => {
+    //                 clearInterval(timerInterval)
+    //             }
+    //         })
+    //         localStorage.removeItem('isTimeUp');
+    //     }
+    // }
+
+    $(document).ready(function () {
         start();
-    }
+        if(localStorage.getItem('isTimeUp')=="true"){
+            Swal.fire({
+                title: '<strong>Hết giờ!</strong>',
+                icon: 'info',
+                showCloseButton: true,
+                showConfirmButton: true,
+                html: 'Hộp thoại tự đóng sau <b></b> giây.',
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    timerInterval = setInterval(() => {
+                        b.textContent = (Swal.getTimerLeft() / 1000)
+                            .toFixed(0)
+                    }, 100)
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            })
+            localStorage.removeItem('isTimeUp');
+        }
+    })
 </script>
 </body>
 </html>

@@ -49,8 +49,20 @@
                 <div class="col-8">
                     <c:forEach items="${listExam}" var="examQuestion">
                         <div class="exam-cart row">
-                            <div class="col-2">
-                                <img src="https://s.tracnghiem.net/assets/images/thpt/hoa-hoc.png" alt="">
+                            <div class="col-2" style="margin: auto">
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Hóa'}">
+                                    <img src="https://s.tracnghiem.net/assets/images/thpt/hoa-hoc.png" alt="">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Toán'}">
+                                    <img src="/icon/toan.png" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Lý'}">
+                                    <img src="/icon/ly.jpg" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'IT'}">
+                                    <img src="/icon/it.png" alt="" width="84px">
+                                </c:if>
+
                             </div>
                             <div class="exam-cart__infor col-10">
                                 <h4 class="exam__label">${examQuestion.exam.getExamName()}</h4>

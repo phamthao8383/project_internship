@@ -27,7 +27,7 @@
                 Khối A
             </a>
             <div class="sector-detail">
-                <ul class="sector-detail__list">
+                <ul class="sector-detail__list" style="padding: 0">
                     <li class="sector-detail__item">
                             <a  href="/exam_list?action=list_exam&sj_id=1"  class="sector-detail__item-link">Toán</a>
                     </li>
@@ -42,7 +42,7 @@
                 Khối B
             </a>
             <div class="sector-detail">
-                <ul class="sector-detail__list">
+                <ul class="sector-detail__list"  style="padding: 0">
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=1" class="sector-detail__item-link">Toán</a></li>
                     <li class="sector-detail__item"><a href="/" class="sector-detail__item-link">Sinh Học</a></li>
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=3"  class="sector-detail__item-link">Hóa Học</a></li>
@@ -56,7 +56,7 @@
                 Khối C
             </a>
             <div class="sector-detail">
-                <ul class="sector-detail__list">
+                <ul class="sector-detail__list"  style="padding: 0">
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=100" class="sector-detail__item-link">Ngữ Văn</a></li>
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=100" class="sector-detail__item-link">Lịch Sử</a></li>
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=100"  class="sector-detail__item-link">Địa Lý</a></li>
@@ -70,7 +70,7 @@
                 Khối D
             </a>
             <div class="sector-detail">
-                <ul class="sector-detail__list">
+                <ul class="sector-detail__list" style="padding: 0">
                     <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Ngữ Văn</a></li>
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=1"  class="sector-detail__item-link">Toán</a></li>
                     <li class="sector-detail__item"><a href="" class="sector-detail__item-link">Tiếng Anh</a></li>
@@ -83,7 +83,7 @@
                 Tin Học
             </a>
             <div class="sector-detail">
-                <ul class="sector-detail__list">
+                <ul class="sector-detail__list"  style="padding: 0">
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=4"  class="sector-detail__item-link">Tin Học Văn Phòng</a></li>
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=4"  class="sector-detail__item-link">Tin Đại Cương</a></li>
                     <li class="sector-detail__item"><a href="/exam_list?action=list_exam&sj_id=4"  class="sector-detail__item-link">IT</a></li>
