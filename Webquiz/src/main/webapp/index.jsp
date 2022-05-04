@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/exam_list?action=list_exam&sj_id=10" class="col-6">
+                <a href="/exam_list?action=list_exam&sj_id=5" class="col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/quy-dinh-thi-bang-lai-xe-may.png" style="height: 180px"
                              alt="Card image cap">
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/exam_list?action=list_exam&sj_id=10" class=" col-6">
+                <a href="/exam_list?action=list_exam&sj_id=4" class=" col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/post-thumb-ngon-ngu-lap-trinh.png" style="height: 180px"
                              alt="Card image cap">
