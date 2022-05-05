@@ -38,15 +38,15 @@
                 <div class="div_group_call">
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <a class="d-flex justify-content-between align-items-center" href="skype:example123?chat">
+                            <a class="d-flex justify-content-between align-items-center" href="https://web.skype.com/chat/" target="_blank">
                                 ONLINE
                                 <span class="badge badge-primary badge-pill">Skype</span>
                             </a>
                         </li>
                         <li class="list-group-item">
-                            <a class="d-flex justify-content-between align-items-center" href="tel:0123456789">
+                            <a class="d-flex justify-content-between align-items-center" href="https://web.skype.com/" target="_blank">
                                 HOTLINE
-                                <span class="badge badge-primary badge-pill">0123456789</span>
+                                <span class="badge badge-primary badge-pill">0947804235</span>
                             </a>
                         </li>
                         <li class="list-group-item">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/exam_list?action=list_exam&sj_id=10" class=" col-6">
+                <a href="/exam_list?action=list_exam&sj_id=7" class=" col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/500-mau-cau-tieng-anh-giao-tiep-hay-dung-nhat-phan-1.png"
                              style="height: 180px" alt="Card image cap">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/exam_list?action=list_exam&sj_id=10" class="col-6">
+                <a href="/exam_list?action=list_exam&sj_id=5" class="col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/quy-dinh-thi-bang-lai-xe-may.png" style="height: 180px"
                              alt="Card image cap">
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="/exam_list?action=list_exam&sj_id=10" class=" col-6">
+                <a href="/exam_list?action=list_exam&sj_id=4" class=" col-6">
                     <div class="card card_mg">
                         <img class="card-img-top" src="../static/img/post-thumb-ngon-ngu-lap-trinh.png" style="height: 180px"
                              alt="Card image cap">

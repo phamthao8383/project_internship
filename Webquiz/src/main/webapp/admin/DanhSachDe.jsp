@@ -62,7 +62,27 @@
                                 <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'IT'}">
                                     <img src="/icon/it.png" alt="" width="84px">
                                 </c:if>
-
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'English'}">
+                                    <img src="/icon/logoEnglish.jpg" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Bằng Lái Xe'}">
+                                    <img src="/icon/blx.jpg" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Sinh Học'}">
+                                    <img src="/icon/sinhhoc.png" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Ngữ Văn'}">
+                                    <img src="/icon/nguvan.png" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Lịch Sử'}">
+                                    <img src="/icon/lichsu.jpg" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Địa Lý'}">
+                                    <img src="/icon/dialy.jpg" alt="" width="84px">
+                                </c:if>
+                                <c:if test="${examQuestion.exam.getSubject().getSubject_name() eq 'Tin Học'}">
+                                    <img src="/icon/IT.jpg" alt="" width="84px">
+                                </c:if>
                             </div>
                             <div class="exam-cart__infor col-10">
                                 <h4 class="exam__label">${examQuestion.exam.getExamName()}</h4>
