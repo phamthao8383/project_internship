@@ -57,12 +57,15 @@ h1 {
 
 #header .header__imgadmin{
     display: inline-block;
-    width: 2rem;
-
+    width: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 2px 4px 0 #ccc;
 }
 
 #header .header__nameadmin{
     display: inline-block;
+    font-size: 24px;
 }
 
 .header__admin .dropdown-menu{

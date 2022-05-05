@@ -137,9 +137,14 @@
                                 <c:forEach items="${list5Exam}" var="exam">
                                     <li class="common-exam__item">
                                         <div class="common-exam__cart">
-                                            <a href="" class="ce__link">
-                                                <h6 class="ce_label">${exam.exam.examName}</h6>
-                                            </a>
+                                            <form action="/exam_list" method="get">
+                                                <input type="hidden" name="action" value="sa">
+                                                <input type="hidden" name="search" value="${exam.exam.examName}">
+                                                <button type="submit" class="ce__link" style="border: none ;background-color: white">
+                                                    <h6 class="ce_label">${exam.exam.examName}</h6>
+                                                </button>
+                                            </form>
+
                                             <div class="ce__description row">
                                                 <p class="ce__time">Thời gian: ${exam.exam.allowedTime}</p>
                                                 <p class="ce__question-number">Số câu: ${exam.total} - Lượt thi: ${exam.timesExam}</p>
