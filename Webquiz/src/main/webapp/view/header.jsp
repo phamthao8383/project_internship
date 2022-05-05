@@ -51,7 +51,7 @@
         </li>
 
         <li class="navbar__item-sectors">
-            <a href="/exam_list?action=list_exam&sj_id=100">
+            <a href="#">
                 <i class="fa-solid fa-book"></i>
                 Khối C
             </a>
@@ -78,7 +78,7 @@
             </div>
         </li>
         <li class="navbar__item-sectors">
-            <a href="/exam_list?action=list_exam&sj_id=1" >
+            <a href="#" >
                 <i class="fa-solid fa-book-open"></i>
                 Tin Học
             </a>

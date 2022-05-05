@@ -6,7 +6,8 @@
   Time: 8:42 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <c:if test="${sessionScope.account.idRole != 1}">
     <%--    ${pageContext.request.contextPath} --%>
@@ -18,6 +19,7 @@
 <html lang="en">
 <head>
     <jsp:include page="/admin/view/head.jsp"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Smart Quiz</title>
 </head>
 <body>
@@ -33,7 +35,7 @@
                         <input id="searchInput" class="form-control me-2" name="nameSearch" type="search" placeholder="Nhập tên cần tìm" aria-label="Search">
                             <div id="searchContent" class="searchContent d-none">
                                 <span id="searchLabel">Tìm kiếm với tên: </span>
-                                <button onclick="unSearch()" type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+                                <a href="/admin/manage-user" onclick="unSearch()" type="button" class="btn-close btn-close-white" aria-label="Close"></a>
                             </div>
                         </input>
                         <button  class="btn btn-outline-success" type="submit">
@@ -43,7 +45,7 @@
                 </div>
                 <div class="user-list">
                     <c:if test="${empty memberList}">
-                        <h2 id="emptyMessage" class="">Danh sách thành viên trống.</h2>
+                        <h2 id="emptyMessage" class="">Không có thành viên nào.</h2>
                     </c:if>
                     <h2 id="message"></h2>
                     <c:if test="${not empty memberList}">
@@ -364,20 +366,21 @@
 
     $(document).ready(function () {
         if(localStorage.getItem('isSearch')=="true"){
-            searchContent.classList.remove("d-none");
+            $(searchContent).removeClass("d-none");
             searchLabel.textContent += localStorage.getItem('nameSearch');
-            message.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
-            pagination.classList.add("d-none");
+            // messages.innerHTML = "Tên cần tìm không tồn tại trong danh sách.";
+            // pagination.classList.add("d-none");
+            $(pagination).addClass("d-none");
         } else if(localStorage.getItem('isSearch')=="false"){
-            searchContent.classList.remove("d-none");
+            $(searchContent).removeClass("d-none");
             searchLabel.textContent = "Vui lòng nhập tên để tìm.";
+            // message.innerHTML = '';
             localStorage.removeItem('isSearch');
         }
     })
 
     function unSearch() {
-        document.getElementById("searchInput").value = '';
-        document.getElementById("searchForm").submit();
+        searchContent.classList.add("d-none");
         pagination.classList.remove("d-none");
         localStorage.removeItem('isSearch');
     }
