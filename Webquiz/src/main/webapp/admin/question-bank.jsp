@@ -438,7 +438,7 @@
             errQuestionDesc.innerText = "";
         }
 
-        for (let i = 0; i < updateOptionsList.length; i++ ){
+        for (let i = 0; i < 2; i++ ){
             if (updateOptionsList[i] == "" || updateOptionsList[i] == null){
                 errOptionsList[i].innerHTML = "Vui lòng nhập đáp án.";
                 return false;
@@ -477,7 +477,7 @@
             errQuestionDesc.innerText = "";
         }
 
-        for (let i = 0; i < createOptionsList.length; i++ ){
+        for (let i = 0; i < 2; i++ ){
             if (createOptionsList[i] == "" || createOptionsList[i] == null){
                 errOptionsList[i].innerHTML = "Vui lòng nhập đáp án.";
                 return false;
@@ -568,6 +568,9 @@
         //     localStorage.removeItem("isImport");
         // }
     })
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
 </html>
 </c:if>

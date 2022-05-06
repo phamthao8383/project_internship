@@ -209,7 +209,7 @@ public class QuestionServlet extends HttpServlet {
         Part part = request.getPart("inputFile");
         System.out.println(part);
 //         chổ ni ae tự thêm đường link foder uploads của dự án vào
-        String realPath2 = "D:\\Du_An_Nhom_2\\Phan_chia_cong_viec\\Folder_DuAn\\project_intership\\fileQuestion";
+        String realPath2 = "D:\\fileQuestion";
         String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
         if(!Files.exists(Paths.get(realPath2))) {
             Files.createDirectory(Paths.get(realPath2));

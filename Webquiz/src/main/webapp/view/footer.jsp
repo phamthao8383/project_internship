@@ -16,12 +16,12 @@
             <!-- Section: Social media -->
             <section class="mb-4">
                 <!-- Facebook -->
-                <a class="btn btn-outline-light btn-floating m-1" href="" role="button"
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/QuizGym-102791849085267" target="_blank" role="button"
                 ><i class="fab fa-facebook-f"></i
                 ></a>
 
                 <!-- Twitter -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                <a class="btn btn-outline-light btn-floating m-1" href="#https://twitter.com/Quiz_Gym" target="_blank" role="button"
                 ><i class="fab fa-twitter"></i
                 ></a>
 
@@ -134,7 +134,7 @@
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2022 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">Nhóm 2</a>
+            <a class="text-white" href="https://www.facebook.com/QuizGym-102791849085267" target="_blank">Nhóm 2</a>
         </div>
     </footer>
 
